@@ -1,0 +1,1 @@
+# Global part of the project.
