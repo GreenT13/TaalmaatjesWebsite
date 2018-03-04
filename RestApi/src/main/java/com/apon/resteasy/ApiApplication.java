@@ -3,6 +3,7 @@ package com.apon.resteasy;
 import com.apon.service.IService;
 import org.reflections.Reflections;
 
+import javax.ws.rs.Path;
 import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,7 +18,8 @@ public class ApiApplication extends Application {
         Reflections reflections = new Reflections("com.apon");
 
         // Add all the services to the singletons.
-        addInstanceToSetOfSubType(reflections, IService.class);
+        // Any service must have @Path, otherwise it won't be registered.
+        addInstanceToSetWithAnnotation(reflections, Path.class);
 
         // Add all the filters to the classes
         addClassToSetWithAnnotation(reflections, Filter.class);

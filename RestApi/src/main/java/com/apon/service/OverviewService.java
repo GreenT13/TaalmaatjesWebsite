@@ -22,17 +22,11 @@ import org.jboss.resteasy.core.ResourceMethodRegistry;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
+/**
+ * Class that is fully copied to create an overview.
+ */
 @Path("overview")
-public class OverviewService implements IService {
-    // Class that is fully copied to retrieve an overview!
-
-    @Override
-    public DbContext getContext() {
-        return null;
-    }
-
-    @Override
-    public void setContext(DbContext dbContext) { }
+public class OverviewService {
 
     private static final class MethodDescription {
         private String method;
