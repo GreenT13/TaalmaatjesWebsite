@@ -12,9 +12,7 @@ import javax.ws.rs.core.MediaType;
 @SuppressWarnings("unchecked")
 @Produces(MediaType.APPLICATION_JSON)
 @Path("version")
-public class VersionService implements IService {
-    private DbContext context;
-
+public class VersionService {
     @GET
     public StringValueObject getVersion() {
         return new StringValueObject("v0.1-unsecured");
@@ -30,15 +28,5 @@ public class VersionService implements IService {
     @Path("error")
     public Object throwError() throws Exception {
         throw new Exception("Catch this!");
-    }
-
-    @Override
-    public DbContext getContext() {
-        return context;
-    }
-
-    @Override
-    public void setContext(DbContext context) {
-        this.context = context;
     }
 }
