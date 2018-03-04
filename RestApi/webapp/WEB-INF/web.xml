@@ -11,19 +11,16 @@
             <param-value>Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,
                 Authorization</param-value>
         </init-param>
+        <init-param>
+            <param-name>cors.allowed.methods</param-name>
+            <param-value>GET,POST,PUT,DELETE</param-value>
+        </init-param>
     </filter>
     <filter-mapping>
         <filter-name>CorsFilter</filter-name>
         <url-pattern>/api/*</url-pattern>
     </filter-mapping>
     <!-- END: Only needed for local builds!! -->
-
-    <!-- START: Handle exceptions -->
-    <context-param>
-        <param-name>resteasy.providers</param-name>
-        <param-value>com.apon.exceptionhandler.ExceptionHandler</param-value>
-    </context-param>
-    <!-- END: Handle exceptions -->
 
     <!-- START: AOP configuration -->
     <!-- Module that configures the actual bindings -->
@@ -43,7 +40,7 @@
         <!-- Use a prefix -->
         <init-param>
             <param-name>resteasy.servlet.mapping.prefix</param-name>
-            <param-value>/api/</param-value>
+            <param-value>/api</param-value>
         </init-param>
         <!-- Add the application here instead of @ApplicationPath because this is better -->
         <init-param>
@@ -80,13 +77,9 @@
 
     <!-- START: DataSource management from tomcat (resource created in context.xml) -->
     <resource-ref>
-        <res-ref-name>jdbc/TestingRest-db</res-ref-name>
+        <res-ref-name>jdbc/Taalmaatjes-db</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>
-        <injection-target>
-            <injection-target-class>com.apon.service.MessageService</injection-target-class>
-            <injection-target-name>dataSource</injection-target-name>
-        </injection-target>
     </resource-ref>
     <!-- END: DataSource management -->
 </web-app>

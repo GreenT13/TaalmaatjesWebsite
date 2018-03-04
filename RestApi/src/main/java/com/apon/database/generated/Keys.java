@@ -4,11 +4,22 @@
 package com.apon.database.generated;
 
 
-import com.apon.database.generated.tables.Message;
-import com.apon.database.generated.tables.records.MessageRecord;
+import com.apon.database.generated.tables.Scriptlog;
+import com.apon.database.generated.tables.Student;
+import com.apon.database.generated.tables.Task;
+import com.apon.database.generated.tables.Volunteer;
+import com.apon.database.generated.tables.Volunteerinstance;
+import com.apon.database.generated.tables.Volunteermatch;
+import com.apon.database.generated.tables.records.ScriptlogRecord;
+import com.apon.database.generated.tables.records.StudentRecord;
+import com.apon.database.generated.tables.records.TaskRecord;
+import com.apon.database.generated.tables.records.VolunteerRecord;
+import com.apon.database.generated.tables.records.VolunteerinstanceRecord;
+import com.apon.database.generated.tables.records.VolunteermatchRecord;
 
 import javax.annotation.Generated;
 
+import org.jooq.ForeignKey;
 import org.jooq.UniqueKey;
 import org.jooq.impl.AbstractKeys;
 
@@ -36,18 +47,49 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final UniqueKey<MessageRecord> CONSTRAINT_6 = UniqueKeys0.CONSTRAINT_6;
+    public static final UniqueKey<ScriptlogRecord> SCLO_PK = UniqueKeys0.SCLO_PK;
+    public static final UniqueKey<StudentRecord> STUD_PK = UniqueKeys0.STUD_PK;
+    public static final UniqueKey<StudentRecord> STUD_EXTID = UniqueKeys0.STUD_EXTID;
+    public static final UniqueKey<TaskRecord> TASK_PK = UniqueKeys0.TASK_PK;
+    public static final UniqueKey<TaskRecord> TASK_EXTID = UniqueKeys0.TASK_EXTID;
+    public static final UniqueKey<VolunteerRecord> VOLU_PK = UniqueKeys0.VOLU_PK;
+    public static final UniqueKey<VolunteerRecord> VOLU_EXTID = UniqueKeys0.VOLU_EXTID;
+    public static final UniqueKey<VolunteerinstanceRecord> VOIN_PK = UniqueKeys0.VOIN_PK;
+    public static final UniqueKey<VolunteerinstanceRecord> VOIN_EXTID = UniqueKeys0.VOIN_EXTID;
+    public static final UniqueKey<VolunteermatchRecord> VOMA_PK = UniqueKeys0.VOMA_PK;
+    public static final UniqueKey<VolunteermatchRecord> VOMA_EXTID = UniqueKeys0.VOMA_EXTID;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final ForeignKey<TaskRecord, VolunteerRecord> TASK_VOLU_FK = ForeignKeys0.TASK_VOLU_FK;
+    public static final ForeignKey<VolunteerinstanceRecord, VolunteerRecord> VOIN_VOLU_FK = ForeignKeys0.VOIN_VOLU_FK;
+    public static final ForeignKey<VolunteermatchRecord, VolunteerRecord> VOMA_VOLU_FK = ForeignKeys0.VOMA_VOLU_FK;
+    public static final ForeignKey<VolunteermatchRecord, StudentRecord> VOMA_STUD_FK = ForeignKeys0.VOMA_STUD_FK;
 
     // -------------------------------------------------------------------------
     // [#1459] distribute members to avoid static initialisers > 64kb
     // -------------------------------------------------------------------------
 
     private static class UniqueKeys0 extends AbstractKeys {
-        public static final UniqueKey<MessageRecord> CONSTRAINT_6 = createUniqueKey(Message.MESSAGE, "CONSTRAINT_6", Message.MESSAGE.MESSAGEID);
+        public static final UniqueKey<ScriptlogRecord> SCLO_PK = createUniqueKey(Scriptlog.SCRIPTLOG, "ScLo_PK", Scriptlog.SCRIPTLOG.SCRIPTNAME);
+        public static final UniqueKey<StudentRecord> STUD_PK = createUniqueKey(Student.STUDENT, "Stud_PK", Student.STUDENT.STUDENTID);
+        public static final UniqueKey<StudentRecord> STUD_EXTID = createUniqueKey(Student.STUDENT, "Stud_ExtId", Student.STUDENT.EXTERNALIDENTIFIER);
+        public static final UniqueKey<TaskRecord> TASK_PK = createUniqueKey(Task.TASK, "Task_PK", Task.TASK.TASKID);
+        public static final UniqueKey<TaskRecord> TASK_EXTID = createUniqueKey(Task.TASK, "Task_ExtId", Task.TASK.EXTERNALIDENTIFIER);
+        public static final UniqueKey<VolunteerRecord> VOLU_PK = createUniqueKey(Volunteer.VOLUNTEER, "Volu_PK", Volunteer.VOLUNTEER.VOLUNTEERID);
+        public static final UniqueKey<VolunteerRecord> VOLU_EXTID = createUniqueKey(Volunteer.VOLUNTEER, "Volu_ExtId", Volunteer.VOLUNTEER.EXTERNALIDENTIFIER);
+        public static final UniqueKey<VolunteerinstanceRecord> VOIN_PK = createUniqueKey(Volunteerinstance.VOLUNTEERINSTANCE, "VoIn_PK", Volunteerinstance.VOLUNTEERINSTANCE.VOLUNTEERID, Volunteerinstance.VOLUNTEERINSTANCE.VOLUNTEERINSTANCEID);
+        public static final UniqueKey<VolunteerinstanceRecord> VOIN_EXTID = createUniqueKey(Volunteerinstance.VOLUNTEERINSTANCE, "VoIn_ExtId", Volunteerinstance.VOLUNTEERINSTANCE.VOLUNTEERID, Volunteerinstance.VOLUNTEERINSTANCE.EXTERNALIDENTIFIER);
+        public static final UniqueKey<VolunteermatchRecord> VOMA_PK = createUniqueKey(Volunteermatch.VOLUNTEERMATCH, "VoMa_PK", Volunteermatch.VOLUNTEERMATCH.VOLUNTEERID, Volunteermatch.VOLUNTEERMATCH.VOLUNTEERMATCHID);
+        public static final UniqueKey<VolunteermatchRecord> VOMA_EXTID = createUniqueKey(Volunteermatch.VOLUNTEERMATCH, "VoMa_ExtId", Volunteermatch.VOLUNTEERMATCH.VOLUNTEERID, Volunteermatch.VOLUNTEERMATCH.EXTERNALIDENTIFIER);
+    }
+
+    private static class ForeignKeys0 extends AbstractKeys {
+        public static final ForeignKey<TaskRecord, VolunteerRecord> TASK_VOLU_FK = createForeignKey(com.apon.database.generated.Keys.VOLU_PK, Task.TASK, "Task_Volu_FK", Task.TASK.VOLUNTEERID);
+        public static final ForeignKey<VolunteerinstanceRecord, VolunteerRecord> VOIN_VOLU_FK = createForeignKey(com.apon.database.generated.Keys.VOLU_PK, Volunteerinstance.VOLUNTEERINSTANCE, "VoIn_Volu_FK", Volunteerinstance.VOLUNTEERINSTANCE.VOLUNTEERID);
+        public static final ForeignKey<VolunteermatchRecord, VolunteerRecord> VOMA_VOLU_FK = createForeignKey(com.apon.database.generated.Keys.VOLU_PK, Volunteermatch.VOLUNTEERMATCH, "VoMa_Volu_FK", Volunteermatch.VOLUNTEERMATCH.VOLUNTEERID);
+        public static final ForeignKey<VolunteermatchRecord, StudentRecord> VOMA_STUD_FK = createForeignKey(com.apon.database.generated.Keys.STUD_PK, Volunteermatch.VOLUNTEERMATCH, "VoMa_Stud_FK", Volunteermatch.VOLUNTEERMATCH.STUDENTID);
     }
 }

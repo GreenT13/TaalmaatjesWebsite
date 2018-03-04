@@ -11,7 +11,7 @@ public class BinderModule implements Module {
     public void configure(Binder binder) {
         // Bind the classes so we can actually use method interception.
         Reflections reflections = new Reflections("com.apon.service");
-        for (Class<? extends IService> myClass : reflections.getSubTypesOf(IService.class)) {
+        for (Class<?> myClass : reflections.getSubTypesOf(IService.class)) {
             binder.bind(myClass);
         }
 

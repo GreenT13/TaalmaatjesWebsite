@@ -3,7 +3,6 @@ package com.apon.resteasy;
 import com.apon.service.IService;
 import org.reflections.Reflections;
 
-import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,6 +21,7 @@ public class ApiApplication extends Application {
 
         // Add all the filters to the classes
         addClassToSetWithAnnotation(reflections, Filter.class);
+        addClassToSetWithAnnotation(reflections, EH.class);
     }
 
     /**

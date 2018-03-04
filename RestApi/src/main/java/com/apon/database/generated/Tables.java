@@ -4,7 +4,12 @@
 package com.apon.database.generated;
 
 
-import com.apon.database.generated.tables.Message;
+import com.apon.database.generated.tables.Scriptlog;
+import com.apon.database.generated.tables.Student;
+import com.apon.database.generated.tables.Task;
+import com.apon.database.generated.tables.Volunteer;
+import com.apon.database.generated.tables.Volunteerinstance;
+import com.apon.database.generated.tables.Volunteermatch;
 
 import javax.annotation.Generated;
 
@@ -23,7 +28,32 @@ import javax.annotation.Generated;
 public class Tables {
 
     /**
-     * The table <code>PUBLIC.MESSAGE</code>.
+     * The table <code>PUBLIC.SCRIPTLOG</code>.
      */
-    public static final Message MESSAGE = com.apon.database.generated.tables.Message.MESSAGE;
+    public static final Scriptlog SCRIPTLOG = com.apon.database.generated.tables.Scriptlog.SCRIPTLOG;
+
+    /**
+     * The table <code>PUBLIC.STUDENT</code>.
+     */
+    public static final Student STUDENT = com.apon.database.generated.tables.Student.STUDENT;
+
+    /**
+     * The table <code>PUBLIC.TASK</code>.
+     */
+    public static final Task TASK = com.apon.database.generated.tables.Task.TASK;
+
+    /**
+     * The table <code>PUBLIC.VOLUNTEER</code>.
+     */
+    public static final Volunteer VOLUNTEER = com.apon.database.generated.tables.Volunteer.VOLUNTEER;
+
+    /**
+     * The table <code>PUBLIC.VOLUNTEERINSTANCE</code>.
+     */
+    public static final Volunteerinstance VOLUNTEERINSTANCE = com.apon.database.generated.tables.Volunteerinstance.VOLUNTEERINSTANCE;
+
+    /**
+     * The table <code>PUBLIC.VOLUNTEERMATCH</code>.
+     */
+    public static final Volunteermatch VOLUNTEERMATCH = com.apon.database.generated.tables.Volunteermatch.VOLUNTEERMATCH;
 }

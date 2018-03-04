@@ -1,8 +1,8 @@
 package com.apon.service;
 
-import com.apon.database.jooq.Context;
+import com.apon.database.jooq.DbContext;
 
 public interface IService {
-    Context getContext();
-    void setContext(Context context);
+    DbContext getContext();
+    void setContext(DbContext dbContext);
 }

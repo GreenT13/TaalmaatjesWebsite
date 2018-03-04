@@ -15,7 +15,7 @@
         <jooq.version>3.10.2</jooq.version>
 
         <!-- Property for generating classes with jOOQ -->
-        <url.database>jdbc:h2:file:./TestingRest-db</url.database>
+        <url.database>jdbc:h2:file:./Taalmaatjes-db</url.database>
     </properties>
 
     <dependencies>
@@ -109,6 +109,12 @@
             <version>2.6</version>
         </dependency>
 
+        <!-- Jar for @Nullable and @Nonnull notation -->
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+            <version>3.0.2</version>
+        </dependency>
     </dependencies>
 
     <build>

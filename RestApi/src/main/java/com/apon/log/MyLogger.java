@@ -2,7 +2,7 @@ package com.apon.log;
 
 import org.apache.log4j.Logger;
 
-public class Log {
+public class MyLogger {
     private static final Logger logger = Logger.getLogger("com.apon");
 
     public static void logError(String message) {

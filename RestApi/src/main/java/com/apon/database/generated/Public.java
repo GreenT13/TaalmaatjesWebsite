@@ -4,7 +4,12 @@
 package com.apon.database.generated;
 
 
-import com.apon.database.generated.tables.Message;
+import com.apon.database.generated.tables.Scriptlog;
+import com.apon.database.generated.tables.Student;
+import com.apon.database.generated.tables.Task;
+import com.apon.database.generated.tables.Volunteer;
+import com.apon.database.generated.tables.Volunteerinstance;
+import com.apon.database.generated.tables.Volunteermatch;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +35,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Public extends SchemaImpl {
 
-    private static final long serialVersionUID = -11326577;
+    private static final long serialVersionUID = -1355499197;
 
     /**
      * The reference instance of <code>PUBLIC</code>
@@ -38,9 +43,34 @@ public class Public extends SchemaImpl {
     public static final Public PUBLIC = new Public();
 
     /**
-     * The table <code>PUBLIC.MESSAGE</code>.
+     * The table <code>PUBLIC.SCRIPTLOG</code>.
      */
-    public final Message MESSAGE = com.apon.database.generated.tables.Message.MESSAGE;
+    public final Scriptlog SCRIPTLOG = com.apon.database.generated.tables.Scriptlog.SCRIPTLOG;
+
+    /**
+     * The table <code>PUBLIC.STUDENT</code>.
+     */
+    public final Student STUDENT = com.apon.database.generated.tables.Student.STUDENT;
+
+    /**
+     * The table <code>PUBLIC.TASK</code>.
+     */
+    public final Task TASK = com.apon.database.generated.tables.Task.TASK;
+
+    /**
+     * The table <code>PUBLIC.VOLUNTEER</code>.
+     */
+    public final Volunteer VOLUNTEER = com.apon.database.generated.tables.Volunteer.VOLUNTEER;
+
+    /**
+     * The table <code>PUBLIC.VOLUNTEERINSTANCE</code>.
+     */
+    public final Volunteerinstance VOLUNTEERINSTANCE = com.apon.database.generated.tables.Volunteerinstance.VOLUNTEERINSTANCE;
+
+    /**
+     * The table <code>PUBLIC.VOLUNTEERMATCH</code>.
+     */
+    public final Volunteermatch VOLUNTEERMATCH = com.apon.database.generated.tables.Volunteermatch.VOLUNTEERMATCH;
 
     /**
      * No further instances allowed
@@ -67,6 +97,11 @@ public class Public extends SchemaImpl {
 
     private final List<Table<?>> getTables0() {
         return Arrays.<Table<?>>asList(
-            Message.MESSAGE);
+            Scriptlog.SCRIPTLOG,
+            Student.STUDENT,
+            Task.TASK,
+            Volunteer.VOLUNTEER,
+            Volunteerinstance.VOLUNTEERINSTANCE,
+            Volunteermatch.VOLUNTEERMATCH);
     }
 }
