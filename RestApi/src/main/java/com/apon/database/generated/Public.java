@@ -4,6 +4,7 @@
 package com.apon.database.generated;
 
 
+import com.apon.database.generated.tables.Logonuser;
 import com.apon.database.generated.tables.Scriptlog;
 import com.apon.database.generated.tables.Student;
 import com.apon.database.generated.tables.Task;
@@ -35,12 +36,17 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Public extends SchemaImpl {
 
-    private static final long serialVersionUID = -1355499197;
+    private static final long serialVersionUID = 137410229;
 
     /**
      * The reference instance of <code>PUBLIC</code>
      */
     public static final Public PUBLIC = new Public();
+
+    /**
+     * The table <code>PUBLIC.LOGONUSER</code>.
+     */
+    public final Logonuser LOGONUSER = com.apon.database.generated.tables.Logonuser.LOGONUSER;
 
     /**
      * The table <code>PUBLIC.SCRIPTLOG</code>.
@@ -97,6 +103,7 @@ public class Public extends SchemaImpl {
 
     private final List<Table<?>> getTables0() {
         return Arrays.<Table<?>>asList(
+            Logonuser.LOGONUSER,
             Scriptlog.SCRIPTLOG,
             Student.STUDENT,
             Task.TASK,

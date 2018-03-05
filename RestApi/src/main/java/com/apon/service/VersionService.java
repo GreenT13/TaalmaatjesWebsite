@@ -1,6 +1,5 @@
 package com.apon.service;
 
-import com.apon.database.jooq.DbContext;
 import com.apon.service.valueobject.StringValueObject;
 
 import javax.ws.rs.DELETE;

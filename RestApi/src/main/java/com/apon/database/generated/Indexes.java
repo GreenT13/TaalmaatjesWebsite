@@ -4,6 +4,7 @@
 package com.apon.database.generated;
 
 
+import com.apon.database.generated.tables.Logonuser;
 import com.apon.database.generated.tables.Scriptlog;
 import com.apon.database.generated.tables.Student;
 import com.apon.database.generated.tables.Task;
@@ -35,6 +36,8 @@ public class Indexes {
     // INDEX definitions
     // -------------------------------------------------------------------------
 
+    public static final Index LOUS_USNA_UC_INDEX_4 = Indexes0.LOUS_USNA_UC_INDEX_4;
+    public static final Index PRIMARY_KEY_4 = Indexes0.PRIMARY_KEY_4;
     public static final Index PRIMARY_KEY_B = Indexes0.PRIMARY_KEY_B;
     public static final Index PRIMARY_KEY_BA = Indexes0.PRIMARY_KEY_BA;
     public static final Index STUD_EXTID_INDEX_B = Indexes0.STUD_EXTID_INDEX_B;
@@ -54,6 +57,8 @@ public class Indexes {
     // -------------------------------------------------------------------------
 
     private static class Indexes0 extends AbstractKeys {
+        public static Index LOUS_USNA_UC_INDEX_4 = createIndex("LoUs_UsNa_UC_INDEX_4", Logonuser.LOGONUSER, new OrderField[] { Logonuser.LOGONUSER.USERNAME }, true);
+        public static Index PRIMARY_KEY_4 = createIndex("PRIMARY_KEY_4", Logonuser.LOGONUSER, new OrderField[] { Logonuser.LOGONUSER.LOGONUSERID }, true);
         public static Index PRIMARY_KEY_B = createIndex("PRIMARY_KEY_B", Scriptlog.SCRIPTLOG, new OrderField[] { Scriptlog.SCRIPTLOG.SCRIPTNAME }, true);
         public static Index PRIMARY_KEY_BA = createIndex("PRIMARY_KEY_BA", Student.STUDENT, new OrderField[] { Student.STUDENT.STUDENTID }, true);
         public static Index STUD_EXTID_INDEX_B = createIndex("Stud_ExtId_INDEX_B", Student.STUDENT, new OrderField[] { Student.STUDENT.EXTERNALIDENTIFIER }, true);

@@ -4,6 +4,7 @@
 package com.apon.database.generated;
 
 
+import com.apon.database.generated.tables.Logonuser;
 import com.apon.database.generated.tables.Scriptlog;
 import com.apon.database.generated.tables.Student;
 import com.apon.database.generated.tables.Task;
@@ -26,6 +27,11 @@ import javax.annotation.Generated;
 )
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Tables {
+
+    /**
+     * The table <code>PUBLIC.LOGONUSER</code>.
+     */
+    public static final Logonuser LOGONUSER = com.apon.database.generated.tables.Logonuser.LOGONUSER;
 
     /**
      * The table <code>PUBLIC.SCRIPTLOG</code>.

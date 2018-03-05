@@ -4,12 +4,14 @@
 package com.apon.database.generated;
 
 
+import com.apon.database.generated.tables.Logonuser;
 import com.apon.database.generated.tables.Scriptlog;
 import com.apon.database.generated.tables.Student;
 import com.apon.database.generated.tables.Task;
 import com.apon.database.generated.tables.Volunteer;
 import com.apon.database.generated.tables.Volunteerinstance;
 import com.apon.database.generated.tables.Volunteermatch;
+import com.apon.database.generated.tables.records.LogonuserRecord;
 import com.apon.database.generated.tables.records.ScriptlogRecord;
 import com.apon.database.generated.tables.records.StudentRecord;
 import com.apon.database.generated.tables.records.TaskRecord;
@@ -47,6 +49,8 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final UniqueKey<LogonuserRecord> LOUS_PK = UniqueKeys0.LOUS_PK;
+    public static final UniqueKey<LogonuserRecord> LOUS_USNA_UC = UniqueKeys0.LOUS_USNA_UC;
     public static final UniqueKey<ScriptlogRecord> SCLO_PK = UniqueKeys0.SCLO_PK;
     public static final UniqueKey<StudentRecord> STUD_PK = UniqueKeys0.STUD_PK;
     public static final UniqueKey<StudentRecord> STUD_EXTID = UniqueKeys0.STUD_EXTID;
@@ -73,6 +77,8 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     private static class UniqueKeys0 extends AbstractKeys {
+        public static final UniqueKey<LogonuserRecord> LOUS_PK = createUniqueKey(Logonuser.LOGONUSER, "LoUs_PK", Logonuser.LOGONUSER.LOGONUSERID);
+        public static final UniqueKey<LogonuserRecord> LOUS_USNA_UC = createUniqueKey(Logonuser.LOGONUSER, "LoUs_UsNa_UC", Logonuser.LOGONUSER.USERNAME);
         public static final UniqueKey<ScriptlogRecord> SCLO_PK = createUniqueKey(Scriptlog.SCRIPTLOG, "ScLo_PK", Scriptlog.SCRIPTLOG.SCRIPTNAME);
         public static final UniqueKey<StudentRecord> STUD_PK = createUniqueKey(Student.STUDENT, "Stud_PK", Student.STUDENT.STUDENTID);
         public static final UniqueKey<StudentRecord> STUD_EXTID = createUniqueKey(Student.STUDENT, "Stud_ExtId", Student.STUDENT.EXTERNALIDENTIFIER);

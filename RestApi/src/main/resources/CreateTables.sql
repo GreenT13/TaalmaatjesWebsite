@@ -3,7 +3,7 @@ create table Scriptlog (
   ts_Started timestamp not null,
   ts_Finished timestamp,
   is_Completed boolean not null,
-  constraint "ScLo_PK" primary key (scriptName)
+  constraint "ScLo_PK" primary key (script_Name)
 );
 
 insert into Scriptlog values ('20180105_CreateTables', current_timestamp, null, false);
@@ -82,6 +82,14 @@ create table Task (
   constraint "Task_PK" primary key (task_Id),
   constraint "Task_ExtId" unique (external_Identifier),
   constraint "Task_Volu_FK" foreign key (volunteer_Id) references Volunteer (volunteer_Id)
+);
+
+create table LogonUser (
+  logonUserId int not null,
+  username varchar(30) not null,
+  password varchar(60) not null,
+  constraint "LoUs_PK" primary key (logonUserId),
+  constraint "LoUs_UsNa_UC" unique (username)
 );
 
 update Scriptlog set is_Completed = true, ts_Finished = current_timestamp where script_Name = 'CreateTables';

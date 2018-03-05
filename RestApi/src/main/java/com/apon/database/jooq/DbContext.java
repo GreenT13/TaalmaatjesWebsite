@@ -2,6 +2,8 @@ package com.apon.database.jooq;
 
 import com.apon.log.MyLogger;
 import org.jooq.Configuration;
+import org.jooq.DSLContext;
+import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 import org.jooq.tools.jdbc.JDBCUtils;
 
@@ -11,17 +13,22 @@ import java.sql.SQLException;
 
 @SuppressWarnings("UnusedReturnValue")
 public class DbContext {
-    private DataSource dataSource;
     private Connection connection;
     private Configuration configuration;
 
     public DbContext(DataSource dataSource) throws SQLException {
-        this.dataSource = dataSource;
-
         // Configure the context based on the dataSource.
         connection = dataSource.getConnection();
 
         // Always without auto commit.
+        connection.setAutoCommit(false);
+        connection.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED);
+
+        configuration = DSL.using(connection, JDBCUtils.dialect(connection)).configuration();
+    }
+
+    public DbContext(Connection connection) throws SQLException {
+        this.connection = connection;
         connection.setAutoCommit(false);
         connection.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED);
 
@@ -46,14 +53,6 @@ public class DbContext {
             MyLogger.logError("Could not rollback connection.", e);
             return false;
         }
-    }
-
-    public DataSource getDataSource() {
-        return dataSource;
-    }
-
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
     }
 
     public Connection getConnection() {
