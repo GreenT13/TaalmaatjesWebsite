@@ -7,6 +7,7 @@
     <groupId>com.apon</groupId>
     <artifactId>RestApi</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
 
     <properties>
         <resteasy.version>3.1.4.Final</resteasy.version>
@@ -137,10 +138,29 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
                 <configuration>
                     <!-- or whatever version you use -->
                     <source>1.8</source>
                     <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <!-- Add the webapp dir (otherwise web.xml and context.xml are not picked up)  -->
+                            <directory>${project.basedir}/webapp</directory>
+                        </resource>
+                        <resource>
+                            <directory>${project.basedir}/../Angular/dist</directory>
+                        </resource>
+                    </webResources>
+
+                    <warSourceDirectory>WebContent</warSourceDirectory>
+                    <failOnMissingWebXml>true</failOnMissingWebXml>
                 </configuration>
             </plugin>
 
@@ -161,6 +181,7 @@
                 </executions>
 
                 <configuration>
+                    <!-- <skip>true</skip> -->
                     <jdbc>
                         <driver>org.h2.Driver</driver>
                         <url>${url.database}</url>
