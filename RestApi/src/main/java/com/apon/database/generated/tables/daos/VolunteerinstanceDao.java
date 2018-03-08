@@ -54,35 +54,35 @@ public class VolunteerinstanceDao extends DAOImpl<VolunteerinstanceRecord, Volun
     }
 
     /**
-     * Fetch records that have <code>VOLUNTEERID IN (values)</code>
+     * Fetch records that have <code>volunteerId IN (values)</code>
      */
     public List<VolunteerinstancePojo> fetchByVolunteerid(Integer... values) {
         return fetch(Volunteerinstance.VOLUNTEERINSTANCE.VOLUNTEERID, values);
     }
 
     /**
-     * Fetch records that have <code>VOLUNTEERINSTANCEID IN (values)</code>
+     * Fetch records that have <code>volunteerInstanceId IN (values)</code>
      */
     public List<VolunteerinstancePojo> fetchByVolunteerinstanceid(Integer... values) {
         return fetch(Volunteerinstance.VOLUNTEERINSTANCE.VOLUNTEERINSTANCEID, values);
     }
 
     /**
-     * Fetch records that have <code>EXTERNALIDENTIFIER IN (values)</code>
+     * Fetch records that have <code>externalIdentifier IN (values)</code>
      */
     public List<VolunteerinstancePojo> fetchByExternalidentifier(String... values) {
         return fetch(Volunteerinstance.VOLUNTEERINSTANCE.EXTERNALIDENTIFIER, values);
     }
 
     /**
-     * Fetch records that have <code>DATESTART IN (values)</code>
+     * Fetch records that have <code>dateStart IN (values)</code>
      */
     public List<VolunteerinstancePojo> fetchByDatestart(Date... values) {
         return fetch(Volunteerinstance.VOLUNTEERINSTANCE.DATESTART, values);
     }
 
     /**
-     * Fetch records that have <code>DATEEND IN (values)</code>
+     * Fetch records that have <code>dateEnd IN (values)</code>
      */
     public List<VolunteerinstancePojo> fetchByDateend(Date... values) {
         return fetch(Volunteerinstance.VOLUNTEERINSTANCE.DATEEND, values);

@@ -55,6 +55,16 @@ public class DbContext {
         }
     }
 
+    public boolean close() {
+        try {
+            connection.close();
+            return true;
+        } catch (SQLException e) {
+            MyLogger.logError("Could not close connection.", e);
+            return false;
+        }
+    }
+
     public Connection getConnection() {
         return connection;
     }

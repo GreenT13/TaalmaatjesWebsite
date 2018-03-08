@@ -53,147 +53,147 @@ public class VolunteerDao extends DAOImpl<VolunteerRecord, VolunteerPojo, Intege
     }
 
     /**
-     * Fetch records that have <code>VOLUNTEERID IN (values)</code>
+     * Fetch records that have <code>volunteerId IN (values)</code>
      */
     public List<VolunteerPojo> fetchByVolunteerid(Integer... values) {
         return fetch(Volunteer.VOLUNTEER.VOLUNTEERID, values);
     }
 
     /**
-     * Fetch a unique record that has <code>VOLUNTEERID = value</code>
+     * Fetch a unique record that has <code>volunteerId = value</code>
      */
     public VolunteerPojo fetchOneByVolunteerid(Integer value) {
         return fetchOne(Volunteer.VOLUNTEER.VOLUNTEERID, value);
     }
 
     /**
-     * Fetch records that have <code>EXTERNALIDENTIFIER IN (values)</code>
+     * Fetch records that have <code>externalIdentifier IN (values)</code>
      */
     public List<VolunteerPojo> fetchByExternalidentifier(String... values) {
         return fetch(Volunteer.VOLUNTEER.EXTERNALIDENTIFIER, values);
     }
 
     /**
-     * Fetch a unique record that has <code>EXTERNALIDENTIFIER = value</code>
+     * Fetch a unique record that has <code>externalIdentifier = value</code>
      */
     public VolunteerPojo fetchOneByExternalidentifier(String value) {
         return fetchOne(Volunteer.VOLUNTEER.EXTERNALIDENTIFIER, value);
     }
 
     /**
-     * Fetch records that have <code>FIRSTNAME IN (values)</code>
+     * Fetch records that have <code>firstName IN (values)</code>
      */
     public List<VolunteerPojo> fetchByFirstname(String... values) {
         return fetch(Volunteer.VOLUNTEER.FIRSTNAME, values);
     }
 
     /**
-     * Fetch records that have <code>INSERTION IN (values)</code>
+     * Fetch records that have <code>insertion IN (values)</code>
      */
     public List<VolunteerPojo> fetchByInsertion(String... values) {
         return fetch(Volunteer.VOLUNTEER.INSERTION, values);
     }
 
     /**
-     * Fetch records that have <code>LASTNAME IN (values)</code>
+     * Fetch records that have <code>lastName IN (values)</code>
      */
     public List<VolunteerPojo> fetchByLastname(String... values) {
         return fetch(Volunteer.VOLUNTEER.LASTNAME, values);
     }
 
     /**
-     * Fetch records that have <code>DATEOFBIRTH IN (values)</code>
+     * Fetch records that have <code>dateOfBirth IN (values)</code>
      */
     public List<VolunteerPojo> fetchByDateofbirth(Date... values) {
         return fetch(Volunteer.VOLUNTEER.DATEOFBIRTH, values);
     }
 
     /**
-     * Fetch records that have <code>SEX IN (values)</code>
+     * Fetch records that have <code>sex IN (values)</code>
      */
     public List<VolunteerPojo> fetchBySex(String... values) {
         return fetch(Volunteer.VOLUNTEER.SEX, values);
     }
 
     /**
-     * Fetch records that have <code>PHONENUMBER IN (values)</code>
+     * Fetch records that have <code>phoneNumber IN (values)</code>
      */
     public List<VolunteerPojo> fetchByPhonenumber(String... values) {
         return fetch(Volunteer.VOLUNTEER.PHONENUMBER, values);
     }
 
     /**
-     * Fetch records that have <code>MOBILEPHONENUMBER IN (values)</code>
+     * Fetch records that have <code>mobilePhoneNumber IN (values)</code>
      */
     public List<VolunteerPojo> fetchByMobilephonenumber(String... values) {
         return fetch(Volunteer.VOLUNTEER.MOBILEPHONENUMBER, values);
     }
 
     /**
-     * Fetch records that have <code>EMAIL IN (values)</code>
+     * Fetch records that have <code>email IN (values)</code>
      */
     public List<VolunteerPojo> fetchByEmail(String... values) {
         return fetch(Volunteer.VOLUNTEER.EMAIL, values);
     }
 
     /**
-     * Fetch records that have <code>POSTALCODE IN (values)</code>
+     * Fetch records that have <code>postalCode IN (values)</code>
      */
     public List<VolunteerPojo> fetchByPostalcode(String... values) {
         return fetch(Volunteer.VOLUNTEER.POSTALCODE, values);
     }
 
     /**
-     * Fetch records that have <code>CITY IN (values)</code>
+     * Fetch records that have <code>city IN (values)</code>
      */
     public List<VolunteerPojo> fetchByCity(String... values) {
         return fetch(Volunteer.VOLUNTEER.CITY, values);
     }
 
     /**
-     * Fetch records that have <code>STREETNAME IN (values)</code>
+     * Fetch records that have <code>streetName IN (values)</code>
      */
     public List<VolunteerPojo> fetchByStreetname(String... values) {
         return fetch(Volunteer.VOLUNTEER.STREETNAME, values);
     }
 
     /**
-     * Fetch records that have <code>HOUSENR IN (values)</code>
+     * Fetch records that have <code>houseNr IN (values)</code>
      */
     public List<VolunteerPojo> fetchByHousenr(String... values) {
         return fetch(Volunteer.VOLUNTEER.HOUSENR, values);
     }
 
     /**
-     * Fetch records that have <code>LOG IN (values)</code>
+     * Fetch records that have <code>log IN (values)</code>
      */
     public List<VolunteerPojo> fetchByLog(String... values) {
         return fetch(Volunteer.VOLUNTEER.LOG, values);
     }
 
     /**
-     * Fetch records that have <code>JOB IN (values)</code>
+     * Fetch records that have <code>job IN (values)</code>
      */
     public List<VolunteerPojo> fetchByJob(String... values) {
         return fetch(Volunteer.VOLUNTEER.JOB, values);
     }
 
     /**
-     * Fetch records that have <code>DATETRAINING IN (values)</code>
+     * Fetch records that have <code>dateTraining IN (values)</code>
      */
     public List<VolunteerPojo> fetchByDatetraining(Date... values) {
         return fetch(Volunteer.VOLUNTEER.DATETRAINING, values);
     }
 
     /**
-     * Fetch records that have <code>ISCLASSASSISTANT IN (values)</code>
+     * Fetch records that have <code>isClassAssistant IN (values)</code>
      */
     public List<VolunteerPojo> fetchByIsclassassistant(Boolean... values) {
         return fetch(Volunteer.VOLUNTEER.ISCLASSASSISTANT, values);
     }
 
     /**
-     * Fetch records that have <code>ISTAALMAATJE IN (values)</code>
+     * Fetch records that have <code>isTaalmaatje IN (values)</code>
      */
     public List<VolunteerPojo> fetchByIstaalmaatje(Boolean... values) {
         return fetch(Volunteer.VOLUNTEER.ISTAALMAATJE, values);

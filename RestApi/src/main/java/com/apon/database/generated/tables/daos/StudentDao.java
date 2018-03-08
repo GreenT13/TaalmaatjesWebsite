@@ -53,77 +53,77 @@ public class StudentDao extends DAOImpl<StudentRecord, StudentPojo, Integer> {
     }
 
     /**
-     * Fetch records that have <code>STUDENTID IN (values)</code>
+     * Fetch records that have <code>studentId IN (values)</code>
      */
     public List<StudentPojo> fetchByStudentid(Integer... values) {
         return fetch(Student.STUDENT.STUDENTID, values);
     }
 
     /**
-     * Fetch a unique record that has <code>STUDENTID = value</code>
+     * Fetch a unique record that has <code>studentId = value</code>
      */
     public StudentPojo fetchOneByStudentid(Integer value) {
         return fetchOne(Student.STUDENT.STUDENTID, value);
     }
 
     /**
-     * Fetch records that have <code>EXTERNALIDENTIFIER IN (values)</code>
+     * Fetch records that have <code>externalIdentifier IN (values)</code>
      */
     public List<StudentPojo> fetchByExternalidentifier(String... values) {
         return fetch(Student.STUDENT.EXTERNALIDENTIFIER, values);
     }
 
     /**
-     * Fetch a unique record that has <code>EXTERNALIDENTIFIER = value</code>
+     * Fetch a unique record that has <code>externalIdentifier = value</code>
      */
     public StudentPojo fetchOneByExternalidentifier(String value) {
         return fetchOne(Student.STUDENT.EXTERNALIDENTIFIER, value);
     }
 
     /**
-     * Fetch records that have <code>FIRSTNAME IN (values)</code>
+     * Fetch records that have <code>firstName IN (values)</code>
      */
     public List<StudentPojo> fetchByFirstname(String... values) {
         return fetch(Student.STUDENT.FIRSTNAME, values);
     }
 
     /**
-     * Fetch records that have <code>INSERTION IN (values)</code>
+     * Fetch records that have <code>insertion IN (values)</code>
      */
     public List<StudentPojo> fetchByInsertion(String... values) {
         return fetch(Student.STUDENT.INSERTION, values);
     }
 
     /**
-     * Fetch records that have <code>LASTNAME IN (values)</code>
+     * Fetch records that have <code>lastName IN (values)</code>
      */
     public List<StudentPojo> fetchByLastname(String... values) {
         return fetch(Student.STUDENT.LASTNAME, values);
     }
 
     /**
-     * Fetch records that have <code>SEX IN (values)</code>
+     * Fetch records that have <code>sex IN (values)</code>
      */
     public List<StudentPojo> fetchBySex(String... values) {
         return fetch(Student.STUDENT.SEX, values);
     }
 
     /**
-     * Fetch records that have <code>DATEOFBIRTH IN (values)</code>
+     * Fetch records that have <code>dateOfBirth IN (values)</code>
      */
     public List<StudentPojo> fetchByDateofbirth(Date... values) {
         return fetch(Student.STUDENT.DATEOFBIRTH, values);
     }
 
     /**
-     * Fetch records that have <code>GROUPIDENTIFICATION IN (values)</code>
+     * Fetch records that have <code>groupIdentification IN (values)</code>
      */
     public List<StudentPojo> fetchByGroupidentification(String... values) {
         return fetch(Student.STUDENT.GROUPIDENTIFICATION, values);
     }
 
     /**
-     * Fetch records that have <code>HASQUIT IN (values)</code>
+     * Fetch records that have <code>hasQuit IN (values)</code>
      */
     public List<StudentPojo> fetchByHasquit(Boolean... values) {
         return fetch(Student.STUDENT.HASQUIT, values);

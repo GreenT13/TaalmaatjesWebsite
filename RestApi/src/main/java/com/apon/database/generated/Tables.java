@@ -16,7 +16,7 @@ import javax.annotation.Generated;
 
 
 /**
- * Convenience access to all tables in PUBLIC
+ * Convenience access to all tables in taalmaatjes
  */
 @Generated(
     value = {
@@ -29,37 +29,37 @@ import javax.annotation.Generated;
 public class Tables {
 
     /**
-     * The table <code>PUBLIC.LOGONUSER</code>.
+     * The table <code>taalmaatjes.logonuser</code>.
      */
     public static final Logonuser LOGONUSER = com.apon.database.generated.tables.Logonuser.LOGONUSER;
 
     /**
-     * The table <code>PUBLIC.SCRIPTLOG</code>.
+     * The table <code>taalmaatjes.scriptlog</code>.
      */
     public static final Scriptlog SCRIPTLOG = com.apon.database.generated.tables.Scriptlog.SCRIPTLOG;
 
     /**
-     * The table <code>PUBLIC.STUDENT</code>.
+     * The table <code>taalmaatjes.student</code>.
      */
     public static final Student STUDENT = com.apon.database.generated.tables.Student.STUDENT;
 
     /**
-     * The table <code>PUBLIC.TASK</code>.
+     * The table <code>taalmaatjes.task</code>.
      */
     public static final Task TASK = com.apon.database.generated.tables.Task.TASK;
 
     /**
-     * The table <code>PUBLIC.VOLUNTEER</code>.
+     * The table <code>taalmaatjes.volunteer</code>.
      */
     public static final Volunteer VOLUNTEER = com.apon.database.generated.tables.Volunteer.VOLUNTEER;
 
     /**
-     * The table <code>PUBLIC.VOLUNTEERINSTANCE</code>.
+     * The table <code>taalmaatjes.volunteerinstance</code>.
      */
     public static final Volunteerinstance VOLUNTEERINSTANCE = com.apon.database.generated.tables.Volunteerinstance.VOLUNTEERINSTANCE;
 
     /**
-     * The table <code>PUBLIC.VOLUNTEERMATCH</code>.
+     * The table <code>taalmaatjes.volunteermatch</code>.
      */
     public static final Volunteermatch VOLUNTEERMATCH = com.apon.database.generated.tables.Volunteermatch.VOLUNTEERMATCH;
 }

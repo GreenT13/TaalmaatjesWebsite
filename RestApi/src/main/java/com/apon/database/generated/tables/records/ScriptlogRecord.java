@@ -30,59 +30,59 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ScriptlogRecord extends UpdatableRecordImpl<ScriptlogRecord> implements Record4<String, Timestamp, Timestamp, Boolean> {
 
-    private static final long serialVersionUID = -1173925034;
+    private static final long serialVersionUID = 28869688;
 
     /**
-     * Setter for <code>PUBLIC.SCRIPTLOG.SCRIPTNAME</code>.
+     * Setter for <code>taalmaatjes.scriptlog.scriptName</code>.
      */
     public void setScriptname(String value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.SCRIPTLOG.SCRIPTNAME</code>.
+     * Getter for <code>taalmaatjes.scriptlog.scriptName</code>.
      */
     public String getScriptname() {
         return (String) get(0);
     }
 
     /**
-     * Setter for <code>PUBLIC.SCRIPTLOG.TSSTARTED</code>.
+     * Setter for <code>taalmaatjes.scriptlog.tsStarted</code>.
      */
     public void setTsstarted(Timestamp value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.SCRIPTLOG.TSSTARTED</code>.
+     * Getter for <code>taalmaatjes.scriptlog.tsStarted</code>.
      */
     public Timestamp getTsstarted() {
         return (Timestamp) get(1);
     }
 
     /**
-     * Setter for <code>PUBLIC.SCRIPTLOG.TSFINISHED</code>.
+     * Setter for <code>taalmaatjes.scriptlog.tsFinished</code>.
      */
     public void setTsfinished(Timestamp value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.SCRIPTLOG.TSFINISHED</code>.
+     * Getter for <code>taalmaatjes.scriptlog.tsFinished</code>.
      */
     public Timestamp getTsfinished() {
         return (Timestamp) get(2);
     }
 
     /**
-     * Setter for <code>PUBLIC.SCRIPTLOG.ISCOMPLETED</code>.
+     * Setter for <code>taalmaatjes.scriptlog.isCompleted</code>.
      */
     public void setIscompleted(Boolean value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.SCRIPTLOG.ISCOMPLETED</code>.
+     * Getter for <code>taalmaatjes.scriptlog.isCompleted</code>.
      */
     public Boolean getIscompleted() {
         return (Boolean) get(3);

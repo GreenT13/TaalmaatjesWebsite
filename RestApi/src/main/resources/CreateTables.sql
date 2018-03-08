@@ -1,95 +1,97 @@
+SET sql_mode = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+
 create table Scriptlog (
-  script_Name varchar(100) not null,
-  ts_Started timestamp not null,
-  ts_Finished timestamp,
-  is_Completed boolean not null,
-  constraint "ScLo_PK" primary key (script_Name)
+  scriptName varchar(100) not null,
+  tsStarted timestamp not null,
+  tsFinished timestamp,
+  isCompleted boolean not null,
+  constraint `ScLo_PK` primary key (scriptName)
 );
 
 insert into Scriptlog values ('20180105_CreateTables', current_timestamp, null, false);
 
 -- Create all kinds of tables.
 create table Volunteer (
-  volunteer_Id int not null,
-  external_Identifier varchar(10) not null,
-  first_Name varchar(100),
+  volunteerId int not null,
+  externalIdentifier varchar(10) not null,
+  firstName varchar(100),
   insertion varchar(100),
-  last_Name varchar(100) not null,
-  date_Of_Birth date not null,
+  lastName varchar(100) not null,
+  dateOfBirth date not null,
   sex varchar(1) not null, -- M = male, F = female.
-  phone_Number varchar(100),
-  mobile_Phone_Number varchar(100),
+  phoneNumber varchar(100),
+  mobilePhoneNumber varchar(100),
   email varchar(100),
-  postal_Code varchar(6),
+  postalCode varchar(6),
   city varchar(100),
-  street_Name varchar(100),
-  house_Nr varchar(10),
-  log clob,
+  streetName varchar(100),
+  houseNr varchar(10),
+  log TEXT,
   job varchar(100),
-  date_Training date,
-  is_Class_Assistant boolean not null,
-  is_Taalmaatje boolean not null,
-  constraint "Volu_PK" primary key (volunteer_Id),
-  constraint "Volu_ExtId" unique (external_Identifier)
+  dateTraining date,
+  isClassAssistant boolean not null,
+  isTaalmaatje boolean not null,
+  constraint `Volu_PK` primary key (volunteerId),
+  constraint `Volu_ExtId` unique (externalIdentifier)
 );
 
 create table VolunteerInstance (
-  volunteer_Id int not null,
-  volunteer_InstanceId int not null,
-  external_Identifier varchar(10) not null,
-  date_Start date not null,
-  date_End date,
-  constraint "VoIn_PK" primary key (volunteer_Id, volunteer_InstanceId),
-  constraint "VoIn_ExtId" unique (volunteer_Id, external_Identifier),
-  constraint "VoIn_Volu_FK" foreign key (volunteer_Id) references Volunteer (volunteer_Id)
+  volunteerId int not null,
+  volunteerInstanceId int not null,
+  externalIdentifier varchar(10) not null,
+  dateStart date not null,
+  dateEnd date,
+  constraint `VoIn_PK` primary key (volunteerId, volunteerInstanceId),
+  constraint `VoIn_ExtId` unique (volunteerId, externalIdentifier),
+  constraint `VoIn_Volu_FK` foreign key (volunteerId) references Volunteer (volunteerId)
 );
 
 create table Student (
-  student_Id int not null,
-  external_Identifier varchar(10) not null,
-  first_Name varchar(100),
+  studentId int not null,
+  externalIdentifier varchar(10) not null,
+  firstName varchar(100),
   insertion varchar(100),
-  last_Name varchar(100),
+  lastName varchar(100),
   sex varchar(1) not null,
-  date_Of_Birth date not null,
-  group_Identification varchar(100),
-  has_Quit boolean not null,
-  constraint "Stud_PK" primary key (student_Id),
-  constraint "Stud_ExtId" unique(external_Identifier)
+  dateOfBirth date not null,
+  groupIdentification varchar(100),
+  hasQuit boolean not null,
+  constraint `Stud_PK` primary key (studentId),
+  constraint `Stud_ExtId` unique(externalIdentifier)
 );
 
 create table VolunteerMatch (
-  volunteer_Id int not null,
-  volunteer_Match_Id int not null,
-  external_Identifier varchar(10) not null,
-  student_Id int not null,
-  date_Start date not null,
-  date_End date,
-  constraint "VoMa_PK" primary key (volunteer_Id, volunteer_Match_Id),
-  constraint "VoMa_ExtId" unique (volunteer_Id, external_Identifier),
-  constraint "VoMa_Volu_FK" foreign key (volunteer_Id) references Volunteer (volunteer_Id),
-  constraint "VoMa_Stud_FK" foreign key (student_Id) references Student (student_Id)
+  volunteerId int not null,
+  volunteerMatchId int not null,
+  externalIdentifier varchar(10) not null,
+  studentId int not null,
+  dateStart date not null,
+  dateEnd date,
+  constraint `VoMa_PK` primary key (volunteerId, volunteerMatchId),
+  constraint `VoMa_ExtId` unique (volunteerId, externalIdentifier),
+  constraint `VoMa_Volu_FK` foreign key (volunteerId) references Volunteer (volunteerId),
+  constraint `VoMa_Stud_FK` foreign key (studentId) references Student (studentId)
 );
 
 create table Task (
-  task_Id int not null,
-  external_Identifier varchar(10) not null,
+  taskId int not null,
+  externalIdentifier varchar(10) not null,
   title varchar(100) not null,
   description varchar(1000),
-  volunteer_Id int not null,
-  is_Finished boolean not null,
-  date_To_Be_Finished date,
-  constraint "Task_PK" primary key (task_Id),
-  constraint "Task_ExtId" unique (external_Identifier),
-  constraint "Task_Volu_FK" foreign key (volunteer_Id) references Volunteer (volunteer_Id)
+  volunteerId int not null,
+  isFinished boolean not null,
+  dateToBeFinished date,
+  constraint `Task_PK` primary key (taskId),
+  constraint `Task_ExtId` unique (externalIdentifier),
+  constraint `Task_Volu_FK` foreign key (volunteerId) references Volunteer (volunteerid)
 );
 
 create table LogonUser (
   logonUserId int not null,
   username varchar(30) not null,
   password varchar(60) not null,
-  constraint "LoUs_PK" primary key (logonUserId),
-  constraint "LoUs_UsNa_UC" unique (username)
+  constraint `LoUs_PK` primary key (logonUserId),
+  constraint `LoUs_UsNa_UC` unique (username)
 );
 
-update Scriptlog set is_Completed = true, ts_Finished = current_timestamp where script_Name = 'CreateTables';
+update Scriptlog set isCompleted = true, tsFinished = current_timestamp where scriptName = '20180105_CreateTables';

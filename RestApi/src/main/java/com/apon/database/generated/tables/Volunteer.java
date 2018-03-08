@@ -6,7 +6,7 @@ package com.apon.database.generated.tables;
 
 import com.apon.database.generated.Indexes;
 import com.apon.database.generated.Keys;
-import com.apon.database.generated.Public;
+import com.apon.database.generated.Taalmaatjes;
 import com.apon.database.generated.tables.records.VolunteerRecord;
 
 import java.sql.Date;
@@ -39,10 +39,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Volunteer extends TableImpl<VolunteerRecord> {
 
-    private static final long serialVersionUID = -1746816345;
+    private static final long serialVersionUID = -1008973987;
 
     /**
-     * The reference instance of <code>PUBLIC.VOLUNTEER</code>
+     * The reference instance of <code>taalmaatjes.volunteer</code>
      */
     public static final Volunteer VOLUNTEER = new Volunteer();
 
@@ -55,116 +55,116 @@ public class Volunteer extends TableImpl<VolunteerRecord> {
     }
 
     /**
-     * The column <code>PUBLIC.VOLUNTEER.VOLUNTEERID</code>.
+     * The column <code>taalmaatjes.volunteer.volunteerId</code>.
      */
-    public final TableField<VolunteerRecord, Integer> VOLUNTEERID = createField("VOLUNTEERID", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<VolunteerRecord, Integer> VOLUNTEERID = createField("volunteerId", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>PUBLIC.VOLUNTEER.EXTERNALIDENTIFIER</code>.
+     * The column <code>taalmaatjes.volunteer.externalIdentifier</code>.
      */
-    public final TableField<VolunteerRecord, String> EXTERNALIDENTIFIER = createField("EXTERNALIDENTIFIER", org.jooq.impl.SQLDataType.VARCHAR(10).nullable(false), this, "");
+    public final TableField<VolunteerRecord, String> EXTERNALIDENTIFIER = createField("externalIdentifier", org.jooq.impl.SQLDataType.VARCHAR(10).nullable(false), this, "");
 
     /**
-     * The column <code>PUBLIC.VOLUNTEER.FIRSTNAME</code>.
+     * The column <code>taalmaatjes.volunteer.firstName</code>.
      */
-    public final TableField<VolunteerRecord, String> FIRSTNAME = createField("FIRSTNAME", org.jooq.impl.SQLDataType.VARCHAR(100), this, "");
+    public final TableField<VolunteerRecord, String> FIRSTNAME = createField("firstName", org.jooq.impl.SQLDataType.VARCHAR(100), this, "");
 
     /**
-     * The column <code>PUBLIC.VOLUNTEER.INSERTION</code>.
+     * The column <code>taalmaatjes.volunteer.insertion</code>.
      */
-    public final TableField<VolunteerRecord, String> INSERTION = createField("INSERTION", org.jooq.impl.SQLDataType.VARCHAR(100), this, "");
+    public final TableField<VolunteerRecord, String> INSERTION = createField("insertion", org.jooq.impl.SQLDataType.VARCHAR(100), this, "");
 
     /**
-     * The column <code>PUBLIC.VOLUNTEER.LASTNAME</code>.
+     * The column <code>taalmaatjes.volunteer.lastName</code>.
      */
-    public final TableField<VolunteerRecord, String> LASTNAME = createField("LASTNAME", org.jooq.impl.SQLDataType.VARCHAR(100).nullable(false), this, "");
+    public final TableField<VolunteerRecord, String> LASTNAME = createField("lastName", org.jooq.impl.SQLDataType.VARCHAR(100).nullable(false), this, "");
 
     /**
-     * The column <code>PUBLIC.VOLUNTEER.DATEOFBIRTH</code>.
+     * The column <code>taalmaatjes.volunteer.dateOfBirth</code>.
      */
-    public final TableField<VolunteerRecord, Date> DATEOFBIRTH = createField("DATEOFBIRTH", org.jooq.impl.SQLDataType.DATE.nullable(false), this, "");
+    public final TableField<VolunteerRecord, Date> DATEOFBIRTH = createField("dateOfBirth", org.jooq.impl.SQLDataType.DATE.nullable(false), this, "");
 
     /**
-     * The column <code>PUBLIC.VOLUNTEER.SEX</code>.
+     * The column <code>taalmaatjes.volunteer.sex</code>.
      */
-    public final TableField<VolunteerRecord, String> SEX = createField("SEX", org.jooq.impl.SQLDataType.VARCHAR(1).nullable(false), this, "");
+    public final TableField<VolunteerRecord, String> SEX = createField("sex", org.jooq.impl.SQLDataType.VARCHAR(1).nullable(false), this, "");
 
     /**
-     * The column <code>PUBLIC.VOLUNTEER.PHONENUMBER</code>.
+     * The column <code>taalmaatjes.volunteer.phoneNumber</code>.
      */
-    public final TableField<VolunteerRecord, String> PHONENUMBER = createField("PHONENUMBER", org.jooq.impl.SQLDataType.VARCHAR(100), this, "");
+    public final TableField<VolunteerRecord, String> PHONENUMBER = createField("phoneNumber", org.jooq.impl.SQLDataType.VARCHAR(100), this, "");
 
     /**
-     * The column <code>PUBLIC.VOLUNTEER.MOBILEPHONENUMBER</code>.
+     * The column <code>taalmaatjes.volunteer.mobilePhoneNumber</code>.
      */
-    public final TableField<VolunteerRecord, String> MOBILEPHONENUMBER = createField("MOBILEPHONENUMBER", org.jooq.impl.SQLDataType.VARCHAR(100), this, "");
+    public final TableField<VolunteerRecord, String> MOBILEPHONENUMBER = createField("mobilePhoneNumber", org.jooq.impl.SQLDataType.VARCHAR(100), this, "");
 
     /**
-     * The column <code>PUBLIC.VOLUNTEER.EMAIL</code>.
+     * The column <code>taalmaatjes.volunteer.email</code>.
      */
-    public final TableField<VolunteerRecord, String> EMAIL = createField("EMAIL", org.jooq.impl.SQLDataType.VARCHAR(100), this, "");
+    public final TableField<VolunteerRecord, String> EMAIL = createField("email", org.jooq.impl.SQLDataType.VARCHAR(100), this, "");
 
     /**
-     * The column <code>PUBLIC.VOLUNTEER.POSTALCODE</code>.
+     * The column <code>taalmaatjes.volunteer.postalCode</code>.
      */
-    public final TableField<VolunteerRecord, String> POSTALCODE = createField("POSTALCODE", org.jooq.impl.SQLDataType.VARCHAR(6), this, "");
+    public final TableField<VolunteerRecord, String> POSTALCODE = createField("postalCode", org.jooq.impl.SQLDataType.VARCHAR(6), this, "");
 
     /**
-     * The column <code>PUBLIC.VOLUNTEER.CITY</code>.
+     * The column <code>taalmaatjes.volunteer.city</code>.
      */
-    public final TableField<VolunteerRecord, String> CITY = createField("CITY", org.jooq.impl.SQLDataType.VARCHAR(100), this, "");
+    public final TableField<VolunteerRecord, String> CITY = createField("city", org.jooq.impl.SQLDataType.VARCHAR(100), this, "");
 
     /**
-     * The column <code>PUBLIC.VOLUNTEER.STREETNAME</code>.
+     * The column <code>taalmaatjes.volunteer.streetName</code>.
      */
-    public final TableField<VolunteerRecord, String> STREETNAME = createField("STREETNAME", org.jooq.impl.SQLDataType.VARCHAR(100), this, "");
+    public final TableField<VolunteerRecord, String> STREETNAME = createField("streetName", org.jooq.impl.SQLDataType.VARCHAR(100), this, "");
 
     /**
-     * The column <code>PUBLIC.VOLUNTEER.HOUSENR</code>.
+     * The column <code>taalmaatjes.volunteer.houseNr</code>.
      */
-    public final TableField<VolunteerRecord, String> HOUSENR = createField("HOUSENR", org.jooq.impl.SQLDataType.VARCHAR(10), this, "");
+    public final TableField<VolunteerRecord, String> HOUSENR = createField("houseNr", org.jooq.impl.SQLDataType.VARCHAR(10), this, "");
 
     /**
-     * The column <code>PUBLIC.VOLUNTEER.LOG</code>.
+     * The column <code>taalmaatjes.volunteer.log</code>.
      */
-    public final TableField<VolunteerRecord, String> LOG = createField("LOG", org.jooq.impl.SQLDataType.CLOB, this, "");
+    public final TableField<VolunteerRecord, String> LOG = createField("log", org.jooq.impl.SQLDataType.CLOB, this, "");
 
     /**
-     * The column <code>PUBLIC.VOLUNTEER.JOB</code>.
+     * The column <code>taalmaatjes.volunteer.job</code>.
      */
-    public final TableField<VolunteerRecord, String> JOB = createField("JOB", org.jooq.impl.SQLDataType.VARCHAR(100), this, "");
+    public final TableField<VolunteerRecord, String> JOB = createField("job", org.jooq.impl.SQLDataType.VARCHAR(100), this, "");
 
     /**
-     * The column <code>PUBLIC.VOLUNTEER.DATETRAINING</code>.
+     * The column <code>taalmaatjes.volunteer.dateTraining</code>.
      */
-    public final TableField<VolunteerRecord, Date> DATETRAINING = createField("DATETRAINING", org.jooq.impl.SQLDataType.DATE, this, "");
+    public final TableField<VolunteerRecord, Date> DATETRAINING = createField("dateTraining", org.jooq.impl.SQLDataType.DATE, this, "");
 
     /**
-     * The column <code>PUBLIC.VOLUNTEER.ISCLASSASSISTANT</code>.
+     * The column <code>taalmaatjes.volunteer.isClassAssistant</code>.
      */
-    public final TableField<VolunteerRecord, Boolean> ISCLASSASSISTANT = createField("ISCLASSASSISTANT", org.jooq.impl.SQLDataType.BOOLEAN.nullable(false), this, "");
+    public final TableField<VolunteerRecord, Boolean> ISCLASSASSISTANT = createField("isClassAssistant", org.jooq.impl.SQLDataType.BOOLEAN.nullable(false), this, "");
 
     /**
-     * The column <code>PUBLIC.VOLUNTEER.ISTAALMAATJE</code>.
+     * The column <code>taalmaatjes.volunteer.isTaalmaatje</code>.
      */
-    public final TableField<VolunteerRecord, Boolean> ISTAALMAATJE = createField("ISTAALMAATJE", org.jooq.impl.SQLDataType.BOOLEAN.nullable(false), this, "");
+    public final TableField<VolunteerRecord, Boolean> ISTAALMAATJE = createField("isTaalmaatje", org.jooq.impl.SQLDataType.BOOLEAN.nullable(false), this, "");
 
     /**
-     * Create a <code>PUBLIC.VOLUNTEER</code> table reference
+     * Create a <code>taalmaatjes.volunteer</code> table reference
      */
     public Volunteer() {
-        this(DSL.name("VOLUNTEER"), null);
+        this(DSL.name("volunteer"), null);
     }
 
     /**
-     * Create an aliased <code>PUBLIC.VOLUNTEER</code> table reference
+     * Create an aliased <code>taalmaatjes.volunteer</code> table reference
      */
     public Volunteer(String alias) {
         this(DSL.name(alias), VOLUNTEER);
     }
 
     /**
-     * Create an aliased <code>PUBLIC.VOLUNTEER</code> table reference
+     * Create an aliased <code>taalmaatjes.volunteer</code> table reference
      */
     public Volunteer(Name alias) {
         this(alias, VOLUNTEER);
@@ -183,7 +183,7 @@ public class Volunteer extends TableImpl<VolunteerRecord> {
      */
     @Override
     public Schema getSchema() {
-        return Public.PUBLIC;
+        return Taalmaatjes.TAALMAATJES;
     }
 
     /**
@@ -191,7 +191,7 @@ public class Volunteer extends TableImpl<VolunteerRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.PRIMARY_KEY_2, Indexes.VOLU_EXTID_INDEX_2);
+        return Arrays.<Index>asList(Indexes.VOLUNTEER_PRIMARY, Indexes.VOLUNTEER_VOLU_EXTID);
     }
 
     /**
@@ -199,7 +199,7 @@ public class Volunteer extends TableImpl<VolunteerRecord> {
      */
     @Override
     public UniqueKey<VolunteerRecord> getPrimaryKey() {
-        return Keys.VOLU_PK;
+        return Keys.KEY_VOLUNTEER_PRIMARY;
     }
 
     /**
@@ -207,7 +207,7 @@ public class Volunteer extends TableImpl<VolunteerRecord> {
      */
     @Override
     public List<UniqueKey<VolunteerRecord>> getKeys() {
-        return Arrays.<UniqueKey<VolunteerRecord>>asList(Keys.VOLU_PK, Keys.VOLU_EXTID);
+        return Arrays.<UniqueKey<VolunteerRecord>>asList(Keys.KEY_VOLUNTEER_PRIMARY, Keys.KEY_VOLUNTEER_VOLU_EXTID);
     }
 
     /**

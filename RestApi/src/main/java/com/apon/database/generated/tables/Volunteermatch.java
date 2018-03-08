@@ -6,7 +6,7 @@ package com.apon.database.generated.tables;
 
 import com.apon.database.generated.Indexes;
 import com.apon.database.generated.Keys;
-import com.apon.database.generated.Public;
+import com.apon.database.generated.Taalmaatjes;
 import com.apon.database.generated.tables.records.VolunteermatchRecord;
 
 import java.sql.Date;
@@ -40,10 +40,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Volunteermatch extends TableImpl<VolunteermatchRecord> {
 
-    private static final long serialVersionUID = 1699141473;
+    private static final long serialVersionUID = 634666475;
 
     /**
-     * The reference instance of <code>PUBLIC.VOLUNTEERMATCH</code>
+     * The reference instance of <code>taalmaatjes.volunteermatch</code>
      */
     public static final Volunteermatch VOLUNTEERMATCH = new Volunteermatch();
 
@@ -56,51 +56,51 @@ public class Volunteermatch extends TableImpl<VolunteermatchRecord> {
     }
 
     /**
-     * The column <code>PUBLIC.VOLUNTEERMATCH.VOLUNTEERID</code>.
+     * The column <code>taalmaatjes.volunteermatch.volunteerId</code>.
      */
-    public final TableField<VolunteermatchRecord, Integer> VOLUNTEERID = createField("VOLUNTEERID", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<VolunteermatchRecord, Integer> VOLUNTEERID = createField("volunteerId", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>PUBLIC.VOLUNTEERMATCH.VOLUNTEERMATCHID</code>.
+     * The column <code>taalmaatjes.volunteermatch.volunteerMatchId</code>.
      */
-    public final TableField<VolunteermatchRecord, Integer> VOLUNTEERMATCHID = createField("VOLUNTEERMATCHID", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<VolunteermatchRecord, Integer> VOLUNTEERMATCHID = createField("volunteerMatchId", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>PUBLIC.VOLUNTEERMATCH.EXTERNALIDENTIFIER</code>.
+     * The column <code>taalmaatjes.volunteermatch.externalIdentifier</code>.
      */
-    public final TableField<VolunteermatchRecord, String> EXTERNALIDENTIFIER = createField("EXTERNALIDENTIFIER", org.jooq.impl.SQLDataType.VARCHAR(10).nullable(false), this, "");
+    public final TableField<VolunteermatchRecord, String> EXTERNALIDENTIFIER = createField("externalIdentifier", org.jooq.impl.SQLDataType.VARCHAR(10).nullable(false), this, "");
 
     /**
-     * The column <code>PUBLIC.VOLUNTEERMATCH.STUDENTID</code>.
+     * The column <code>taalmaatjes.volunteermatch.studentId</code>.
      */
-    public final TableField<VolunteermatchRecord, Integer> STUDENTID = createField("STUDENTID", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<VolunteermatchRecord, Integer> STUDENTID = createField("studentId", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>PUBLIC.VOLUNTEERMATCH.DATESTART</code>.
+     * The column <code>taalmaatjes.volunteermatch.dateStart</code>.
      */
-    public final TableField<VolunteermatchRecord, Date> DATESTART = createField("DATESTART", org.jooq.impl.SQLDataType.DATE.nullable(false), this, "");
+    public final TableField<VolunteermatchRecord, Date> DATESTART = createField("dateStart", org.jooq.impl.SQLDataType.DATE.nullable(false), this, "");
 
     /**
-     * The column <code>PUBLIC.VOLUNTEERMATCH.DATEEND</code>.
+     * The column <code>taalmaatjes.volunteermatch.dateEnd</code>.
      */
-    public final TableField<VolunteermatchRecord, Date> DATEEND = createField("DATEEND", org.jooq.impl.SQLDataType.DATE, this, "");
+    public final TableField<VolunteermatchRecord, Date> DATEEND = createField("dateEnd", org.jooq.impl.SQLDataType.DATE, this, "");
 
     /**
-     * Create a <code>PUBLIC.VOLUNTEERMATCH</code> table reference
+     * Create a <code>taalmaatjes.volunteermatch</code> table reference
      */
     public Volunteermatch() {
-        this(DSL.name("VOLUNTEERMATCH"), null);
+        this(DSL.name("volunteermatch"), null);
     }
 
     /**
-     * Create an aliased <code>PUBLIC.VOLUNTEERMATCH</code> table reference
+     * Create an aliased <code>taalmaatjes.volunteermatch</code> table reference
      */
     public Volunteermatch(String alias) {
         this(DSL.name(alias), VOLUNTEERMATCH);
     }
 
     /**
-     * Create an aliased <code>PUBLIC.VOLUNTEERMATCH</code> table reference
+     * Create an aliased <code>taalmaatjes.volunteermatch</code> table reference
      */
     public Volunteermatch(Name alias) {
         this(alias, VOLUNTEERMATCH);
@@ -119,7 +119,7 @@ public class Volunteermatch extends TableImpl<VolunteermatchRecord> {
      */
     @Override
     public Schema getSchema() {
-        return Public.PUBLIC;
+        return Taalmaatjes.TAALMAATJES;
     }
 
     /**
@@ -127,7 +127,7 @@ public class Volunteermatch extends TableImpl<VolunteermatchRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.PRIMARY_KEY_1, Indexes.VOMA_EXTID_INDEX_1, Indexes.VOMA_STUD_FK_INDEX_1);
+        return Arrays.<Index>asList(Indexes.VOLUNTEERMATCH_PRIMARY, Indexes.VOLUNTEERMATCH_VOMA_EXTID, Indexes.VOLUNTEERMATCH_VOMA_STUD_FK);
     }
 
     /**
@@ -135,7 +135,7 @@ public class Volunteermatch extends TableImpl<VolunteermatchRecord> {
      */
     @Override
     public UniqueKey<VolunteermatchRecord> getPrimaryKey() {
-        return Keys.VOMA_PK;
+        return Keys.KEY_VOLUNTEERMATCH_PRIMARY;
     }
 
     /**
@@ -143,7 +143,7 @@ public class Volunteermatch extends TableImpl<VolunteermatchRecord> {
      */
     @Override
     public List<UniqueKey<VolunteermatchRecord>> getKeys() {
-        return Arrays.<UniqueKey<VolunteermatchRecord>>asList(Keys.VOMA_PK, Keys.VOMA_EXTID);
+        return Arrays.<UniqueKey<VolunteermatchRecord>>asList(Keys.KEY_VOLUNTEERMATCH_PRIMARY, Keys.KEY_VOLUNTEERMATCH_VOMA_EXTID);
     }
 
     /**

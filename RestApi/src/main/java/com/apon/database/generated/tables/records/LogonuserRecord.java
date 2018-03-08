@@ -28,45 +28,45 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class LogonuserRecord extends UpdatableRecordImpl<LogonuserRecord> implements Record3<Integer, String, String> {
 
-    private static final long serialVersionUID = -1241717018;
+    private static final long serialVersionUID = -656319048;
 
     /**
-     * Setter for <code>PUBLIC.LOGONUSER.LOGONUSERID</code>.
+     * Setter for <code>taalmaatjes.logonuser.logonUserId</code>.
      */
     public void setLogonuserid(Integer value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.LOGONUSER.LOGONUSERID</code>.
+     * Getter for <code>taalmaatjes.logonuser.logonUserId</code>.
      */
     public Integer getLogonuserid() {
         return (Integer) get(0);
     }
 
     /**
-     * Setter for <code>PUBLIC.LOGONUSER.USERNAME</code>.
+     * Setter for <code>taalmaatjes.logonuser.username</code>.
      */
     public void setUsername(String value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.LOGONUSER.USERNAME</code>.
+     * Getter for <code>taalmaatjes.logonuser.username</code>.
      */
     public String getUsername() {
         return (String) get(1);
     }
 
     /**
-     * Setter for <code>PUBLIC.LOGONUSER.PASSWORD</code>.
+     * Setter for <code>taalmaatjes.logonuser.password</code>.
      */
     public void setPassword(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.LOGONUSER.PASSWORD</code>.
+     * Getter for <code>taalmaatjes.logonuser.password</code>.
      */
     public String getPassword() {
         return (String) get(2);

@@ -54,42 +54,42 @@ public class VolunteermatchDao extends DAOImpl<VolunteermatchRecord, Volunteerma
     }
 
     /**
-     * Fetch records that have <code>VOLUNTEERID IN (values)</code>
+     * Fetch records that have <code>volunteerId IN (values)</code>
      */
     public List<VolunteermatchPojo> fetchByVolunteerid(Integer... values) {
         return fetch(Volunteermatch.VOLUNTEERMATCH.VOLUNTEERID, values);
     }
 
     /**
-     * Fetch records that have <code>VOLUNTEERMATCHID IN (values)</code>
+     * Fetch records that have <code>volunteerMatchId IN (values)</code>
      */
     public List<VolunteermatchPojo> fetchByVolunteermatchid(Integer... values) {
         return fetch(Volunteermatch.VOLUNTEERMATCH.VOLUNTEERMATCHID, values);
     }
 
     /**
-     * Fetch records that have <code>EXTERNALIDENTIFIER IN (values)</code>
+     * Fetch records that have <code>externalIdentifier IN (values)</code>
      */
     public List<VolunteermatchPojo> fetchByExternalidentifier(String... values) {
         return fetch(Volunteermatch.VOLUNTEERMATCH.EXTERNALIDENTIFIER, values);
     }
 
     /**
-     * Fetch records that have <code>STUDENTID IN (values)</code>
+     * Fetch records that have <code>studentId IN (values)</code>
      */
     public List<VolunteermatchPojo> fetchByStudentid(Integer... values) {
         return fetch(Volunteermatch.VOLUNTEERMATCH.STUDENTID, values);
     }
 
     /**
-     * Fetch records that have <code>DATESTART IN (values)</code>
+     * Fetch records that have <code>dateStart IN (values)</code>
      */
     public List<VolunteermatchPojo> fetchByDatestart(Date... values) {
         return fetch(Volunteermatch.VOLUNTEERMATCH.DATESTART, values);
     }
 
     /**
-     * Fetch records that have <code>DATEEND IN (values)</code>
+     * Fetch records that have <code>dateEnd IN (values)</code>
      */
     public List<VolunteermatchPojo> fetchByDateend(Date... values) {
         return fetch(Volunteermatch.VOLUNTEERMATCH.DATEEND, values);

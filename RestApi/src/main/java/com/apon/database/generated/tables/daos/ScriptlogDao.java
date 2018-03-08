@@ -53,35 +53,35 @@ public class ScriptlogDao extends DAOImpl<ScriptlogRecord, ScriptlogPojo, String
     }
 
     /**
-     * Fetch records that have <code>SCRIPTNAME IN (values)</code>
+     * Fetch records that have <code>scriptName IN (values)</code>
      */
     public List<ScriptlogPojo> fetchByScriptname(String... values) {
         return fetch(Scriptlog.SCRIPTLOG.SCRIPTNAME, values);
     }
 
     /**
-     * Fetch a unique record that has <code>SCRIPTNAME = value</code>
+     * Fetch a unique record that has <code>scriptName = value</code>
      */
     public ScriptlogPojo fetchOneByScriptname(String value) {
         return fetchOne(Scriptlog.SCRIPTLOG.SCRIPTNAME, value);
     }
 
     /**
-     * Fetch records that have <code>TSSTARTED IN (values)</code>
+     * Fetch records that have <code>tsStarted IN (values)</code>
      */
     public List<ScriptlogPojo> fetchByTsstarted(Timestamp... values) {
         return fetch(Scriptlog.SCRIPTLOG.TSSTARTED, values);
     }
 
     /**
-     * Fetch records that have <code>TSFINISHED IN (values)</code>
+     * Fetch records that have <code>tsFinished IN (values)</code>
      */
     public List<ScriptlogPojo> fetchByTsfinished(Timestamp... values) {
         return fetch(Scriptlog.SCRIPTLOG.TSFINISHED, values);
     }
 
     /**
-     * Fetch records that have <code>ISCOMPLETED IN (values)</code>
+     * Fetch records that have <code>isCompleted IN (values)</code>
      */
     public List<ScriptlogPojo> fetchByIscompleted(Boolean... values) {
         return fetch(Scriptlog.SCRIPTLOG.ISCOMPLETED, values);

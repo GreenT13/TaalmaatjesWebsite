@@ -6,7 +6,7 @@ package com.apon.database.generated.tables;
 
 import com.apon.database.generated.Indexes;
 import com.apon.database.generated.Keys;
-import com.apon.database.generated.Public;
+import com.apon.database.generated.Taalmaatjes;
 import com.apon.database.generated.tables.records.StudentRecord;
 
 import java.sql.Date;
@@ -39,10 +39,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Student extends TableImpl<StudentRecord> {
 
-    private static final long serialVersionUID = -2060325644;
+    private static final long serialVersionUID = 1267828080;
 
     /**
-     * The reference instance of <code>PUBLIC.STUDENT</code>
+     * The reference instance of <code>taalmaatjes.student</code>
      */
     public static final Student STUDENT = new Student();
 
@@ -55,66 +55,66 @@ public class Student extends TableImpl<StudentRecord> {
     }
 
     /**
-     * The column <code>PUBLIC.STUDENT.STUDENTID</code>.
+     * The column <code>taalmaatjes.student.studentId</code>.
      */
-    public final TableField<StudentRecord, Integer> STUDENTID = createField("STUDENTID", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<StudentRecord, Integer> STUDENTID = createField("studentId", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>PUBLIC.STUDENT.EXTERNALIDENTIFIER</code>.
+     * The column <code>taalmaatjes.student.externalIdentifier</code>.
      */
-    public final TableField<StudentRecord, String> EXTERNALIDENTIFIER = createField("EXTERNALIDENTIFIER", org.jooq.impl.SQLDataType.VARCHAR(10).nullable(false), this, "");
+    public final TableField<StudentRecord, String> EXTERNALIDENTIFIER = createField("externalIdentifier", org.jooq.impl.SQLDataType.VARCHAR(10).nullable(false), this, "");
 
     /**
-     * The column <code>PUBLIC.STUDENT.FIRSTNAME</code>.
+     * The column <code>taalmaatjes.student.firstName</code>.
      */
-    public final TableField<StudentRecord, String> FIRSTNAME = createField("FIRSTNAME", org.jooq.impl.SQLDataType.VARCHAR(100), this, "");
+    public final TableField<StudentRecord, String> FIRSTNAME = createField("firstName", org.jooq.impl.SQLDataType.VARCHAR(100), this, "");
 
     /**
-     * The column <code>PUBLIC.STUDENT.INSERTION</code>.
+     * The column <code>taalmaatjes.student.insertion</code>.
      */
-    public final TableField<StudentRecord, String> INSERTION = createField("INSERTION", org.jooq.impl.SQLDataType.VARCHAR(100), this, "");
+    public final TableField<StudentRecord, String> INSERTION = createField("insertion", org.jooq.impl.SQLDataType.VARCHAR(100), this, "");
 
     /**
-     * The column <code>PUBLIC.STUDENT.LASTNAME</code>.
+     * The column <code>taalmaatjes.student.lastName</code>.
      */
-    public final TableField<StudentRecord, String> LASTNAME = createField("LASTNAME", org.jooq.impl.SQLDataType.VARCHAR(100), this, "");
+    public final TableField<StudentRecord, String> LASTNAME = createField("lastName", org.jooq.impl.SQLDataType.VARCHAR(100), this, "");
 
     /**
-     * The column <code>PUBLIC.STUDENT.SEX</code>.
+     * The column <code>taalmaatjes.student.sex</code>.
      */
-    public final TableField<StudentRecord, String> SEX = createField("SEX", org.jooq.impl.SQLDataType.VARCHAR(1).nullable(false), this, "");
+    public final TableField<StudentRecord, String> SEX = createField("sex", org.jooq.impl.SQLDataType.VARCHAR(1).nullable(false), this, "");
 
     /**
-     * The column <code>PUBLIC.STUDENT.DATEOFBIRTH</code>.
+     * The column <code>taalmaatjes.student.dateOfBirth</code>.
      */
-    public final TableField<StudentRecord, Date> DATEOFBIRTH = createField("DATEOFBIRTH", org.jooq.impl.SQLDataType.DATE.nullable(false), this, "");
+    public final TableField<StudentRecord, Date> DATEOFBIRTH = createField("dateOfBirth", org.jooq.impl.SQLDataType.DATE.nullable(false), this, "");
 
     /**
-     * The column <code>PUBLIC.STUDENT.GROUPIDENTIFICATION</code>.
+     * The column <code>taalmaatjes.student.groupIdentification</code>.
      */
-    public final TableField<StudentRecord, String> GROUPIDENTIFICATION = createField("GROUPIDENTIFICATION", org.jooq.impl.SQLDataType.VARCHAR(100), this, "");
+    public final TableField<StudentRecord, String> GROUPIDENTIFICATION = createField("groupIdentification", org.jooq.impl.SQLDataType.VARCHAR(100), this, "");
 
     /**
-     * The column <code>PUBLIC.STUDENT.HASQUIT</code>.
+     * The column <code>taalmaatjes.student.hasQuit</code>.
      */
-    public final TableField<StudentRecord, Boolean> HASQUIT = createField("HASQUIT", org.jooq.impl.SQLDataType.BOOLEAN.nullable(false), this, "");
+    public final TableField<StudentRecord, Boolean> HASQUIT = createField("hasQuit", org.jooq.impl.SQLDataType.BOOLEAN.nullable(false), this, "");
 
     /**
-     * Create a <code>PUBLIC.STUDENT</code> table reference
+     * Create a <code>taalmaatjes.student</code> table reference
      */
     public Student() {
-        this(DSL.name("STUDENT"), null);
+        this(DSL.name("student"), null);
     }
 
     /**
-     * Create an aliased <code>PUBLIC.STUDENT</code> table reference
+     * Create an aliased <code>taalmaatjes.student</code> table reference
      */
     public Student(String alias) {
         this(DSL.name(alias), STUDENT);
     }
 
     /**
-     * Create an aliased <code>PUBLIC.STUDENT</code> table reference
+     * Create an aliased <code>taalmaatjes.student</code> table reference
      */
     public Student(Name alias) {
         this(alias, STUDENT);
@@ -133,7 +133,7 @@ public class Student extends TableImpl<StudentRecord> {
      */
     @Override
     public Schema getSchema() {
-        return Public.PUBLIC;
+        return Taalmaatjes.TAALMAATJES;
     }
 
     /**
@@ -141,7 +141,7 @@ public class Student extends TableImpl<StudentRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.PRIMARY_KEY_BA, Indexes.STUD_EXTID_INDEX_B);
+        return Arrays.<Index>asList(Indexes.STUDENT_PRIMARY, Indexes.STUDENT_STUD_EXTID);
     }
 
     /**
@@ -149,7 +149,7 @@ public class Student extends TableImpl<StudentRecord> {
      */
     @Override
     public UniqueKey<StudentRecord> getPrimaryKey() {
-        return Keys.STUD_PK;
+        return Keys.KEY_STUDENT_PRIMARY;
     }
 
     /**
@@ -157,7 +157,7 @@ public class Student extends TableImpl<StudentRecord> {
      */
     @Override
     public List<UniqueKey<StudentRecord>> getKeys() {
-        return Arrays.<UniqueKey<StudentRecord>>asList(Keys.STUD_PK, Keys.STUD_EXTID);
+        return Arrays.<UniqueKey<StudentRecord>>asList(Keys.KEY_STUDENT_PRIMARY, Keys.KEY_STUDENT_STUD_EXTID);
     }
 
     /**

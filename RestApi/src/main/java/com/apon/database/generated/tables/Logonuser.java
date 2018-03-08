@@ -6,7 +6,7 @@ package com.apon.database.generated.tables;
 
 import com.apon.database.generated.Indexes;
 import com.apon.database.generated.Keys;
-import com.apon.database.generated.Public;
+import com.apon.database.generated.Taalmaatjes;
 import com.apon.database.generated.tables.records.LogonuserRecord;
 
 import java.util.Arrays;
@@ -38,10 +38,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Logonuser extends TableImpl<LogonuserRecord> {
 
-    private static final long serialVersionUID = 1998855952;
+    private static final long serialVersionUID = 157044238;
 
     /**
-     * The reference instance of <code>PUBLIC.LOGONUSER</code>
+     * The reference instance of <code>taalmaatjes.logonuser</code>
      */
     public static final Logonuser LOGONUSER = new Logonuser();
 
@@ -54,36 +54,36 @@ public class Logonuser extends TableImpl<LogonuserRecord> {
     }
 
     /**
-     * The column <code>PUBLIC.LOGONUSER.LOGONUSERID</code>.
+     * The column <code>taalmaatjes.logonuser.logonUserId</code>.
      */
-    public final TableField<LogonuserRecord, Integer> LOGONUSERID = createField("LOGONUSERID", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<LogonuserRecord, Integer> LOGONUSERID = createField("logonUserId", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>PUBLIC.LOGONUSER.USERNAME</code>.
+     * The column <code>taalmaatjes.logonuser.username</code>.
      */
-    public final TableField<LogonuserRecord, String> USERNAME = createField("USERNAME", org.jooq.impl.SQLDataType.VARCHAR(30).nullable(false), this, "");
+    public final TableField<LogonuserRecord, String> USERNAME = createField("username", org.jooq.impl.SQLDataType.VARCHAR(30).nullable(false), this, "");
 
     /**
-     * The column <code>PUBLIC.LOGONUSER.PASSWORD</code>.
+     * The column <code>taalmaatjes.logonuser.password</code>.
      */
-    public final TableField<LogonuserRecord, String> PASSWORD = createField("PASSWORD", org.jooq.impl.SQLDataType.VARCHAR(60).nullable(false), this, "");
+    public final TableField<LogonuserRecord, String> PASSWORD = createField("password", org.jooq.impl.SQLDataType.VARCHAR(60).nullable(false), this, "");
 
     /**
-     * Create a <code>PUBLIC.LOGONUSER</code> table reference
+     * Create a <code>taalmaatjes.logonuser</code> table reference
      */
     public Logonuser() {
-        this(DSL.name("LOGONUSER"), null);
+        this(DSL.name("logonuser"), null);
     }
 
     /**
-     * Create an aliased <code>PUBLIC.LOGONUSER</code> table reference
+     * Create an aliased <code>taalmaatjes.logonuser</code> table reference
      */
     public Logonuser(String alias) {
         this(DSL.name(alias), LOGONUSER);
     }
 
     /**
-     * Create an aliased <code>PUBLIC.LOGONUSER</code> table reference
+     * Create an aliased <code>taalmaatjes.logonuser</code> table reference
      */
     public Logonuser(Name alias) {
         this(alias, LOGONUSER);
@@ -102,7 +102,7 @@ public class Logonuser extends TableImpl<LogonuserRecord> {
      */
     @Override
     public Schema getSchema() {
-        return Public.PUBLIC;
+        return Taalmaatjes.TAALMAATJES;
     }
 
     /**
@@ -110,7 +110,7 @@ public class Logonuser extends TableImpl<LogonuserRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.LOUS_USNA_UC_INDEX_4, Indexes.PRIMARY_KEY_4);
+        return Arrays.<Index>asList(Indexes.LOGONUSER_LOUS_USNA_UC, Indexes.LOGONUSER_PRIMARY);
     }
 
     /**
@@ -118,7 +118,7 @@ public class Logonuser extends TableImpl<LogonuserRecord> {
      */
     @Override
     public UniqueKey<LogonuserRecord> getPrimaryKey() {
-        return Keys.LOUS_PK;
+        return Keys.KEY_LOGONUSER_PRIMARY;
     }
 
     /**
@@ -126,7 +126,7 @@ public class Logonuser extends TableImpl<LogonuserRecord> {
      */
     @Override
     public List<UniqueKey<LogonuserRecord>> getKeys() {
-        return Arrays.<UniqueKey<LogonuserRecord>>asList(Keys.LOUS_PK, Keys.LOUS_USNA_UC);
+        return Arrays.<UniqueKey<LogonuserRecord>>asList(Keys.KEY_LOGONUSER_PRIMARY, Keys.KEY_LOGONUSER_LOUS_USNA_UC);
     }
 
     /**

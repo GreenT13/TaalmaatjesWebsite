@@ -30,129 +30,129 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class StudentRecord extends UpdatableRecordImpl<StudentRecord> implements Record9<Integer, String, String, String, String, String, Date, String, Boolean> {
 
-    private static final long serialVersionUID = -314881659;
+    private static final long serialVersionUID = 1297390503;
 
     /**
-     * Setter for <code>PUBLIC.STUDENT.STUDENTID</code>.
+     * Setter for <code>taalmaatjes.student.studentId</code>.
      */
     public void setStudentid(Integer value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.STUDENT.STUDENTID</code>.
+     * Getter for <code>taalmaatjes.student.studentId</code>.
      */
     public Integer getStudentid() {
         return (Integer) get(0);
     }
 
     /**
-     * Setter for <code>PUBLIC.STUDENT.EXTERNALIDENTIFIER</code>.
+     * Setter for <code>taalmaatjes.student.externalIdentifier</code>.
      */
     public void setExternalidentifier(String value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.STUDENT.EXTERNALIDENTIFIER</code>.
+     * Getter for <code>taalmaatjes.student.externalIdentifier</code>.
      */
     public String getExternalidentifier() {
         return (String) get(1);
     }
 
     /**
-     * Setter for <code>PUBLIC.STUDENT.FIRSTNAME</code>.
+     * Setter for <code>taalmaatjes.student.firstName</code>.
      */
     public void setFirstname(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.STUDENT.FIRSTNAME</code>.
+     * Getter for <code>taalmaatjes.student.firstName</code>.
      */
     public String getFirstname() {
         return (String) get(2);
     }
 
     /**
-     * Setter for <code>PUBLIC.STUDENT.INSERTION</code>.
+     * Setter for <code>taalmaatjes.student.insertion</code>.
      */
     public void setInsertion(String value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.STUDENT.INSERTION</code>.
+     * Getter for <code>taalmaatjes.student.insertion</code>.
      */
     public String getInsertion() {
         return (String) get(3);
     }
 
     /**
-     * Setter for <code>PUBLIC.STUDENT.LASTNAME</code>.
+     * Setter for <code>taalmaatjes.student.lastName</code>.
      */
     public void setLastname(String value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.STUDENT.LASTNAME</code>.
+     * Getter for <code>taalmaatjes.student.lastName</code>.
      */
     public String getLastname() {
         return (String) get(4);
     }
 
     /**
-     * Setter for <code>PUBLIC.STUDENT.SEX</code>.
+     * Setter for <code>taalmaatjes.student.sex</code>.
      */
     public void setSex(String value) {
         set(5, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.STUDENT.SEX</code>.
+     * Getter for <code>taalmaatjes.student.sex</code>.
      */
     public String getSex() {
         return (String) get(5);
     }
 
     /**
-     * Setter for <code>PUBLIC.STUDENT.DATEOFBIRTH</code>.
+     * Setter for <code>taalmaatjes.student.dateOfBirth</code>.
      */
     public void setDateofbirth(Date value) {
         set(6, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.STUDENT.DATEOFBIRTH</code>.
+     * Getter for <code>taalmaatjes.student.dateOfBirth</code>.
      */
     public Date getDateofbirth() {
         return (Date) get(6);
     }
 
     /**
-     * Setter for <code>PUBLIC.STUDENT.GROUPIDENTIFICATION</code>.
+     * Setter for <code>taalmaatjes.student.groupIdentification</code>.
      */
     public void setGroupidentification(String value) {
         set(7, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.STUDENT.GROUPIDENTIFICATION</code>.
+     * Getter for <code>taalmaatjes.student.groupIdentification</code>.
      */
     public String getGroupidentification() {
         return (String) get(7);
     }
 
     /**
-     * Setter for <code>PUBLIC.STUDENT.HASQUIT</code>.
+     * Setter for <code>taalmaatjes.student.hasQuit</code>.
      */
     public void setHasquit(Boolean value) {
         set(8, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.STUDENT.HASQUIT</code>.
+     * Getter for <code>taalmaatjes.student.hasQuit</code>.
      */
     public Boolean getHasquit() {
         return (Boolean) get(8);

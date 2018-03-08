@@ -52,35 +52,35 @@ public class LogonuserDao extends DAOImpl<LogonuserRecord, LogonuserPojo, Intege
     }
 
     /**
-     * Fetch records that have <code>LOGONUSERID IN (values)</code>
+     * Fetch records that have <code>logonUserId IN (values)</code>
      */
     public List<LogonuserPojo> fetchByLogonuserid(Integer... values) {
         return fetch(Logonuser.LOGONUSER.LOGONUSERID, values);
     }
 
     /**
-     * Fetch a unique record that has <code>LOGONUSERID = value</code>
+     * Fetch a unique record that has <code>logonUserId = value</code>
      */
     public LogonuserPojo fetchOneByLogonuserid(Integer value) {
         return fetchOne(Logonuser.LOGONUSER.LOGONUSERID, value);
     }
 
     /**
-     * Fetch records that have <code>USERNAME IN (values)</code>
+     * Fetch records that have <code>username IN (values)</code>
      */
     public List<LogonuserPojo> fetchByUsername(String... values) {
         return fetch(Logonuser.LOGONUSER.USERNAME, values);
     }
 
     /**
-     * Fetch a unique record that has <code>USERNAME = value</code>
+     * Fetch a unique record that has <code>username = value</code>
      */
     public LogonuserPojo fetchOneByUsername(String value) {
         return fetchOne(Logonuser.LOGONUSER.USERNAME, value);
     }
 
     /**
-     * Fetch records that have <code>PASSWORD IN (values)</code>
+     * Fetch records that have <code>password IN (values)</code>
      */
     public List<LogonuserPojo> fetchByPassword(String... values) {
         return fetch(Logonuser.LOGONUSER.PASSWORD, values);

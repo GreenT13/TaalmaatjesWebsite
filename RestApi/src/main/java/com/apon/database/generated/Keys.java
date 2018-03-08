@@ -28,7 +28,7 @@ import org.jooq.impl.AbstractKeys;
 
 /**
  * A class modelling foreign key relationships and constraints of tables of 
- * the <code>PUBLIC</code> schema.
+ * the <code>taalmaatjes</code> schema.
  */
 @Generated(
     value = {
@@ -49,19 +49,19 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final UniqueKey<LogonuserRecord> LOUS_PK = UniqueKeys0.LOUS_PK;
-    public static final UniqueKey<LogonuserRecord> LOUS_USNA_UC = UniqueKeys0.LOUS_USNA_UC;
-    public static final UniqueKey<ScriptlogRecord> SCLO_PK = UniqueKeys0.SCLO_PK;
-    public static final UniqueKey<StudentRecord> STUD_PK = UniqueKeys0.STUD_PK;
-    public static final UniqueKey<StudentRecord> STUD_EXTID = UniqueKeys0.STUD_EXTID;
-    public static final UniqueKey<TaskRecord> TASK_PK = UniqueKeys0.TASK_PK;
-    public static final UniqueKey<TaskRecord> TASK_EXTID = UniqueKeys0.TASK_EXTID;
-    public static final UniqueKey<VolunteerRecord> VOLU_PK = UniqueKeys0.VOLU_PK;
-    public static final UniqueKey<VolunteerRecord> VOLU_EXTID = UniqueKeys0.VOLU_EXTID;
-    public static final UniqueKey<VolunteerinstanceRecord> VOIN_PK = UniqueKeys0.VOIN_PK;
-    public static final UniqueKey<VolunteerinstanceRecord> VOIN_EXTID = UniqueKeys0.VOIN_EXTID;
-    public static final UniqueKey<VolunteermatchRecord> VOMA_PK = UniqueKeys0.VOMA_PK;
-    public static final UniqueKey<VolunteermatchRecord> VOMA_EXTID = UniqueKeys0.VOMA_EXTID;
+    public static final UniqueKey<LogonuserRecord> KEY_LOGONUSER_PRIMARY = UniqueKeys0.KEY_LOGONUSER_PRIMARY;
+    public static final UniqueKey<LogonuserRecord> KEY_LOGONUSER_LOUS_USNA_UC = UniqueKeys0.KEY_LOGONUSER_LOUS_USNA_UC;
+    public static final UniqueKey<ScriptlogRecord> KEY_SCRIPTLOG_PRIMARY = UniqueKeys0.KEY_SCRIPTLOG_PRIMARY;
+    public static final UniqueKey<StudentRecord> KEY_STUDENT_PRIMARY = UniqueKeys0.KEY_STUDENT_PRIMARY;
+    public static final UniqueKey<StudentRecord> KEY_STUDENT_STUD_EXTID = UniqueKeys0.KEY_STUDENT_STUD_EXTID;
+    public static final UniqueKey<TaskRecord> KEY_TASK_PRIMARY = UniqueKeys0.KEY_TASK_PRIMARY;
+    public static final UniqueKey<TaskRecord> KEY_TASK_TASK_EXTID = UniqueKeys0.KEY_TASK_TASK_EXTID;
+    public static final UniqueKey<VolunteerRecord> KEY_VOLUNTEER_PRIMARY = UniqueKeys0.KEY_VOLUNTEER_PRIMARY;
+    public static final UniqueKey<VolunteerRecord> KEY_VOLUNTEER_VOLU_EXTID = UniqueKeys0.KEY_VOLUNTEER_VOLU_EXTID;
+    public static final UniqueKey<VolunteerinstanceRecord> KEY_VOLUNTEERINSTANCE_PRIMARY = UniqueKeys0.KEY_VOLUNTEERINSTANCE_PRIMARY;
+    public static final UniqueKey<VolunteerinstanceRecord> KEY_VOLUNTEERINSTANCE_VOIN_EXTID = UniqueKeys0.KEY_VOLUNTEERINSTANCE_VOIN_EXTID;
+    public static final UniqueKey<VolunteermatchRecord> KEY_VOLUNTEERMATCH_PRIMARY = UniqueKeys0.KEY_VOLUNTEERMATCH_PRIMARY;
+    public static final UniqueKey<VolunteermatchRecord> KEY_VOLUNTEERMATCH_VOMA_EXTID = UniqueKeys0.KEY_VOLUNTEERMATCH_VOMA_EXTID;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
@@ -77,25 +77,25 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     private static class UniqueKeys0 extends AbstractKeys {
-        public static final UniqueKey<LogonuserRecord> LOUS_PK = createUniqueKey(Logonuser.LOGONUSER, "LoUs_PK", Logonuser.LOGONUSER.LOGONUSERID);
-        public static final UniqueKey<LogonuserRecord> LOUS_USNA_UC = createUniqueKey(Logonuser.LOGONUSER, "LoUs_UsNa_UC", Logonuser.LOGONUSER.USERNAME);
-        public static final UniqueKey<ScriptlogRecord> SCLO_PK = createUniqueKey(Scriptlog.SCRIPTLOG, "ScLo_PK", Scriptlog.SCRIPTLOG.SCRIPTNAME);
-        public static final UniqueKey<StudentRecord> STUD_PK = createUniqueKey(Student.STUDENT, "Stud_PK", Student.STUDENT.STUDENTID);
-        public static final UniqueKey<StudentRecord> STUD_EXTID = createUniqueKey(Student.STUDENT, "Stud_ExtId", Student.STUDENT.EXTERNALIDENTIFIER);
-        public static final UniqueKey<TaskRecord> TASK_PK = createUniqueKey(Task.TASK, "Task_PK", Task.TASK.TASKID);
-        public static final UniqueKey<TaskRecord> TASK_EXTID = createUniqueKey(Task.TASK, "Task_ExtId", Task.TASK.EXTERNALIDENTIFIER);
-        public static final UniqueKey<VolunteerRecord> VOLU_PK = createUniqueKey(Volunteer.VOLUNTEER, "Volu_PK", Volunteer.VOLUNTEER.VOLUNTEERID);
-        public static final UniqueKey<VolunteerRecord> VOLU_EXTID = createUniqueKey(Volunteer.VOLUNTEER, "Volu_ExtId", Volunteer.VOLUNTEER.EXTERNALIDENTIFIER);
-        public static final UniqueKey<VolunteerinstanceRecord> VOIN_PK = createUniqueKey(Volunteerinstance.VOLUNTEERINSTANCE, "VoIn_PK", Volunteerinstance.VOLUNTEERINSTANCE.VOLUNTEERID, Volunteerinstance.VOLUNTEERINSTANCE.VOLUNTEERINSTANCEID);
-        public static final UniqueKey<VolunteerinstanceRecord> VOIN_EXTID = createUniqueKey(Volunteerinstance.VOLUNTEERINSTANCE, "VoIn_ExtId", Volunteerinstance.VOLUNTEERINSTANCE.VOLUNTEERID, Volunteerinstance.VOLUNTEERINSTANCE.EXTERNALIDENTIFIER);
-        public static final UniqueKey<VolunteermatchRecord> VOMA_PK = createUniqueKey(Volunteermatch.VOLUNTEERMATCH, "VoMa_PK", Volunteermatch.VOLUNTEERMATCH.VOLUNTEERID, Volunteermatch.VOLUNTEERMATCH.VOLUNTEERMATCHID);
-        public static final UniqueKey<VolunteermatchRecord> VOMA_EXTID = createUniqueKey(Volunteermatch.VOLUNTEERMATCH, "VoMa_ExtId", Volunteermatch.VOLUNTEERMATCH.VOLUNTEERID, Volunteermatch.VOLUNTEERMATCH.EXTERNALIDENTIFIER);
+        public static final UniqueKey<LogonuserRecord> KEY_LOGONUSER_PRIMARY = createUniqueKey(Logonuser.LOGONUSER, "KEY_logonuser_PRIMARY", Logonuser.LOGONUSER.LOGONUSERID);
+        public static final UniqueKey<LogonuserRecord> KEY_LOGONUSER_LOUS_USNA_UC = createUniqueKey(Logonuser.LOGONUSER, "KEY_logonuser_LoUs_UsNa_UC", Logonuser.LOGONUSER.USERNAME);
+        public static final UniqueKey<ScriptlogRecord> KEY_SCRIPTLOG_PRIMARY = createUniqueKey(Scriptlog.SCRIPTLOG, "KEY_scriptlog_PRIMARY", Scriptlog.SCRIPTLOG.SCRIPTNAME);
+        public static final UniqueKey<StudentRecord> KEY_STUDENT_PRIMARY = createUniqueKey(Student.STUDENT, "KEY_student_PRIMARY", Student.STUDENT.STUDENTID);
+        public static final UniqueKey<StudentRecord> KEY_STUDENT_STUD_EXTID = createUniqueKey(Student.STUDENT, "KEY_student_Stud_ExtId", Student.STUDENT.EXTERNALIDENTIFIER);
+        public static final UniqueKey<TaskRecord> KEY_TASK_PRIMARY = createUniqueKey(Task.TASK, "KEY_task_PRIMARY", Task.TASK.TASKID);
+        public static final UniqueKey<TaskRecord> KEY_TASK_TASK_EXTID = createUniqueKey(Task.TASK, "KEY_task_Task_ExtId", Task.TASK.EXTERNALIDENTIFIER);
+        public static final UniqueKey<VolunteerRecord> KEY_VOLUNTEER_PRIMARY = createUniqueKey(Volunteer.VOLUNTEER, "KEY_volunteer_PRIMARY", Volunteer.VOLUNTEER.VOLUNTEERID);
+        public static final UniqueKey<VolunteerRecord> KEY_VOLUNTEER_VOLU_EXTID = createUniqueKey(Volunteer.VOLUNTEER, "KEY_volunteer_Volu_ExtId", Volunteer.VOLUNTEER.EXTERNALIDENTIFIER);
+        public static final UniqueKey<VolunteerinstanceRecord> KEY_VOLUNTEERINSTANCE_PRIMARY = createUniqueKey(Volunteerinstance.VOLUNTEERINSTANCE, "KEY_volunteerinstance_PRIMARY", Volunteerinstance.VOLUNTEERINSTANCE.VOLUNTEERID, Volunteerinstance.VOLUNTEERINSTANCE.VOLUNTEERINSTANCEID);
+        public static final UniqueKey<VolunteerinstanceRecord> KEY_VOLUNTEERINSTANCE_VOIN_EXTID = createUniqueKey(Volunteerinstance.VOLUNTEERINSTANCE, "KEY_volunteerinstance_VoIn_ExtId", Volunteerinstance.VOLUNTEERINSTANCE.VOLUNTEERID, Volunteerinstance.VOLUNTEERINSTANCE.EXTERNALIDENTIFIER);
+        public static final UniqueKey<VolunteermatchRecord> KEY_VOLUNTEERMATCH_PRIMARY = createUniqueKey(Volunteermatch.VOLUNTEERMATCH, "KEY_volunteermatch_PRIMARY", Volunteermatch.VOLUNTEERMATCH.VOLUNTEERID, Volunteermatch.VOLUNTEERMATCH.VOLUNTEERMATCHID);
+        public static final UniqueKey<VolunteermatchRecord> KEY_VOLUNTEERMATCH_VOMA_EXTID = createUniqueKey(Volunteermatch.VOLUNTEERMATCH, "KEY_volunteermatch_VoMa_ExtId", Volunteermatch.VOLUNTEERMATCH.VOLUNTEERID, Volunteermatch.VOLUNTEERMATCH.EXTERNALIDENTIFIER);
     }
 
     private static class ForeignKeys0 extends AbstractKeys {
-        public static final ForeignKey<TaskRecord, VolunteerRecord> TASK_VOLU_FK = createForeignKey(com.apon.database.generated.Keys.VOLU_PK, Task.TASK, "Task_Volu_FK", Task.TASK.VOLUNTEERID);
-        public static final ForeignKey<VolunteerinstanceRecord, VolunteerRecord> VOIN_VOLU_FK = createForeignKey(com.apon.database.generated.Keys.VOLU_PK, Volunteerinstance.VOLUNTEERINSTANCE, "VoIn_Volu_FK", Volunteerinstance.VOLUNTEERINSTANCE.VOLUNTEERID);
-        public static final ForeignKey<VolunteermatchRecord, VolunteerRecord> VOMA_VOLU_FK = createForeignKey(com.apon.database.generated.Keys.VOLU_PK, Volunteermatch.VOLUNTEERMATCH, "VoMa_Volu_FK", Volunteermatch.VOLUNTEERMATCH.VOLUNTEERID);
-        public static final ForeignKey<VolunteermatchRecord, StudentRecord> VOMA_STUD_FK = createForeignKey(com.apon.database.generated.Keys.STUD_PK, Volunteermatch.VOLUNTEERMATCH, "VoMa_Stud_FK", Volunteermatch.VOLUNTEERMATCH.STUDENTID);
+        public static final ForeignKey<TaskRecord, VolunteerRecord> TASK_VOLU_FK = createForeignKey(com.apon.database.generated.Keys.KEY_VOLUNTEER_PRIMARY, Task.TASK, "Task_Volu_FK", Task.TASK.VOLUNTEERID);
+        public static final ForeignKey<VolunteerinstanceRecord, VolunteerRecord> VOIN_VOLU_FK = createForeignKey(com.apon.database.generated.Keys.KEY_VOLUNTEER_PRIMARY, Volunteerinstance.VOLUNTEERINSTANCE, "VoIn_Volu_FK", Volunteerinstance.VOLUNTEERINSTANCE.VOLUNTEERID);
+        public static final ForeignKey<VolunteermatchRecord, VolunteerRecord> VOMA_VOLU_FK = createForeignKey(com.apon.database.generated.Keys.KEY_VOLUNTEER_PRIMARY, Volunteermatch.VOLUNTEERMATCH, "VoMa_Volu_FK", Volunteermatch.VOLUNTEERMATCH.VOLUNTEERID);
+        public static final ForeignKey<VolunteermatchRecord, StudentRecord> VOMA_STUD_FK = createForeignKey(com.apon.database.generated.Keys.KEY_STUDENT_PRIMARY, Volunteermatch.VOLUNTEERMATCH, "VoMa_Stud_FK", Volunteermatch.VOLUNTEERMATCH.STUDENTID);
     }
 }

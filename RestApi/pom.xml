@@ -16,7 +16,7 @@
         <jooq.version>3.10.2</jooq.version>
 
         <!-- Property for generating classes with jOOQ -->
-        <url.database>jdbc:h2:file:./Taalmaatjes-db</url.database>
+        <url.database>jdbc:mysql://localhost:3306/taalmaatjes</url.database>
     </properties>
 
     <dependencies>
@@ -70,11 +70,11 @@
             <artifactId>jooq-codegen</artifactId>
             <version>${jooq.version}</version>
         </dependency>
-        <!-- H2 database -->
+        <!-- MySQL database -->
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.4.196</version>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.45</version>
         </dependency>
 
         <!-- Logging -->
@@ -183,10 +183,10 @@
                 <configuration>
                     <!-- <skip>true</skip> -->
                     <jdbc>
-                        <driver>org.h2.Driver</driver>
+                        <driver>com.mysql.jdbc.Driver</driver>
                         <url>${url.database}</url>
-                        <!-- <user></user>
-                        <password></password> -->
+                        <user>root</user>
+                        <password>rootie</password>
                     </jdbc>
                     <generator>
                         <!-- Use my own GeneratorStrategy to make naming easier. -->
@@ -194,10 +194,17 @@
                             <name>com.apon.database.jooq.GeneratorStrategy</name>
                         </strategy>
                         <database>
-                            <name>org.jooq.util.h2.H2Database</name>
+                            <name>org.jooq.util.mysql.MySQLDatabase</name>
                             <includes>.*</includes>
                             <!-- <excludes></excludes> -->
-                            <inputSchema>PUBLIC</inputSchema>
+                            <inputSchema>taalmaatjes</inputSchema>
+                            <!-- Boolean en bytes zijn gek -->
+                            <forcedTypes>
+                                <forcedType>
+                                    <name>BOOLEAN</name>
+                                    <types>tinyint</types>
+                                </forcedType>
+                            </forcedTypes>
                         </database>
                         <target>
                             <packageName>com.apon.database.generated</packageName>

@@ -6,7 +6,7 @@ package com.apon.database.generated.tables;
 
 import com.apon.database.generated.Indexes;
 import com.apon.database.generated.Keys;
-import com.apon.database.generated.Public;
+import com.apon.database.generated.Taalmaatjes;
 import com.apon.database.generated.tables.records.ScriptlogRecord;
 
 import java.sql.Timestamp;
@@ -39,10 +39,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Scriptlog extends TableImpl<ScriptlogRecord> {
 
-    private static final long serialVersionUID = 13681459;
+    private static final long serialVersionUID = -346875421;
 
     /**
-     * The reference instance of <code>PUBLIC.SCRIPTLOG</code>
+     * The reference instance of <code>taalmaatjes.scriptlog</code>
      */
     public static final Scriptlog SCRIPTLOG = new Scriptlog();
 
@@ -55,41 +55,41 @@ public class Scriptlog extends TableImpl<ScriptlogRecord> {
     }
 
     /**
-     * The column <code>PUBLIC.SCRIPTLOG.SCRIPTNAME</code>.
+     * The column <code>taalmaatjes.scriptlog.scriptName</code>.
      */
-    public final TableField<ScriptlogRecord, String> SCRIPTNAME = createField("SCRIPTNAME", org.jooq.impl.SQLDataType.VARCHAR(100).nullable(false), this, "");
+    public final TableField<ScriptlogRecord, String> SCRIPTNAME = createField("scriptName", org.jooq.impl.SQLDataType.VARCHAR(100).nullable(false), this, "");
 
     /**
-     * The column <code>PUBLIC.SCRIPTLOG.TSSTARTED</code>.
+     * The column <code>taalmaatjes.scriptlog.tsStarted</code>.
      */
-    public final TableField<ScriptlogRecord, Timestamp> TSSTARTED = createField("TSSTARTED", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false), this, "");
+    public final TableField<ScriptlogRecord, Timestamp> TSSTARTED = createField("tsStarted", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false).defaultValue(org.jooq.impl.DSL.inline("CURRENT_TIMESTAMP", org.jooq.impl.SQLDataType.TIMESTAMP)), this, "");
 
     /**
-     * The column <code>PUBLIC.SCRIPTLOG.TSFINISHED</code>.
+     * The column <code>taalmaatjes.scriptlog.tsFinished</code>.
      */
-    public final TableField<ScriptlogRecord, Timestamp> TSFINISHED = createField("TSFINISHED", org.jooq.impl.SQLDataType.TIMESTAMP, this, "");
+    public final TableField<ScriptlogRecord, Timestamp> TSFINISHED = createField("tsFinished", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0000-00-00 00:00:00", org.jooq.impl.SQLDataType.TIMESTAMP)), this, "");
 
     /**
-     * The column <code>PUBLIC.SCRIPTLOG.ISCOMPLETED</code>.
+     * The column <code>taalmaatjes.scriptlog.isCompleted</code>.
      */
-    public final TableField<ScriptlogRecord, Boolean> ISCOMPLETED = createField("ISCOMPLETED", org.jooq.impl.SQLDataType.BOOLEAN.nullable(false), this, "");
+    public final TableField<ScriptlogRecord, Boolean> ISCOMPLETED = createField("isCompleted", org.jooq.impl.SQLDataType.BOOLEAN.nullable(false), this, "");
 
     /**
-     * Create a <code>PUBLIC.SCRIPTLOG</code> table reference
+     * Create a <code>taalmaatjes.scriptlog</code> table reference
      */
     public Scriptlog() {
-        this(DSL.name("SCRIPTLOG"), null);
+        this(DSL.name("scriptlog"), null);
     }
 
     /**
-     * Create an aliased <code>PUBLIC.SCRIPTLOG</code> table reference
+     * Create an aliased <code>taalmaatjes.scriptlog</code> table reference
      */
     public Scriptlog(String alias) {
         this(DSL.name(alias), SCRIPTLOG);
     }
 
     /**
-     * Create an aliased <code>PUBLIC.SCRIPTLOG</code> table reference
+     * Create an aliased <code>taalmaatjes.scriptlog</code> table reference
      */
     public Scriptlog(Name alias) {
         this(alias, SCRIPTLOG);
@@ -108,7 +108,7 @@ public class Scriptlog extends TableImpl<ScriptlogRecord> {
      */
     @Override
     public Schema getSchema() {
-        return Public.PUBLIC;
+        return Taalmaatjes.TAALMAATJES;
     }
 
     /**
@@ -116,7 +116,7 @@ public class Scriptlog extends TableImpl<ScriptlogRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.PRIMARY_KEY_B);
+        return Arrays.<Index>asList(Indexes.SCRIPTLOG_PRIMARY);
     }
 
     /**
@@ -124,7 +124,7 @@ public class Scriptlog extends TableImpl<ScriptlogRecord> {
      */
     @Override
     public UniqueKey<ScriptlogRecord> getPrimaryKey() {
-        return Keys.SCLO_PK;
+        return Keys.KEY_SCRIPTLOG_PRIMARY;
     }
 
     /**
@@ -132,7 +132,7 @@ public class Scriptlog extends TableImpl<ScriptlogRecord> {
      */
     @Override
     public List<UniqueKey<ScriptlogRecord>> getKeys() {
-        return Arrays.<UniqueKey<ScriptlogRecord>>asList(Keys.SCLO_PK);
+        return Arrays.<UniqueKey<ScriptlogRecord>>asList(Keys.KEY_SCRIPTLOG_PRIMARY);
     }
 
     /**

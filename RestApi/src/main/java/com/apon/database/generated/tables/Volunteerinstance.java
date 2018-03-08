@@ -6,7 +6,7 @@ package com.apon.database.generated.tables;
 
 import com.apon.database.generated.Indexes;
 import com.apon.database.generated.Keys;
-import com.apon.database.generated.Public;
+import com.apon.database.generated.Taalmaatjes;
 import com.apon.database.generated.tables.records.VolunteerinstanceRecord;
 
 import java.sql.Date;
@@ -40,10 +40,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Volunteerinstance extends TableImpl<VolunteerinstanceRecord> {
 
-    private static final long serialVersionUID = 1489053987;
+    private static final long serialVersionUID = -1000755924;
 
     /**
-     * The reference instance of <code>PUBLIC.VOLUNTEERINSTANCE</code>
+     * The reference instance of <code>taalmaatjes.volunteerinstance</code>
      */
     public static final Volunteerinstance VOLUNTEERINSTANCE = new Volunteerinstance();
 
@@ -56,46 +56,46 @@ public class Volunteerinstance extends TableImpl<VolunteerinstanceRecord> {
     }
 
     /**
-     * The column <code>PUBLIC.VOLUNTEERINSTANCE.VOLUNTEERID</code>.
+     * The column <code>taalmaatjes.volunteerinstance.volunteerId</code>.
      */
-    public final TableField<VolunteerinstanceRecord, Integer> VOLUNTEERID = createField("VOLUNTEERID", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<VolunteerinstanceRecord, Integer> VOLUNTEERID = createField("volunteerId", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>PUBLIC.VOLUNTEERINSTANCE.VOLUNTEERINSTANCEID</code>.
+     * The column <code>taalmaatjes.volunteerinstance.volunteerInstanceId</code>.
      */
-    public final TableField<VolunteerinstanceRecord, Integer> VOLUNTEERINSTANCEID = createField("VOLUNTEERINSTANCEID", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<VolunteerinstanceRecord, Integer> VOLUNTEERINSTANCEID = createField("volunteerInstanceId", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>PUBLIC.VOLUNTEERINSTANCE.EXTERNALIDENTIFIER</code>.
+     * The column <code>taalmaatjes.volunteerinstance.externalIdentifier</code>.
      */
-    public final TableField<VolunteerinstanceRecord, String> EXTERNALIDENTIFIER = createField("EXTERNALIDENTIFIER", org.jooq.impl.SQLDataType.VARCHAR(10).nullable(false), this, "");
+    public final TableField<VolunteerinstanceRecord, String> EXTERNALIDENTIFIER = createField("externalIdentifier", org.jooq.impl.SQLDataType.VARCHAR(10).nullable(false), this, "");
 
     /**
-     * The column <code>PUBLIC.VOLUNTEERINSTANCE.DATESTART</code>.
+     * The column <code>taalmaatjes.volunteerinstance.dateStart</code>.
      */
-    public final TableField<VolunteerinstanceRecord, Date> DATESTART = createField("DATESTART", org.jooq.impl.SQLDataType.DATE.nullable(false), this, "");
+    public final TableField<VolunteerinstanceRecord, Date> DATESTART = createField("dateStart", org.jooq.impl.SQLDataType.DATE.nullable(false), this, "");
 
     /**
-     * The column <code>PUBLIC.VOLUNTEERINSTANCE.DATEEND</code>.
+     * The column <code>taalmaatjes.volunteerinstance.dateEnd</code>.
      */
-    public final TableField<VolunteerinstanceRecord, Date> DATEEND = createField("DATEEND", org.jooq.impl.SQLDataType.DATE, this, "");
+    public final TableField<VolunteerinstanceRecord, Date> DATEEND = createField("dateEnd", org.jooq.impl.SQLDataType.DATE, this, "");
 
     /**
-     * Create a <code>PUBLIC.VOLUNTEERINSTANCE</code> table reference
+     * Create a <code>taalmaatjes.volunteerinstance</code> table reference
      */
     public Volunteerinstance() {
-        this(DSL.name("VOLUNTEERINSTANCE"), null);
+        this(DSL.name("volunteerinstance"), null);
     }
 
     /**
-     * Create an aliased <code>PUBLIC.VOLUNTEERINSTANCE</code> table reference
+     * Create an aliased <code>taalmaatjes.volunteerinstance</code> table reference
      */
     public Volunteerinstance(String alias) {
         this(DSL.name(alias), VOLUNTEERINSTANCE);
     }
 
     /**
-     * Create an aliased <code>PUBLIC.VOLUNTEERINSTANCE</code> table reference
+     * Create an aliased <code>taalmaatjes.volunteerinstance</code> table reference
      */
     public Volunteerinstance(Name alias) {
         this(alias, VOLUNTEERINSTANCE);
@@ -114,7 +114,7 @@ public class Volunteerinstance extends TableImpl<VolunteerinstanceRecord> {
      */
     @Override
     public Schema getSchema() {
-        return Public.PUBLIC;
+        return Taalmaatjes.TAALMAATJES;
     }
 
     /**
@@ -122,7 +122,7 @@ public class Volunteerinstance extends TableImpl<VolunteerinstanceRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.PRIMARY_KEY_5, Indexes.VOIN_EXTID_INDEX_5);
+        return Arrays.<Index>asList(Indexes.VOLUNTEERINSTANCE_PRIMARY, Indexes.VOLUNTEERINSTANCE_VOIN_EXTID);
     }
 
     /**
@@ -130,7 +130,7 @@ public class Volunteerinstance extends TableImpl<VolunteerinstanceRecord> {
      */
     @Override
     public UniqueKey<VolunteerinstanceRecord> getPrimaryKey() {
-        return Keys.VOIN_PK;
+        return Keys.KEY_VOLUNTEERINSTANCE_PRIMARY;
     }
 
     /**
@@ -138,7 +138,7 @@ public class Volunteerinstance extends TableImpl<VolunteerinstanceRecord> {
      */
     @Override
     public List<UniqueKey<VolunteerinstanceRecord>> getKeys() {
-        return Arrays.<UniqueKey<VolunteerinstanceRecord>>asList(Keys.VOIN_PK, Keys.VOIN_EXTID);
+        return Arrays.<UniqueKey<VolunteerinstanceRecord>>asList(Keys.KEY_VOLUNTEERINSTANCE_PRIMARY, Keys.KEY_VOLUNTEERINSTANCE_VOIN_EXTID);
     }
 
     /**

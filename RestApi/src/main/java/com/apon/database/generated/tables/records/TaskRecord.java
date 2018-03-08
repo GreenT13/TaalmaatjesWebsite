@@ -30,101 +30,101 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TaskRecord extends UpdatableRecordImpl<TaskRecord> implements Record7<Integer, String, String, String, Integer, Boolean, Date> {
 
-    private static final long serialVersionUID = -1981386347;
+    private static final long serialVersionUID = 997266379;
 
     /**
-     * Setter for <code>PUBLIC.TASK.TASKID</code>.
+     * Setter for <code>taalmaatjes.task.taskId</code>.
      */
     public void setTaskid(Integer value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.TASK.TASKID</code>.
+     * Getter for <code>taalmaatjes.task.taskId</code>.
      */
     public Integer getTaskid() {
         return (Integer) get(0);
     }
 
     /**
-     * Setter for <code>PUBLIC.TASK.EXTERNALIDENTIFIER</code>.
+     * Setter for <code>taalmaatjes.task.externalIdentifier</code>.
      */
     public void setExternalidentifier(String value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.TASK.EXTERNALIDENTIFIER</code>.
+     * Getter for <code>taalmaatjes.task.externalIdentifier</code>.
      */
     public String getExternalidentifier() {
         return (String) get(1);
     }
 
     /**
-     * Setter for <code>PUBLIC.TASK.TITLE</code>.
+     * Setter for <code>taalmaatjes.task.title</code>.
      */
     public void setTitle(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.TASK.TITLE</code>.
+     * Getter for <code>taalmaatjes.task.title</code>.
      */
     public String getTitle() {
         return (String) get(2);
     }
 
     /**
-     * Setter for <code>PUBLIC.TASK.DESCRIPTION</code>.
+     * Setter for <code>taalmaatjes.task.description</code>.
      */
     public void setDescription(String value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.TASK.DESCRIPTION</code>.
+     * Getter for <code>taalmaatjes.task.description</code>.
      */
     public String getDescription() {
         return (String) get(3);
     }
 
     /**
-     * Setter for <code>PUBLIC.TASK.VOLUNTEERID</code>.
+     * Setter for <code>taalmaatjes.task.volunteerId</code>.
      */
     public void setVolunteerid(Integer value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.TASK.VOLUNTEERID</code>.
+     * Getter for <code>taalmaatjes.task.volunteerId</code>.
      */
     public Integer getVolunteerid() {
         return (Integer) get(4);
     }
 
     /**
-     * Setter for <code>PUBLIC.TASK.ISFINISHED</code>.
+     * Setter for <code>taalmaatjes.task.isFinished</code>.
      */
     public void setIsfinished(Boolean value) {
         set(5, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.TASK.ISFINISHED</code>.
+     * Getter for <code>taalmaatjes.task.isFinished</code>.
      */
     public Boolean getIsfinished() {
         return (Boolean) get(5);
     }
 
     /**
-     * Setter for <code>PUBLIC.TASK.DATETOBEFINISHED</code>.
+     * Setter for <code>taalmaatjes.task.dateToBeFinished</code>.
      */
     public void setDatetobefinished(Date value) {
         set(6, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.TASK.DATETOBEFINISHED</code>.
+     * Getter for <code>taalmaatjes.task.dateToBeFinished</code>.
      */
     public Date getDatetobefinished() {
         return (Date) get(6);

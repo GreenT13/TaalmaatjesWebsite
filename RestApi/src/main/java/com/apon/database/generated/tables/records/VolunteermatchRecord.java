@@ -30,87 +30,87 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class VolunteermatchRecord extends UpdatableRecordImpl<VolunteermatchRecord> implements Record6<Integer, Integer, String, Integer, Date, Date> {
 
-    private static final long serialVersionUID = 447924392;
+    private static final long serialVersionUID = 652528684;
 
     /**
-     * Setter for <code>PUBLIC.VOLUNTEERMATCH.VOLUNTEERID</code>.
+     * Setter for <code>taalmaatjes.volunteermatch.volunteerId</code>.
      */
     public void setVolunteerid(Integer value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.VOLUNTEERMATCH.VOLUNTEERID</code>.
+     * Getter for <code>taalmaatjes.volunteermatch.volunteerId</code>.
      */
     public Integer getVolunteerid() {
         return (Integer) get(0);
     }
 
     /**
-     * Setter for <code>PUBLIC.VOLUNTEERMATCH.VOLUNTEERMATCHID</code>.
+     * Setter for <code>taalmaatjes.volunteermatch.volunteerMatchId</code>.
      */
     public void setVolunteermatchid(Integer value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.VOLUNTEERMATCH.VOLUNTEERMATCHID</code>.
+     * Getter for <code>taalmaatjes.volunteermatch.volunteerMatchId</code>.
      */
     public Integer getVolunteermatchid() {
         return (Integer) get(1);
     }
 
     /**
-     * Setter for <code>PUBLIC.VOLUNTEERMATCH.EXTERNALIDENTIFIER</code>.
+     * Setter for <code>taalmaatjes.volunteermatch.externalIdentifier</code>.
      */
     public void setExternalidentifier(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.VOLUNTEERMATCH.EXTERNALIDENTIFIER</code>.
+     * Getter for <code>taalmaatjes.volunteermatch.externalIdentifier</code>.
      */
     public String getExternalidentifier() {
         return (String) get(2);
     }
 
     /**
-     * Setter for <code>PUBLIC.VOLUNTEERMATCH.STUDENTID</code>.
+     * Setter for <code>taalmaatjes.volunteermatch.studentId</code>.
      */
     public void setStudentid(Integer value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.VOLUNTEERMATCH.STUDENTID</code>.
+     * Getter for <code>taalmaatjes.volunteermatch.studentId</code>.
      */
     public Integer getStudentid() {
         return (Integer) get(3);
     }
 
     /**
-     * Setter for <code>PUBLIC.VOLUNTEERMATCH.DATESTART</code>.
+     * Setter for <code>taalmaatjes.volunteermatch.dateStart</code>.
      */
     public void setDatestart(Date value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.VOLUNTEERMATCH.DATESTART</code>.
+     * Getter for <code>taalmaatjes.volunteermatch.dateStart</code>.
      */
     public Date getDatestart() {
         return (Date) get(4);
     }
 
     /**
-     * Setter for <code>PUBLIC.VOLUNTEERMATCH.DATEEND</code>.
+     * Setter for <code>taalmaatjes.volunteermatch.dateEnd</code>.
      */
     public void setDateend(Date value) {
         set(5, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.VOLUNTEERMATCH.DATEEND</code>.
+     * Getter for <code>taalmaatjes.volunteermatch.dateEnd</code>.
      */
     public Date getDateend() {
         return (Date) get(5);

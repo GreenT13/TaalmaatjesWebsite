@@ -6,7 +6,7 @@ package com.apon.database.generated.tables;
 
 import com.apon.database.generated.Indexes;
 import com.apon.database.generated.Keys;
-import com.apon.database.generated.Public;
+import com.apon.database.generated.Taalmaatjes;
 import com.apon.database.generated.tables.records.TaskRecord;
 
 import java.sql.Date;
@@ -40,10 +40,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Task extends TableImpl<TaskRecord> {
 
-    private static final long serialVersionUID = -1257310689;
+    private static final long serialVersionUID = 2011094517;
 
     /**
-     * The reference instance of <code>PUBLIC.TASK</code>
+     * The reference instance of <code>taalmaatjes.task</code>
      */
     public static final Task TASK = new Task();
 
@@ -56,56 +56,56 @@ public class Task extends TableImpl<TaskRecord> {
     }
 
     /**
-     * The column <code>PUBLIC.TASK.TASKID</code>.
+     * The column <code>taalmaatjes.task.taskId</code>.
      */
-    public final TableField<TaskRecord, Integer> TASKID = createField("TASKID", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<TaskRecord, Integer> TASKID = createField("taskId", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>PUBLIC.TASK.EXTERNALIDENTIFIER</code>.
+     * The column <code>taalmaatjes.task.externalIdentifier</code>.
      */
-    public final TableField<TaskRecord, String> EXTERNALIDENTIFIER = createField("EXTERNALIDENTIFIER", org.jooq.impl.SQLDataType.VARCHAR(10).nullable(false), this, "");
+    public final TableField<TaskRecord, String> EXTERNALIDENTIFIER = createField("externalIdentifier", org.jooq.impl.SQLDataType.VARCHAR(10).nullable(false), this, "");
 
     /**
-     * The column <code>PUBLIC.TASK.TITLE</code>.
+     * The column <code>taalmaatjes.task.title</code>.
      */
-    public final TableField<TaskRecord, String> TITLE = createField("TITLE", org.jooq.impl.SQLDataType.VARCHAR(100).nullable(false), this, "");
+    public final TableField<TaskRecord, String> TITLE = createField("title", org.jooq.impl.SQLDataType.VARCHAR(100).nullable(false), this, "");
 
     /**
-     * The column <code>PUBLIC.TASK.DESCRIPTION</code>.
+     * The column <code>taalmaatjes.task.description</code>.
      */
-    public final TableField<TaskRecord, String> DESCRIPTION = createField("DESCRIPTION", org.jooq.impl.SQLDataType.VARCHAR(1000), this, "");
+    public final TableField<TaskRecord, String> DESCRIPTION = createField("description", org.jooq.impl.SQLDataType.VARCHAR(1000), this, "");
 
     /**
-     * The column <code>PUBLIC.TASK.VOLUNTEERID</code>.
+     * The column <code>taalmaatjes.task.volunteerId</code>.
      */
-    public final TableField<TaskRecord, Integer> VOLUNTEERID = createField("VOLUNTEERID", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<TaskRecord, Integer> VOLUNTEERID = createField("volunteerId", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>PUBLIC.TASK.ISFINISHED</code>.
+     * The column <code>taalmaatjes.task.isFinished</code>.
      */
-    public final TableField<TaskRecord, Boolean> ISFINISHED = createField("ISFINISHED", org.jooq.impl.SQLDataType.BOOLEAN.nullable(false), this, "");
+    public final TableField<TaskRecord, Boolean> ISFINISHED = createField("isFinished", org.jooq.impl.SQLDataType.BOOLEAN.nullable(false), this, "");
 
     /**
-     * The column <code>PUBLIC.TASK.DATETOBEFINISHED</code>.
+     * The column <code>taalmaatjes.task.dateToBeFinished</code>.
      */
-    public final TableField<TaskRecord, Date> DATETOBEFINISHED = createField("DATETOBEFINISHED", org.jooq.impl.SQLDataType.DATE, this, "");
+    public final TableField<TaskRecord, Date> DATETOBEFINISHED = createField("dateToBeFinished", org.jooq.impl.SQLDataType.DATE, this, "");
 
     /**
-     * Create a <code>PUBLIC.TASK</code> table reference
+     * Create a <code>taalmaatjes.task</code> table reference
      */
     public Task() {
-        this(DSL.name("TASK"), null);
+        this(DSL.name("task"), null);
     }
 
     /**
-     * Create an aliased <code>PUBLIC.TASK</code> table reference
+     * Create an aliased <code>taalmaatjes.task</code> table reference
      */
     public Task(String alias) {
         this(DSL.name(alias), TASK);
     }
 
     /**
-     * Create an aliased <code>PUBLIC.TASK</code> table reference
+     * Create an aliased <code>taalmaatjes.task</code> table reference
      */
     public Task(Name alias) {
         this(alias, TASK);
@@ -124,7 +124,7 @@ public class Task extends TableImpl<TaskRecord> {
      */
     @Override
     public Schema getSchema() {
-        return Public.PUBLIC;
+        return Taalmaatjes.TAALMAATJES;
     }
 
     /**
@@ -132,7 +132,7 @@ public class Task extends TableImpl<TaskRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.PRIMARY_KEY_27, Indexes.TASK_EXTID_INDEX_2, Indexes.TASK_VOLU_FK_INDEX_2);
+        return Arrays.<Index>asList(Indexes.TASK_PRIMARY, Indexes.TASK_TASK_EXTID, Indexes.TASK_TASK_VOLU_FK);
     }
 
     /**
@@ -140,7 +140,7 @@ public class Task extends TableImpl<TaskRecord> {
      */
     @Override
     public UniqueKey<TaskRecord> getPrimaryKey() {
-        return Keys.TASK_PK;
+        return Keys.KEY_TASK_PRIMARY;
     }
 
     /**
@@ -148,7 +148,7 @@ public class Task extends TableImpl<TaskRecord> {
      */
     @Override
     public List<UniqueKey<TaskRecord>> getKeys() {
-        return Arrays.<UniqueKey<TaskRecord>>asList(Keys.TASK_PK, Keys.TASK_EXTID);
+        return Arrays.<UniqueKey<TaskRecord>>asList(Keys.KEY_TASK_PRIMARY, Keys.KEY_TASK_TASK_EXTID);
     }
 
     /**

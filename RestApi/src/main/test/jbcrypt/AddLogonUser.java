@@ -18,12 +18,12 @@ public class AddLogonUser {
     @Test
     public void addLogonUser() {
         // Create connection with the database.
-        String url = "jdbc:h2:file:C:\\Users\\Gebruiker\\IdeaProjects\\TaalmaatjesWebsite\\RestApi\\Taalmaatjes-db";
+        String url = "jdbc:mysql://localhost:3306/taalmaatjes";
 
         // Connection is the only JDBC resource that we need
         // PreparedStatement and ResultSet are handled by jOOQ, internally
         try {
-            Connection connection = DriverManager.getConnection(url, "", "");
+            Connection connection = DriverManager.getConnection(url, "root", "rootie");
             DbContext context = new DbContext(connection);
 
             LogonUserMyDao logonUserMyDao = new LogonUserMyDao(context);
@@ -32,7 +32,7 @@ public class AddLogonUser {
             logonuserPojo.setUsername("root");
             logonuserPojo.setPassword(BCryptUtil.hashPassword("rootie"));
 
-            assertEquals("rootie", logonuserPojo.getPassword());
+            assertEquals(BCryptUtil.checkPassword("rootie", logonuserPojo.getPassword()), true);
 
             logonUserMyDao.insert(logonuserPojo);
             context.commit();

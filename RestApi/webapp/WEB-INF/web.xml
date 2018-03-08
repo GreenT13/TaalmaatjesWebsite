@@ -82,4 +82,14 @@
         <res-auth>Container</res-auth>
     </resource-ref>
     <!-- END: DataSource management -->
+
+    <servlet>
+        <servlet-name>Angular</servlet-name>
+        <jsp-file>/index.html</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Angular</servlet-name>
+        <url-pattern>/angular/*</url-pattern>
+    </servlet-mapping>
+
 </web-app>

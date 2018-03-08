@@ -53,63 +53,63 @@ public class TaskDao extends DAOImpl<TaskRecord, TaskPojo, Integer> {
     }
 
     /**
-     * Fetch records that have <code>TASKID IN (values)</code>
+     * Fetch records that have <code>taskId IN (values)</code>
      */
     public List<TaskPojo> fetchByTaskid(Integer... values) {
         return fetch(Task.TASK.TASKID, values);
     }
 
     /**
-     * Fetch a unique record that has <code>TASKID = value</code>
+     * Fetch a unique record that has <code>taskId = value</code>
      */
     public TaskPojo fetchOneByTaskid(Integer value) {
         return fetchOne(Task.TASK.TASKID, value);
     }
 
     /**
-     * Fetch records that have <code>EXTERNALIDENTIFIER IN (values)</code>
+     * Fetch records that have <code>externalIdentifier IN (values)</code>
      */
     public List<TaskPojo> fetchByExternalidentifier(String... values) {
         return fetch(Task.TASK.EXTERNALIDENTIFIER, values);
     }
 
     /**
-     * Fetch a unique record that has <code>EXTERNALIDENTIFIER = value</code>
+     * Fetch a unique record that has <code>externalIdentifier = value</code>
      */
     public TaskPojo fetchOneByExternalidentifier(String value) {
         return fetchOne(Task.TASK.EXTERNALIDENTIFIER, value);
     }
 
     /**
-     * Fetch records that have <code>TITLE IN (values)</code>
+     * Fetch records that have <code>title IN (values)</code>
      */
     public List<TaskPojo> fetchByTitle(String... values) {
         return fetch(Task.TASK.TITLE, values);
     }
 
     /**
-     * Fetch records that have <code>DESCRIPTION IN (values)</code>
+     * Fetch records that have <code>description IN (values)</code>
      */
     public List<TaskPojo> fetchByDescription(String... values) {
         return fetch(Task.TASK.DESCRIPTION, values);
     }
 
     /**
-     * Fetch records that have <code>VOLUNTEERID IN (values)</code>
+     * Fetch records that have <code>volunteerId IN (values)</code>
      */
     public List<TaskPojo> fetchByVolunteerid(Integer... values) {
         return fetch(Task.TASK.VOLUNTEERID, values);
     }
 
     /**
-     * Fetch records that have <code>ISFINISHED IN (values)</code>
+     * Fetch records that have <code>isFinished IN (values)</code>
      */
     public List<TaskPojo> fetchByIsfinished(Boolean... values) {
         return fetch(Task.TASK.ISFINISHED, values);
     }
 
     /**
-     * Fetch records that have <code>DATETOBEFINISHED IN (values)</code>
+     * Fetch records that have <code>dateToBeFinished IN (values)</code>
      */
     public List<TaskPojo> fetchByDatetobefinished(Date... values) {
         return fetch(Task.TASK.DATETOBEFINISHED, values);
