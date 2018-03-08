@@ -1,7 +1,8 @@
 <Context>
     <!-- DataSource management from tomcat (reference created in web.xml) -->
     <Resource name="jdbc/Taalmaatjes-db" auth="Container" type="javax.sql.DataSource"
-              maxTotal="100" maxIdle="30" maxWaitMillis="10000"
-              driverClassName="org.h2.Driver" url="jdbc:h2:file:C:\Users\Gebruiker\IdeaProjects\TaalmaatjesWebsite\RestApi\Taalmaatjes-db"
-              removeAbandoned="true" removeAbandonedTimeout="60" />
+              maxWaitMillis="10000"
+              username="root" password="rootie"
+              driverClassName="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost:3306/taalmaatjes"
+              defaultAutoCommit="false" rollbackOnReturn="true" />
 </Context>

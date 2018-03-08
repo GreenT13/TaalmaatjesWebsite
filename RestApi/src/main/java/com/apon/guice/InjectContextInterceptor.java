@@ -33,6 +33,9 @@ public class InjectContextInterceptor extends AbstractModule implements MethodIn
             throw e;
         }
 
+        // Close connection because its needed?
+        service.getContext().close();
+
         MyLogger.logDebug("End invocation of " + methodInvocation.getThis().getClass().getName() + "."
                 + methodInvocation.getMethod().getName());
         return object;
