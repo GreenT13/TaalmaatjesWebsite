@@ -24,26 +24,33 @@ public class DatabaseRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         // Connect with the database.
-        DbContext context;
+        DbContext context = null;
         try {
             context = DbContextUtil.getContextFromTomcat();
+            // Lookup user in the database.
+            LogonUserMyDao logonUserMyDao = new LogonUserMyDao(context);
+            LogonuserPojo logonuserPojo = logonUserMyDao.fetchOneByUsername(((UsernamePasswordToken) authenticationToken).getUsername());
+            if (logonuserPojo == null) {
+                throw new AuthenticationException("Could not find user.");
+            }
+            String plainTextPassword = new String(((UsernamePasswordToken) authenticationToken).getPassword());
+            if (!BCryptUtil.checkPassword(plainTextPassword, logonuserPojo.getPassword())) {
+                throw new AuthenticationException("Incorrect password.");
+            }
+
+            // User is valid, so return some info.
+            return new SimpleAuthenticationInfo(logonuserPojo.getUsername(), plainTextPassword, getClass().getName());
         } catch (SQLException e) {
             MyLogger.logError("Could not connect to user database.", e);
             throw new AuthenticationException("Could not connect to databse.");
+        } finally {
+            if (context != null) {
+                try {
+                    context.getConnection().close();
+                } catch (SQLException e) {
+                    MyLogger.logError("Could not close connection", e);
+                }
+            }
         }
-
-        // Lookup user in the database.
-        LogonUserMyDao logonUserMyDao = new LogonUserMyDao(context);
-        LogonuserPojo logonuserPojo = logonUserMyDao.fetchOneByUsername(((UsernamePasswordToken) authenticationToken).getUsername());
-        if (logonuserPojo == null) {
-            throw new AuthenticationException("Could not find user.");
-        }
-        String plainTextPassword = new String(((UsernamePasswordToken) authenticationToken).getPassword());
-        if (!BCryptUtil.checkPassword(plainTextPassword, logonuserPojo.getPassword())) {
-            throw new AuthenticationException("Incorrect password.");
-        }
-
-        // User is valid, so return some info.
-        return new SimpleAuthenticationInfo(logonuserPojo.getUsername(), plainTextPassword, getClass().getName());
     }
 }

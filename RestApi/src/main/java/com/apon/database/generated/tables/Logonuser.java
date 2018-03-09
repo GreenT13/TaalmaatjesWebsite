@@ -38,7 +38,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Logonuser extends TableImpl<LogonuserRecord> {
 
-    private static final long serialVersionUID = 157044238;
+    private static final long serialVersionUID = -1825247697;
 
     /**
      * The reference instance of <code>taalmaatjes.logonuser</code>
@@ -61,7 +61,7 @@ public class Logonuser extends TableImpl<LogonuserRecord> {
     /**
      * The column <code>taalmaatjes.logonuser.username</code>.
      */
-    public final TableField<LogonuserRecord, String> USERNAME = createField("username", org.jooq.impl.SQLDataType.VARCHAR(30).nullable(false), this, "");
+    public final TableField<LogonuserRecord, String> USERNAME = createField("username", org.jooq.impl.SQLDataType.VARCHAR(20).nullable(false), this, "");
 
     /**
      * The column <code>taalmaatjes.logonuser.password</code>.
