@@ -1,0 +1,15 @@
+<section class="container_login">
+  <div class="login">
+    <h1>Kobra</h1>
+    <form (ngSubmit)="onSubmit()">
+      <div style="margin: 0px; padding-top: 3px; padding-bottom: 3px; text-align: center; color: red; height: 20px;">{{ errorMessage }}</div>
+      <input type="text" name="login_name" value="" placeholder="Email" [(ngModel)]="username">
+      <div style="margin-top: 10px;"><input type="password" name="login_pass" value="" placeholder="Wachtwoord" [(ngModel)]="password"></div>
+      <div id="table">
+        <div class="row">
+          <span class="cell1"><a class="transactie">Wachtwoord vergeten</a></span><span class="cell2"><p class="submit"><input type="submit" name="commit" value="Login"></p></span>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

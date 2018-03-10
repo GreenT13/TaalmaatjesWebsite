@@ -1,0 +1,23 @@
+.form-style-4{
+    padding: 30px 30px 15px 30px;
+}
+
+.form-style-4 label {
+    display:block;
+    margin-bottom: 10px;
+}
+.form-style-4 label > span{
+    display: inline-block;
+    float: left;
+    width: 150px;
+}
+.form-style-4 input[type=text]
+{
+    background: transparent;
+    border: none;
+    width: 275px;
+    outline: none;
+    padding: 0px 0px 0px 0px;
+	background: rgba(0, 0, 0, 0.08);
+	text-align: right;
+}

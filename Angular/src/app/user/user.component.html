@@ -1,0 +1,15 @@
+<form class="form-style-4" action="" method="post">
+<label for="field1">
+<span>Name</span><input type="text" name="field1" required="true" [disabled]="!this.canEdit" value="Rico Apon" />
+</label>
+<label for="field2">
+<span>Number of lists</span><input type="text" name="field2" required="true" [disabled]="!this.canEdit" value = "0 / 4" />
+</label>
+<label for="field3">
+<span>E-mail</span><input type="text" name="field3" required="true" [disabled]="!this.canEdit" value="test@hotmail.com"/>
+</label>
+<label>
+<span>&nbsp;</span><input type="button" (click)="this.canEdit = !this.canEdit" value="Edit"/><input [disabled]="!this.canEdit" type="submit" value="Save user" />
+{{ this.canEdit }}
+</label>
+</form>
