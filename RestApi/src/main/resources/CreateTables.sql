@@ -90,6 +90,8 @@ create table LogonUser (
   logonUserId int not null,
   username varchar(30) not null,
   password varchar(60) not null,
+  nrOfLogonAttempts int not null,
+  dateEndValid date,
   constraint `LoUs_PK` primary key (logonUserId),
   constraint `LoUs_UsNa_UC` unique (username)
 );

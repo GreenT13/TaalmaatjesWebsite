@@ -31,6 +31,7 @@ public class AddLogonUser {
             logonuserPojo.setLogonuserid(1);
             logonuserPojo.setUsername("root");
             logonuserPojo.setPassword(BCryptUtil.hashPassword("rootie"));
+            logonuserPojo.setNroflogonattempts(0);
 
             assertEquals(BCryptUtil.checkPassword("rootie", logonuserPojo.getPassword()), true);
 

@@ -5,6 +5,7 @@ package com.apon.database.generated.tables.pojos;
 
 
 import java.io.Serializable;
+import java.sql.Date;
 
 import javax.annotation.Generated;
 
@@ -22,11 +23,13 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class LogonuserPojo implements Serializable {
 
-    private static final long serialVersionUID = 1253058530;
+    private static final long serialVersionUID = -613396455;
 
     private Integer logonuserid;
     private String  username;
     private String  password;
+    private Integer nroflogonattempts;
+    private Date    dateendvalid;
 
     public LogonuserPojo() {}
 
@@ -34,16 +37,22 @@ public class LogonuserPojo implements Serializable {
         this.logonuserid = value.logonuserid;
         this.username = value.username;
         this.password = value.password;
+        this.nroflogonattempts = value.nroflogonattempts;
+        this.dateendvalid = value.dateendvalid;
     }
 
     public LogonuserPojo(
         Integer logonuserid,
         String  username,
-        String  password
+        String  password,
+        Integer nroflogonattempts,
+        Date    dateendvalid
     ) {
         this.logonuserid = logonuserid;
         this.username = username;
         this.password = password;
+        this.nroflogonattempts = nroflogonattempts;
+        this.dateendvalid = dateendvalid;
     }
 
     public Integer getLogonuserid() {
@@ -70,6 +79,22 @@ public class LogonuserPojo implements Serializable {
         this.password = password;
     }
 
+    public Integer getNroflogonattempts() {
+        return this.nroflogonattempts;
+    }
+
+    public void setNroflogonattempts(Integer nroflogonattempts) {
+        this.nroflogonattempts = nroflogonattempts;
+    }
+
+    public Date getDateendvalid() {
+        return this.dateendvalid;
+    }
+
+    public void setDateendvalid(Date dateendvalid) {
+        this.dateendvalid = dateendvalid;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("LogonuserPojo (");
@@ -77,6 +102,8 @@ public class LogonuserPojo implements Serializable {
         sb.append(logonuserid);
         sb.append(", ").append(username);
         sb.append(", ").append(password);
+        sb.append(", ").append(nroflogonattempts);
+        sb.append(", ").append(dateendvalid);
 
         sb.append(")");
         return sb.toString();

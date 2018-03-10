@@ -8,6 +8,7 @@ import com.apon.database.generated.tables.Logonuser;
 import com.apon.database.generated.tables.pojos.LogonuserPojo;
 import com.apon.database.generated.tables.records.LogonuserRecord;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.annotation.Generated;
@@ -84,5 +85,19 @@ public class LogonuserDao extends DAOImpl<LogonuserRecord, LogonuserPojo, Intege
      */
     public List<LogonuserPojo> fetchByPassword(String... values) {
         return fetch(Logonuser.LOGONUSER.PASSWORD, values);
+    }
+
+    /**
+     * Fetch records that have <code>nrOfLogonAttempts IN (values)</code>
+     */
+    public List<LogonuserPojo> fetchByNroflogonattempts(Integer... values) {
+        return fetch(Logonuser.LOGONUSER.NROFLOGONATTEMPTS, values);
+    }
+
+    /**
+     * Fetch records that have <code>dateEndValid IN (values)</code>
+     */
+    public List<LogonuserPojo> fetchByDateendvalid(Date... values) {
+        return fetch(Logonuser.LOGONUSER.DATEENDVALID, values);
     }
 }
