@@ -227,6 +227,8 @@
                             <pojos>true</pojos>
                             <daos>true</daos>
                             <interfaces>false</interfaces>
+                            <!-- https://stackoverflow.com/questions/38222957/jooq-can-i-fetch-a-join-of-two-tables-into-the-respective-pojos -->
+                            <pojosEqualsAndHashCode>true</pojosEqualsAndHashCode>
                         </generate>
                     </generator>
                 </configuration>
