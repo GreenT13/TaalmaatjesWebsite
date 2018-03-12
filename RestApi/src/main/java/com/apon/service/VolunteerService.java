@@ -1,13 +1,13 @@
 package com.apon.service;
 
 import com.apon.database.generated.tables.pojos.VolunteerPojo;
+import com.apon.database.generated.tables.pojos.VolunteerinstancePojo;
 import com.apon.database.jooq.DbContext;
-import com.apon.database.mydao.VolunteerMyDao;
+import com.apon.database.mydao.*;
 import com.apon.guice.InjectContext;
+import com.apon.service.valueobject.StringValueObject;
 import com.apon.service.valueobject.VolunteerValueObject;
 import com.apon.service.valueobject.mapper.VolunteerMapper;
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
-import org.apache.shiro.authz.annotation.RequiresUser;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -17,8 +17,6 @@ import java.util.List;
 @SuppressWarnings("unchecked")
 @Path("volunteer")
 @Produces(MediaType.APPLICATION_JSON)
-@RequiresAuthentication
-@RequiresUser
 public class VolunteerService implements IService {
     private DbContext context;
 
@@ -26,26 +24,53 @@ public class VolunteerService implements IService {
     @Path("{volunteerExtId}")
     @InjectContext
     public VolunteerValueObject getVolunteer(@PathParam("volunteerExtId") String volunteerExtId) throws com.apon.exceptionhandler.NotFoundException {
+        // Mapper and Dao variables.
         VolunteerMyDao volunteerMyDao = new VolunteerMyDao(context);
+        VolunteerInstanceMyDao volunteerInstanceMyDao = new VolunteerInstanceMyDao(context);
+        VolunteerMatchMyDao volunteerMatchMyDao = new VolunteerMatchMyDao(context);
+        TaskMyDao taskMyDao = new TaskMyDao(context);
+        VolunteerMapper volunteerMapper = new VolunteerMapper();
+
+        // Retrieve the volunteer.
         VolunteerPojo volunteerPojo = volunteerMyDao.fetchOneByExternalidentifier(volunteerExtId);
         if (volunteerPojo == null) {
             throw new com.apon.exceptionhandler.NotFoundException("Could not find volunteer");
         }
-        VolunteerMapper volunteerMapper = new VolunteerMapper();
         volunteerMapper.setVolunteerPojo(volunteerPojo);
+
+        // Retrieve the instances and put them on the volunteer.
+        volunteerMapper.setInstanceList(volunteerInstanceMyDao.getInstanceForVolunteer(volunteerExtId, false));
+
+        // Retrieve the matches and put them on the volunteer.
+        volunteerMapper.setMatchList(volunteerMatchMyDao.getMatchForVolunteer(volunteerExtId, false), new StudentMyDao(context));
+
+        // Retrieve all tasks
+        volunteerMapper.setTaskList(taskMyDao.getTasksForVolunteer(volunteerPojo.getVolunteerid()));
 
         return volunteerMapper.getVolunteerValueObject();
     }
 
     @PUT
     @InjectContext
-    public void insertVolunteer(VolunteerValueObject volunteerValueObject) {
+    public StringValueObject insertVolunteer(VolunteerValueObject volunteerValueObject) {
         VolunteerMapper volunteerMapper = new VolunteerMapper();
         volunteerMapper.setVolunteerValueObject(volunteerValueObject);
 
         VolunteerMyDao volunteerMyDao = new VolunteerMyDao(context);
-        volunteerMyDao.insertPojo(volunteerMapper.getVolunteerPojo());
+        VolunteerPojo volunteerPojo = volunteerMapper.getVolunteerPojo();
+        volunteerMyDao.insertPojo(volunteerPojo);
+
+        if (volunteerValueObject.getDateStartActive() != null) {
+            VolunteerinstancePojo volunteerinstancePojo = new VolunteerinstancePojo();
+            volunteerinstancePojo.setVolunteerid(volunteerPojo.getVolunteerid());
+            volunteerinstancePojo.setDatestart(volunteerValueObject.getDateStartActive());
+            VolunteerInstanceMyDao volunteerInstanceMyDao = new VolunteerInstanceMyDao(context);
+            volunteerInstanceMyDao.insertPojo(volunteerinstancePojo);
+        }
+
         context.commit();
+
+        return new StringValueObject(volunteerPojo.getExternalidentifier());
     }
 
     @POST
