@@ -1,6 +1,7 @@
 package com.apon.service.valueobject;
 
 import java.sql.Date;
+import java.util.List;
 
 public class VolunteerValueObject {
     // Variables extracted from the database.
@@ -9,7 +10,7 @@ public class VolunteerValueObject {
     private String insertion;
     private String lastName;
     private Date dateOfBirth;
-    private String sex;
+    private String gender;
     private String phoneNumber;
     private String mobilePhoneNumber;
     private String email;
@@ -25,6 +26,12 @@ public class VolunteerValueObject {
 
     // Variables determined by logic.
     private Integer nrOfMatchesToday = 0;
+    private Date dateStartActive;
+
+    // Lists of instances, matches and tasks.
+    private List<VolunteerInstanceValueObject> volunteerInstanceValueObjects;
+    private List<VolunteerMatchValueObject> volunteerMatchValueObjects;
+    private List<TaskValueObject> taskValueObjects;
 
     public VolunteerValueObject() { }
 
@@ -68,12 +75,12 @@ public class VolunteerValueObject {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getSex() {
-        return sex;
+    public String getGender() {
+        return gender;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getPhoneNumber() {
@@ -156,19 +163,19 @@ public class VolunteerValueObject {
         this.job = job;
     }
 
-    public Boolean getClassAssistant() {
+    public Boolean getIsClassAssistant() {
         return isClassAssistant;
     }
 
-    public void setClassAssistant(Boolean classAssistant) {
+    public void setIsClassAssistant(Boolean classAssistant) {
         isClassAssistant = classAssistant;
     }
 
-    public Boolean getTaalmaatje() {
+    public Boolean getIsTaalmaatje() {
         return isTaalmaatje;
     }
 
-    public void setTaalmaatje(Boolean taalmaatje) {
+    public void setIsTaalmaatje(Boolean taalmaatje) {
         isTaalmaatje = taalmaatje;
     }
 
@@ -178,5 +185,37 @@ public class VolunteerValueObject {
 
     public void setNrOfMatchesToday(Integer nrOfMatchesToday) {
         this.nrOfMatchesToday = nrOfMatchesToday;
+    }
+
+    public Date getDateStartActive() {
+        return dateStartActive;
+    }
+
+    public void setDateStartActive(Date dateStartActive) {
+        this.dateStartActive = dateStartActive;
+    }
+
+    public List<VolunteerInstanceValueObject> getVolunteerInstanceValueObjects() {
+        return volunteerInstanceValueObjects;
+    }
+
+    public void setVolunteerInstanceValueObjects(List<VolunteerInstanceValueObject> volunteerInstanceValueObjects) {
+        this.volunteerInstanceValueObjects = volunteerInstanceValueObjects;
+    }
+
+    public List<VolunteerMatchValueObject> getVolunteerMatchValueObjects() {
+        return volunteerMatchValueObjects;
+    }
+
+    public void setVolunteerMatchValueObjects(List<VolunteerMatchValueObject> volunteerMatchValueObjects) {
+        this.volunteerMatchValueObjects = volunteerMatchValueObjects;
+    }
+
+    public List<TaskValueObject> getTaskValueObjects() {
+        return taskValueObjects;
+    }
+
+    public void setTaskValueObjects(List<TaskValueObject> taskValueObjects) {
+        this.taskValueObjects = taskValueObjects;
     }
 }
