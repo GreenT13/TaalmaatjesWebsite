@@ -23,7 +23,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ScriptlogPojo implements Serializable {
 
-    private static final long serialVersionUID = 77608682;
+    private static final long serialVersionUID = -1103244498;
 
     private String    scriptname;
     private Timestamp tsstarted;
@@ -81,6 +81,53 @@ public class ScriptlogPojo implements Serializable {
 
     public void setIscompleted(Boolean iscompleted) {
         this.iscompleted = iscompleted;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        final ScriptlogPojo other = (ScriptlogPojo) obj;
+        if (scriptname == null) {
+            if (other.scriptname != null)
+                return false;
+        }
+        else if (!scriptname.equals(other.scriptname))
+            return false;
+        if (tsstarted == null) {
+            if (other.tsstarted != null)
+                return false;
+        }
+        else if (!tsstarted.equals(other.tsstarted))
+            return false;
+        if (tsfinished == null) {
+            if (other.tsfinished != null)
+                return false;
+        }
+        else if (!tsfinished.equals(other.tsfinished))
+            return false;
+        if (iscompleted == null) {
+            if (other.iscompleted != null)
+                return false;
+        }
+        else if (!iscompleted.equals(other.iscompleted))
+            return false;
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((this.scriptname == null) ? 0 : this.scriptname.hashCode());
+        result = prime * result + ((this.tsstarted == null) ? 0 : this.tsstarted.hashCode());
+        result = prime * result + ((this.tsfinished == null) ? 0 : this.tsfinished.hashCode());
+        result = prime * result + ((this.iscompleted == null) ? 0 : this.iscompleted.hashCode());
+        return result;
     }
 
     @Override

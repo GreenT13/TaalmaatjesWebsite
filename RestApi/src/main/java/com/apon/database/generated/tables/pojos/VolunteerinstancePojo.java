@@ -23,7 +23,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class VolunteerinstancePojo implements Serializable {
 
-    private static final long serialVersionUID = 1752768396;
+    private static final long serialVersionUID = -1419556104;
 
     private Integer volunteerid;
     private Integer volunteerinstanceid;
@@ -93,6 +93,60 @@ public class VolunteerinstancePojo implements Serializable {
 
     public void setDateend(Date dateend) {
         this.dateend = dateend;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        final VolunteerinstancePojo other = (VolunteerinstancePojo) obj;
+        if (volunteerid == null) {
+            if (other.volunteerid != null)
+                return false;
+        }
+        else if (!volunteerid.equals(other.volunteerid))
+            return false;
+        if (volunteerinstanceid == null) {
+            if (other.volunteerinstanceid != null)
+                return false;
+        }
+        else if (!volunteerinstanceid.equals(other.volunteerinstanceid))
+            return false;
+        if (externalidentifier == null) {
+            if (other.externalidentifier != null)
+                return false;
+        }
+        else if (!externalidentifier.equals(other.externalidentifier))
+            return false;
+        if (datestart == null) {
+            if (other.datestart != null)
+                return false;
+        }
+        else if (!datestart.equals(other.datestart))
+            return false;
+        if (dateend == null) {
+            if (other.dateend != null)
+                return false;
+        }
+        else if (!dateend.equals(other.dateend))
+            return false;
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((this.volunteerid == null) ? 0 : this.volunteerid.hashCode());
+        result = prime * result + ((this.volunteerinstanceid == null) ? 0 : this.volunteerinstanceid.hashCode());
+        result = prime * result + ((this.externalidentifier == null) ? 0 : this.externalidentifier.hashCode());
+        result = prime * result + ((this.datestart == null) ? 0 : this.datestart.hashCode());
+        result = prime * result + ((this.dateend == null) ? 0 : this.dateend.hashCode());
+        return result;
     }
 
     @Override

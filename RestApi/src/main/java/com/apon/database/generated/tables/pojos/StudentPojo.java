@@ -23,7 +23,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class StudentPojo implements Serializable {
 
-    private static final long serialVersionUID = 873001213;
+    private static final long serialVersionUID = 942320037;
 
     private Integer studentid;
     private String  externalidentifier;
@@ -141,6 +141,88 @@ public class StudentPojo implements Serializable {
 
     public void setHasquit(Boolean hasquit) {
         this.hasquit = hasquit;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        final StudentPojo other = (StudentPojo) obj;
+        if (studentid == null) {
+            if (other.studentid != null)
+                return false;
+        }
+        else if (!studentid.equals(other.studentid))
+            return false;
+        if (externalidentifier == null) {
+            if (other.externalidentifier != null)
+                return false;
+        }
+        else if (!externalidentifier.equals(other.externalidentifier))
+            return false;
+        if (firstname == null) {
+            if (other.firstname != null)
+                return false;
+        }
+        else if (!firstname.equals(other.firstname))
+            return false;
+        if (insertion == null) {
+            if (other.insertion != null)
+                return false;
+        }
+        else if (!insertion.equals(other.insertion))
+            return false;
+        if (lastname == null) {
+            if (other.lastname != null)
+                return false;
+        }
+        else if (!lastname.equals(other.lastname))
+            return false;
+        if (sex == null) {
+            if (other.sex != null)
+                return false;
+        }
+        else if (!sex.equals(other.sex))
+            return false;
+        if (dateofbirth == null) {
+            if (other.dateofbirth != null)
+                return false;
+        }
+        else if (!dateofbirth.equals(other.dateofbirth))
+            return false;
+        if (groupidentification == null) {
+            if (other.groupidentification != null)
+                return false;
+        }
+        else if (!groupidentification.equals(other.groupidentification))
+            return false;
+        if (hasquit == null) {
+            if (other.hasquit != null)
+                return false;
+        }
+        else if (!hasquit.equals(other.hasquit))
+            return false;
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((this.studentid == null) ? 0 : this.studentid.hashCode());
+        result = prime * result + ((this.externalidentifier == null) ? 0 : this.externalidentifier.hashCode());
+        result = prime * result + ((this.firstname == null) ? 0 : this.firstname.hashCode());
+        result = prime * result + ((this.insertion == null) ? 0 : this.insertion.hashCode());
+        result = prime * result + ((this.lastname == null) ? 0 : this.lastname.hashCode());
+        result = prime * result + ((this.sex == null) ? 0 : this.sex.hashCode());
+        result = prime * result + ((this.dateofbirth == null) ? 0 : this.dateofbirth.hashCode());
+        result = prime * result + ((this.groupidentification == null) ? 0 : this.groupidentification.hashCode());
+        result = prime * result + ((this.hasquit == null) ? 0 : this.hasquit.hashCode());
+        return result;
     }
 
     @Override

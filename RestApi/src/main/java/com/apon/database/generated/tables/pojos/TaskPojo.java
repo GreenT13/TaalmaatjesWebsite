@@ -23,7 +23,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TaskPojo implements Serializable {
 
-    private static final long serialVersionUID = -608236843;
+    private static final long serialVersionUID = 5371823;
 
     private Integer taskid;
     private String  externalidentifier;
@@ -117,6 +117,74 @@ public class TaskPojo implements Serializable {
 
     public void setDatetobefinished(Date datetobefinished) {
         this.datetobefinished = datetobefinished;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        final TaskPojo other = (TaskPojo) obj;
+        if (taskid == null) {
+            if (other.taskid != null)
+                return false;
+        }
+        else if (!taskid.equals(other.taskid))
+            return false;
+        if (externalidentifier == null) {
+            if (other.externalidentifier != null)
+                return false;
+        }
+        else if (!externalidentifier.equals(other.externalidentifier))
+            return false;
+        if (title == null) {
+            if (other.title != null)
+                return false;
+        }
+        else if (!title.equals(other.title))
+            return false;
+        if (description == null) {
+            if (other.description != null)
+                return false;
+        }
+        else if (!description.equals(other.description))
+            return false;
+        if (volunteerid == null) {
+            if (other.volunteerid != null)
+                return false;
+        }
+        else if (!volunteerid.equals(other.volunteerid))
+            return false;
+        if (isfinished == null) {
+            if (other.isfinished != null)
+                return false;
+        }
+        else if (!isfinished.equals(other.isfinished))
+            return false;
+        if (datetobefinished == null) {
+            if (other.datetobefinished != null)
+                return false;
+        }
+        else if (!datetobefinished.equals(other.datetobefinished))
+            return false;
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((this.taskid == null) ? 0 : this.taskid.hashCode());
+        result = prime * result + ((this.externalidentifier == null) ? 0 : this.externalidentifier.hashCode());
+        result = prime * result + ((this.title == null) ? 0 : this.title.hashCode());
+        result = prime * result + ((this.description == null) ? 0 : this.description.hashCode());
+        result = prime * result + ((this.volunteerid == null) ? 0 : this.volunteerid.hashCode());
+        result = prime * result + ((this.isfinished == null) ? 0 : this.isfinished.hashCode());
+        result = prime * result + ((this.datetobefinished == null) ? 0 : this.datetobefinished.hashCode());
+        return result;
     }
 
     @Override

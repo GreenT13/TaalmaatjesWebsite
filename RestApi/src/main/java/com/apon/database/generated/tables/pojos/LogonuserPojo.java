@@ -23,7 +23,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class LogonuserPojo implements Serializable {
 
-    private static final long serialVersionUID = -613396455;
+    private static final long serialVersionUID = -392701475;
 
     private Integer logonuserid;
     private String  username;
@@ -93,6 +93,60 @@ public class LogonuserPojo implements Serializable {
 
     public void setDateendvalid(Date dateendvalid) {
         this.dateendvalid = dateendvalid;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        final LogonuserPojo other = (LogonuserPojo) obj;
+        if (logonuserid == null) {
+            if (other.logonuserid != null)
+                return false;
+        }
+        else if (!logonuserid.equals(other.logonuserid))
+            return false;
+        if (username == null) {
+            if (other.username != null)
+                return false;
+        }
+        else if (!username.equals(other.username))
+            return false;
+        if (password == null) {
+            if (other.password != null)
+                return false;
+        }
+        else if (!password.equals(other.password))
+            return false;
+        if (nroflogonattempts == null) {
+            if (other.nroflogonattempts != null)
+                return false;
+        }
+        else if (!nroflogonattempts.equals(other.nroflogonattempts))
+            return false;
+        if (dateendvalid == null) {
+            if (other.dateendvalid != null)
+                return false;
+        }
+        else if (!dateendvalid.equals(other.dateendvalid))
+            return false;
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((this.logonuserid == null) ? 0 : this.logonuserid.hashCode());
+        result = prime * result + ((this.username == null) ? 0 : this.username.hashCode());
+        result = prime * result + ((this.password == null) ? 0 : this.password.hashCode());
+        result = prime * result + ((this.nroflogonattempts == null) ? 0 : this.nroflogonattempts.hashCode());
+        result = prime * result + ((this.dateendvalid == null) ? 0 : this.dateendvalid.hashCode());
+        return result;
     }
 
     @Override

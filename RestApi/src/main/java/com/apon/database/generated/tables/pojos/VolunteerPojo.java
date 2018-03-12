@@ -23,7 +23,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class VolunteerPojo implements Serializable {
 
-    private static final long serialVersionUID = 724285758;
+    private static final long serialVersionUID = 197478984;
 
     private Integer volunteerid;
     private String  externalidentifier;
@@ -261,6 +261,158 @@ public class VolunteerPojo implements Serializable {
 
     public void setIstaalmaatje(Boolean istaalmaatje) {
         this.istaalmaatje = istaalmaatje;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        final VolunteerPojo other = (VolunteerPojo) obj;
+        if (volunteerid == null) {
+            if (other.volunteerid != null)
+                return false;
+        }
+        else if (!volunteerid.equals(other.volunteerid))
+            return false;
+        if (externalidentifier == null) {
+            if (other.externalidentifier != null)
+                return false;
+        }
+        else if (!externalidentifier.equals(other.externalidentifier))
+            return false;
+        if (firstname == null) {
+            if (other.firstname != null)
+                return false;
+        }
+        else if (!firstname.equals(other.firstname))
+            return false;
+        if (insertion == null) {
+            if (other.insertion != null)
+                return false;
+        }
+        else if (!insertion.equals(other.insertion))
+            return false;
+        if (lastname == null) {
+            if (other.lastname != null)
+                return false;
+        }
+        else if (!lastname.equals(other.lastname))
+            return false;
+        if (dateofbirth == null) {
+            if (other.dateofbirth != null)
+                return false;
+        }
+        else if (!dateofbirth.equals(other.dateofbirth))
+            return false;
+        if (sex == null) {
+            if (other.sex != null)
+                return false;
+        }
+        else if (!sex.equals(other.sex))
+            return false;
+        if (phonenumber == null) {
+            if (other.phonenumber != null)
+                return false;
+        }
+        else if (!phonenumber.equals(other.phonenumber))
+            return false;
+        if (mobilephonenumber == null) {
+            if (other.mobilephonenumber != null)
+                return false;
+        }
+        else if (!mobilephonenumber.equals(other.mobilephonenumber))
+            return false;
+        if (email == null) {
+            if (other.email != null)
+                return false;
+        }
+        else if (!email.equals(other.email))
+            return false;
+        if (postalcode == null) {
+            if (other.postalcode != null)
+                return false;
+        }
+        else if (!postalcode.equals(other.postalcode))
+            return false;
+        if (city == null) {
+            if (other.city != null)
+                return false;
+        }
+        else if (!city.equals(other.city))
+            return false;
+        if (streetname == null) {
+            if (other.streetname != null)
+                return false;
+        }
+        else if (!streetname.equals(other.streetname))
+            return false;
+        if (housenr == null) {
+            if (other.housenr != null)
+                return false;
+        }
+        else if (!housenr.equals(other.housenr))
+            return false;
+        if (log == null) {
+            if (other.log != null)
+                return false;
+        }
+        else if (!log.equals(other.log))
+            return false;
+        if (job == null) {
+            if (other.job != null)
+                return false;
+        }
+        else if (!job.equals(other.job))
+            return false;
+        if (datetraining == null) {
+            if (other.datetraining != null)
+                return false;
+        }
+        else if (!datetraining.equals(other.datetraining))
+            return false;
+        if (isclassassistant == null) {
+            if (other.isclassassistant != null)
+                return false;
+        }
+        else if (!isclassassistant.equals(other.isclassassistant))
+            return false;
+        if (istaalmaatje == null) {
+            if (other.istaalmaatje != null)
+                return false;
+        }
+        else if (!istaalmaatje.equals(other.istaalmaatje))
+            return false;
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((this.volunteerid == null) ? 0 : this.volunteerid.hashCode());
+        result = prime * result + ((this.externalidentifier == null) ? 0 : this.externalidentifier.hashCode());
+        result = prime * result + ((this.firstname == null) ? 0 : this.firstname.hashCode());
+        result = prime * result + ((this.insertion == null) ? 0 : this.insertion.hashCode());
+        result = prime * result + ((this.lastname == null) ? 0 : this.lastname.hashCode());
+        result = prime * result + ((this.dateofbirth == null) ? 0 : this.dateofbirth.hashCode());
+        result = prime * result + ((this.sex == null) ? 0 : this.sex.hashCode());
+        result = prime * result + ((this.phonenumber == null) ? 0 : this.phonenumber.hashCode());
+        result = prime * result + ((this.mobilephonenumber == null) ? 0 : this.mobilephonenumber.hashCode());
+        result = prime * result + ((this.email == null) ? 0 : this.email.hashCode());
+        result = prime * result + ((this.postalcode == null) ? 0 : this.postalcode.hashCode());
+        result = prime * result + ((this.city == null) ? 0 : this.city.hashCode());
+        result = prime * result + ((this.streetname == null) ? 0 : this.streetname.hashCode());
+        result = prime * result + ((this.housenr == null) ? 0 : this.housenr.hashCode());
+        result = prime * result + ((this.log == null) ? 0 : this.log.hashCode());
+        result = prime * result + ((this.job == null) ? 0 : this.job.hashCode());
+        result = prime * result + ((this.datetraining == null) ? 0 : this.datetraining.hashCode());
+        result = prime * result + ((this.isclassassistant == null) ? 0 : this.isclassassistant.hashCode());
+        result = prime * result + ((this.istaalmaatje == null) ? 0 : this.istaalmaatje.hashCode());
+        return result;
     }
 
     @Override
