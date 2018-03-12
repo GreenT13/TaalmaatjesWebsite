@@ -1,0 +1,52 @@
+<!--Search bar on top -->
+<div class="row">
+  <div class="col-sm-3" style="padding-left: 0">
+    <button type="button" [routerLink]="['add']" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span>Toevoegen vrijwilliger</button>
+  </div>
+
+  <!-- Empty space in the middle -->
+  <div class="col-sm-7" >
+    <div class="pull-right form-inline form-group">
+      <label>Is actief: </label>
+      <select class="form-control"><option>Ja</option><option>Nee</option></select>
+    </div>
+  </div>
+
+  <div class="col-sm-2 text-right input-group">
+    <input type="text" class="form-control" placeholder="Zoeken&hellip;">
+    <span class="input-group-btn">
+      <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#advancedRow"><span class="glyphicon glyphicon-chevron-down" style="padding: 0"></span></button>
+    </span>
+  </div>
+</div>
+
+<!-- Advanced search bar -->
+<div id="advancedRow" class="row collapse">
+  <div class="pull-right form-inline form-group">
+    <label>Is actief: </label>
+    <select class="form-control"><option>Ja</option><option>Nee</option></select>
+  </div>
+</div>
+
+<!-- The table with output results -->
+<div class="row">
+  <table data-toggle="table" data-pagination="true" class="table table-hover">
+    <thead>
+    <tr>
+      <th>Naam</th>
+      <th>Stad</th>
+      <th>Telefoonnummer</th>
+      <th>Koppelingen</th>
+    </tr>
+    </thead>
+    <tbody>
+      <!-- Show all volunteers -->
+      <tr *ngFor="let volunteer of volunteers" (dblclick)="clickOnVolunteer(volunteer.externalIdentifier)">
+        <td>{{ parseName(volunteer) }}</td>
+        <td>{{ volunteer.city }}</td>
+        <td>{{ volunteer.mobilePhoneNumber }}</td>
+        <td>{{ volunteer.gender }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

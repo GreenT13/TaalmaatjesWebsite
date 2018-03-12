@@ -8,7 +8,16 @@ import {Observer} from "rxjs/Observer";
 export class LoginService {
   loggedIn: boolean = false;
 
-  constructor(private myHttpClient: MyHttpClient) { }
+  constructor(private myHttpClient: MyHttpClient) {
+    this.login('', '').subscribe(
+      (response: Response) => {
+        this.loggedIn = true;
+      },
+      () => {
+        this.loggedIn = false;
+      }
+    )
+  }
 
   login(username: string, password: string) {
     // HttpHeaders is an immutable object, so we need to append.
@@ -17,10 +26,10 @@ export class LoginService {
 
     var promise = this.myHttpClient.get('version/secured', httpHeaders);
     promise.subscribe(
-      (response: Response) => {
+      () => {
         this.loggedIn = true;
       },
-      (error: Error) => {
+      () => {
         this.loggedIn = false;
       });
     return promise;

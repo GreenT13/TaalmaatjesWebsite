@@ -1,0 +1,5 @@
+/* Form-select elements are usually bold, but I don't want this. */
+select {
+  font-weight: normal;
+}
+

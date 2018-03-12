@@ -1,0 +1,129 @@
+<!-- Show all information in pannels -->
+<div class="panel-group">
+  <!-- Left column of panels -->
+  <div class="col-sm-6">
+    <!-- Text Panel with information from customer. -->
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h1 class="panel-title"><span data-toggle="collapse" data-target="#user-panel" class="glyphicon glyphicon-user"></span>Rico Apon</h1>
+      </div>
+      <div id="user-panel" class="panel-body collapse in collapsible-text-panel">
+        <div class="fix-collapse">
+          <table data-toggle="table" data-pagination="true" class="table table-condensed borderless">
+            <tbody>
+            <tr>
+              <td>Geboortedatum</td>
+              <td>{{ volunteer.dateOfBirth }}</td>
+            </tr>
+            <tr>
+              <td>Leeftijd</td>
+              <td>TODO</td>
+            </tr>
+            <tr>
+              <td>Geslacht</td>
+              <td>{{ volunteer.gender }}</td>
+            </tr>
+            <tr>
+              <td>Telefoonnr</td>
+              <td>{{ volunteer.phoneNumber }}</td>
+            </tr>
+            <tr>
+              <td>Mobiele telefoonnr</td>
+              <td>{{ volunteer.mobilePhoneNumber }}</td>
+            </tr>
+            <tr>
+              <td>Email</td>
+              <td>{{ volunteer.email }}</td>
+            </tr>
+            <tr>
+              <td>Straat</td>
+              <td>{{ volunteer.houseNr }}</td>
+            </tr>
+            <tr>
+              <td>Huisnummer</td>
+              <td>{{ volunteer.houseNr }}</td>
+            </tr>
+            <tr>
+              <td>Postcode</td>
+              <td>{{ volunteer.postalCode }}</td>
+            </tr>
+            <tr>
+              <td>Stad</td>
+              <td>{{ volunteer.city }}</td>
+            </tr>
+            <tr>
+              <td>Datum training</td>
+              <td>{{ volunteer.dateTraining }}</td>
+            </tr>
+            <tr>
+              <td>Beroep</td>
+              <td>{{ volunteer.job }}</td>
+            </tr>
+            <tr>
+              <td>Is klassenassistent</td>
+              <td>{{ volunteer.isClassAssistant }}</td>
+            </tr>
+            <tr>
+              <td>Is taalmaatje</td>
+              <td>{{ volunteer.isTaalmaatje }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Active -->
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h1 class="panel-title">
+          <span data-toggle="collapse" data-target="#active-panel" class="glyphicon glyphicon-ok-sign"></span><a [routerLink]="['active']">Actief</a>
+        </h1>
+      </div>
+      <div id="active-panel" class="list-group collapse in">
+        <a *ngFor="let instance of volunteer.volunteerInstanceValueObjects" href="#" class="list-group-item">Van {{ instance.dateStart }} tot {{ instance.dateEnd }}.</a>
+      </div>
+    </div>
+
+    <!-- Matches -->
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h1 class="panel-title"><span data-toggle="collapse" data-target="#matches-panel" class="glyphicon glyphicon-ok-sign"></span>Koppelingen</h1>
+      </div>
+      <div id="matches-panel" class="list-group collapse in">
+        <a *ngFor="let match of volunteer.volunteerMatchValueObjects" class="list-group-item">Van {{ match.dateStart }} tot {{ match.dateEnd }} {{ match.studentExtId }}.</a>
+      </div>
+    </div>
+
+
+    <!-- Tasks -->
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h1 class="panel-title"><span data-toggle="collapse" data-target="#task-panel" class="glyphicon glyphicon-pushpin"></span>Taken</h1>
+      </div>
+      <div id="task-panel" class="list-group collapse in">
+        <a *ngFor="let task of volunteer.taskValueObjects" class="list-group-item">{{ task.title }}.</a>
+      </div>
+    </div>
+
+    <!-- Log -->
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h1 class="panel-title"><span data-toggle="collapse" data-target="#log-panel" class="glyphicon glyphicon-user"></span>Logboek</h1>
+      </div>
+
+      <div id="log-panel" class="panel-body collapse in collapsible-text-panel">
+        <div class="fix-collapse">
+          <p>{{ volunteer.log }}</p>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+  <!-- Right column of panels -->
+  <div class="col-sm-6">
+    <router-outlet></router-outlet>
+  </div>
+</div>

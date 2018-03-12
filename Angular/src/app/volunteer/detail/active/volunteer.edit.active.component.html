@@ -1,0 +1,28 @@
+<form (ngSubmit)="onSubmit()">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h1 class="panel-title">
+        <span data-toggle="collapse" data-target="#active-panel" class="glyphicon glyphicon-ok-sign"></span>Toevoegen nieuwe activiteit
+      </h1>
+    </div>
+    <div class="panel-body form-horizontal">
+      <div class="form-group">
+        <label for="dateStartActive" class="col-sm-4 control-label">Actief vanaf</label>
+        <div class="col-sm-8">
+          <!--suppress HtmlUnknownAttribute -->
+          <my-date-picker name="dateStartActive" id="dateStartActive" [options]="optionsAll" [(ngModel)]="dateStartActive"></my-date-picker>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="dateEndActive" class="col-sm-4 control-label">Actief tot</label>
+        <div class="col-sm-8">
+          <!--suppress HtmlUnknownAttribute -->
+          <my-date-picker name="dateEndActive" id="dateEndActive" [options]="optionsAll" [(ngModel)]="dateEndActive"></my-date-picker>
+        </div>
+      </div>
+      <div class="pull-right">
+          <input type="submit" class="btn btn-default" value="Opslaan"> <a class="btn btn-default" [routerLink]="['../']">Terug</a>
+      </div>
+    </div>
+  </div>
+</form>

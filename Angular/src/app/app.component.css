@@ -1,11 +1,10 @@
-.aponSubContainer {
-	background-color: white;
-	margin-top: 0px !important;
-	height: auto;
-	min-height: 400px;
-	border-radius: 0px 0px 4px 4px;
+/* Change styling of menu bar on the left. Selected items are highlighted slightly brighter than previously. */
+.list-group .active, .list-group .list-group-item:hover, .list-group .list-group-item:focus {
+  background-color: #49515a !important;
+  color: #ffffff !important;
 }
-.aponContentContainer {
-	margin: 0px;
-	padding: 10px 20px;
+
+/* Make list panels same background color as text panels. */
+.list-group-item {
+  background-color: transparent;
 }
