@@ -1,11 +1,13 @@
 package com.apon.database.mydao;
 
+import com.apon.database.generated.tables.Volunteer;
 import com.apon.database.generated.tables.Volunteermatch;
 import com.apon.database.generated.tables.daos.VolunteermatchDao;
 import com.apon.database.generated.tables.pojos.VolunteermatchPojo;
 import com.apon.database.generated.tables.records.VolunteermatchRecord;
 import com.apon.database.jooq.DbContext;
 import org.jooq.Configuration;
+import org.jooq.Record;
 import org.jooq.SelectConditionStep;
 import org.jooq.impl.DSL;
 import org.jooq.util.mysql.MySQLDataType;
@@ -67,16 +69,6 @@ public class VolunteerMatchMyDao extends VolunteermatchDao {
                 .fetchOne(0, String.class);
     }
 
-    public Integer getIdFromExtId(Integer volunteerId, String volunteerMatchExtId) {
-        return using(configuration())
-                .select(Volunteermatch.VOLUNTEERMATCH.VOLUNTEERMATCHID)
-                .from(Volunteermatch.VOLUNTEERMATCH)
-                .where(Volunteermatch.VOLUNTEERMATCH.VOLUNTEERID.eq(volunteerId))
-                .and(Volunteermatch.VOLUNTEERMATCH.EXTERNALIDENTIFIER.eq(volunteerMatchExtId))
-                .fetchOne(0, Integer.class);
-    }
-
-
     public boolean insertPojo(VolunteermatchPojo volunteermatchPojo) {
         if (!generateIds(volunteermatchPojo)) {
             // Some kind of logError message?
@@ -88,22 +80,24 @@ public class VolunteerMatchMyDao extends VolunteermatchDao {
         return true;
     }
 
-    public List<VolunteermatchPojo> getMatchForVolunteer(int volunteerId) {
-        return getMatchForVolunteer(volunteerId, true);
+    public List<VolunteermatchPojo> getMatchForVolunteer(String volunteerExtId) {
+        return getMatchForVolunteer(volunteerExtId, null);
     }
 
-    public List<VolunteermatchPojo> getMatchForVolunteer(int volunteerId, boolean sortAscending) {
-        SelectConditionStep<VolunteermatchRecord> query = using(configuration())
-                .selectFrom(Volunteermatch.VOLUNTEERMATCH)
-                .where(Volunteermatch.VOLUNTEERMATCH.VOLUNTEERID.eq(volunteerId));
+    public List<VolunteermatchPojo> getMatchForVolunteer(String volunteerExtId, Boolean sortAscending) {
+        SelectConditionStep<Record> query = using(configuration())
+                .select(Volunteermatch.VOLUNTEERMATCH.fields())
+                .from(Volunteermatch.VOLUNTEERMATCH)
+                .innerJoin(Volunteer.VOLUNTEER).on(Volunteer.VOLUNTEER.VOLUNTEERID.eq(Volunteermatch.VOLUNTEERMATCH.VOLUNTEERID))
+                .where(Volunteer.VOLUNTEER.EXTERNALIDENTIFIER.eq(volunteerExtId));
 
-        if (sortAscending) {
+        if (sortAscending != null && sortAscending) {
             query.orderBy(Volunteermatch.VOLUNTEERMATCH.DATESTART.asc());
-        } else {
+        } else if (sortAscending != null) {
             query.orderBy(Volunteermatch.VOLUNTEERMATCH.DATESTART.desc());
         }
 
-        return query.fetch().map(mapper());
+        return query.fetchInto(Volunteermatch.VOLUNTEERMATCH).map(mapper());
     }
 
     public List<VolunteermatchPojo> getMatchForStudent(int studentId, boolean sortAscending) {
@@ -127,16 +121,6 @@ public class VolunteerMatchMyDao extends VolunteermatchDao {
                 .and(Volunteermatch.VOLUNTEERMATCH.VOLUNTEERID.eq(volunteerId));
 
         return query.fetch().map(mapper());
-    }
-
-    public VolunteermatchPojo fetchById(int volunteerId, int volunteerMatchId) {
-        VolunteermatchRecord record = using(configuration())
-                .selectFrom(Volunteermatch.VOLUNTEERMATCH)
-                .where(Volunteermatch.VOLUNTEERMATCH.VOLUNTEERID.eq(volunteerId))
-                .and(Volunteermatch.VOLUNTEERMATCH.VOLUNTEERMATCHID.eq(volunteerMatchId))
-                .fetchOne();
-
-        return mapper().map(record);
     }
 
     /**
