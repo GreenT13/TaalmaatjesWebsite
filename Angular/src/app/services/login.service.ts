@@ -16,7 +16,7 @@ export class LoginService {
       () => {
         this.loggedIn = false;
       }
-    )
+    );
   }
 
   login(username: string, password: string) {

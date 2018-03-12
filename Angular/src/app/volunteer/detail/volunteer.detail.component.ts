@@ -27,7 +27,6 @@ export class VolunteerDetailComponent implements OnInit {
             console.log(error);
           }
         );
-      }
-    )
+      });
   }
 }

@@ -1,3 +1,6 @@
+<!-- Overlay code -->
+<div *ngIf="showOverlay" class="overlay"></div>
+
 <!-- Show either login page or normal framework for page. -->
 <div *ngIf="loginService.isLoggedIn(); else login_page">
 

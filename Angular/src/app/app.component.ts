@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {LoginService} from "./services/login.service";
 import {DOCUMENT} from "@angular/common";
+import {OverlayService} from "./services/overlay.service";
+import {LoginService} from "./services/login.service";
 
 @Component({
   selector: 'app-root',
@@ -11,8 +12,13 @@ export class AppComponent {
   currentTheme: string = 'dark';
   hrefDarkTheme: string = 'https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/slate/bootstrap.min.css';
   hrefLightTheme: string = 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css';
+  public showOverlay: boolean = false;
 
-  constructor(public loginService: LoginService, @Inject(DOCUMENT) private document) { }
+  constructor(@Inject(DOCUMENT) private document,
+              public overlayService: OverlayService,
+              public loginService: LoginService) {
+    overlayService.showOverlayEventEmitter.subscribe((value: boolean) => this.showOverlay = value);
+  }
 
   handleChangeTheme() {
     if (this.currentTheme === 'dark') {

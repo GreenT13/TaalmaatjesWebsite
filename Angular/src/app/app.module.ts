@@ -19,6 +19,7 @@ import {MyDatePickerModule} from 'mydatepicker';
 import {DateUtil} from "./util/date.util";
 import {GenderUtil} from "./util/gender.util";
 import {VolunteerEditActiveComponent} from "./volunteer/detail/active/volunteer.edit.active.component";
+import {OverlayService} from "./services/overlay.service";
 
 
 @NgModule({
@@ -38,7 +39,10 @@ import {VolunteerEditActiveComponent} from "./volunteer/detail/active/volunteer.
     HttpClientModule,
     MyDatePickerModule
   ],
-  providers: [MyHttpClient, LoginService, AuthGuardService, VolunteerService, NameUtil, DateUtil, GenderUtil],
+  providers: [
+    MyHttpClient, LoginService, VolunteerService,
+    OverlayService, AuthGuardService,
+    NameUtil, DateUtil, GenderUtil],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
