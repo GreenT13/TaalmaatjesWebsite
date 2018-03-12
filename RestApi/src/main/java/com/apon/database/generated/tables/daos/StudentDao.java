@@ -102,10 +102,10 @@ public class StudentDao extends DAOImpl<StudentRecord, StudentPojo, Integer> {
     }
 
     /**
-     * Fetch records that have <code>sex IN (values)</code>
+     * Fetch records that have <code>gender IN (values)</code>
      */
-    public List<StudentPojo> fetchBySex(String... values) {
-        return fetch(Student.STUDENT.SEX, values);
+    public List<StudentPojo> fetchByGender(String... values) {
+        return fetch(Student.STUDENT.GENDER, values);
     }
 
     /**

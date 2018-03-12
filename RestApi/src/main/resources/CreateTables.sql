@@ -18,7 +18,7 @@ create table Volunteer (
   insertion varchar(100),
   lastName varchar(100) not null,
   dateOfBirth date not null,
-  sex varchar(1) not null, -- M = male, F = female.
+  gender varchar(1) not null, -- M = male, F = female.
   phoneNumber varchar(100),
   mobilePhoneNumber varchar(100),
   email varchar(100),
@@ -52,7 +52,7 @@ create table Student (
   firstName varchar(100),
   insertion varchar(100),
   lastName varchar(100),
-  sex varchar(1) not null,
+  gender varchar(1) not null,
   dateOfBirth date not null,
   groupIdentification varchar(100),
   hasQuit boolean not null,

@@ -104,7 +104,7 @@ public class StudentMyDao extends StudentDao {
      * @return Integer value of students that satisfy the criteria.
      */
     public int countNew(@Nonnull Date minimumDate, @Nonnull Date maximumDate,
-                        @Nonnull int minAge, @Nonnull int maxAge, @Nonnull String sex) {
+                        @Nonnull int minAge, @Nonnull int maxAge, @Nonnull String gender) {
         SelectConditionStep<Record1<Integer>> query =  using(configuration())
                 .selectCount()
                 .from(Student.STUDENT)
@@ -115,8 +115,8 @@ public class StudentMyDao extends StudentDao {
                                 .and(Volunteer.VOLUNTEER.DATETRAINING.le(maximumDate))
                                 // Check whether this date is between the minimumDate and maximumDate
                                 .asField().between(minimumDate, maximumDate))
-                // Need to equal sex
-                .and(Student.STUDENT.SEX.eq(sex))
+                // Need to equal gender
+                .and(Student.STUDENT.GENDER.eq(gender))
                 // Age is in certain category.
                 .and(DSL.floor(DSL.dateDiff(DSL.currentDate(), Student.STUDENT.DATEOFBIRTH).div(365.25)).between(minAge, maxAge));
 
@@ -134,7 +134,7 @@ public class StudentMyDao extends StudentDao {
      * @return
      */
     public int countActive(@Nonnull Date minimumDate, @Nonnull Date maximumDate,
-                           @Nonnull int minAge, @Nonnull int maxAge, @Nonnull String sex) {
+                           @Nonnull int minAge, @Nonnull int maxAge, @Nonnull String gender) {
         SelectConditionStep<Record1<Integer>> query = using(configuration())
                 // Since we use a join on instance, we must count distinct number of ID's.
                 .select(Student.STUDENT.STUDENTID.countDistinct())
@@ -161,8 +161,8 @@ public class StudentMyDao extends StudentDao {
                 )
                 // Volunteer must be trained.
                 .and(Volunteer.VOLUNTEER.DATETRAINING.le(maximumDate))
-                // Need to equal sex
-                .and(Student.STUDENT.SEX.eq(sex))
+                // Need to equal gender
+                .and(Student.STUDENT.GENDER.eq(gender))
                 // Age is in certain category.
                 .and(DSL.floor(DSL.dateDiff(DSL.currentDate(), Student.STUDENT.DATEOFBIRTH).div(365.25)).between(minAge, maxAge));
 

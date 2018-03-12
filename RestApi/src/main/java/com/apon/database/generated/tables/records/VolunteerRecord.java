@@ -30,7 +30,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class VolunteerRecord extends UpdatableRecordImpl<VolunteerRecord> implements Record19<Integer, String, String, String, String, Date, String, String, String, String, String, String, String, String, String, String, Date, Boolean, Boolean> {
 
-    private static final long serialVersionUID = 446394529;
+    private static final long serialVersionUID = 11115445;
 
     /**
      * Setter for <code>taalmaatjes.volunteer.volunteerId</code>.
@@ -117,16 +117,16 @@ public class VolunteerRecord extends UpdatableRecordImpl<VolunteerRecord> implem
     }
 
     /**
-     * Setter for <code>taalmaatjes.volunteer.sex</code>.
+     * Setter for <code>taalmaatjes.volunteer.gender</code>.
      */
-    public void setSex(String value) {
+    public void setGender(String value) {
         set(6, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.volunteer.sex</code>.
+     * Getter for <code>taalmaatjes.volunteer.gender</code>.
      */
-    public String getSex() {
+    public String getGender() {
         return (String) get(6);
     }
 
@@ -383,7 +383,7 @@ public class VolunteerRecord extends UpdatableRecordImpl<VolunteerRecord> implem
      */
     @Override
     public Field<String> field7() {
-        return Volunteer.VOLUNTEER.SEX;
+        return Volunteer.VOLUNTEER.GENDER;
     }
 
     /**
@@ -535,7 +535,7 @@ public class VolunteerRecord extends UpdatableRecordImpl<VolunteerRecord> implem
      */
     @Override
     public String component7() {
-        return getSex();
+        return getGender();
     }
 
     /**
@@ -687,7 +687,7 @@ public class VolunteerRecord extends UpdatableRecordImpl<VolunteerRecord> implem
      */
     @Override
     public String value7() {
-        return getSex();
+        return getGender();
     }
 
     /**
@@ -845,7 +845,7 @@ public class VolunteerRecord extends UpdatableRecordImpl<VolunteerRecord> implem
      */
     @Override
     public VolunteerRecord value7(String value) {
-        setSex(value);
+        setGender(value);
         return this;
     }
 
@@ -998,7 +998,7 @@ public class VolunteerRecord extends UpdatableRecordImpl<VolunteerRecord> implem
     /**
      * Create a detached, initialised VolunteerRecord
      */
-    public VolunteerRecord(Integer volunteerid, String externalidentifier, String firstname, String insertion, String lastname, Date dateofbirth, String sex, String phonenumber, String mobilephonenumber, String email, String postalcode, String city, String streetname, String housenr, String log, String job, Date datetraining, Boolean isclassassistant, Boolean istaalmaatje) {
+    public VolunteerRecord(Integer volunteerid, String externalidentifier, String firstname, String insertion, String lastname, Date dateofbirth, String gender, String phonenumber, String mobilephonenumber, String email, String postalcode, String city, String streetname, String housenr, String log, String job, Date datetraining, Boolean isclassassistant, Boolean istaalmaatje) {
         super(Volunteer.VOLUNTEER);
 
         set(0, volunteerid);
@@ -1007,7 +1007,7 @@ public class VolunteerRecord extends UpdatableRecordImpl<VolunteerRecord> implem
         set(3, insertion);
         set(4, lastname);
         set(5, dateofbirth);
-        set(6, sex);
+        set(6, gender);
         set(7, phonenumber);
         set(8, mobilephonenumber);
         set(9, email);

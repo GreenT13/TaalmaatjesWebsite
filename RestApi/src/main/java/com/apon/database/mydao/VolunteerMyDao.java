@@ -99,7 +99,7 @@ public class VolunteerMyDao extends VolunteerDao {
      * @return
      */
     public int countNew(@Nonnull Date minimumDate, @Nonnull Date maximumDate,
-                        @Nonnull int minAge, @Nonnull int maxAge, @Nonnull String sex) {
+                        @Nonnull int minAge, @Nonnull int maxAge, @Nonnull String gender) {
         SelectConditionStep<Record1<Integer>> query = using(configuration())
                 .selectCount()
                 .from(Volunteer.VOLUNTEER)
@@ -115,8 +115,8 @@ public class VolunteerMyDao extends VolunteerDao {
         // Volunteer needs to be trained in this range (new = trained in this range).
         query.and(Volunteer.VOLUNTEER.DATETRAINING.between(minimumDate, maximumDate));
 
-        // Need to equal sex
-        query.and(Volunteer.VOLUNTEER.SEX.eq(sex));
+        // Need to equal gender
+        query.and(Volunteer.VOLUNTEER.GENDER.eq(gender));
 
         // Return the single row integer.
         return query.fetchOne(0, int.class);
@@ -133,7 +133,7 @@ public class VolunteerMyDao extends VolunteerDao {
      * @return
      */
     public int countActive(@Nonnull Date minimumDate, @Nonnull Date maximumDate,
-                           @Nonnull int minAge, @Nonnull int maxAge, @Nonnull String sex) {
+                           @Nonnull int minAge, @Nonnull int maxAge, @Nonnull String gender) {
         SelectConditionStep<Record1<Integer>> query = using(configuration())
                 // Since we use a join on instance, we must count distinct number of ID's.
                 .select(Volunteer.VOLUNTEER.VOLUNTEERID.countDistinct())
@@ -164,8 +164,8 @@ public class VolunteerMyDao extends VolunteerDao {
         // Volunteer needs to be trained before end date of range.
         query.and(Volunteer.VOLUNTEER.DATETRAINING.le(maximumDate));
 
-        // Need to equal sex
-        query.and(Volunteer.VOLUNTEER.SEX.eq(sex));
+        // Need to equal gender
+        query.and(Volunteer.VOLUNTEER.GENDER.eq(gender));
 
         // Return the single row integer.
         return query.fetchOne(0, int.class);

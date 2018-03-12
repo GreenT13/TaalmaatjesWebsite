@@ -30,7 +30,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class StudentRecord extends UpdatableRecordImpl<StudentRecord> implements Record9<Integer, String, String, String, String, String, Date, String, Boolean> {
 
-    private static final long serialVersionUID = 1297390503;
+    private static final long serialVersionUID = -1926503547;
 
     /**
      * Setter for <code>taalmaatjes.student.studentId</code>.
@@ -103,16 +103,16 @@ public class StudentRecord extends UpdatableRecordImpl<StudentRecord> implements
     }
 
     /**
-     * Setter for <code>taalmaatjes.student.sex</code>.
+     * Setter for <code>taalmaatjes.student.gender</code>.
      */
-    public void setSex(String value) {
+    public void setGender(String value) {
         set(5, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.student.sex</code>.
+     * Getter for <code>taalmaatjes.student.gender</code>.
      */
-    public String getSex() {
+    public String getGender() {
         return (String) get(5);
     }
 
@@ -235,7 +235,7 @@ public class StudentRecord extends UpdatableRecordImpl<StudentRecord> implements
      */
     @Override
     public Field<String> field6() {
-        return Student.STUDENT.SEX;
+        return Student.STUDENT.GENDER;
     }
 
     /**
@@ -307,7 +307,7 @@ public class StudentRecord extends UpdatableRecordImpl<StudentRecord> implements
      */
     @Override
     public String component6() {
-        return getSex();
+        return getGender();
     }
 
     /**
@@ -379,7 +379,7 @@ public class StudentRecord extends UpdatableRecordImpl<StudentRecord> implements
      */
     @Override
     public String value6() {
-        return getSex();
+        return getGender();
     }
 
     /**
@@ -456,7 +456,7 @@ public class StudentRecord extends UpdatableRecordImpl<StudentRecord> implements
      */
     @Override
     public StudentRecord value6(String value) {
-        setSex(value);
+        setGender(value);
         return this;
     }
 
@@ -518,7 +518,7 @@ public class StudentRecord extends UpdatableRecordImpl<StudentRecord> implements
     /**
      * Create a detached, initialised StudentRecord
      */
-    public StudentRecord(Integer studentid, String externalidentifier, String firstname, String insertion, String lastname, String sex, Date dateofbirth, String groupidentification, Boolean hasquit) {
+    public StudentRecord(Integer studentid, String externalidentifier, String firstname, String insertion, String lastname, String gender, Date dateofbirth, String groupidentification, Boolean hasquit) {
         super(Student.STUDENT);
 
         set(0, studentid);
@@ -526,7 +526,7 @@ public class StudentRecord extends UpdatableRecordImpl<StudentRecord> implements
         set(2, firstname);
         set(3, insertion);
         set(4, lastname);
-        set(5, sex);
+        set(5, gender);
         set(6, dateofbirth);
         set(7, groupidentification);
         set(8, hasquit);

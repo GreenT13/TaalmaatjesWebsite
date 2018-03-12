@@ -39,7 +39,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Volunteer extends TableImpl<VolunteerRecord> {
 
-    private static final long serialVersionUID = -1008973987;
+    private static final long serialVersionUID = -1652715974;
 
     /**
      * The reference instance of <code>taalmaatjes.volunteer</code>
@@ -85,9 +85,9 @@ public class Volunteer extends TableImpl<VolunteerRecord> {
     public final TableField<VolunteerRecord, Date> DATEOFBIRTH = createField("dateOfBirth", org.jooq.impl.SQLDataType.DATE.nullable(false), this, "");
 
     /**
-     * The column <code>taalmaatjes.volunteer.sex</code>.
+     * The column <code>taalmaatjes.volunteer.gender</code>.
      */
-    public final TableField<VolunteerRecord, String> SEX = createField("sex", org.jooq.impl.SQLDataType.VARCHAR(1).nullable(false), this, "");
+    public final TableField<VolunteerRecord, String> GENDER = createField("gender", org.jooq.impl.SQLDataType.VARCHAR(1).nullable(false), this, "");
 
     /**
      * The column <code>taalmaatjes.volunteer.phoneNumber</code>.

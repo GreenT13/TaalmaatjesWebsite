@@ -39,7 +39,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Student extends TableImpl<StudentRecord> {
 
-    private static final long serialVersionUID = 1267828080;
+    private static final long serialVersionUID = -1937742165;
 
     /**
      * The reference instance of <code>taalmaatjes.student</code>
@@ -80,9 +80,9 @@ public class Student extends TableImpl<StudentRecord> {
     public final TableField<StudentRecord, String> LASTNAME = createField("lastName", org.jooq.impl.SQLDataType.VARCHAR(100), this, "");
 
     /**
-     * The column <code>taalmaatjes.student.sex</code>.
+     * The column <code>taalmaatjes.student.gender</code>.
      */
-    public final TableField<StudentRecord, String> SEX = createField("sex", org.jooq.impl.SQLDataType.VARCHAR(1).nullable(false), this, "");
+    public final TableField<StudentRecord, String> GENDER = createField("gender", org.jooq.impl.SQLDataType.VARCHAR(1).nullable(false), this, "");
 
     /**
      * The column <code>taalmaatjes.student.dateOfBirth</code>.

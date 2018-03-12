@@ -109,10 +109,10 @@ public class VolunteerDao extends DAOImpl<VolunteerRecord, VolunteerPojo, Intege
     }
 
     /**
-     * Fetch records that have <code>sex IN (values)</code>
+     * Fetch records that have <code>gender IN (values)</code>
      */
-    public List<VolunteerPojo> fetchBySex(String... values) {
-        return fetch(Volunteer.VOLUNTEER.SEX, values);
+    public List<VolunteerPojo> fetchByGender(String... values) {
+        return fetch(Volunteer.VOLUNTEER.GENDER, values);
     }
 
     /**

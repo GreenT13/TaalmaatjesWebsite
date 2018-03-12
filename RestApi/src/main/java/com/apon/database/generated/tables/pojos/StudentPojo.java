@@ -23,14 +23,14 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class StudentPojo implements Serializable {
 
-    private static final long serialVersionUID = 942320037;
+    private static final long serialVersionUID = -791412492;
 
     private Integer studentid;
     private String  externalidentifier;
     private String  firstname;
     private String  insertion;
     private String  lastname;
-    private String  sex;
+    private String  gender;
     private Date    dateofbirth;
     private String  groupidentification;
     private Boolean hasquit;
@@ -43,7 +43,7 @@ public class StudentPojo implements Serializable {
         this.firstname = value.firstname;
         this.insertion = value.insertion;
         this.lastname = value.lastname;
-        this.sex = value.sex;
+        this.gender = value.gender;
         this.dateofbirth = value.dateofbirth;
         this.groupidentification = value.groupidentification;
         this.hasquit = value.hasquit;
@@ -55,7 +55,7 @@ public class StudentPojo implements Serializable {
         String  firstname,
         String  insertion,
         String  lastname,
-        String  sex,
+        String  gender,
         Date    dateofbirth,
         String  groupidentification,
         Boolean hasquit
@@ -65,7 +65,7 @@ public class StudentPojo implements Serializable {
         this.firstname = firstname;
         this.insertion = insertion;
         this.lastname = lastname;
-        this.sex = sex;
+        this.gender = gender;
         this.dateofbirth = dateofbirth;
         this.groupidentification = groupidentification;
         this.hasquit = hasquit;
@@ -111,12 +111,12 @@ public class StudentPojo implements Serializable {
         this.lastname = lastname;
     }
 
-    public String getSex() {
-        return this.sex;
+    public String getGender() {
+        return this.gender;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public Date getDateofbirth() {
@@ -182,11 +182,11 @@ public class StudentPojo implements Serializable {
         }
         else if (!lastname.equals(other.lastname))
             return false;
-        if (sex == null) {
-            if (other.sex != null)
+        if (gender == null) {
+            if (other.gender != null)
                 return false;
         }
-        else if (!sex.equals(other.sex))
+        else if (!gender.equals(other.gender))
             return false;
         if (dateofbirth == null) {
             if (other.dateofbirth != null)
@@ -218,7 +218,7 @@ public class StudentPojo implements Serializable {
         result = prime * result + ((this.firstname == null) ? 0 : this.firstname.hashCode());
         result = prime * result + ((this.insertion == null) ? 0 : this.insertion.hashCode());
         result = prime * result + ((this.lastname == null) ? 0 : this.lastname.hashCode());
-        result = prime * result + ((this.sex == null) ? 0 : this.sex.hashCode());
+        result = prime * result + ((this.gender == null) ? 0 : this.gender.hashCode());
         result = prime * result + ((this.dateofbirth == null) ? 0 : this.dateofbirth.hashCode());
         result = prime * result + ((this.groupidentification == null) ? 0 : this.groupidentification.hashCode());
         result = prime * result + ((this.hasquit == null) ? 0 : this.hasquit.hashCode());
@@ -234,7 +234,7 @@ public class StudentPojo implements Serializable {
         sb.append(", ").append(firstname);
         sb.append(", ").append(insertion);
         sb.append(", ").append(lastname);
-        sb.append(", ").append(sex);
+        sb.append(", ").append(gender);
         sb.append(", ").append(dateofbirth);
         sb.append(", ").append(groupidentification);
         sb.append(", ").append(hasquit);

@@ -23,7 +23,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class VolunteerPojo implements Serializable {
 
-    private static final long serialVersionUID = 197478984;
+    private static final long serialVersionUID = -614028819;
 
     private Integer volunteerid;
     private String  externalidentifier;
@@ -31,7 +31,7 @@ public class VolunteerPojo implements Serializable {
     private String  insertion;
     private String  lastname;
     private Date    dateofbirth;
-    private String  sex;
+    private String  gender;
     private String  phonenumber;
     private String  mobilephonenumber;
     private String  email;
@@ -54,7 +54,7 @@ public class VolunteerPojo implements Serializable {
         this.insertion = value.insertion;
         this.lastname = value.lastname;
         this.dateofbirth = value.dateofbirth;
-        this.sex = value.sex;
+        this.gender = value.gender;
         this.phonenumber = value.phonenumber;
         this.mobilephonenumber = value.mobilephonenumber;
         this.email = value.email;
@@ -76,7 +76,7 @@ public class VolunteerPojo implements Serializable {
         String  insertion,
         String  lastname,
         Date    dateofbirth,
-        String  sex,
+        String  gender,
         String  phonenumber,
         String  mobilephonenumber,
         String  email,
@@ -96,7 +96,7 @@ public class VolunteerPojo implements Serializable {
         this.insertion = insertion;
         this.lastname = lastname;
         this.dateofbirth = dateofbirth;
-        this.sex = sex;
+        this.gender = gender;
         this.phonenumber = phonenumber;
         this.mobilephonenumber = mobilephonenumber;
         this.email = email;
@@ -159,12 +159,12 @@ public class VolunteerPojo implements Serializable {
         this.dateofbirth = dateofbirth;
     }
 
-    public String getSex() {
-        return this.sex;
+    public String getGender() {
+        return this.gender;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getPhonenumber() {
@@ -308,11 +308,11 @@ public class VolunteerPojo implements Serializable {
         }
         else if (!dateofbirth.equals(other.dateofbirth))
             return false;
-        if (sex == null) {
-            if (other.sex != null)
+        if (gender == null) {
+            if (other.gender != null)
                 return false;
         }
-        else if (!sex.equals(other.sex))
+        else if (!gender.equals(other.gender))
             return false;
         if (phonenumber == null) {
             if (other.phonenumber != null)
@@ -399,7 +399,7 @@ public class VolunteerPojo implements Serializable {
         result = prime * result + ((this.insertion == null) ? 0 : this.insertion.hashCode());
         result = prime * result + ((this.lastname == null) ? 0 : this.lastname.hashCode());
         result = prime * result + ((this.dateofbirth == null) ? 0 : this.dateofbirth.hashCode());
-        result = prime * result + ((this.sex == null) ? 0 : this.sex.hashCode());
+        result = prime * result + ((this.gender == null) ? 0 : this.gender.hashCode());
         result = prime * result + ((this.phonenumber == null) ? 0 : this.phonenumber.hashCode());
         result = prime * result + ((this.mobilephonenumber == null) ? 0 : this.mobilephonenumber.hashCode());
         result = prime * result + ((this.email == null) ? 0 : this.email.hashCode());
@@ -425,7 +425,7 @@ public class VolunteerPojo implements Serializable {
         sb.append(", ").append(insertion);
         sb.append(", ").append(lastname);
         sb.append(", ").append(dateofbirth);
-        sb.append(", ").append(sex);
+        sb.append(", ").append(gender);
         sb.append(", ").append(phonenumber);
         sb.append(", ").append(mobilephonenumber);
         sb.append(", ").append(email);
