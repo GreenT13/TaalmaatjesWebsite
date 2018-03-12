@@ -86,7 +86,8 @@ public class VolunteerService implements IService {
         }
 
         VolunteerMapper volunteerMapper = new VolunteerMapper();
-        volunteerMapper.setVolunteerValueObject(volunteerValueObject, volunteerPojo.getVolunteerid());
+        volunteerMapper.setVolunteerValueObject(volunteerValueObject);
+        volunteerMapper.getVolunteerPojo().setVolunteerid(volunteerPojo.getVolunteerid());
         volunteerMyDao.update(volunteerMapper.getVolunteerPojo());
         context.commit();
     }
