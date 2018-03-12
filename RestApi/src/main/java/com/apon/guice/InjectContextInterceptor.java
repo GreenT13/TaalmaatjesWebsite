@@ -26,15 +26,12 @@ public class InjectContextInterceptor extends AbstractModule implements MethodIn
             MyLogger.logError("Invocation of " + methodInvocation.getThis().getClass().getName() + "."
                     + methodInvocation.getMethod().getName() + " failed." , e);
 
-            // Something went wrong, so we want to rollback.
-            service.getContext().rollback();
-
             // Still throw the exception.
             throw e;
+        } finally {
+            service.getContext().rollback();
+            service.getContext().close();
         }
-
-        // Close connection because its needed?
-        service.getContext().close();
 
         MyLogger.logDebug("End invocation of " + methodInvocation.getThis().getClass().getName() + "."
                 + methodInvocation.getMethod().getName());
