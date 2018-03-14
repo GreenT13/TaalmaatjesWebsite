@@ -6,6 +6,7 @@ import {GenderUtil} from "../../util/gender.util";
 import {VolunteerService} from "../../services/volunteer.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {SingleStringModel} from "../../valueobject/singlestring.model";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-volunteer-add',
@@ -13,6 +14,7 @@ import {SingleStringModel} from "../../valueobject/singlestring.model";
   styleUrls: ['./volunteer.add.component.css']
 })
 export class VolunteerAddComponent implements OnInit {
+  public errorMessage: string = null;
   public genders = GenderUtil.genders;
   public volunteer: VolunteerModel;
   public dateOfBirth;
@@ -57,6 +59,9 @@ export class VolunteerAddComponent implements OnInit {
     this.volunteerService.insertVolunteer(this.volunteer).subscribe(
       (volunteerExtId: SingleStringModel) => {
         this.router.navigate(['../' + volunteerExtId.value], {relativeTo: this.route});
+      },
+      (error: HttpErrorResponse) => {
+        this.errorMessage = error.error.title;
       }
     );
   }
