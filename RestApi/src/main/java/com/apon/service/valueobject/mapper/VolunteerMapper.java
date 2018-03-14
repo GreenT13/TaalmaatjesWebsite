@@ -34,7 +34,7 @@ public class VolunteerMapper {
 
     public void setVolunteerValueObject(VolunteerValueObject volunteerValueObject) {
         this.volunteerValueObject = volunteerValueObject;
-
+        fillPojoWithValueObject(volunteerValueObject);
     }
 
     public void setVolunteerPojo(VolunteerPojo volunteerPojo) {
