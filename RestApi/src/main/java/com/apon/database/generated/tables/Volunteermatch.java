@@ -4,9 +4,9 @@
 package com.apon.database.generated.tables;
 
 
+import com.apon.database.generated.DefaultSchema;
 import com.apon.database.generated.Indexes;
 import com.apon.database.generated.Keys;
-import com.apon.database.generated.Taalmaatjes;
 import com.apon.database.generated.tables.records.VolunteermatchRecord;
 
 import java.sql.Date;
@@ -40,10 +40,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Volunteermatch extends TableImpl<VolunteermatchRecord> {
 
-    private static final long serialVersionUID = 634666475;
+    private static final long serialVersionUID = 785639185;
 
     /**
-     * The reference instance of <code>taalmaatjes.volunteermatch</code>
+     * The reference instance of <code>volunteermatch</code>
      */
     public static final Volunteermatch VOLUNTEERMATCH = new Volunteermatch();
 
@@ -56,51 +56,51 @@ public class Volunteermatch extends TableImpl<VolunteermatchRecord> {
     }
 
     /**
-     * The column <code>taalmaatjes.volunteermatch.volunteerId</code>.
+     * The column <code>volunteermatch.volunteerId</code>.
      */
     public final TableField<VolunteermatchRecord, Integer> VOLUNTEERID = createField("volunteerId", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>taalmaatjes.volunteermatch.volunteerMatchId</code>.
+     * The column <code>volunteermatch.volunteerMatchId</code>.
      */
     public final TableField<VolunteermatchRecord, Integer> VOLUNTEERMATCHID = createField("volunteerMatchId", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>taalmaatjes.volunteermatch.externalIdentifier</code>.
+     * The column <code>volunteermatch.externalIdentifier</code>.
      */
     public final TableField<VolunteermatchRecord, String> EXTERNALIDENTIFIER = createField("externalIdentifier", org.jooq.impl.SQLDataType.VARCHAR(10).nullable(false), this, "");
 
     /**
-     * The column <code>taalmaatjes.volunteermatch.studentId</code>.
+     * The column <code>volunteermatch.studentId</code>.
      */
     public final TableField<VolunteermatchRecord, Integer> STUDENTID = createField("studentId", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>taalmaatjes.volunteermatch.dateStart</code>.
+     * The column <code>volunteermatch.dateStart</code>.
      */
     public final TableField<VolunteermatchRecord, Date> DATESTART = createField("dateStart", org.jooq.impl.SQLDataType.DATE.nullable(false), this, "");
 
     /**
-     * The column <code>taalmaatjes.volunteermatch.dateEnd</code>.
+     * The column <code>volunteermatch.dateEnd</code>.
      */
     public final TableField<VolunteermatchRecord, Date> DATEEND = createField("dateEnd", org.jooq.impl.SQLDataType.DATE, this, "");
 
     /**
-     * Create a <code>taalmaatjes.volunteermatch</code> table reference
+     * Create a <code>volunteermatch</code> table reference
      */
     public Volunteermatch() {
         this(DSL.name("volunteermatch"), null);
     }
 
     /**
-     * Create an aliased <code>taalmaatjes.volunteermatch</code> table reference
+     * Create an aliased <code>volunteermatch</code> table reference
      */
     public Volunteermatch(String alias) {
         this(DSL.name(alias), VOLUNTEERMATCH);
     }
 
     /**
-     * Create an aliased <code>taalmaatjes.volunteermatch</code> table reference
+     * Create an aliased <code>volunteermatch</code> table reference
      */
     public Volunteermatch(Name alias) {
         this(alias, VOLUNTEERMATCH);
@@ -119,7 +119,7 @@ public class Volunteermatch extends TableImpl<VolunteermatchRecord> {
      */
     @Override
     public Schema getSchema() {
-        return Taalmaatjes.TAALMAATJES;
+        return DefaultSchema.DEFAULT_SCHEMA;
     }
 
     /**

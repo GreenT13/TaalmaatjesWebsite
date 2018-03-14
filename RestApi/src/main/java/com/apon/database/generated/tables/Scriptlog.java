@@ -4,9 +4,9 @@
 package com.apon.database.generated.tables;
 
 
+import com.apon.database.generated.DefaultSchema;
 import com.apon.database.generated.Indexes;
 import com.apon.database.generated.Keys;
-import com.apon.database.generated.Taalmaatjes;
 import com.apon.database.generated.tables.records.ScriptlogRecord;
 
 import java.sql.Timestamp;
@@ -39,10 +39,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Scriptlog extends TableImpl<ScriptlogRecord> {
 
-    private static final long serialVersionUID = -346875421;
+    private static final long serialVersionUID = -280900017;
 
     /**
-     * The reference instance of <code>taalmaatjes.scriptlog</code>
+     * The reference instance of <code>scriptlog</code>
      */
     public static final Scriptlog SCRIPTLOG = new Scriptlog();
 
@@ -55,41 +55,41 @@ public class Scriptlog extends TableImpl<ScriptlogRecord> {
     }
 
     /**
-     * The column <code>taalmaatjes.scriptlog.scriptName</code>.
+     * The column <code>scriptlog.scriptName</code>.
      */
     public final TableField<ScriptlogRecord, String> SCRIPTNAME = createField("scriptName", org.jooq.impl.SQLDataType.VARCHAR(100).nullable(false), this, "");
 
     /**
-     * The column <code>taalmaatjes.scriptlog.tsStarted</code>.
+     * The column <code>scriptlog.tsStarted</code>.
      */
     public final TableField<ScriptlogRecord, Timestamp> TSSTARTED = createField("tsStarted", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false).defaultValue(org.jooq.impl.DSL.inline("CURRENT_TIMESTAMP", org.jooq.impl.SQLDataType.TIMESTAMP)), this, "");
 
     /**
-     * The column <code>taalmaatjes.scriptlog.tsFinished</code>.
+     * The column <code>scriptlog.tsFinished</code>.
      */
     public final TableField<ScriptlogRecord, Timestamp> TSFINISHED = createField("tsFinished", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0000-00-00 00:00:00", org.jooq.impl.SQLDataType.TIMESTAMP)), this, "");
 
     /**
-     * The column <code>taalmaatjes.scriptlog.isCompleted</code>.
+     * The column <code>scriptlog.isCompleted</code>.
      */
     public final TableField<ScriptlogRecord, Boolean> ISCOMPLETED = createField("isCompleted", org.jooq.impl.SQLDataType.BOOLEAN.nullable(false), this, "");
 
     /**
-     * Create a <code>taalmaatjes.scriptlog</code> table reference
+     * Create a <code>scriptlog</code> table reference
      */
     public Scriptlog() {
         this(DSL.name("scriptlog"), null);
     }
 
     /**
-     * Create an aliased <code>taalmaatjes.scriptlog</code> table reference
+     * Create an aliased <code>scriptlog</code> table reference
      */
     public Scriptlog(String alias) {
         this(DSL.name(alias), SCRIPTLOG);
     }
 
     /**
-     * Create an aliased <code>taalmaatjes.scriptlog</code> table reference
+     * Create an aliased <code>scriptlog</code> table reference
      */
     public Scriptlog(Name alias) {
         this(alias, SCRIPTLOG);
@@ -108,7 +108,7 @@ public class Scriptlog extends TableImpl<ScriptlogRecord> {
      */
     @Override
     public Schema getSchema() {
-        return Taalmaatjes.TAALMAATJES;
+        return DefaultSchema.DEFAULT_SCHEMA;
     }
 
     /**

@@ -4,9 +4,9 @@
 package com.apon.database.generated.tables;
 
 
+import com.apon.database.generated.DefaultSchema;
 import com.apon.database.generated.Indexes;
 import com.apon.database.generated.Keys;
-import com.apon.database.generated.Taalmaatjes;
 import com.apon.database.generated.tables.records.StudentRecord;
 
 import java.sql.Date;
@@ -39,10 +39,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Student extends TableImpl<StudentRecord> {
 
-    private static final long serialVersionUID = -1937742165;
+    private static final long serialVersionUID = -183446440;
 
     /**
-     * The reference instance of <code>taalmaatjes.student</code>
+     * The reference instance of <code>student</code>
      */
     public static final Student STUDENT = new Student();
 
@@ -55,66 +55,66 @@ public class Student extends TableImpl<StudentRecord> {
     }
 
     /**
-     * The column <code>taalmaatjes.student.studentId</code>.
+     * The column <code>student.studentId</code>.
      */
     public final TableField<StudentRecord, Integer> STUDENTID = createField("studentId", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>taalmaatjes.student.externalIdentifier</code>.
+     * The column <code>student.externalIdentifier</code>.
      */
     public final TableField<StudentRecord, String> EXTERNALIDENTIFIER = createField("externalIdentifier", org.jooq.impl.SQLDataType.VARCHAR(10).nullable(false), this, "");
 
     /**
-     * The column <code>taalmaatjes.student.firstName</code>.
+     * The column <code>student.firstName</code>.
      */
     public final TableField<StudentRecord, String> FIRSTNAME = createField("firstName", org.jooq.impl.SQLDataType.VARCHAR(100), this, "");
 
     /**
-     * The column <code>taalmaatjes.student.insertion</code>.
+     * The column <code>student.insertion</code>.
      */
     public final TableField<StudentRecord, String> INSERTION = createField("insertion", org.jooq.impl.SQLDataType.VARCHAR(100), this, "");
 
     /**
-     * The column <code>taalmaatjes.student.lastName</code>.
+     * The column <code>student.lastName</code>.
      */
     public final TableField<StudentRecord, String> LASTNAME = createField("lastName", org.jooq.impl.SQLDataType.VARCHAR(100), this, "");
 
     /**
-     * The column <code>taalmaatjes.student.gender</code>.
+     * The column <code>student.gender</code>.
      */
     public final TableField<StudentRecord, String> GENDER = createField("gender", org.jooq.impl.SQLDataType.VARCHAR(1).nullable(false), this, "");
 
     /**
-     * The column <code>taalmaatjes.student.dateOfBirth</code>.
+     * The column <code>student.dateOfBirth</code>.
      */
     public final TableField<StudentRecord, Date> DATEOFBIRTH = createField("dateOfBirth", org.jooq.impl.SQLDataType.DATE.nullable(false), this, "");
 
     /**
-     * The column <code>taalmaatjes.student.groupIdentification</code>.
+     * The column <code>student.groupIdentification</code>.
      */
     public final TableField<StudentRecord, String> GROUPIDENTIFICATION = createField("groupIdentification", org.jooq.impl.SQLDataType.VARCHAR(100), this, "");
 
     /**
-     * The column <code>taalmaatjes.student.hasQuit</code>.
+     * The column <code>student.hasQuit</code>.
      */
     public final TableField<StudentRecord, Boolean> HASQUIT = createField("hasQuit", org.jooq.impl.SQLDataType.BOOLEAN.nullable(false), this, "");
 
     /**
-     * Create a <code>taalmaatjes.student</code> table reference
+     * Create a <code>student</code> table reference
      */
     public Student() {
         this(DSL.name("student"), null);
     }
 
     /**
-     * Create an aliased <code>taalmaatjes.student</code> table reference
+     * Create an aliased <code>student</code> table reference
      */
     public Student(String alias) {
         this(DSL.name(alias), STUDENT);
     }
 
     /**
-     * Create an aliased <code>taalmaatjes.student</code> table reference
+     * Create an aliased <code>student</code> table reference
      */
     public Student(Name alias) {
         this(alias, STUDENT);
@@ -133,7 +133,7 @@ public class Student extends TableImpl<StudentRecord> {
      */
     @Override
     public Schema getSchema() {
-        return Taalmaatjes.TAALMAATJES;
+        return DefaultSchema.DEFAULT_SCHEMA;
     }
 
     /**

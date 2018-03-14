@@ -30,269 +30,269 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class VolunteerRecord extends UpdatableRecordImpl<VolunteerRecord> implements Record19<Integer, String, String, String, String, Date, String, String, String, String, String, String, String, String, String, String, Date, Boolean, Boolean> {
 
-    private static final long serialVersionUID = 11115445;
+    private static final long serialVersionUID = -1943351979;
 
     /**
-     * Setter for <code>taalmaatjes.volunteer.volunteerId</code>.
+     * Setter for <code>volunteer.volunteerId</code>.
      */
     public void setVolunteerid(Integer value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.volunteer.volunteerId</code>.
+     * Getter for <code>volunteer.volunteerId</code>.
      */
     public Integer getVolunteerid() {
         return (Integer) get(0);
     }
 
     /**
-     * Setter for <code>taalmaatjes.volunteer.externalIdentifier</code>.
+     * Setter for <code>volunteer.externalIdentifier</code>.
      */
     public void setExternalidentifier(String value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.volunteer.externalIdentifier</code>.
+     * Getter for <code>volunteer.externalIdentifier</code>.
      */
     public String getExternalidentifier() {
         return (String) get(1);
     }
 
     /**
-     * Setter for <code>taalmaatjes.volunteer.firstName</code>.
+     * Setter for <code>volunteer.firstName</code>.
      */
     public void setFirstname(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.volunteer.firstName</code>.
+     * Getter for <code>volunteer.firstName</code>.
      */
     public String getFirstname() {
         return (String) get(2);
     }
 
     /**
-     * Setter for <code>taalmaatjes.volunteer.insertion</code>.
+     * Setter for <code>volunteer.insertion</code>.
      */
     public void setInsertion(String value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.volunteer.insertion</code>.
+     * Getter for <code>volunteer.insertion</code>.
      */
     public String getInsertion() {
         return (String) get(3);
     }
 
     /**
-     * Setter for <code>taalmaatjes.volunteer.lastName</code>.
+     * Setter for <code>volunteer.lastName</code>.
      */
     public void setLastname(String value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.volunteer.lastName</code>.
+     * Getter for <code>volunteer.lastName</code>.
      */
     public String getLastname() {
         return (String) get(4);
     }
 
     /**
-     * Setter for <code>taalmaatjes.volunteer.dateOfBirth</code>.
+     * Setter for <code>volunteer.dateOfBirth</code>.
      */
     public void setDateofbirth(Date value) {
         set(5, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.volunteer.dateOfBirth</code>.
+     * Getter for <code>volunteer.dateOfBirth</code>.
      */
     public Date getDateofbirth() {
         return (Date) get(5);
     }
 
     /**
-     * Setter for <code>taalmaatjes.volunteer.gender</code>.
+     * Setter for <code>volunteer.gender</code>.
      */
     public void setGender(String value) {
         set(6, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.volunteer.gender</code>.
+     * Getter for <code>volunteer.gender</code>.
      */
     public String getGender() {
         return (String) get(6);
     }
 
     /**
-     * Setter for <code>taalmaatjes.volunteer.phoneNumber</code>.
+     * Setter for <code>volunteer.phoneNumber</code>.
      */
     public void setPhonenumber(String value) {
         set(7, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.volunteer.phoneNumber</code>.
+     * Getter for <code>volunteer.phoneNumber</code>.
      */
     public String getPhonenumber() {
         return (String) get(7);
     }
 
     /**
-     * Setter for <code>taalmaatjes.volunteer.mobilePhoneNumber</code>.
+     * Setter for <code>volunteer.mobilePhoneNumber</code>.
      */
     public void setMobilephonenumber(String value) {
         set(8, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.volunteer.mobilePhoneNumber</code>.
+     * Getter for <code>volunteer.mobilePhoneNumber</code>.
      */
     public String getMobilephonenumber() {
         return (String) get(8);
     }
 
     /**
-     * Setter for <code>taalmaatjes.volunteer.email</code>.
+     * Setter for <code>volunteer.email</code>.
      */
     public void setEmail(String value) {
         set(9, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.volunteer.email</code>.
+     * Getter for <code>volunteer.email</code>.
      */
     public String getEmail() {
         return (String) get(9);
     }
 
     /**
-     * Setter for <code>taalmaatjes.volunteer.postalCode</code>.
+     * Setter for <code>volunteer.postalCode</code>.
      */
     public void setPostalcode(String value) {
         set(10, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.volunteer.postalCode</code>.
+     * Getter for <code>volunteer.postalCode</code>.
      */
     public String getPostalcode() {
         return (String) get(10);
     }
 
     /**
-     * Setter for <code>taalmaatjes.volunteer.city</code>.
+     * Setter for <code>volunteer.city</code>.
      */
     public void setCity(String value) {
         set(11, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.volunteer.city</code>.
+     * Getter for <code>volunteer.city</code>.
      */
     public String getCity() {
         return (String) get(11);
     }
 
     /**
-     * Setter for <code>taalmaatjes.volunteer.streetName</code>.
+     * Setter for <code>volunteer.streetName</code>.
      */
     public void setStreetname(String value) {
         set(12, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.volunteer.streetName</code>.
+     * Getter for <code>volunteer.streetName</code>.
      */
     public String getStreetname() {
         return (String) get(12);
     }
 
     /**
-     * Setter for <code>taalmaatjes.volunteer.houseNr</code>.
+     * Setter for <code>volunteer.houseNr</code>.
      */
     public void setHousenr(String value) {
         set(13, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.volunteer.houseNr</code>.
+     * Getter for <code>volunteer.houseNr</code>.
      */
     public String getHousenr() {
         return (String) get(13);
     }
 
     /**
-     * Setter for <code>taalmaatjes.volunteer.log</code>.
+     * Setter for <code>volunteer.log</code>.
      */
     public void setLog(String value) {
         set(14, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.volunteer.log</code>.
+     * Getter for <code>volunteer.log</code>.
      */
     public String getLog() {
         return (String) get(14);
     }
 
     /**
-     * Setter for <code>taalmaatjes.volunteer.job</code>.
+     * Setter for <code>volunteer.job</code>.
      */
     public void setJob(String value) {
         set(15, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.volunteer.job</code>.
+     * Getter for <code>volunteer.job</code>.
      */
     public String getJob() {
         return (String) get(15);
     }
 
     /**
-     * Setter for <code>taalmaatjes.volunteer.dateTraining</code>.
+     * Setter for <code>volunteer.dateTraining</code>.
      */
     public void setDatetraining(Date value) {
         set(16, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.volunteer.dateTraining</code>.
+     * Getter for <code>volunteer.dateTraining</code>.
      */
     public Date getDatetraining() {
         return (Date) get(16);
     }
 
     /**
-     * Setter for <code>taalmaatjes.volunteer.isClassAssistant</code>.
+     * Setter for <code>volunteer.isClassAssistant</code>.
      */
     public void setIsclassassistant(Boolean value) {
         set(17, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.volunteer.isClassAssistant</code>.
+     * Getter for <code>volunteer.isClassAssistant</code>.
      */
     public Boolean getIsclassassistant() {
         return (Boolean) get(17);
     }
 
     /**
-     * Setter for <code>taalmaatjes.volunteer.isTaalmaatje</code>.
+     * Setter for <code>volunteer.isTaalmaatje</code>.
      */
     public void setIstaalmaatje(Boolean value) {
         set(18, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.volunteer.isTaalmaatje</code>.
+     * Getter for <code>volunteer.isTaalmaatje</code>.
      */
     public Boolean getIstaalmaatje() {
         return (Boolean) get(18);

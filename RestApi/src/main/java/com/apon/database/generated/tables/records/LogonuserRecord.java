@@ -30,73 +30,73 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class LogonuserRecord extends UpdatableRecordImpl<LogonuserRecord> implements Record5<Integer, String, String, Integer, Date> {
 
-    private static final long serialVersionUID = 498693684;
+    private static final long serialVersionUID = 1057780800;
 
     /**
-     * Setter for <code>taalmaatjes.logonuser.logonUserId</code>.
+     * Setter for <code>logonuser.logonUserId</code>.
      */
     public void setLogonuserid(Integer value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.logonuser.logonUserId</code>.
+     * Getter for <code>logonuser.logonUserId</code>.
      */
     public Integer getLogonuserid() {
         return (Integer) get(0);
     }
 
     /**
-     * Setter for <code>taalmaatjes.logonuser.username</code>.
+     * Setter for <code>logonuser.username</code>.
      */
     public void setUsername(String value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.logonuser.username</code>.
+     * Getter for <code>logonuser.username</code>.
      */
     public String getUsername() {
         return (String) get(1);
     }
 
     /**
-     * Setter for <code>taalmaatjes.logonuser.password</code>.
+     * Setter for <code>logonuser.password</code>.
      */
     public void setPassword(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.logonuser.password</code>.
+     * Getter for <code>logonuser.password</code>.
      */
     public String getPassword() {
         return (String) get(2);
     }
 
     /**
-     * Setter for <code>taalmaatjes.logonuser.nrOfLogonAttempts</code>.
+     * Setter for <code>logonuser.nrOfLogonAttempts</code>.
      */
     public void setNroflogonattempts(Integer value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.logonuser.nrOfLogonAttempts</code>.
+     * Getter for <code>logonuser.nrOfLogonAttempts</code>.
      */
     public Integer getNroflogonattempts() {
         return (Integer) get(3);
     }
 
     /**
-     * Setter for <code>taalmaatjes.logonuser.dateEndValid</code>.
+     * Setter for <code>logonuser.dateEndValid</code>.
      */
     public void setDateendvalid(Date value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.logonuser.dateEndValid</code>.
+     * Getter for <code>logonuser.dateEndValid</code>.
      */
     public Date getDateendvalid() {
         return (Date) get(4);

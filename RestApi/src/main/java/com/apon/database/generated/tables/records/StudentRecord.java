@@ -30,129 +30,129 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class StudentRecord extends UpdatableRecordImpl<StudentRecord> implements Record9<Integer, String, String, String, String, String, Date, String, Boolean> {
 
-    private static final long serialVersionUID = -1926503547;
+    private static final long serialVersionUID = -719290651;
 
     /**
-     * Setter for <code>taalmaatjes.student.studentId</code>.
+     * Setter for <code>student.studentId</code>.
      */
     public void setStudentid(Integer value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.student.studentId</code>.
+     * Getter for <code>student.studentId</code>.
      */
     public Integer getStudentid() {
         return (Integer) get(0);
     }
 
     /**
-     * Setter for <code>taalmaatjes.student.externalIdentifier</code>.
+     * Setter for <code>student.externalIdentifier</code>.
      */
     public void setExternalidentifier(String value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.student.externalIdentifier</code>.
+     * Getter for <code>student.externalIdentifier</code>.
      */
     public String getExternalidentifier() {
         return (String) get(1);
     }
 
     /**
-     * Setter for <code>taalmaatjes.student.firstName</code>.
+     * Setter for <code>student.firstName</code>.
      */
     public void setFirstname(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.student.firstName</code>.
+     * Getter for <code>student.firstName</code>.
      */
     public String getFirstname() {
         return (String) get(2);
     }
 
     /**
-     * Setter for <code>taalmaatjes.student.insertion</code>.
+     * Setter for <code>student.insertion</code>.
      */
     public void setInsertion(String value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.student.insertion</code>.
+     * Getter for <code>student.insertion</code>.
      */
     public String getInsertion() {
         return (String) get(3);
     }
 
     /**
-     * Setter for <code>taalmaatjes.student.lastName</code>.
+     * Setter for <code>student.lastName</code>.
      */
     public void setLastname(String value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.student.lastName</code>.
+     * Getter for <code>student.lastName</code>.
      */
     public String getLastname() {
         return (String) get(4);
     }
 
     /**
-     * Setter for <code>taalmaatjes.student.gender</code>.
+     * Setter for <code>student.gender</code>.
      */
     public void setGender(String value) {
         set(5, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.student.gender</code>.
+     * Getter for <code>student.gender</code>.
      */
     public String getGender() {
         return (String) get(5);
     }
 
     /**
-     * Setter for <code>taalmaatjes.student.dateOfBirth</code>.
+     * Setter for <code>student.dateOfBirth</code>.
      */
     public void setDateofbirth(Date value) {
         set(6, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.student.dateOfBirth</code>.
+     * Getter for <code>student.dateOfBirth</code>.
      */
     public Date getDateofbirth() {
         return (Date) get(6);
     }
 
     /**
-     * Setter for <code>taalmaatjes.student.groupIdentification</code>.
+     * Setter for <code>student.groupIdentification</code>.
      */
     public void setGroupidentification(String value) {
         set(7, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.student.groupIdentification</code>.
+     * Getter for <code>student.groupIdentification</code>.
      */
     public String getGroupidentification() {
         return (String) get(7);
     }
 
     /**
-     * Setter for <code>taalmaatjes.student.hasQuit</code>.
+     * Setter for <code>student.hasQuit</code>.
      */
     public void setHasquit(Boolean value) {
         set(8, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.student.hasQuit</code>.
+     * Getter for <code>student.hasQuit</code>.
      */
     public Boolean getHasquit() {
         return (Boolean) get(8);

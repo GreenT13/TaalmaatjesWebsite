@@ -27,7 +27,7 @@ import org.jooq.impl.CatalogImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class DefaultCatalog extends CatalogImpl {
 
-    private static final long serialVersionUID = 119599785;
+    private static final long serialVersionUID = -250506763;
 
     /**
      * The reference instance of <code></code>
@@ -35,9 +35,9 @@ public class DefaultCatalog extends CatalogImpl {
     public static final DefaultCatalog DEFAULT_CATALOG = new DefaultCatalog();
 
     /**
-     * The schema <code>taalmaatjes</code>.
+     * The schema <code></code>.
      */
-    public final Taalmaatjes TAALMAATJES = com.apon.database.generated.Taalmaatjes.TAALMAATJES;
+    public final DefaultSchema DEFAULT_SCHEMA = com.apon.database.generated.DefaultSchema.DEFAULT_SCHEMA;
 
     /**
      * No further instances allowed
@@ -55,6 +55,6 @@ public class DefaultCatalog extends CatalogImpl {
 
     private final List<Schema> getSchemas0() {
         return Arrays.<Schema>asList(
-            Taalmaatjes.TAALMAATJES);
+            DefaultSchema.DEFAULT_SCHEMA);
     }
 }

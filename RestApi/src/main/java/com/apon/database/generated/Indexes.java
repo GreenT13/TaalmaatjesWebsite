@@ -20,7 +20,7 @@ import org.jooq.impl.AbstractKeys;
 
 
 /**
- * A class modelling indexes of tables of the <code>taalmaatjes</code> schema.
+ * A class modelling indexes of tables of the <code></code> schema.
  */
 @Generated(
     value = {

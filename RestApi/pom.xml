@@ -209,7 +209,12 @@
                             <name>org.jooq.util.mysql.MySQLDatabase</name>
                             <includes>.*</includes>
                             <!-- <excludes></excludes> -->
-                            <inputSchema>taalmaatjes</inputSchema>
+                            <schemata>
+                                <schema>
+                                    <inputSchema>taalmaatjes</inputSchema>
+                                    <outputSchemaToDefault>true</outputSchemaToDefault>
+                                </schema>
+                            </schemata>
                             <!-- Boolean en bytes zijn gek -->
                             <forcedTypes>
                                 <forcedType>

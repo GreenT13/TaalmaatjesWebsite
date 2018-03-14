@@ -4,9 +4,9 @@
 package com.apon.database.generated.tables;
 
 
+import com.apon.database.generated.DefaultSchema;
 import com.apon.database.generated.Indexes;
 import com.apon.database.generated.Keys;
-import com.apon.database.generated.Taalmaatjes;
 import com.apon.database.generated.tables.records.VolunteerinstanceRecord;
 
 import java.sql.Date;
@@ -40,10 +40,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Volunteerinstance extends TableImpl<VolunteerinstanceRecord> {
 
-    private static final long serialVersionUID = -1000755924;
+    private static final long serialVersionUID = -73844221;
 
     /**
-     * The reference instance of <code>taalmaatjes.volunteerinstance</code>
+     * The reference instance of <code>volunteerinstance</code>
      */
     public static final Volunteerinstance VOLUNTEERINSTANCE = new Volunteerinstance();
 
@@ -56,46 +56,46 @@ public class Volunteerinstance extends TableImpl<VolunteerinstanceRecord> {
     }
 
     /**
-     * The column <code>taalmaatjes.volunteerinstance.volunteerId</code>.
+     * The column <code>volunteerinstance.volunteerId</code>.
      */
     public final TableField<VolunteerinstanceRecord, Integer> VOLUNTEERID = createField("volunteerId", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>taalmaatjes.volunteerinstance.volunteerInstanceId</code>.
+     * The column <code>volunteerinstance.volunteerInstanceId</code>.
      */
     public final TableField<VolunteerinstanceRecord, Integer> VOLUNTEERINSTANCEID = createField("volunteerInstanceId", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>taalmaatjes.volunteerinstance.externalIdentifier</code>.
+     * The column <code>volunteerinstance.externalIdentifier</code>.
      */
     public final TableField<VolunteerinstanceRecord, String> EXTERNALIDENTIFIER = createField("externalIdentifier", org.jooq.impl.SQLDataType.VARCHAR(10).nullable(false), this, "");
 
     /**
-     * The column <code>taalmaatjes.volunteerinstance.dateStart</code>.
+     * The column <code>volunteerinstance.dateStart</code>.
      */
     public final TableField<VolunteerinstanceRecord, Date> DATESTART = createField("dateStart", org.jooq.impl.SQLDataType.DATE.nullable(false), this, "");
 
     /**
-     * The column <code>taalmaatjes.volunteerinstance.dateEnd</code>.
+     * The column <code>volunteerinstance.dateEnd</code>.
      */
     public final TableField<VolunteerinstanceRecord, Date> DATEEND = createField("dateEnd", org.jooq.impl.SQLDataType.DATE, this, "");
 
     /**
-     * Create a <code>taalmaatjes.volunteerinstance</code> table reference
+     * Create a <code>volunteerinstance</code> table reference
      */
     public Volunteerinstance() {
         this(DSL.name("volunteerinstance"), null);
     }
 
     /**
-     * Create an aliased <code>taalmaatjes.volunteerinstance</code> table reference
+     * Create an aliased <code>volunteerinstance</code> table reference
      */
     public Volunteerinstance(String alias) {
         this(DSL.name(alias), VOLUNTEERINSTANCE);
     }
 
     /**
-     * Create an aliased <code>taalmaatjes.volunteerinstance</code> table reference
+     * Create an aliased <code>volunteerinstance</code> table reference
      */
     public Volunteerinstance(Name alias) {
         this(alias, VOLUNTEERINSTANCE);
@@ -114,7 +114,7 @@ public class Volunteerinstance extends TableImpl<VolunteerinstanceRecord> {
      */
     @Override
     public Schema getSchema() {
-        return Taalmaatjes.TAALMAATJES;
+        return DefaultSchema.DEFAULT_SCHEMA;
     }
 
     /**

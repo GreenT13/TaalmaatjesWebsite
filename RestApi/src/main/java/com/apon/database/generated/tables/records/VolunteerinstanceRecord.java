@@ -30,73 +30,73 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class VolunteerinstanceRecord extends UpdatableRecordImpl<VolunteerinstanceRecord> implements Record5<Integer, Integer, String, Date, Date> {
 
-    private static final long serialVersionUID = -768890762;
+    private static final long serialVersionUID = -903720534;
 
     /**
-     * Setter for <code>taalmaatjes.volunteerinstance.volunteerId</code>.
+     * Setter for <code>volunteerinstance.volunteerId</code>.
      */
     public void setVolunteerid(Integer value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.volunteerinstance.volunteerId</code>.
+     * Getter for <code>volunteerinstance.volunteerId</code>.
      */
     public Integer getVolunteerid() {
         return (Integer) get(0);
     }
 
     /**
-     * Setter for <code>taalmaatjes.volunteerinstance.volunteerInstanceId</code>.
+     * Setter for <code>volunteerinstance.volunteerInstanceId</code>.
      */
     public void setVolunteerinstanceid(Integer value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.volunteerinstance.volunteerInstanceId</code>.
+     * Getter for <code>volunteerinstance.volunteerInstanceId</code>.
      */
     public Integer getVolunteerinstanceid() {
         return (Integer) get(1);
     }
 
     /**
-     * Setter for <code>taalmaatjes.volunteerinstance.externalIdentifier</code>.
+     * Setter for <code>volunteerinstance.externalIdentifier</code>.
      */
     public void setExternalidentifier(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.volunteerinstance.externalIdentifier</code>.
+     * Getter for <code>volunteerinstance.externalIdentifier</code>.
      */
     public String getExternalidentifier() {
         return (String) get(2);
     }
 
     /**
-     * Setter for <code>taalmaatjes.volunteerinstance.dateStart</code>.
+     * Setter for <code>volunteerinstance.dateStart</code>.
      */
     public void setDatestart(Date value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.volunteerinstance.dateStart</code>.
+     * Getter for <code>volunteerinstance.dateStart</code>.
      */
     public Date getDatestart() {
         return (Date) get(3);
     }
 
     /**
-     * Setter for <code>taalmaatjes.volunteerinstance.dateEnd</code>.
+     * Setter for <code>volunteerinstance.dateEnd</code>.
      */
     public void setDateend(Date value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>taalmaatjes.volunteerinstance.dateEnd</code>.
+     * Getter for <code>volunteerinstance.dateEnd</code>.
      */
     public Date getDateend() {
         return (Date) get(4);

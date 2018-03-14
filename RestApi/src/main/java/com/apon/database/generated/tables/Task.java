@@ -4,9 +4,9 @@
 package com.apon.database.generated.tables;
 
 
+import com.apon.database.generated.DefaultSchema;
 import com.apon.database.generated.Indexes;
 import com.apon.database.generated.Keys;
-import com.apon.database.generated.Taalmaatjes;
 import com.apon.database.generated.tables.records.TaskRecord;
 
 import java.sql.Date;
@@ -40,10 +40,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Task extends TableImpl<TaskRecord> {
 
-    private static final long serialVersionUID = 2011094517;
+    private static final long serialVersionUID = -506690416;
 
     /**
-     * The reference instance of <code>taalmaatjes.task</code>
+     * The reference instance of <code>task</code>
      */
     public static final Task TASK = new Task();
 
@@ -56,56 +56,56 @@ public class Task extends TableImpl<TaskRecord> {
     }
 
     /**
-     * The column <code>taalmaatjes.task.taskId</code>.
+     * The column <code>task.taskId</code>.
      */
     public final TableField<TaskRecord, Integer> TASKID = createField("taskId", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>taalmaatjes.task.externalIdentifier</code>.
+     * The column <code>task.externalIdentifier</code>.
      */
     public final TableField<TaskRecord, String> EXTERNALIDENTIFIER = createField("externalIdentifier", org.jooq.impl.SQLDataType.VARCHAR(10).nullable(false), this, "");
 
     /**
-     * The column <code>taalmaatjes.task.title</code>.
+     * The column <code>task.title</code>.
      */
     public final TableField<TaskRecord, String> TITLE = createField("title", org.jooq.impl.SQLDataType.VARCHAR(100).nullable(false), this, "");
 
     /**
-     * The column <code>taalmaatjes.task.description</code>.
+     * The column <code>task.description</code>.
      */
     public final TableField<TaskRecord, String> DESCRIPTION = createField("description", org.jooq.impl.SQLDataType.VARCHAR(1000), this, "");
 
     /**
-     * The column <code>taalmaatjes.task.volunteerId</code>.
+     * The column <code>task.volunteerId</code>.
      */
     public final TableField<TaskRecord, Integer> VOLUNTEERID = createField("volunteerId", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>taalmaatjes.task.isFinished</code>.
+     * The column <code>task.isFinished</code>.
      */
     public final TableField<TaskRecord, Boolean> ISFINISHED = createField("isFinished", org.jooq.impl.SQLDataType.BOOLEAN.nullable(false), this, "");
 
     /**
-     * The column <code>taalmaatjes.task.dateToBeFinished</code>.
+     * The column <code>task.dateToBeFinished</code>.
      */
     public final TableField<TaskRecord, Date> DATETOBEFINISHED = createField("dateToBeFinished", org.jooq.impl.SQLDataType.DATE, this, "");
 
     /**
-     * Create a <code>taalmaatjes.task</code> table reference
+     * Create a <code>task</code> table reference
      */
     public Task() {
         this(DSL.name("task"), null);
     }
 
     /**
-     * Create an aliased <code>taalmaatjes.task</code> table reference
+     * Create an aliased <code>task</code> table reference
      */
     public Task(String alias) {
         this(DSL.name(alias), TASK);
     }
 
     /**
-     * Create an aliased <code>taalmaatjes.task</code> table reference
+     * Create an aliased <code>task</code> table reference
      */
     public Task(Name alias) {
         this(alias, TASK);
@@ -124,7 +124,7 @@ public class Task extends TableImpl<TaskRecord> {
      */
     @Override
     public Schema getSchema() {
-        return Taalmaatjes.TAALMAATJES;
+        return DefaultSchema.DEFAULT_SCHEMA;
     }
 
     /**

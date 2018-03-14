@@ -4,9 +4,9 @@
 package com.apon.database.generated.tables;
 
 
+import com.apon.database.generated.DefaultSchema;
 import com.apon.database.generated.Indexes;
 import com.apon.database.generated.Keys;
-import com.apon.database.generated.Taalmaatjes;
 import com.apon.database.generated.tables.records.LogonuserRecord;
 
 import java.sql.Date;
@@ -39,10 +39,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Logonuser extends TableImpl<LogonuserRecord> {
 
-    private static final long serialVersionUID = -1851313474;
+    private static final long serialVersionUID = -874563143;
 
     /**
-     * The reference instance of <code>taalmaatjes.logonuser</code>
+     * The reference instance of <code>logonuser</code>
      */
     public static final Logonuser LOGONUSER = new Logonuser();
 
@@ -55,46 +55,46 @@ public class Logonuser extends TableImpl<LogonuserRecord> {
     }
 
     /**
-     * The column <code>taalmaatjes.logonuser.logonUserId</code>.
+     * The column <code>logonuser.logonUserId</code>.
      */
     public final TableField<LogonuserRecord, Integer> LOGONUSERID = createField("logonUserId", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>taalmaatjes.logonuser.username</code>.
+     * The column <code>logonuser.username</code>.
      */
     public final TableField<LogonuserRecord, String> USERNAME = createField("username", org.jooq.impl.SQLDataType.VARCHAR(30).nullable(false), this, "");
 
     /**
-     * The column <code>taalmaatjes.logonuser.password</code>.
+     * The column <code>logonuser.password</code>.
      */
     public final TableField<LogonuserRecord, String> PASSWORD = createField("password", org.jooq.impl.SQLDataType.VARCHAR(60).nullable(false), this, "");
 
     /**
-     * The column <code>taalmaatjes.logonuser.nrOfLogonAttempts</code>.
+     * The column <code>logonuser.nrOfLogonAttempts</code>.
      */
     public final TableField<LogonuserRecord, Integer> NROFLOGONATTEMPTS = createField("nrOfLogonAttempts", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>taalmaatjes.logonuser.dateEndValid</code>.
+     * The column <code>logonuser.dateEndValid</code>.
      */
     public final TableField<LogonuserRecord, Date> DATEENDVALID = createField("dateEndValid", org.jooq.impl.SQLDataType.DATE, this, "");
 
     /**
-     * Create a <code>taalmaatjes.logonuser</code> table reference
+     * Create a <code>logonuser</code> table reference
      */
     public Logonuser() {
         this(DSL.name("logonuser"), null);
     }
 
     /**
-     * Create an aliased <code>taalmaatjes.logonuser</code> table reference
+     * Create an aliased <code>logonuser</code> table reference
      */
     public Logonuser(String alias) {
         this(DSL.name(alias), LOGONUSER);
     }
 
     /**
-     * Create an aliased <code>taalmaatjes.logonuser</code> table reference
+     * Create an aliased <code>logonuser</code> table reference
      */
     public Logonuser(Name alias) {
         this(alias, LOGONUSER);
@@ -113,7 +113,7 @@ public class Logonuser extends TableImpl<LogonuserRecord> {
      */
     @Override
     public Schema getSchema() {
-        return Taalmaatjes.TAALMAATJES;
+        return DefaultSchema.DEFAULT_SCHEMA;
     }
 
     /**
