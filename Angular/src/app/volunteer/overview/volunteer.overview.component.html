@@ -1,6 +1,6 @@
 <!--Search bar on top -->
 <div class="row">
-  <div class="col-sm-3" style="padding-left: 0">
+  <div class="col-sm-3">
     <button type="button" [routerLink]="['add']" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span>Toevoegen vrijwilliger</button>
   </div>
 
@@ -15,7 +15,7 @@
   <div class="col-sm-2 text-right input-group">
     <input type="text" class="form-control" placeholder="Zoeken&hellip;">
     <span class="input-group-btn">
-      <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#advancedRow"><span class="glyphicon glyphicon-chevron-down" style="padding: 0"></span></button>
+      <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#advancedRow"><span class="glyphicon glyphicon-chevron-down"></span></button>
     </span>
   </div>
 </div>
@@ -29,7 +29,7 @@
 </div>
 
 <!-- The table with output results -->
-<div class="row">
+<div class="row col-sm-12">
   <table data-toggle="table" data-pagination="true" class="table table-hover">
     <thead>
     <tr>

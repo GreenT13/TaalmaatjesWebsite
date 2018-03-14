@@ -21,3 +21,8 @@ div.overlay {
 .list-group-item {
   background-color: transparent;
 }
+
+/* This padding doubles because I start with columns in each subview. */
+.center-container {
+  padding: 0;
+}
