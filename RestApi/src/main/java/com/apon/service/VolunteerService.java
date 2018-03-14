@@ -52,7 +52,7 @@ public class VolunteerService implements IService {
 
     @PUT
     @InjectContext
-    public StringValueObject insertVolunteer(VolunteerValueObject volunteerValueObject) {
+    public StringValueObject insertVolunteer(VolunteerValueObject volunteerValueObject) throws Exception {
         VolunteerMapper volunteerMapper = new VolunteerMapper();
         volunteerMapper.setVolunteerValueObject(volunteerValueObject);
 
