@@ -146,6 +146,7 @@
     </dependencies>
 
     <build>
+        <finalName>Taalmaatjes</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
