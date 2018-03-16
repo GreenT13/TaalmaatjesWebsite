@@ -37,4 +37,28 @@ export class MyHttpClient {
       this.httpClient.delete(this.baseString + url, {headers: httpHeaders}).pipe(share())
     );
   }
+
+  public static createParameterUrl(params: {name: string, value: object}[]) {
+    if (!params || params.length == 0) {
+      return '';
+    }
+
+    let url: string = '?';
+    let isFirst: boolean = true;
+    for (let {name, value} of params) {
+      if (value == null || value == undefined || value.toString().length === 0) {
+        continue;
+      }
+
+      if (!isFirst) {
+        url += '&'
+      } else {
+        isFirst = false;
+      }
+      url += name + '=' + value;
+    }
+
+    return url;
+  }
 }
+
