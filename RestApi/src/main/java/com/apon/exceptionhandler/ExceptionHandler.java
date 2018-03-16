@@ -8,9 +8,9 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 
 @EH
+@SuppressWarnings("unused")
 public class ExceptionHandler implements ExceptionMapper<Exception> {
 
-    // TODO: Handle generic responses of exceptions (exceptions that we don't know) with some kind of filter?
     public Response toResponse(Exception e) {
         return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
             .entity(new ErrorResponse(e.getMessage(), ExceptionUtils.getStackTrace(e)))

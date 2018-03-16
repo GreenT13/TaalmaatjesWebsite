@@ -1,5 +1,6 @@
 package com.apon.exceptionhandler;
 
+@SuppressWarnings("unused")
 public class ErrorResponse {
     private String title;
     private String detail;
