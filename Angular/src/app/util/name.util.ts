@@ -1,15 +1,18 @@
-import {Injectable} from "@angular/core";
 import {VolunteerModel} from "../valueobject/volunteer.model";
 
-@Injectable()
 export class NameUtil {
 
   public static isEmptyString(value: string): boolean {
-    return value === null || value.length == 0 || value.trim().length == 0;
+    // When doing !object, it checks for null or undefined.
+    return !value || value.length == 0 || value.trim().length == 0;
   }
 
   public static parseName(volunteer: VolunteerModel): string {
-    var name: string = '';
+    if (!volunteer) {
+      return '';
+    }
+
+    let name: string = '';
     if (!NameUtil.isEmptyString(volunteer.firstName)) {
       name += volunteer.firstName + ' ';
     }
