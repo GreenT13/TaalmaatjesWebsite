@@ -47,17 +47,10 @@ export class VolunteerAddComponent implements OnInit {
               private router: Router, private route: ActivatedRoute) { }
 
   onSubmit() {
-    if (this.dateStartActive != undefined) {
-      this.volunteer.dateStartActive = DateUtil.convertIDateToString(this.dateStartActive.date);
-    }
-    if (this.dateOfBirth != undefined) {
-      this.volunteer.dateOfBirth = DateUtil.convertIDateToString(this.dateOfBirth.date);
-    }
-    if (this.dateTraining != undefined) {
-      this.volunteer.dateTraining = DateUtil.convertIDateToString(this.dateTraining.date);
-    }
+    this.volunteer.dateOfBirth = DateUtil.convertDateIDateToString(this.dateOfBirth);
+    this.volunteer.dateTraining = DateUtil.convertDateIDateToString(this.dateTraining);
 
-    this.volunteerService.insertVolunteer(this.volunteer).subscribe(
+    this.volunteerService.insertVolunteer(this.volunteer, DateUtil.convertDateIDateToString(this.dateStartActive)).subscribe(
       (volunteerExtId: SingleStringModel) => {
         this.router.navigate(['../' + volunteerExtId.value], {relativeTo: this.route});
       },

@@ -33,4 +33,11 @@ export class DateUtil {
     }
     return iDate.year + '-' + iDate.month + '-' + iDate.day;
   }
+
+  public static convertDateIDateToString(iDate: {date: IMyDate}): string {
+    if (!iDate) {
+      return null;
+    }
+    return this.convertIDateToString(iDate.date);
+  }
 }

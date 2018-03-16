@@ -26,7 +26,6 @@ public class VolunteerValueObject {
 
     // Variables determined by logic.
     private Integer nrOfMatchesToday = 0;
-    private Date dateStartActive;
 
     // Lists of instances, matches and tasks.
     private List<VolunteerInstanceValueObject> volunteerInstanceValueObjects;
@@ -185,14 +184,6 @@ public class VolunteerValueObject {
 
     public void setNrOfMatchesToday(Integer nrOfMatchesToday) {
         this.nrOfMatchesToday = nrOfMatchesToday;
-    }
-
-    public Date getDateStartActive() {
-        return dateStartActive;
-    }
-
-    public void setDateStartActive(Date dateStartActive) {
-        this.dateStartActive = dateStartActive;
     }
 
     public List<VolunteerInstanceValueObject> getVolunteerInstanceValueObjects() {

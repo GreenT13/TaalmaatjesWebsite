@@ -13,13 +13,13 @@ export class VolunteerService {
   searchVolunteers(search: String, city: String, isActive: Boolean, hasTraining: Boolean, hasMatch: Boolean) {
     const url: string = 'volunteer' + MyHttpClient.createParameterUrl([
       {name: 'search', value: search}, {name: 'city', value: city}, {name: 'isActive', value: isActive},
-      {name: 'hasTraining', value: hasTraining}, {name: 'hasMatch', value: hasMatch}],);
-    console.log(url);
+      {name: 'hasTraining', value: hasTraining}, {name: 'hasMatch', value: hasMatch}]);
     return this.myHttpClient.get(url, null);
   }
 
-  insertVolunteer(volunteerModel: VolunteerModel) {
-    return this.myHttpClient.put('volunteer', null, volunteerModel);
+  insertVolunteer(volunteerModel: VolunteerModel, dateStartActive: String) {
+    const url: string = 'volunteer' + MyHttpClient.createParameterUrl([{name: 'dateStartActive', value: dateStartActive}]);
+    return this.myHttpClient.put(url, null, volunteerModel);
   }
 
   getVolunteer(volunteerExtId: string) {

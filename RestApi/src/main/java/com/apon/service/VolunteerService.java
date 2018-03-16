@@ -14,6 +14,7 @@ import com.apon.service.valueobject.mapper.VolunteerMapper;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,7 +84,8 @@ public class VolunteerService implements IService {
      */
     @PUT
     @InjectContext
-    public StringValueObject insert(VolunteerValueObject volunteerValueObject) throws Exception {
+    public StringValueObject insert(@QueryParam("dateStartActive") Date dateStartActive,
+                                    VolunteerValueObject volunteerValueObject) throws Exception {
         VolunteerMapper volunteerMapper = new VolunteerMapper();
         volunteerMapper.setVolunteerValueObject(volunteerValueObject);
 
@@ -94,12 +96,12 @@ public class VolunteerService implements IService {
         }
 
         // Whenever the dateStartActive is filled, we create a VolunteerInstance row starting on this date.
-        if (volunteerValueObject.getDateStartActive() != null) {
+        if (dateStartActive != null) {
             VolunteerInstanceMyDao volunteerInstanceMyDao = new VolunteerInstanceMyDao(context);
             VolunteerinstancePojo volunteerinstancePojo = new VolunteerinstancePojo();
 
             volunteerinstancePojo.setVolunteerid(volunteerPojo.getVolunteerid());
-            volunteerinstancePojo.setDatestart(volunteerValueObject.getDateStartActive());
+            volunteerinstancePojo.setDatestart(dateStartActive);
 
             if (!volunteerInstanceMyDao.insertPojo(volunteerinstancePojo)) {
                 throw new FunctionalException(volunteerInstanceMyDao.getResultObject());

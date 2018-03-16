@@ -23,9 +23,6 @@ export class VolunteerModel {
   public isClassAssistant: boolean;
   public isTaalmaatje: boolean;
 
-  // Only for adding volunteers.
-  public dateStartActive: string;
-
   public volunteerInstanceValueObjects: VolunteerInstanceModel[];
   public volunteerMatchValueObjects: VolunteerMatchModel[];
   public taskValueObjects: TaskModel[];
