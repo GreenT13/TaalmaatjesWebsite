@@ -53,6 +53,7 @@ public class VolunteerMapper {
         volunteerValueObject.setMobilePhoneNumber(volunteerPojo.getMobilephonenumber());
         volunteerValueObject.setEmail(volunteerPojo.getEmail());
         volunteerValueObject.setDateTraining(volunteerPojo.getDatetraining());
+        volunteerValueObject.setCity(volunteerPojo.getCity());
         volunteerValueObject.setPostalCode(volunteerPojo.getPostalcode());
         volunteerValueObject.setStreetName(volunteerPojo.getStreetname());
         volunteerValueObject.setHouseNr(volunteerPojo.getHousenr());
