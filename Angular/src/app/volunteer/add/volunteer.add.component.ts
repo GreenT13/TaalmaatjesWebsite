@@ -14,7 +14,7 @@ import {HttpErrorResponse} from "@angular/common/http";
   styleUrls: ['./volunteer.add.component.css']
 })
 export class VolunteerAddComponent implements OnInit {
-  public errorMessage: string = null;
+  public error;
   public genders = GenderUtil.genders;
   public volunteer: VolunteerModel;
   public dateOfBirth;
@@ -43,7 +43,8 @@ export class VolunteerAddComponent implements OnInit {
     this.dateStartActive = {date: DateUtil.getCurrentIDate()};
   }
 
-  constructor(private volunteerService: VolunteerService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private volunteerService: VolunteerService,
+              private router: Router, private route: ActivatedRoute) { }
 
   onSubmit() {
     if (this.dateStartActive != undefined) {
@@ -61,7 +62,7 @@ export class VolunteerAddComponent implements OnInit {
         this.router.navigate(['../' + volunteerExtId.value], {relativeTo: this.route});
       },
       (error: HttpErrorResponse) => {
-        this.errorMessage = error.error.title;
+        this.error = error;
       }
     );
   }

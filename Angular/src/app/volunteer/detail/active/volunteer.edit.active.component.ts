@@ -4,6 +4,9 @@ import {VolunteerInstanceModel} from "../../../valueobject/volunteerinstance.mod
 import {ActivatedRoute} from "@angular/router";
 import {VolunteerService} from "../../../services/volunteer.service";
 import {DateUtil} from "../../../util/date.util";
+import {VolunteerDetailService} from "../volunteer.detail.service";
+import {VolunteerModel} from "../../../valueobject/volunteer.model";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-volunteer-edit-active',
@@ -18,8 +21,11 @@ export class VolunteerEditActiveComponent implements OnInit {
     dateFormat: 'dd-mm-yyyy'
   };
   private volunteerInstanceModel: VolunteerInstanceModel;
+  private volunteer: VolunteerModel;
+  public errorMessage: string = null;
 
   constructor(private volunteerService: VolunteerService,
+              private volunteerDetailService: VolunteerDetailService,
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -32,7 +38,12 @@ export class VolunteerEditActiveComponent implements OnInit {
         } else {
           // New instance, so initialize new one.
           this.volunteerInstanceModel = new VolunteerInstanceModel();
-          this.volunteerInstanceModel.volunteerExtId = this.volunteerService.currentVolunteer.externalIdentifier;
+          this.volunteerDetailService.getVolunteer().subscribe(
+            (volunteer: VolunteerModel) => {
+              this.volunteerInstanceModel.volunteerExtId = volunteer.externalIdentifier;
+              this.volunteer = volunteer;
+            }
+          );
         }
       }
     );
@@ -45,10 +56,12 @@ export class VolunteerEditActiveComponent implements OnInit {
     if (this.dateEndActive != undefined) {
       this.volunteerInstanceModel.dateEnd = DateUtil.convertIDateToString(this.dateEndActive.date);
     }
-    console.log(this.volunteerInstanceModel);
     this.volunteerService.insertVolunteerInstance(this.volunteerInstanceModel).subscribe(
       (response: Response) => {
         console.log(response);
+      },
+      (error: HttpErrorResponse) => {
+        this.errorMessage = error.error.title;
       }
     );
   }

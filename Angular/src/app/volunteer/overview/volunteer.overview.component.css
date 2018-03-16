@@ -7,3 +7,7 @@ select {
 .glyphicon-chevron-down {
   padding-right: 0;
 }
+
+#advancedRow .form-group {
+  padding-left: 30px;
+}

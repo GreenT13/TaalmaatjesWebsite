@@ -1,11 +1,13 @@
+<app-alert-component [error]="error"></app-alert-component>
+
 <!-- Show all information in pannels -->
-<div class="panel-group">
+<div class="panel-group row">
   <!-- Left column of panels -->
   <div class="col-sm-6">
     <!-- Text Panel with information from customer. -->
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <h1 class="panel-title"><span data-toggle="collapse" data-target="#user-panel" class="glyphicon glyphicon-user"></span>Rico Apon</h1>
+        <h1 class="panel-title"><span data-toggle="collapse" data-target="#user-panel" class="glyphicon glyphicon-user"></span>{{ parseName(volunteer) }}</h1>
       </div>
       <div id="user-panel" class="panel-body collapse in collapsible-text-panel">
         <div class="fix-collapse">
@@ -118,8 +120,6 @@
         </div>
       </div>
     </div>
-
-
   </div>
 
   <!-- Right column of panels -->

@@ -1,11 +1,6 @@
-<!-- Alert (hidden because of display:none). -->
-<div *ngIf="errorMessage != null" class="alert alert-danger alert-dismissible" role="alert">
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  {{ errorMessage }}
-</div>
+<app-alert-component [error]="error"></app-alert-component>
 
 <div class="row">
-
 <!-- Show all information in pannels -->
 <form (ngSubmit)="onSubmit()">
   <!-- Left column of panels -->
