@@ -83,7 +83,7 @@ public class VolunteerMyDao extends VolunteerDao {
             super.insert(volunteerPojo);
         } catch (Exception e) {
             MyLogger.logError("Could not insert volunteer", e);
-            throw e;
+            return false;
         }
 
         return true;
