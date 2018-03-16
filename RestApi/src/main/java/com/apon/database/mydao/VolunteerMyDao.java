@@ -24,7 +24,7 @@ import java.util.List;
 
 import static org.jooq.impl.DSL.using;
 
-
+@SuppressWarnings("unused")
 public class VolunteerMyDao extends VolunteerDao {
     private final static Integer STARTING_EXT_ID = 1001;
     private ResultObject resultObject;
@@ -71,16 +71,37 @@ public class VolunteerMyDao extends VolunteerDao {
                 .fetchOne(0, String.class);
     }
 
-    public Integer getIdFromExtId(String externalIdentifier) {
-        return using(configuration())
-                .select(Volunteer.VOLUNTEER.VOLUNTEERID)
-                .from(Volunteer.VOLUNTEER)
-                .where(Volunteer.VOLUNTEER.EXTERNALIDENTIFIER.eq(externalIdentifier))
-                .fetchOne(0, Integer.class);
+    private boolean validatePojo(VolunteerPojo volunteerPojo) {
+        if (volunteerPojo.getLastname() == null) {
+            resultObject = ResultUtil.createErrorResult("VolunteerMyDao.validate.lastName");
+            return false;
+        }
+
+        if (volunteerPojo.getDateofbirth() == null) {
+            resultObject = ResultUtil.createErrorResult("VolunteerMyDao.validate.dateOfBirth");
+            return false;
+        }
+
+        if (volunteerPojo.getGender() == null) {
+            resultObject = ResultUtil.createErrorResult("VolunteerMyDao.validate.gender");
+            return false;
+        }
+
+        if (volunteerPojo.getIsclassassistant() == null) {
+            resultObject = ResultUtil.createErrorResult("VolunteerMyDao.validate.isClassAssistant");
+            return false;
+        }
+
+        if (volunteerPojo.getIstaalmaatje() == null) {
+            resultObject = ResultUtil.createErrorResult("VolunteerMyDao.validate.isTaalmaatje");
+            return false;
+        }
+
+        return true;
     }
 
     public boolean insertPojo(VolunteerPojo volunteerPojo) {
-        if (!validateVolunteer(volunteerPojo)) {
+        if (!validatePojo(volunteerPojo)) {
             // Result object is already set.
             return false;
         }
@@ -101,29 +122,15 @@ public class VolunteerMyDao extends VolunteerDao {
     }
 
     public boolean updatePojo(VolunteerPojo volunteerPojo) {
-        if (!validateVolunteer(volunteerPojo)) {
+        if (!validatePojo(volunteerPojo)) {
             // Result object is already set.
             return false;
         }
 
         try {
-            super.insert(volunteerPojo);
+            super.update(volunteerPojo);
         } catch (Exception e) {
             resultObject = ResultUtil.createErrorResult("VolunteerMyDao.update.error", e);
-        }
-
-        return true;
-    }
-
-    private boolean validateVolunteer(VolunteerPojo volunteerPojo) {
-        if (volunteerPojo.getLastname() == null) {
-            resultObject = ResultUtil.createErrorResult("VolunteerMyDao.validate.lastName");
-            return false;
-        }
-
-        if (volunteerPojo.getDateofbirth() == null) {
-            resultObject = ResultUtil.createErrorResult("VolunteerMyDao.validate.dateOfBirth");
-            return false;
         }
 
         return true;
@@ -132,14 +139,15 @@ public class VolunteerMyDao extends VolunteerDao {
     /**
      * Count how many volunteers there are in the database with a VolunteerInstance.dateStart
      * between minimumDate and maximumDate, with age between certain range. Needs to follow training within date range.
-     * @param minimumDate
-     * @param maximumDate
-     * @param minAge
-     * @param maxAge
-     * @return
+     * @param minimumDate Minimum start date.
+     * @param maximumDate Maximum start date.
+     * @param minAge Minimum age.
+     * @param maxAge Maximum age.
+     * @param gender Gender.
+     * @return Integer value of volunteers that satisfy the criteria
      */
     public int countNew(@Nonnull Date minimumDate, @Nonnull Date maximumDate,
-                        @Nonnull int minAge, @Nonnull int maxAge, @Nonnull String gender) {
+                        int minAge, int maxAge, @Nonnull String gender) {
         SelectConditionStep<Record1<Integer>> query = using(configuration())
                 .selectCount()
                 .from(Volunteer.VOLUNTEER)
@@ -168,12 +176,15 @@ public class VolunteerMyDao extends VolunteerDao {
      * A volunteer is considered active on date X if there is some volunteerInstance for which holds:
      * 1. dateStart <= x
      * 2. dateEnd is null or x <= dateEnd
-     * @param minimumDate
-     * @param maximumDate
-     * @return
+     * @param minimumDate Minimum start date.
+     * @param maximumDate Maximum start date.
+     * @param minAge Minimum age.
+     * @param maxAge Maximum age.
+     * @param gender Gender.
+     * @return Integer value of volunteers that satisfy the criteria
      */
     public int countActive(@Nonnull Date minimumDate, @Nonnull Date maximumDate,
-                           @Nonnull int minAge, @Nonnull int maxAge, @Nonnull String gender) {
+                           int minAge, int maxAge, @Nonnull String gender) {
         SelectConditionStep<Record1<Integer>> query = using(configuration())
                 // Since we use a join on instance, we must count distinct number of ID's.
                 .select(Volunteer.VOLUNTEER.VOLUNTEERID.countDistinct())

@@ -67,7 +67,7 @@ public class VolunteerService implements IService {
         volunteerMapper.setMatchList(volunteermatchPojos, new StudentMyDao(context));
 
         // Retrieve the tasks.
-        List<TaskPojo> taskPojos = taskMyDao.getTasksForVolunteer(volunteerPojo.getVolunteerid());
+        List<TaskPojo> taskPojos = taskMyDao.getTasksForVolunteer(volunteerExtId);
         if (taskPojos == null) {
             throw new FunctionalException("VolunteerService.notFound.task");
         }

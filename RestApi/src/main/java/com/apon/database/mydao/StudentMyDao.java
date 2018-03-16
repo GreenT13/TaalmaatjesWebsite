@@ -8,8 +8,12 @@ import com.apon.database.generated.tables.pojos.StudentPojo;
 import com.apon.database.generated.tables.records.StudentRecord;
 import com.apon.database.generated.tables.records.VolunteermatchRecord;
 import com.apon.database.jooq.DbContext;
-import com.apon.log.MyLogger;
-import org.jooq.*;
+import com.apon.exceptionhandler.ResultObject;
+import com.apon.util.ResultUtil;
+import org.jooq.Record1;
+import org.jooq.Select;
+import org.jooq.SelectConditionStep;
+import org.jooq.SelectWhereStep;
 import org.jooq.impl.DSL;
 import org.jooq.util.mysql.MySQLDataType;
 
@@ -19,16 +23,17 @@ import java.util.List;
 
 import static org.jooq.impl.DSL.using;
 
+@SuppressWarnings("unused")
 public class StudentMyDao extends StudentDao {
     private final static Integer STARTING_EXT_ID = 5001;
+    private ResultObject resultObject;
 
     public StudentMyDao(DbContext context) {
         super(context.getConfiguration());
     }
 
-    @Deprecated
-    public StudentMyDao(Configuration configuration) {
-        super(configuration);
+    public ResultObject getResultObject() {
+        return resultObject;
     }
 
     @SuppressWarnings("Duplicates")
@@ -65,33 +70,51 @@ public class StudentMyDao extends StudentDao {
                 .fetchOne(0, String.class);
     }
 
-    public Integer getIdFromExtId(String externalIdentifier) {
-        return using(configuration())
-                .select(Student.STUDENT.STUDENTID)
-                .from(Student.STUDENT)
-                .where(Student.STUDENT.EXTERNALIDENTIFIER.eq(externalIdentifier))
-                .fetchOne(0, Integer.class);
-    }
+    private boolean validatePojo(StudentPojo studentPojo) {
+        if (studentPojo.getGender() == null) {
+            resultObject = ResultUtil.createErrorResult("StudentMyDao.validate.gender");
+            return false;
+        }
 
-    public String getExtIdFromid(int studentId) {
-        return using(configuration())
-                .select(Student.STUDENT.EXTERNALIDENTIFIER)
-                .from(Student.STUDENT)
-                .where(Student.STUDENT.STUDENTID.eq(studentId))
-                .fetchOne(0, String.class);
+        if (studentPojo.getGender() == null) {
+            resultObject = ResultUtil.createErrorResult("StudentMyDao.validate.dateOfBirth");
+            return false;
+        }
+
+        return true;
     }
 
     public boolean insertPojo(StudentPojo studentPojo) {
+        if (!validatePojo(studentPojo)) {
+            // Result object is already set.
+            return false;
+        }
+
         if (!generateIds(studentPojo)) {
-            // Some kind of logError message?
+            resultObject = ResultUtil.createErrorResult("StudentMyDao.generateId.error");
             return false;
         }
 
         try {
             super.insert(studentPojo);
         } catch (Exception e) {
-            MyLogger.logError("Could not insert student", e);
+            resultObject = ResultUtil.createErrorResult("StudentMyDao.insert.error", e);
             return false;
+        }
+
+        return true;
+    }
+
+    public boolean updatePojo(StudentPojo studentPojo) {
+        if (!validatePojo(studentPojo)) {
+            // Result object is already set.
+            return false;
+        }
+
+        try {
+            super.update(studentPojo);
+        } catch (Exception e) {
+            resultObject = ResultUtil.createErrorResult("StudentMyDao.update.error", e);
         }
 
         return true;
@@ -101,10 +124,13 @@ public class StudentMyDao extends StudentDao {
      * Count how many students have their first dateStart from a match between minimumDate and maximumDate.
      * @param minimumDate Minimum start date.
      * @param maximumDate Maximum start date.
+     * @param minAge Minimum age.
+     * @param maxAge Maximum age.
+     * @param gender Gender.
      * @return Integer value of students that satisfy the criteria.
      */
     public int countNew(@Nonnull Date minimumDate, @Nonnull Date maximumDate,
-                        @Nonnull int minAge, @Nonnull int maxAge, @Nonnull String gender) {
+                        int minAge, int maxAge, @Nonnull String gender) {
         SelectConditionStep<Record1<Integer>> query =  using(configuration())
                 .selectCount()
                 .from(Student.STUDENT)
@@ -129,12 +155,15 @@ public class StudentMyDao extends StudentDao {
      * A student is considered active on date X if there is some volunteerMatch for which holds:
      * 1. dateStart <= x
      * 2. dateEnd is null or x <= dateEnd
-     * @param minimumDate
-     * @param maximumDate
-     * @return
+     * @param minimumDate Minimum start date.
+     * @param maximumDate Maximum start date.
+     * @param minAge Minimum age.
+     * @param maxAge Maximum age.
+     * @param gender Gender.
+     * @return Integer value of students that satisfy the criteria.
      */
     public int countActive(@Nonnull Date minimumDate, @Nonnull Date maximumDate,
-                           @Nonnull int minAge, @Nonnull int maxAge, @Nonnull String gender) {
+                           int minAge, int maxAge, @Nonnull String gender) {
         SelectConditionStep<Record1<Integer>> query = using(configuration())
                 // Since we use a join on instance, we must count distinct number of ID's.
                 .select(Student.STUDENT.STUDENTID.countDistinct())
@@ -172,9 +201,9 @@ public class StudentMyDao extends StudentDao {
 
     /**
      * Search for students based on non-null inputs.
-     * @param input
-     * @param hasMatch
-     * @return
+     * @param input Search for input in Student.firstName, Student.insertion and Student.lastName.
+     * @param hasMatch Whether the student has a VolunteerMatch today.
+     * @return List&lt;StudentPojo&gt;
      */
     public List<StudentPojo> advancedSearch(String input, Boolean hasMatch) {
         SelectWhereStep<StudentRecord> query = using(configuration()).selectFrom(Student.STUDENT);

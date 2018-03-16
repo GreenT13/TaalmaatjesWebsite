@@ -2,24 +2,36 @@ package com.apon.database.mydao;
 
 import com.apon.database.generated.tables.Task;
 import com.apon.database.generated.tables.Volunteer;
+import com.apon.database.generated.tables.Volunteerinstance;
 import com.apon.database.generated.tables.daos.TaskDao;
 import com.apon.database.generated.tables.pojos.TaskPojo;
+import com.apon.database.generated.tables.pojos.VolunteerPojo;
 import com.apon.database.generated.tables.records.TaskRecord;
 import com.apon.database.jooq.DbContext;
+import com.apon.exceptionhandler.ResultObject;
 import com.apon.log.MyLogger;
+import com.apon.util.ResultUtil;
 import org.jooq.SelectWhereStep;
 import org.jooq.util.mysql.MySQLDataType;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static org.jooq.impl.DSL.select;
 import static org.jooq.impl.DSL.using;
 
+@SuppressWarnings("unused")
 public class TaskMyDao extends TaskDao {
     private final static Integer STARTING_EXT_ID = 8001;
+    private ResultObject resultObject;
 
     public TaskMyDao(DbContext context) {
         super(context.getConfiguration());
+    }
+
+    public ResultObject getResultObject() {
+        return resultObject;
     }
 
     @SuppressWarnings("Duplicates")
@@ -56,36 +68,39 @@ public class TaskMyDao extends TaskDao {
                 .fetchOne(0, String.class);
     }
 
-    public Integer getIdFromExtId(String externalIdentifier) {
-        return using(configuration())
-                .select(Task.TASK.TASKID)
-                .from(Task.TASK)
-                .where(Task.TASK.EXTERNALIDENTIFIER.eq(externalIdentifier))
-                .fetchOne(0, Integer.class);
-    }
-
-    private boolean fillDefaultValues(TaskPojo taskPojo) {
+    private boolean validatePojo(TaskPojo taskPojo) {
         if (taskPojo.getIsfinished() == null) {
             taskPojo.setIsfinished(false);
+        }
+
+        if (taskPojo.getTitle() == null) {
+            resultObject = ResultUtil.createErrorResult("TaskMyDao.validate.title");
+            return false;
+        }
+
+        if (taskPojo.getVolunteerid() == null) {
+            resultObject = ResultUtil.createErrorResult("TaskMyDao.validate.volunteer");
+            return false;
         }
 
         return true;
     }
 
     public boolean insertPojo(TaskPojo taskPojo) {
-        if (!generateIds(taskPojo)) {
-            // Some kind of logError message?
+        if (!validatePojo(taskPojo)) {
+            // Result object is already set.
             return false;
         }
 
-        if (!fillDefaultValues(taskPojo)) {
+        if (!generateIds(taskPojo)) {
+            resultObject = ResultUtil.createErrorResult("TaskMyDao.generateId.error");
             return false;
         }
 
         try {
             super.insert(taskPojo);
         } catch (Exception e) {
-            MyLogger.logError("Could not insert task", e);
+            resultObject = ResultUtil.createErrorResult("TaskMyDao.insert.error", e);
             return false;
         }
 
@@ -93,20 +108,42 @@ public class TaskMyDao extends TaskDao {
     }
 
     public boolean updatePojo(TaskPojo taskPojo) {
-        if (!fillDefaultValues(taskPojo)) {
+        if (!validatePojo(taskPojo)) {
+            // Result object is already set.
             return false;
         }
 
         try {
             super.update(taskPojo);
         } catch (Exception e) {
-            MyLogger.logError("Could not update task", e);
-            return false;
+            resultObject = ResultUtil.createErrorResult("TaskMyDao.update.error", e);
         }
 
         return true;
     }
 
+    /**
+     * Get all tasks for a volunteer, ordered by dateToBeFinished (asc).
+     * @param volunteerExtId The extId from the volunteer.
+     * @return List&lt;TaskPojo&gt;
+     */
+    public List<TaskPojo> getTasksForVolunteer(String volunteerExtId) {
+        return  using(configuration())
+                .select(Task.TASK.fields())
+                .from(Volunteer.VOLUNTEER)
+                .join(Task.TASK).on(Task.TASK.VOLUNTEERID.eq(Volunteer.VOLUNTEER.VOLUNTEERID))
+                .where(Volunteer.VOLUNTEER.EXTERNALIDENTIFIER.eq(volunteerExtId))
+                .orderBy(Task.TASK.DATETOBEFINISHED.asc())
+                .fetchInto(Task.TASK).map(mapper());
+    }
+
+    /**
+     * Search tasks based on given input.
+     * @param input Searched for in Task.description and Task.title.
+     * @param isFinished Must equal Task.isFinished (if not null).
+     * @param volunteerExtId Task must belong to this volunteer.
+     * @return List&lt;TaskPojo&gt;
+     */
     public List<TaskPojo> advancedSearch(String input, Boolean isFinished, String volunteerExtId) {
         SelectWhereStep<TaskRecord> query = using(configuration()).selectFrom(Task.TASK);
 
@@ -129,28 +166,21 @@ public class TaskMyDao extends TaskDao {
         return query.orderBy(Task.TASK.DATETOBEFINISHED.asc()).limit(50).fetch().map(mapper());
     }
 
-    public List<TaskPojo> getTasksForVolunteer(int volunteerId) {
-        return using(configuration())
-                .selectFrom(Task.TASK)
-                .where(Task.TASK.VOLUNTEERID.eq(volunteerId))
-                .fetch()
-                .map(mapper());
-    }
-
-    public void deleteTask(int taskId) {
-        using(configuration())
-                .deleteFrom(Task.TASK)
-                .where(Task.TASK.TASKID.eq(taskId))
-                .returning()
-                .fetch();
-    }
-
-    public void finishTask(int taskId, boolean isFinished) {
-        using(configuration())
-                .update(Task.TASK)
-                .set(Task.TASK.ISFINISHED, isFinished)
-                .where(Task.TASK.TASKID.eq(taskId))
-                .returning()
-                .fetch();
-    }
+//    If I ever want to use the functions below, I should return how many rows it deleted / updated. This is really useful for finding bugs.
+//    public void deleteTask(int taskId) {
+//        using(configuration())
+//                .deleteFrom(Task.TASK)
+//                .where(Task.TASK.TASKID.eq(taskId))
+//                .returning()
+//                .fetch();
+//    }
+//
+//    public void finishTask(int taskId, boolean isFinished) {
+//        using(configuration())
+//                .update(Task.TASK)
+//                .set(Task.TASK.ISFINISHED, isFinished)
+//                .where(Task.TASK.TASKID.eq(taskId))
+//                .returning()
+//                .fetch();
+//    }
 }

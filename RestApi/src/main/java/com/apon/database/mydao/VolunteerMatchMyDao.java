@@ -1,12 +1,14 @@
 package com.apon.database.mydao;
 
+import com.apon.database.generated.tables.Student;
 import com.apon.database.generated.tables.Volunteer;
 import com.apon.database.generated.tables.Volunteermatch;
 import com.apon.database.generated.tables.daos.VolunteermatchDao;
 import com.apon.database.generated.tables.pojos.VolunteermatchPojo;
 import com.apon.database.generated.tables.records.VolunteermatchRecord;
 import com.apon.database.jooq.DbContext;
-import org.jooq.Configuration;
+import com.apon.exceptionhandler.ResultObject;
+import com.apon.util.ResultUtil;
 import org.jooq.Record;
 import org.jooq.SelectConditionStep;
 import org.jooq.impl.DSL;
@@ -16,15 +18,16 @@ import java.util.List;
 
 import static org.jooq.impl.DSL.using;
 
+@SuppressWarnings("unused")
 public class VolunteerMatchMyDao extends VolunteermatchDao {
+    private ResultObject resultObject;
 
     public VolunteerMatchMyDao(DbContext context) {
         super(context.getConfiguration());
     }
 
-    @Deprecated
-    public VolunteerMatchMyDao(Configuration configuration) {
-        super(configuration);
+    public ResultObject getResultObject() {
+        return resultObject;
     }
 
     @SuppressWarnings("Duplicates")
@@ -69,21 +72,61 @@ public class VolunteerMatchMyDao extends VolunteermatchDao {
                 .fetchOne(0, String.class);
     }
 
-    public boolean insertPojo(VolunteermatchPojo volunteermatchPojo) {
-        if (!generateIds(volunteermatchPojo)) {
-            // Some kind of logError message?
+    private boolean validatePojo(VolunteermatchPojo volunteermatchPojo) {
+        if (volunteermatchPojo.getVolunteerid() == null) {
+            resultObject = ResultUtil.createErrorResult("VolunteerMatchMyDao.validate.volunteer");
             return false;
         }
 
-        super.insert(volunteermatchPojo);
+        if (volunteermatchPojo.getStudentid() == null) {
+            resultObject = ResultUtil.createErrorResult("VolunteerMatchMyDao.validate.student");
+            return false;
+        }
+
+        if (volunteermatchPojo.getDatestart() == null) {
+            resultObject = ResultUtil.createErrorResult("VolunteerMatchMyDao.validate.dateStart");
+            return false;
+        }
 
         return true;
     }
 
+    public boolean insertPojo(VolunteermatchPojo volunteermatchPojo) {
+        if (!validatePojo(volunteermatchPojo)) {
+            // Result object is already set.
+            return false;
+        }
+
+        if (!generateIds(volunteermatchPojo)) {
+            resultObject = ResultUtil.createErrorResult("VolunteerMatchMyDao.generateId.error");
+            return false;
+        }
+
+        try {
+            super.insert(volunteermatchPojo);
+        } catch (Exception e) {
+            resultObject = ResultUtil.createErrorResult("VolunteerMatchMyDao.insert.error", e);
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Calls {@link #getMatchForVolunteer(String, Boolean) getMatchForVolunteer} with sortAscending=null.
+     * @param volunteerExtId The extId from the volunteer.
+     * @return List&lt;VolunteermatchPojo&gt;
+     */
     public List<VolunteermatchPojo> getMatchForVolunteer(String volunteerExtId) {
         return getMatchForVolunteer(volunteerExtId, null);
     }
 
+    /**
+     * Get all matches for a volunteer.
+     * @param volunteerExtId The extId from the volunteer.
+     * @param sortAscending Sort by dateStart. If null, it will not sort.
+     * @return List&lt;VolunteermatchPojo&gt;
+     */
     public List<VolunteermatchPojo> getMatchForVolunteer(String volunteerExtId, Boolean sortAscending) {
         SelectConditionStep<Record> query = using(configuration())
                 .select(Volunteermatch.VOLUNTEERMATCH.fields())
@@ -100,27 +143,44 @@ public class VolunteerMatchMyDao extends VolunteermatchDao {
         return query.fetchInto(Volunteermatch.VOLUNTEERMATCH).map(mapper());
     }
 
-    public List<VolunteermatchPojo> getMatchForStudent(int studentId, boolean sortAscending) {
-        SelectConditionStep<VolunteermatchRecord> query = using(configuration())
-                .selectFrom(Volunteermatch.VOLUNTEERMATCH)
-                .where(Volunteermatch.VOLUNTEERMATCH.STUDENTID.eq(studentId));
+    /**
+     * Get al matches for a student.
+     * @param studentExtId The extid from the student.
+     * @param sortAscending Sort by dateStart. If null, it will not sort.
+     * @return List&lt;VolunteermatchPojo&gt;
+     */
+    public List<VolunteermatchPojo> getMatchForStudent(String studentExtId, Boolean sortAscending) {
+        SelectConditionStep<Record> query = using(configuration())
+                .select(Volunteermatch.VOLUNTEERMATCH.fields())
+                .from(Volunteermatch.VOLUNTEERMATCH)
+                .join(Student.STUDENT).on(Student.STUDENT.STUDENTID.eq(Volunteermatch.VOLUNTEERMATCH.STUDENTID))
+                .where(Student.STUDENT.EXTERNALIDENTIFIER.eq(studentExtId));
 
-        if (sortAscending) {
+        if (sortAscending != null && sortAscending) {
             query.orderBy(Volunteermatch.VOLUNTEERMATCH.DATESTART.asc());
-        } else {
+        } else if (sortAscending != null) {
             query.orderBy(Volunteermatch.VOLUNTEERMATCH.DATESTART.desc());
         }
 
-        return query.fetch().map(mapper());
+        return query.fetchInto(Volunteermatch.VOLUNTEERMATCH).map(mapper());
     }
 
-    public List<VolunteermatchPojo> getMatchForVolunteerAndStudent(int volunteerId, int studentId) {
-        SelectConditionStep<VolunteermatchRecord> query = using(configuration())
-                .selectFrom(Volunteermatch.VOLUNTEERMATCH)
-                .where(Volunteermatch.VOLUNTEERMATCH.STUDENTID.eq(studentId))
-                .and(Volunteermatch.VOLUNTEERMATCH.VOLUNTEERID.eq(volunteerId));
+    /**
+     * Retrieve all matches between a certain volunteer and student.
+     * @param volunteerExtId The extId from the volunteer.
+     * @param studentExtId The extId from the student.
+     * @return List&lt;VolunteermatchPojo&gt;
+     */
+    public List<VolunteermatchPojo> getMatchForVolunteerAndStudent(String volunteerExtId, String studentExtId) {
+        SelectConditionStep<Record> query = using(configuration())
+                .select(Volunteermatch.VOLUNTEERMATCH.fields())
+                .from(Volunteermatch.VOLUNTEERMATCH)
+                .join(Volunteer.VOLUNTEER).on(Volunteer.VOLUNTEER.VOLUNTEERID.eq(Volunteermatch.VOLUNTEERMATCH.VOLUNTEERID))
+                .join(Student.STUDENT).on(Student.STUDENT.STUDENTID.eq(Volunteermatch.VOLUNTEERMATCH.STUDENTID))
+                .where(Volunteer.VOLUNTEER.EXTERNALIDENTIFIER.eq(volunteerExtId))
+                .and(Student.STUDENT.EXTERNALIDENTIFIER.eq(studentExtId));
 
-        return query.fetch().map(mapper());
+        return query.fetchInto(Volunteermatch.VOLUNTEERMATCH).map(mapper());
     }
 
     /**

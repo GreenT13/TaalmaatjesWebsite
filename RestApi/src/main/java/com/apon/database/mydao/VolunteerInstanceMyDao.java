@@ -3,10 +3,10 @@ package com.apon.database.mydao;
 import com.apon.database.generated.tables.Volunteer;
 import com.apon.database.generated.tables.Volunteerinstance;
 import com.apon.database.generated.tables.daos.VolunteerinstanceDao;
-import com.apon.database.generated.tables.pojos.VolunteerPojo;
 import com.apon.database.generated.tables.pojos.VolunteerinstancePojo;
 import com.apon.database.jooq.DbContext;
 import com.apon.exceptionhandler.ResultObject;
+import com.apon.util.DateTimeUtil;
 import com.apon.util.ResultUtil;
 import org.jooq.Record;
 import org.jooq.SelectConditionStep;
@@ -14,10 +14,10 @@ import org.jooq.impl.DSL;
 import org.jooq.util.mysql.MySQLDataType;
 
 import java.util.List;
-import java.util.Map;
 
 import static org.jooq.impl.DSL.using;
 
+@SuppressWarnings("unused")
 public class VolunteerInstanceMyDao extends VolunteerinstanceDao {
     private ResultObject resultObject;
 
@@ -70,7 +70,31 @@ public class VolunteerInstanceMyDao extends VolunteerinstanceDao {
                 .fetchOne(0, String.class);
     }
 
+    private boolean validatePojo(VolunteerinstancePojo volunteerinstancePojo) {
+        if (volunteerinstancePojo.getVolunteerid() == null) {
+            resultObject = ResultUtil.createErrorResult("VolunteerInstanceMyDao.validate.volunteer");
+            return false;
+        }
+
+        if (volunteerinstancePojo.getDatestart() == null) {
+            resultObject = ResultUtil.createErrorResult("VolunteerInstanceMyDao.validate.dateStart");
+            return false;
+        }
+
+        if (DateTimeUtil.nrOfDaysInBetween(volunteerinstancePojo.getDatestart(), volunteerinstancePojo.getDateend()) < 0) {
+            resultObject = ResultUtil.createErrorResult("VolunteerInstanceMyDao.validate.dateEndBeforeDateStart");
+            return false;
+        }
+
+        return true;
+    }
+
     public boolean insertPojo(VolunteerinstancePojo volunteerinstancePojo) {
+        if (!validatePojo(volunteerinstancePojo)) {
+            // Result object is already set.
+            return false;
+        }
+
         if (!generateIds(volunteerinstancePojo)) {
             resultObject = ResultUtil.createErrorResult("VolunteerInstanceMyDao.generateId.error");
             return false;
@@ -86,10 +110,21 @@ public class VolunteerInstanceMyDao extends VolunteerinstanceDao {
         return true;
     }
 
+    /**
+     * Calls {@link #getInstanceForVolunteer(String, Boolean) getInstanceForVolunteer} with sortAscending=null.
+     * @param volunteerExtId The extId from the volunteer.
+     * @return List&lt;VolunteerinstancePojo&gt;
+     */
     public List<VolunteerinstancePojo> getInstanceForVolunteer(String volunteerExtId) {
         return getInstanceForVolunteer(volunteerExtId, null);
     }
 
+    /**
+     * Get all instances for a volunteer.
+     * @param volunteerExtId The extId from the volunteer.
+     * @param sortAscending Sort by dateStart. If null, it will not sort.
+     * @return List&lt;VolunteerinstancePojo&gt;
+     */
     public List<VolunteerinstancePojo> getInstanceForVolunteer(String volunteerExtId, Boolean sortAscending) {
         SelectConditionStep<Record> query = using(configuration())
                 .select(Volunteerinstance.VOLUNTEERINSTANCE.fields())
@@ -106,20 +141,27 @@ public class VolunteerInstanceMyDao extends VolunteerinstanceDao {
         return query.fetchInto(Volunteerinstance.VOLUNTEERINSTANCE).map(mapper());
     }
 
+    /**
+     * Retrieve a single VolunteerInstance based on extId's.
+     * @param volunteerExtId The extId from the volunteer.
+     * @param volunteerInstanceExtId The extId from the volunteerInstance.
+     * @return VolunteerinstancePojo
+     */
     public VolunteerinstancePojo fetchByExtIds(String volunteerExtId, String volunteerInstanceExtId) {
-        Map<VolunteerinstancePojo, List<VolunteerPojo>> result =  using(configuration())
+        List<VolunteerinstancePojo> volunteerinstancePojos = using(configuration())
                 .select(Volunteerinstance.VOLUNTEERINSTANCE.fields())
                 .from(Volunteerinstance.VOLUNTEERINSTANCE)
                 .join(Volunteer.VOLUNTEER).on(Volunteer.VOLUNTEER.VOLUNTEERID.eq(Volunteerinstance.VOLUNTEERINSTANCE.VOLUNTEERID))
                 .where(Volunteer.VOLUNTEER.EXTERNALIDENTIFIER.eq(volunteerExtId))
                 .and(Volunteerinstance.VOLUNTEERINSTANCE.EXTERNALIDENTIFIER.eq(volunteerInstanceExtId))
-                .fetchGroups(
-                        r -> r.into(Volunteerinstance.VOLUNTEERINSTANCE).into(VolunteerinstancePojo.class),
-                        r -> r.into(Volunteer.VOLUNTEER).into(VolunteerPojo.class)
-                );
+                .fetchInto(Volunteerinstance.VOLUNTEERINSTANCE).map(mapper());
 
-        // We know there can only be one result.
-        return result.entrySet().iterator().next().getKey();
+        // We know there must be one. We do this to prevent IndexOutOfBoundsExceptions.
+        if (volunteerinstancePojos.size() != 1) {
+            return null;
+        }
+
+        return volunteerinstancePojos.get(0);
     }
 
     /**

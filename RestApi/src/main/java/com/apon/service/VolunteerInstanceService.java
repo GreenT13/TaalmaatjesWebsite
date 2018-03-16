@@ -1,5 +1,6 @@
 package com.apon.service;
 
+import com.apon.database.generated.tables.pojos.VolunteerPojo;
 import com.apon.database.generated.tables.pojos.VolunteerinstancePojo;
 import com.apon.database.generated.tables.pojos.VolunteermatchPojo;
 import com.apon.database.jooq.DbContext;
@@ -8,6 +9,7 @@ import com.apon.database.mydao.VolunteerMatchMyDao;
 import com.apon.database.mydao.VolunteerMyDao;
 import com.apon.exceptionhandler.FunctionalException;
 import com.apon.guice.InjectContext;
+import com.apon.service.valueobject.StringValueObject;
 import com.apon.service.valueobject.VolunteerInstanceValueObject;
 import com.apon.service.valueobject.mapper.VolunteerInstanceMapper;
 import com.apon.util.DateTimeUtil;
@@ -24,12 +26,17 @@ import java.util.List;
 public class VolunteerInstanceService implements IService {
     private DbContext context;
 
+    /**
+     * Retrieves a volunteerInstance.
+     * @param volunteerExtId The extId from the volunteer.
+     * @param volunteerInstanceExtId The extId from the instance.
+     * @return VolunteerInstanceValueObject
+     */
     @GET
     @Path("{volunteerInstanceExtId}")
     @InjectContext
-    public VolunteerInstanceValueObject getVolunteerInstance(@PathParam("volunteerExtId") String volunteerExtId,
-                                                             @PathParam("volunteerInstanceExtId") String volunteerInstanceExtId)
-            throws Exception {
+    public VolunteerInstanceValueObject get(@PathParam("volunteerExtId") String volunteerExtId,
+                                            @PathParam("volunteerInstanceExtId") String volunteerInstanceExtId) throws Exception {
         // Mapper and Dao variables.
         VolunteerInstanceMyDao volunteerInstanceMyDao = new VolunteerInstanceMyDao(context);
         VolunteerInstanceMapper volunteerInstanceMapper = new VolunteerInstanceMapper();
@@ -37,10 +44,8 @@ public class VolunteerInstanceService implements IService {
         // Retrieve volunteerInstanceId.
         VolunteerinstancePojo volunteerinstancePojo = volunteerInstanceMyDao.fetchByExtIds(volunteerExtId, volunteerInstanceExtId);
         if (volunteerinstancePojo == null) {
-            throw new FunctionalException("NotFound.entity", "Vrijwilliger");
+            throw new FunctionalException("VolunteerInstanceService.notFound.instance");
         }
-
-        // Retrieve the instances and put them on the volunteer.
         volunteerInstanceMapper.setVolunteerinstancePojo(volunteerinstancePojo);
 
         // volunteerExtId is not retrieved, but it is a path param so we just set it manually.
@@ -49,40 +54,58 @@ public class VolunteerInstanceService implements IService {
         return volunteerInstanceMapper.getVolunteerInstanceValueObject();
     }
 
+    /**
+     * Add a VolunteerInstance in the database.
+     * @param volunteerExtId The extId from the volunteer.
+     * @param volunteerInstanceValueObject The instance object.
+     * @return The extId from the instance that is inserted.
+     */
     @PUT
     @InjectContext
-    public void insertVolunteerInstance(@PathParam("volunteerExtId") String volunteerExtId,
-                                                        VolunteerInstanceValueObject volunteerInstanceValueObject) throws Exception {
+    public StringValueObject insert(@PathParam("volunteerExtId") String volunteerExtId,
+                                    VolunteerInstanceValueObject volunteerInstanceValueObject) throws Exception {
         // Mapper and Dao variables.
         VolunteerInstanceMapper volunteerInstanceMapper = new VolunteerInstanceMapper();
         volunteerInstanceMapper.setVolunteerInstanceValueObject(volunteerInstanceValueObject);
 
         // Get volunteerId.
         VolunteerMyDao volunteerMyDao = new VolunteerMyDao(context);
-        Integer volunteerId = volunteerMyDao.getIdFromExtId(volunteerExtId);
-        if (volunteerId == null) {
-            throw new Exception("VolunteerInstanceAPI.error.noVolunteerExtIdFound");
+        VolunteerPojo volunteerPojo = volunteerMyDao.fetchOneByExternalidentifier(volunteerExtId);
+        if (volunteerPojo == null) {
+            throw new FunctionalException("VolunteerInstanceService.notFound.volunteer");
         }
 
         VolunteerinstancePojo volunteerinstancePojo = volunteerInstanceMapper.getVolunteerinstancePojo();
-        volunteerinstancePojo.setVolunteerid(volunteerId);
+        volunteerinstancePojo.setVolunteerid(volunteerPojo.getVolunteerid());
 
         // Handle the complete adding / merging in another function.
         isVolunteerInstanceValidAndAdd(volunteerExtId, volunteerinstancePojo, false);
 
+        // Commit the changes.
         context.commit();
+
+        // Return the extId.
+        return new StringValueObject(volunteerInstanceMapper.getVolunteerinstancePojo().getExternalidentifier());
     }
 
+    /**
+     * Update a VolunteerInstance in the database with a certain extId.
+     * Note that you overwrite ALL fields on the instance. You have to fill every parameter.
+     * @param volunteerExtId The extId to identify the volunteer.
+     * @param volunteerInstanceExtId The extId to identify the instance.
+     * @param volunteerInstanceValueObject The instance object.
+     */
     @POST
     @Path("{volunteerInstanceExtId}")
     @InjectContext
-    public void updateVolunteerInstance(@PathParam("volunteerExtId") String volunteerExtId,
-                                @PathParam("volunteerInstanceExtId") String volunteerInstanceExtId,
-                                VolunteerInstanceValueObject volunteerInstanceValueObject) throws Exception {
+    public void update(@PathParam("volunteerExtId") String volunteerExtId,
+                       @PathParam("volunteerInstanceExtId") String volunteerInstanceExtId,
+                       VolunteerInstanceValueObject volunteerInstanceValueObject) throws Exception {
+        // Retrieve the instance.
         VolunteerInstanceMyDao volunteerInstanceMyDao = new VolunteerInstanceMyDao(context);
         VolunteerinstancePojo volunteerinstancePojo = volunteerInstanceMyDao.fetchByExtIds(volunteerExtId, volunteerInstanceExtId);
         if (volunteerinstancePojo == null) {
-            throw new FunctionalException("NotFound.entity", "Activiteit");
+            throw new FunctionalException("VolunteerInstanceService.notFound.instance");
         }
 
         VolunteerInstanceMapper volunteerInstanceMapper = new VolunteerInstanceMapper();
@@ -94,17 +117,17 @@ public class VolunteerInstanceService implements IService {
         // Handle the complete adding / merging in another function.
         isVolunteerInstanceValidAndAdd(volunteerExtId, volunteerInstanceMapper.getVolunteerinstancePojo(), true);
 
+        // Commit the changes.
         context.commit();
     }
 
     /**
      * Check if the line can be added to the database. Merge the line if needed. Returns true if added (possibly merged)
      * and return false if some verification failed.
-     * @param volunteerExtId
-     * @param volunteerinstancePojoNew
-     * @param isUpdate
+     * @param volunteerExtId The extId from the volunteer.
+     * @param volunteerinstancePojoNew The pojo we are going to insert into the database.
+     * @param isUpdate Whether we call this function to update the pojo or insert the pojo.
      * @return boolean
-     * @throws Exception
      */
     private boolean isVolunteerInstanceValidAndAdd(String volunteerExtId, VolunteerinstancePojo volunteerinstancePojoNew, boolean isUpdate)
         throws Exception {
@@ -140,7 +163,7 @@ public class VolunteerInstanceService implements IService {
                 // 4. none of the above => we do nothing, we can ignore this line.
 
                 if (DateTimeUtil.isBetweenWithoutEndpoints(volunteerinstancePojo.getDatestart(), dateStart, dateEnd)) {
-                    throw new FunctionalException("VolunteerInstanceAPI.error.overlap");
+                    throw new FunctionalException("VolunteerInstanceService.error.overlap");
                 }
 
                 // Merge before
@@ -161,12 +184,12 @@ public class VolunteerInstanceService implements IService {
 
             if (DateTimeUtil.isBetweenWithoutEndpoints(dateStart,
                     volunteerinstancePojo.getDatestart(), volunteerinstancePojo.getDateend())) {
-                throw new FunctionalException("VolunteerInstanceAPI.error.overlap");
+                throw new FunctionalException("VolunteerInstanceService.error.overlap");
             }
 
             if (DateTimeUtil.isBetweenWithoutEndpoints(dateEnd,
                     volunteerinstancePojo.getDatestart(), volunteerinstancePojo.getDateend())) {
-                throw new FunctionalException("VolunteerInstanceAPI.error.overlap");
+                throw new FunctionalException("VolunteerInstanceService.error.overlap");
             }
 
             if (DateTimeUtil.isContained(volunteerinstancePojo.getDatestart(), volunteerinstancePojo.getDateend(),
@@ -191,31 +214,23 @@ public class VolunteerInstanceService implements IService {
         }
 
         // If we actually reach this point, we know the line will be added to the database (merged or not).
-        VolunteerinstancePojo volunteerinstancePojo = new VolunteerinstancePojo();
-        volunteerinstancePojo.setVolunteerid(volunteerinstancePojoNew.getVolunteerid());
 
         // Merge after if possible.
         if (mergeAfterVolunteerInstanceExtId != null) {
             VolunteerinstancePojo mergedVolunteerinstancePojo = volunteerInstanceMyDao.fetchByExtIds(volunteerExtId, mergeAfterVolunteerInstanceExtId);
-            volunteerinstancePojo.setDateend(mergedVolunteerinstancePojo.getDateend());
+            volunteerinstancePojoNew.setDateend(mergedVolunteerinstancePojo.getDateend());
             volunteerInstanceMyDao.delete(mergedVolunteerinstancePojo);
-        } else {
-            // Date end must still be set.
-            volunteerinstancePojo.setDateend(dateEnd);
         }
 
         // Merge before if possible.
         if (mergeBeforeVolunteerInstanceExtId != null) {
             VolunteerinstancePojo mergedVolunteerinstancePojo = volunteerInstanceMyDao.fetchByExtIds(volunteerExtId, mergeAfterVolunteerInstanceExtId);
-            volunteerinstancePojo.setDatestart(mergedVolunteerinstancePojo.getDatestart());
+            volunteerinstancePojoNew.setDatestart(mergedVolunteerinstancePojo.getDatestart());
             volunteerInstanceMyDao.delete(mergedVolunteerinstancePojo);
-        } else {
-            // Date start must still be set.
-            volunteerinstancePojo.setDatestart(dateStart);
         }
 
         if (!isUpdate) {
-            volunteerInstanceMyDao.insertPojo(volunteerinstancePojo);
+            volunteerInstanceMyDao.insertPojo(volunteerinstancePojoNew);
         } else {
             // Check that we can actually update without affecting matches.
             List<String> merged = new ArrayList();
@@ -225,7 +240,7 @@ public class VolunteerInstanceService implements IService {
             if (mergeBeforeVolunteerInstanceExtId != null) {
                 merged.add(mergeBeforeVolunteerInstanceExtId);
             }
-            if (!allMatchesAreInsideInstance(volunteerExtId, volunteerinstancePojo, merged)) {
+            if (!allMatchesAreInsideInstance(volunteerExtId, volunteerinstancePojoNew, merged)) {
                 throw new FunctionalException("VolunteerInstanceAPI.error.matchWithoutInstance");
             }
 
@@ -284,9 +299,6 @@ public class VolunteerInstanceService implements IService {
 
         return false;
     }
-
-
-
 
     @Override
     public DbContext getContext() {
