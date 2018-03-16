@@ -83,7 +83,7 @@
         </h1>
       </div>
       <div id="active-panel" class="list-group collapse in">
-        <a *ngFor="let instance of volunteer.volunteerInstanceValueObjects" href="#" class="list-group-item">
+        <a *ngFor="let instance of volunteer.volunteerInstanceValueObjects" [routerLink]="'active/' + instance.externalIdentifier" class="list-group-item">
           Van {{ instance.dateStart | mydate }} tot {{ instance.dateEnd | mydate:true }}.
         </a>
       </div>

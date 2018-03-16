@@ -29,4 +29,12 @@ export class VolunteerService {
   insertVolunteerInstance(volunteerInstanceModel: VolunteerInstanceModel) {
     return this.myHttpClient.put('volunteer/' + volunteerInstanceModel.volunteerExtId + '/instance', null, volunteerInstanceModel);
   }
+
+  updateVolunteerInstance(volunteerInstanceModel: VolunteerInstanceModel) {
+    return this.myHttpClient.post('volunteer/' +
+      volunteerInstanceModel.volunteerExtId +
+      '/instance/' +
+      volunteerInstanceModel.externalIdentifier, null, volunteerInstanceModel);
+  }
+
 }

@@ -7,6 +7,7 @@ import {VolunteerOverviewComponent} from "../volunteer/overview/volunteer.overvi
 import {VolunteerDetailComponent} from "../volunteer/detail/volunteer.detail.component";
 import {VolunteerAddComponent} from "../volunteer/add/volunteer.add.component";
 import {VolunteerEditActiveComponent} from "../volunteer/detail/active/volunteer.edit.active.component";
+import {VolunteerAddActiveComponent} from "../volunteer/detail/active/volunteer.add.active.component";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -15,7 +16,7 @@ const appRoutes: Routes = [
   { path: 'volunteer/add', canActivate: [AuthGuardService], component: VolunteerAddComponent},
   { path: 'volunteer/:volunteerExtId', canActivate: [AuthGuardService], component: VolunteerDetailComponent, children: [
       { path: 'active/:volunteerInstanceExtId', component: VolunteerEditActiveComponent},
-      { path: 'active', component: VolunteerEditActiveComponent}]}
+      { path: 'active', component: VolunteerAddActiveComponent}]}
       ];
 
 @NgModule({

@@ -3,4 +3,5 @@ export class VolunteerInstanceModel {
   public externalIdentifier: string;
   public dateStart: string;
   public dateEnd: string;
+
 }

@@ -1,67 +1,47 @@
-import {Component, OnInit} from "@angular/core";
-import {IMyDpOptions} from "mydatepicker";
-import {VolunteerInstanceModel} from "../../../valueobject/volunteerinstance.model";
-import {ActivatedRoute} from "@angular/router";
-import {VolunteerService} from "../../../services/volunteer.service";
-import {DateUtil} from "../../../util/date.util";
+import {Component} from "@angular/core";
+import {VolunteerActiveComponent} from "./volunteer.active.component";
 import {VolunteerDetailService} from "../volunteer.detail.service";
-import {VolunteerModel} from "../../../valueobject/volunteer.model";
+import {VolunteerService} from "../../../services/volunteer.service";
+import {ActivatedRoute} from "@angular/router";
+import {DateUtil} from "../../../util/date.util";
+import {CopyUtil} from "../../../util/copy.util";
 import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-volunteer-edit-active',
-  templateUrl: './volunteer.edit.active.component.html',
-  styleUrls: ['./volunteer.edit.active.component.css']
+  templateUrl: './volunteer.active.component.html',
+  styleUrls: ['./volunteer.active.component.css']
 })
-export class VolunteerEditActiveComponent implements OnInit {
-  public dateStartActive;
-  public dateEndActive;
-  public optionsAll: IMyDpOptions = {
-    satHighlight: true,
-    dateFormat: 'dd-mm-yyyy'
-  };
-  private volunteerInstanceModel: VolunteerInstanceModel;
-  private volunteer: VolunteerModel;
-  public errorMessage: string = null;
+export class VolunteerEditActiveComponent extends VolunteerActiveComponent {
 
-  constructor(private volunteerService: VolunteerService,
-              private volunteerDetailService: VolunteerDetailService,
-              private route: ActivatedRoute) { }
+  constructor(protected volunteerService: VolunteerService,
+              protected volunteerDetailService: VolunteerDetailService,
+              protected route: ActivatedRoute) {
+    super(volunteerService, volunteerDetailService, route, 'Wijzigen activiteit');
+  }
 
-  ngOnInit(): void {
+  retrieveSpecificInstance() {
     this.route.params.subscribe(
       (params) => {
-        if (params['volunteerInstanceExtId'] != undefined) {
-          // Find the one from the volunteer.
-          //this.volunteerInstanceModel = this.volunteerService.currentVolunteer.volunteerInstanceValueObjects.find()
-          // Prefill the values.
-        } else {
-          // New instance, so initialize new one.
-          this.volunteerInstanceModel = new VolunteerInstanceModel();
-          this.volunteerDetailService.getVolunteer().subscribe(
-            (volunteer: VolunteerModel) => {
-              this.volunteerInstanceModel.volunteerExtId = volunteer.externalIdentifier;
-              this.volunteer = volunteer;
-            }
-          );
-        }
+        // Find the instance from the volunteer that corresponds to this instance.
+        this.volunteerInstanceModel = CopyUtil.createCopy(this.volunteer.volunteerInstanceValueObjects.find(
+          x => x.externalIdentifier == params['volunteerInstanceExtId']
+        ));
+
+        // Prefill the values.
+        this.dateStartActive = {date: DateUtil.convertStringToIDate(this.volunteerInstanceModel.dateStart)};
+        this.dateEndActive = {date: DateUtil.convertStringToIDate(this.volunteerInstanceModel.dateEnd)};
       }
     );
   }
 
-  onSubmit() {
-    if (this.dateStartActive != undefined) {
-      this.volunteerInstanceModel.dateStart = DateUtil.convertIDateToString(this.dateStartActive.date);
-    }
-    if (this.dateEndActive != undefined) {
-      this.volunteerInstanceModel.dateEnd = DateUtil.convertIDateToString(this.dateEndActive.date);
-    }
-    this.volunteerService.insertVolunteerInstance(this.volunteerInstanceModel).subscribe(
+  doHttpRequest() {
+    this.volunteerService.updateVolunteerInstance(this.volunteerInstanceModel).subscribe(
       (response: Response) => {
-        console.log(response);
+        this.error = this.volunteerDetailService.retrieveVolunteer(this.volunteer.externalIdentifier, this.volunteerService);
       },
       (error: HttpErrorResponse) => {
-        this.errorMessage = error.error.title;
+        this.error = error;
       }
     );
   }

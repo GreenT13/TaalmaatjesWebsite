@@ -17,10 +17,11 @@ import {VolunteerAddComponent} from "./volunteer/add/volunteer.add.component";
 import {MyDatePickerModule} from 'mydatepicker';
 import {VolunteerEditActiveComponent} from "./volunteer/detail/active/volunteer.edit.active.component";
 import {OverlayService} from "./services/overlay.service";
-import {AlertComponent} from "./error/alert.component";
+import {AlertComponent} from "./alert/alert.component";
 import {MyDatePipe} from "./pipes/mydate.pipe";
 import {GenderPipe} from "./pipes/gender.pipe";
 import {BooleanPipe} from "./pipes/boolean.pipe";
+import {VolunteerAddActiveComponent} from "./volunteer/detail/active/volunteer.add.active.component";
 
 
 @NgModule({
@@ -30,7 +31,7 @@ import {BooleanPipe} from "./pipes/boolean.pipe";
     VolunteerOverviewComponent,
     VolunteerDetailComponent,
     VolunteerAddComponent,
-    VolunteerEditActiveComponent,
+    VolunteerAddActiveComponent, VolunteerEditActiveComponent,
     AlertComponent,
     MyDatePipe, GenderPipe, BooleanPipe
   ],

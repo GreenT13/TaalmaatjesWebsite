@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {VolunteerModel} from "../../valueobject/volunteer.model";
 import {Observable} from "rxjs/Observable";
 import {ReplaySubject} from "rxjs/ReplaySubject";
+import {VolunteerService} from "../../services/volunteer.service";
 
 @Injectable()
 export class VolunteerDetailService {
@@ -14,5 +15,17 @@ export class VolunteerDetailService {
 
   public getVolunteer(): Observable<VolunteerModel> {
     return this.subject.asObservable();
+  }
+
+  public retrieveVolunteer(extId: string, volunteerService: VolunteerService): any {
+    volunteerService.getVolunteer(extId).subscribe(
+      (response: VolunteerModel) => {
+        this.setVolunteer(response);
+        return null;
+      },
+      (error) => {
+        return error;
+      }
+    );
   }
 }

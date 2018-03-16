@@ -16,9 +16,21 @@ export class DateUtil {
       day: date.getDate()}
   }
 
+  public static convertStringToIDate(date: String): IMyDate {
+    if (!date || date.length == 0) {
+      return null;
+    }
+    const year = date.substr(0, date.indexOf('-'));
+    const month = date.substr(date.indexOf('-') + 1, date.substr(date.indexOf('-') + 1).indexOf('-'));
+    const day = date.substr(date.lastIndexOf('-') + 1);
+    return {year: +year, month: +month, day: +day};
+
+  }
+
   public static convertIDateToString(iDate: IMyDate): string {
-    var date: Date = new Date();
-    date.setUTCFullYear(iDate.year, iDate.month, iDate.day);
-    return date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
+    if (!iDate) {
+      return null;
+    }
+    return iDate.year + '-' + iDate.month + '-' + iDate.day;
   }
 }
