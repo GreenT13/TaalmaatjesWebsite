@@ -224,12 +224,12 @@ public class VolunteerMyDao extends VolunteerDao {
 
     /**
      * Search for volunteers based on non-null inputs.
-     * @param input
-     * @param isActive
-     * @param hasTraining
-     * @param hasMatch
-     * @param city
-     * @return
+     * @param input Search for this text in Volunteer.firstName, Volunteer.insertion and Volunteer.lastName.
+     * @param isActive Whether there is a VolunteerInstance today.
+     * @param hasTraining Whether Volunteer.dateTraining is filled.
+     * @param hasMatch Whether there is a VolunteerMatch today.
+     * @param city Search for this text in Volunteer.city.
+     * @return List&lt;VolunteerPojo&gt;
      */
     public List<VolunteerPojo> advancedSearch(String input, Boolean isActive, Boolean hasTraining, Boolean hasMatch, String city) {
         SelectWhereStep<VolunteerRecord> query = using(configuration()).selectFrom(Volunteer.VOLUNTEER);
@@ -266,7 +266,7 @@ public class VolunteerMyDao extends VolunteerDao {
 
         if (hasTraining != null && hasTraining) {
             query.where(Volunteer.VOLUNTEER.DATETRAINING.isNotNull());
-        } else if (hasTraining != null && !hasTraining) {
+        } else if (hasTraining != null) {
             query.where(Volunteer.VOLUNTEER.DATETRAINING.isNull());
         }
 

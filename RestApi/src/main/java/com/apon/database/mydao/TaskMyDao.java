@@ -2,21 +2,16 @@ package com.apon.database.mydao;
 
 import com.apon.database.generated.tables.Task;
 import com.apon.database.generated.tables.Volunteer;
-import com.apon.database.generated.tables.Volunteerinstance;
 import com.apon.database.generated.tables.daos.TaskDao;
 import com.apon.database.generated.tables.pojos.TaskPojo;
-import com.apon.database.generated.tables.pojos.VolunteerPojo;
 import com.apon.database.generated.tables.records.TaskRecord;
 import com.apon.database.jooq.DbContext;
 import com.apon.exceptionhandler.ResultObject;
-import com.apon.log.MyLogger;
 import com.apon.util.ResultUtil;
 import org.jooq.SelectWhereStep;
 import org.jooq.util.mysql.MySQLDataType;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import static org.jooq.impl.DSL.select;
 import static org.jooq.impl.DSL.using;

@@ -78,7 +78,7 @@ public class VolunteerInstanceService implements IService {
         VolunteerinstancePojo volunteerinstancePojo = volunteerInstanceMapper.getVolunteerinstancePojo();
         volunteerinstancePojo.setVolunteerid(volunteerPojo.getVolunteerid());
 
-        // Handle the complete adding / merging in another function.
+        // Handle the complete adding / merging in another function. This function will throw its exceptions.
         isVolunteerInstanceValidAndAdd(volunteerExtId, volunteerinstancePojo, false);
 
         // Commit the changes.
@@ -127,9 +127,8 @@ public class VolunteerInstanceService implements IService {
      * @param volunteerExtId The extId from the volunteer.
      * @param volunteerinstancePojoNew The pojo we are going to insert into the database.
      * @param isUpdate Whether we call this function to update the pojo or insert the pojo.
-     * @return boolean
      */
-    private boolean isVolunteerInstanceValidAndAdd(String volunteerExtId, VolunteerinstancePojo volunteerinstancePojoNew, boolean isUpdate)
+    private void isVolunteerInstanceValidAndAdd(String volunteerExtId, VolunteerinstancePojo volunteerinstancePojoNew, boolean isUpdate)
         throws Exception {
         VolunteerInstanceMyDao volunteerInstanceMyDao = new VolunteerInstanceMyDao(context);
         // if [A,B] can be merged into [dateStart,dateEnd] with B=dateStart then mergeAfterVolunteerInstanceId will be B.
@@ -247,8 +246,6 @@ public class VolunteerInstanceService implements IService {
             // We can just update the instance we got from the function.
             volunteerInstanceMyDao.update(volunteerinstancePojoNew);
         }
-
-        return true;
     }
 
     /**
