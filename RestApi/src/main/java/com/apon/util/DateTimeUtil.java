@@ -2,12 +2,23 @@ package com.apon.util;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.concurrent.TimeUnit;
+import java.time.temporal.ChronoUnit;
 
 public class DateTimeUtil {
 
+    private static LocalDate toLocalDate(Date d) {
+        if (d == null) {
+            return null;
+        }
+
+        return d.toLocalDate();
+    }
+
     public static boolean isBeforeToday(Date date) {
-        return date.compareTo(getCurrentDate()) < 0;
+        return isBeforeToday(toLocalDate(date));
+    }
+    private static boolean isBeforeToday(LocalDate date) {
+        return date.compareTo(toLocalDate(getCurrentDate())) < 0;
     }
 
     public static Date getCurrentDate() {
@@ -22,6 +33,9 @@ public class DateTimeUtil {
      * @return
      */
     public static boolean isBetween(Date d, Date r1, Date r2) {
+        return isBetween(toLocalDate(d), toLocalDate(r1), toLocalDate(r2));
+    }
+    private static boolean isBetween(LocalDate d, LocalDate r1, LocalDate r2) {
         if (d == null) {
             return (r2 == null);
         }
@@ -38,6 +52,9 @@ public class DateTimeUtil {
     }
 
     public static boolean isBetweenWithoutEndpoints(Date d, Date r1, Date r2) {
+        return isBetweenWithoutEndpoints(toLocalDate(d), toLocalDate(r1), toLocalDate(r2));
+    }
+    private static boolean isBetweenWithoutEndpoints(LocalDate d, LocalDate r1, LocalDate r2) {
         if (d == null) {
             return (r2 == null);
         }
@@ -62,6 +79,9 @@ public class DateTimeUtil {
      * @return boolean
      */
     public static boolean isOverlap(Date d1, Date d2, Date e1, Date e2) {
+        return isOverlap(toLocalDate(d1), toLocalDate(d2), toLocalDate(e1), toLocalDate(e2));
+    }
+    private static boolean isOverlap(LocalDate d1, LocalDate d2, LocalDate e1, LocalDate e2) {
         if (isBetween(e1, d1, d2)) {
             return true;
         }
@@ -95,8 +115,10 @@ public class DateTimeUtil {
     }
 
     public static long nrOfDaysInBetween(Date d1, Date d2) {
-        long diff = d2.getTime() - d1.getTime();
-        return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+        return nrOfDaysInBetween(toLocalDate(d1), toLocalDate(d2));
+    }
+    private static long nrOfDaysInBetween(LocalDate d1, LocalDate d2) {
+        return ChronoUnit.DAYS.between(d1, d2);
     }
 
 

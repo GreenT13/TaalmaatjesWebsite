@@ -86,9 +86,13 @@ public class VolunteerInstanceService implements IService {
         }
 
         VolunteerInstanceMapper volunteerInstanceMapper = new VolunteerInstanceMapper();
+        // Make sure the id's are set.
+        volunteerInstanceMapper.setVolunteerinstancePojo(volunteerinstancePojo);
+        // Overwrite the rest.
+        volunteerInstanceMapper.setVolunteerInstanceValueObject(volunteerInstanceValueObject);
 
         // Handle the complete adding / merging in another function.
-        isVolunteerInstanceValidAndAdd(volunteerExtId, volunteerinstancePojo, true);
+        isVolunteerInstanceValidAndAdd(volunteerExtId, volunteerInstanceMapper.getVolunteerinstancePojo(), true);
 
         context.commit();
     }
@@ -128,7 +132,7 @@ public class VolunteerInstanceService implements IService {
             // However, the above does not hold at all whenever pojo.dateStart = pojo.dateEnd (one day instance).
             // So we only threat this case differently.
             if (volunteerinstancePojo.getDateend() != null &&
-                    volunteerinstancePojo.getDatestart().compareTo(volunteerinstancePojo.getDateend()) == 0) {
+                    DateTimeUtil.nrOfDaysInBetween(volunteerinstancePojo.getDatestart(), volunteerinstancePojo.getDateend()) == 0) {
                 // We have 4 possibilities:
                 // 1. pojo.date \in (dateStart, dateEnd) => overlap so false.
                 // 2. pojo.date == dateStart || pojo.date + 1 DAY = dateStart => merge
@@ -136,17 +140,17 @@ public class VolunteerInstanceService implements IService {
                 // 4. none of the above => we do nothing, we can ignore this line.
 
                 if (DateTimeUtil.isBetweenWithoutEndpoints(volunteerinstancePojo.getDatestart(), dateStart, dateEnd)) {
-                    throw new Exception("VolunteerInstanceAPI.error.overlap");
+                    throw new FunctionalException("VolunteerInstanceAPI.error.overlap");
                 }
 
                 // Merge before
-                if (volunteerinstancePojo.getDateend().compareTo(dateStart) == 0 ||
+                if (DateTimeUtil.nrOfDaysInBetween(volunteerinstancePojo.getDateend(), dateStart) == 0 ||
                         DateTimeUtil.nrOfDaysInBetween(volunteerinstancePojo.getDateend(), dateStart) == 1) {
                     mergeBeforeVolunteerInstanceExtId = volunteerinstancePojo.getExternalidentifier();
                 }
 
                 // Merge after
-                if (dateEnd != null && (volunteerinstancePojo.getDatestart().compareTo(dateEnd) == 0 ||
+                if (dateEnd != null && (DateTimeUtil.nrOfDaysInBetween(volunteerinstancePojo.getDatestart(), dateEnd) == 0 ||
                         DateTimeUtil.nrOfDaysInBetween(dateEnd, volunteerinstancePojo.getDatestart()) == 1)) {
                     mergeAfterVolunteerInstanceExtId = volunteerinstancePojo.getExternalidentifier();
                 }
@@ -157,30 +161,30 @@ public class VolunteerInstanceService implements IService {
 
             if (DateTimeUtil.isBetweenWithoutEndpoints(dateStart,
                     volunteerinstancePojo.getDatestart(), volunteerinstancePojo.getDateend())) {
-                throw new Exception("VolunteerInstanceAPI.error.overlap");
+                throw new FunctionalException("VolunteerInstanceAPI.error.overlap");
             }
 
             if (DateTimeUtil.isBetweenWithoutEndpoints(dateEnd,
                     volunteerinstancePojo.getDatestart(), volunteerinstancePojo.getDateend())) {
-                throw new Exception("VolunteerInstanceAPI.error.overlap");
+                throw new FunctionalException("VolunteerInstanceAPI.error.overlap");
             }
 
             if (DateTimeUtil.isContained(volunteerinstancePojo.getDatestart(), volunteerinstancePojo.getDateend(),
                     dateStart, dateEnd)) {
-                throw new Exception("VolunteerInstanceAPI.error.completeOverlap");
+                throw new FunctionalException("VolunteerInstanceAPI.error.completeOverlap");
             }
 
             // Determine whether we can actually merge with this line.
             // Merge after: (note that if both dates are null, we can never merge.
             if (dateEnd != null && volunteerinstancePojo.getDatestart() != null &&
-                    (volunteerinstancePojo.getDatestart().compareTo(dateEnd) == 0 ||
+                    (DateTimeUtil.nrOfDaysInBetween(volunteerinstancePojo.getDatestart(), dateEnd) == 0 ||
                             DateTimeUtil.nrOfDaysInBetween(dateEnd, volunteerinstancePojo.getDatestart()) == 1)) {
                 mergeAfterVolunteerInstanceExtId = volunteerinstancePojo.getExternalidentifier();
             }
 
             // Merge before: (note that dateEnd must be non-null to merge. Also dateStart is never null).
             if (volunteerinstancePojo.getDateend() != null &&
-                    (volunteerinstancePojo.getDateend().compareTo(dateStart) == 0 ||
+                    (DateTimeUtil.nrOfDaysInBetween(volunteerinstancePojo.getDateend(), dateStart) == 0 ||
                             DateTimeUtil.nrOfDaysInBetween(volunteerinstancePojo.getDateend(), dateStart) == 1)) {
                 mergeBeforeVolunteerInstanceExtId = volunteerinstancePojo.getExternalidentifier();
             }
@@ -196,7 +200,7 @@ public class VolunteerInstanceService implements IService {
             volunteerinstancePojo.setDateend(mergedVolunteerinstancePojo.getDateend());
             volunteerInstanceMyDao.delete(mergedVolunteerinstancePojo);
         } else {
-            // Date start must still be set.
+            // Date end must still be set.
             volunteerinstancePojo.setDateend(dateEnd);
         }
 
@@ -222,10 +226,11 @@ public class VolunteerInstanceService implements IService {
                 merged.add(mergeBeforeVolunteerInstanceExtId);
             }
             if (!allMatchesAreInsideInstance(volunteerExtId, volunteerinstancePojo, merged)) {
-                throw new Exception("VolunteerInstanceAPI.error.matchWithoutInstance");
+                throw new FunctionalException("VolunteerInstanceAPI.error.matchWithoutInstance");
             }
 
-            volunteerInstanceMyDao.update(volunteerinstancePojo);
+            // We can just update the instance we got from the function.
+            volunteerInstanceMyDao.update(volunteerinstancePojoNew);
         }
 
         return true;
