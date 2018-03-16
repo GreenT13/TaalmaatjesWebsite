@@ -15,7 +15,7 @@
             <tbody>
             <tr>
               <td>Geboortedatum</td>
-              <td>{{ volunteer.dateOfBirth }}</td>
+              <td>{{ volunteer.dateOfBirth | mydate }}</td>
             </tr>
             <tr>
               <td>Leeftijd</td>
@@ -23,7 +23,7 @@
             </tr>
             <tr>
               <td>Geslacht</td>
-              <td>{{ volunteer.gender }}</td>
+              <td>{{ volunteer.gender | gender }}</td>
             </tr>
             <tr>
               <td>Telefoonnr</td>
@@ -39,7 +39,7 @@
             </tr>
             <tr>
               <td>Straat</td>
-              <td>{{ volunteer.houseNr }}</td>
+              <td>{{ volunteer.streetName }}</td>
             </tr>
             <tr>
               <td>Huisnummer</td>
@@ -55,7 +55,7 @@
             </tr>
             <tr>
               <td>Datum training</td>
-              <td>{{ volunteer.dateTraining }}</td>
+              <td>{{ volunteer.dateTraining | mydate }}</td>
             </tr>
             <tr>
               <td>Beroep</td>
@@ -63,11 +63,11 @@
             </tr>
             <tr>
               <td>Is klassenassistent</td>
-              <td>{{ volunteer.isClassAssistant }}</td>
+              <td>{{ volunteer.isClassAssistant | boolean }}</td>
             </tr>
             <tr>
               <td>Is taalmaatje</td>
-              <td>{{ volunteer.isTaalmaatje }}</td>
+              <td>{{ volunteer.isTaalmaatje | boolean }}</td>
             </tr>
             </tbody>
           </table>
@@ -83,7 +83,9 @@
         </h1>
       </div>
       <div id="active-panel" class="list-group collapse in">
-        <a *ngFor="let instance of volunteer.volunteerInstanceValueObjects" href="#" class="list-group-item">Van {{ instance.dateStart }} tot {{ instance.dateEnd }}.</a>
+        <a *ngFor="let instance of volunteer.volunteerInstanceValueObjects" href="#" class="list-group-item">
+          Van {{ instance.dateStart | mydate }} tot {{ instance.dateEnd | mydate:true }}.
+        </a>
       </div>
     </div>
 

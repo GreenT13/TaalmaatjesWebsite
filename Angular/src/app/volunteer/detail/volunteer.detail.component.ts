@@ -25,6 +25,7 @@ export class VolunteerDetailComponent implements OnInit {
       (params) => {
         this.volunteerService.getVolunteer(params['volunteerExtId']).subscribe(
           (response: VolunteerModel) => {
+            console.log(response);
             this.volunteerDetailService.setVolunteer(response);
           },
           (error) => {

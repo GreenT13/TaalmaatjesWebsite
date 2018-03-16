@@ -18,6 +18,9 @@ import {MyDatePickerModule} from 'mydatepicker';
 import {VolunteerEditActiveComponent} from "./volunteer/detail/active/volunteer.edit.active.component";
 import {OverlayService} from "./services/overlay.service";
 import {AlertComponent} from "./error/alert.component";
+import {MyDatePipe} from "./pipes/mydate.pipe";
+import {GenderPipe} from "./pipes/gender.pipe";
+import {BooleanPipe} from "./pipes/boolean.pipe";
 
 
 @NgModule({
@@ -28,7 +31,8 @@ import {AlertComponent} from "./error/alert.component";
     VolunteerDetailComponent,
     VolunteerAddComponent,
     VolunteerEditActiveComponent,
-    AlertComponent
+    AlertComponent,
+    MyDatePipe, GenderPipe, BooleanPipe
   ],
   imports: [
     BrowserModule,
