@@ -12,14 +12,12 @@ import {LoginService} from "./services/login.service";
 import {HttpClientModule} from "@angular/common/http";
 import {VolunteerOverviewComponent} from "./volunteer/overview/volunteer.overview.component";
 import {VolunteerService} from "./services/volunteer.service";
-import {NameUtil} from "./util/name.util";
 import {VolunteerDetailComponent} from "./volunteer/detail/volunteer.detail.component";
 import {VolunteerAddComponent} from "./volunteer/add/volunteer.add.component";
 import {MyDatePickerModule} from 'mydatepicker';
-import {DateUtil} from "./util/date.util";
-import {GenderUtil} from "./util/gender.util";
 import {VolunteerEditActiveComponent} from "./volunteer/detail/active/volunteer.edit.active.component";
 import {OverlayService} from "./services/overlay.service";
+import {AlertComponent} from "./error/alert.component";
 
 
 @NgModule({
@@ -29,7 +27,8 @@ import {OverlayService} from "./services/overlay.service";
     VolunteerOverviewComponent,
     VolunteerDetailComponent,
     VolunteerAddComponent,
-    VolunteerEditActiveComponent
+    VolunteerEditActiveComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -41,8 +40,7 @@ import {OverlayService} from "./services/overlay.service";
   ],
   providers: [
     MyHttpClient, LoginService, VolunteerService,
-    OverlayService, AuthGuardService,
-    NameUtil, DateUtil, GenderUtil],
+    OverlayService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
