@@ -10,8 +10,12 @@ export class VolunteerService {
 
   constructor(private myHttpClient: MyHttpClient) {}
 
-  searchVolunteers() {
-    return this.myHttpClient.get('volunteer', null);
+  searchVolunteers(search: String, city: String, isActive: Boolean, hasTraining: Boolean, hasMatch: Boolean) {
+    const url: string = 'volunteer' + MyHttpClient.createParameterUrl([
+      {name: 'search', value: search}, {name: 'city', value: city}, {name: 'isActive', value: isActive},
+      {name: 'hasTraining', value: hasTraining}, {name: 'hasMatch', value: hasMatch}],);
+    console.log(url);
+    return this.myHttpClient.get(url, null);
   }
 
   insertVolunteer(volunteerModel: VolunteerModel) {
@@ -25,5 +29,4 @@ export class VolunteerService {
   insertVolunteerInstance(volunteerInstanceModel: VolunteerInstanceModel) {
     return this.myHttpClient.put('volunteer/' + volunteerInstanceModel.volunteerExtId + '/instance', null, volunteerInstanceModel);
   }
-
 }
