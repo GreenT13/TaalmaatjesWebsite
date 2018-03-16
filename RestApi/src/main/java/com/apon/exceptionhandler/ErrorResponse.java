@@ -5,6 +5,10 @@ public class ErrorResponse {
     private String title;
     private String detail;
 
+    public ErrorResponse() {
+
+    }
+
     ErrorResponse(String title, String detail) {
         this.title = title;
         this.detail = detail;

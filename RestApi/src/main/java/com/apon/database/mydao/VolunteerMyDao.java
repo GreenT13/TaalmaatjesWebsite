@@ -9,7 +9,8 @@ import com.apon.database.generated.tables.records.VolunteerRecord;
 import com.apon.database.generated.tables.records.VolunteerinstanceRecord;
 import com.apon.database.generated.tables.records.VolunteermatchRecord;
 import com.apon.database.jooq.DbContext;
-import com.apon.log.MyLogger;
+import com.apon.exceptionhandler.ResultObject;
+import com.apon.util.ResultUtil;
 import org.jooq.Record1;
 import org.jooq.Select;
 import org.jooq.SelectConditionStep;
@@ -26,13 +27,18 @@ import static org.jooq.impl.DSL.using;
 
 public class VolunteerMyDao extends VolunteerDao {
     private final static Integer STARTING_EXT_ID = 1001;
+    private ResultObject resultObject;
 
     public VolunteerMyDao(DbContext context) {
         super(context.getConfiguration());
     }
 
+    public ResultObject getResultObject() {
+        return resultObject;
+    }
+
     @SuppressWarnings("Duplicates")
-    public boolean generateIds(VolunteerPojo volunteerPojo) {
+    private boolean generateIds(VolunteerPojo volunteerPojo) {
         if (volunteerPojo.getVolunteerid() == null) {
             Integer maxId = getMaxId();
             volunteerPojo.setVolunteerid(maxId != null ? maxId + 1 : 0);
@@ -74,15 +80,49 @@ public class VolunteerMyDao extends VolunteerDao {
     }
 
     public boolean insertPojo(VolunteerPojo volunteerPojo) {
+        if (!validateVolunteer(volunteerPojo)) {
+            // Result object is already set.
+            return false;
+        }
+
         if (!generateIds(volunteerPojo)) {
-            // Some kind of logError message?
+            resultObject = ResultUtil.createErrorResult("VolunteerMyDao.generateId.error");
             return false;
         }
 
         try {
             super.insert(volunteerPojo);
         } catch (Exception e) {
-            MyLogger.logError("Could not insert volunteer", e);
+            resultObject = ResultUtil.createErrorResult("VolunteerMyDao.insert.error", e);
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean updatePojo(VolunteerPojo volunteerPojo) {
+        if (!validateVolunteer(volunteerPojo)) {
+            // Result object is already set.
+            return false;
+        }
+
+        try {
+            super.insert(volunteerPojo);
+        } catch (Exception e) {
+            resultObject = ResultUtil.createErrorResult("VolunteerMyDao.update.error", e);
+        }
+
+        return true;
+    }
+
+    private boolean validateVolunteer(VolunteerPojo volunteerPojo) {
+        if (volunteerPojo.getLastname() == null) {
+            resultObject = ResultUtil.createErrorResult("VolunteerMyDao.validate.lastName");
+            return false;
+        }
+
+        if (volunteerPojo.getDateofbirth() == null) {
+            resultObject = ResultUtil.createErrorResult("VolunteerMyDao.validate.dateOfBirth");
             return false;
         }
 

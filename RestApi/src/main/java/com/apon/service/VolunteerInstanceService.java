@@ -6,6 +6,7 @@ import com.apon.database.jooq.DbContext;
 import com.apon.database.mydao.VolunteerInstanceMyDao;
 import com.apon.database.mydao.VolunteerMatchMyDao;
 import com.apon.database.mydao.VolunteerMyDao;
+import com.apon.exceptionhandler.FunctionalException;
 import com.apon.guice.InjectContext;
 import com.apon.service.valueobject.VolunteerInstanceValueObject;
 import com.apon.service.valueobject.mapper.VolunteerInstanceMapper;
@@ -28,7 +29,7 @@ public class VolunteerInstanceService implements IService {
     @InjectContext
     public VolunteerInstanceValueObject getVolunteerInstance(@PathParam("volunteerExtId") String volunteerExtId,
                                                              @PathParam("volunteerInstanceExtId") String volunteerInstanceExtId)
-            throws com.apon.exceptionhandler.NotFoundException {
+            throws Exception {
         // Mapper and Dao variables.
         VolunteerInstanceMyDao volunteerInstanceMyDao = new VolunteerInstanceMyDao(context);
         VolunteerInstanceMapper volunteerInstanceMapper = new VolunteerInstanceMapper();
@@ -36,7 +37,7 @@ public class VolunteerInstanceService implements IService {
         // Retrieve volunteerInstanceId.
         VolunteerinstancePojo volunteerinstancePojo = volunteerInstanceMyDao.fetchByExtIds(volunteerExtId, volunteerInstanceExtId);
         if (volunteerinstancePojo == null) {
-            throw new com.apon.exceptionhandler.NotFoundException("Could not find volunteer instance.");
+            throw new FunctionalException("NotFound.entity", "Vrijwilliger");
         }
 
         // Retrieve the instances and put them on the volunteer.
@@ -81,7 +82,7 @@ public class VolunteerInstanceService implements IService {
         VolunteerInstanceMyDao volunteerInstanceMyDao = new VolunteerInstanceMyDao(context);
         VolunteerinstancePojo volunteerinstancePojo = volunteerInstanceMyDao.fetchByExtIds(volunteerExtId, volunteerInstanceExtId);
         if (volunteerinstancePojo == null) {
-            throw new com.apon.exceptionhandler.NotFoundException("Could not find volunteer instance.");
+            throw new FunctionalException("NotFound.entity", "Activiteit");
         }
 
         VolunteerInstanceMapper volunteerInstanceMapper = new VolunteerInstanceMapper();

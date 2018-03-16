@@ -6,8 +6,8 @@ import com.apon.database.generated.tables.daos.VolunteerinstanceDao;
 import com.apon.database.generated.tables.pojos.VolunteerPojo;
 import com.apon.database.generated.tables.pojos.VolunteerinstancePojo;
 import com.apon.database.jooq.DbContext;
-import com.apon.log.MyLogger;
-import org.jooq.Configuration;
+import com.apon.exceptionhandler.ResultObject;
+import com.apon.util.ResultUtil;
 import org.jooq.Record;
 import org.jooq.SelectConditionStep;
 import org.jooq.impl.DSL;
@@ -19,14 +19,14 @@ import java.util.Map;
 import static org.jooq.impl.DSL.using;
 
 public class VolunteerInstanceMyDao extends VolunteerinstanceDao {
+    private ResultObject resultObject;
 
     public VolunteerInstanceMyDao(DbContext context) {
         super(context.getConfiguration());
     }
 
-    @Deprecated
-    public VolunteerInstanceMyDao(Configuration configuration) {
-        super(configuration);
+    public ResultObject getResultObject() {
+        return resultObject;
     }
 
     @SuppressWarnings("Duplicates")
@@ -72,14 +72,14 @@ public class VolunteerInstanceMyDao extends VolunteerinstanceDao {
 
     public boolean insertPojo(VolunteerinstancePojo volunteerinstancePojo) {
         if (!generateIds(volunteerinstancePojo)) {
-            // Some kind of logError message?
+            resultObject = ResultUtil.createErrorResult("VolunteerInstanceMyDao.generateId.error");
             return false;
         }
 
         try {
             super.insert(volunteerinstancePojo);
         } catch (Exception e) {
-            MyLogger.logError("Could not insert new volunteerinstance.", e);
+            resultObject = ResultUtil.createErrorResult("VolunteerInstanceMyDao.insert.error", e);
             return false;
         }
 
