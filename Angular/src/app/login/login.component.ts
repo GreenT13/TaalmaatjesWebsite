@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {LoginService} from "../services/login.service";
 import {VersionService} from "../services/version.service";
@@ -9,7 +9,7 @@ import {SingleStringModel} from "../valueobject/singlestring.model";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   username: string;
   password: string;
   errorMessage: string;
@@ -31,13 +31,10 @@ export class LoginComponent implements OnInit {
       (version: SingleStringModel) => {
         this.version = version.value;
       },
-      (error: any) => {
+      () => {
         this.errorMessage = 'Versie kon niet opgehaald worden.';
       }
     )
-  }
-
-  ngOnInit() {
   }
 
   onSubmit() {
@@ -45,7 +42,7 @@ export class LoginComponent implements OnInit {
       () => {
         // We already route because of constructor.
       },
-      (error: Error) => {
+      () => {
         this.errorMessage = 'Inloggen mislukt.'
       });
   }

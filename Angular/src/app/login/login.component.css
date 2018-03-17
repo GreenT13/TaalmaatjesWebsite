@@ -26,5 +26,12 @@
 
 /* So I don't need the space after the symbol. */
 .glyphicon {
-  padding-right: 0px;
+  padding-right: 0;
+}
+
+.background.light {
+  height: 100%;
+  width: 100%;
+  background-color: #eee;
+  position:absolute;
 }

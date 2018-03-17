@@ -1,11 +1,11 @@
 <!-- Overlay code -->
-<div *ngIf="showOverlay" class="overlay"></div>
+<div *ngIf="showOverlay" class="overlay" theme></div>
 
 <!-- Show either login page or normal framework for page. -->
 <div *ngIf="loginService.isLoggedIn(); else login_page">
 
   <!-- Top bar. Only used for title at the moment. -->
-  <nav class="navbar navbar-default" role="navigation">
+  <nav class="navbar navbar-default" role="navigation" theme>
     <div class="container-fluid">
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
@@ -25,8 +25,8 @@
         <div class="panel-heading">
           <h1 class="panel-title"><span class="glyphicon glyphicon-book" data-toggle="collapse" data-target="#menu-admin-panel"></span>Administratie</h1>
         </div>
-        <div id="menu-admin-panel" class="list-group collapse in">
-          <a [routerLink]="['/volunteer']" class="list-group-item active">Vrijwilligers</a>
+        <div id="menu-admin-panel" class="list-group collapse in" theme>
+          <a [routerLink]="['/volunteer']" class="list-group-item active" theme>Vrijwilligers</a>
           <a href="#" class="list-group-item">Cursisten</a>
           <a href="#" class="list-group-item">Taken</a>
           <a href="#" class="list-group-item">Rapportage</a>

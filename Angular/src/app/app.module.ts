@@ -23,6 +23,9 @@ import {GenderPipe} from "./pipes/gender.pipe";
 import {BooleanPipe} from "./pipes/boolean.pipe";
 import {VolunteerAddActiveComponent} from "./volunteer/detail/active/volunteer.add.active.component";
 import {VersionService} from "./services/version.service";
+import {ThemeDirective} from "./directive/theme.directive";
+import {ThemeService} from "./services/theme.service";
+import {CookieModule} from "ngx-cookie";
 
 
 @NgModule({
@@ -34,7 +37,8 @@ import {VersionService} from "./services/version.service";
     VolunteerAddComponent,
     VolunteerAddActiveComponent, VolunteerEditActiveComponent,
     AlertComponent,
-    MyDatePipe, GenderPipe, BooleanPipe
+    MyDatePipe, GenderPipe, BooleanPipe,
+    ThemeDirective
   ],
   imports: [
     BrowserModule,
@@ -42,11 +46,13 @@ import {VersionService} from "./services/version.service";
     CommonModule,
     AppRoutingModule,
     HttpClientModule,
-    MyDatePickerModule
+    MyDatePickerModule,
+    CookieModule.forRoot()
   ],
   providers: [
     MyHttpClient, LoginService, VolunteerService, VersionService,
-    OverlayService, AuthGuardService],
+    OverlayService, AuthGuardService,
+    ThemeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

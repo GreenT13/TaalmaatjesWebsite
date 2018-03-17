@@ -1,6 +1,7 @@
 /* Overlay code. Gif source: https://loading.io/
    Code source: https://stackoverflow.com/questions/2852276/make-div-overlay-entire-page-not-just-viewport */
 div.overlay {
+  background: url("spinner-white.svg") no-repeat center;
   opacity:    1.0;
   width:      100%;
   height:     100%;
@@ -8,21 +9,42 @@ div.overlay {
   top:        0;
   left:       0;
   position:   fixed;
-  background: url("spinner.svg") no-repeat center;
-}
 
-/* Change styling of menu bar on the left. Selected items are highlighted slightly brighter than previously. */
-.list-group .active, .list-group .list-group-item:hover, .list-group .list-group-item:focus {
+}
+/* Different spinners  for different themes */
+div.overlay.dark { background: url("spinner-white.svg") no-repeat center; }
+div.overlay.light { background: url("spinner-blue.svg") no-repeat center; }
+
+/* DARK: Change styling of menu bar on the left. Selected items are highlighted slightly brighter than previously. */
+.dark.list-group-item.active, .dark.list-group .list-group-item:hover, .dark .list-group .list-group-item:focus {
   background-color: #49515a !important;
   color: #ffffff !important;
 }
 
-/* Make list panels same background color as text panels. */
-.list-group-item {
+/* DARK: Make list panels same background color as text panels. */
+.dark .list-group-item {
   background-color: transparent;
 }
 
 /* This padding doubles because I start with columns in each subview. */
 .center-container {
   padding: 0;
+}
+
+/* Remove weird corners. They only stand out in light theme, but this is a fine fix in dark theme as well. */
+.navbar {
+  border-radius: 0;
+}
+
+/* Style for blue navbar. */
+.light.navbar {
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #337ab7;
+}
+/* Menu items active styling. */
+.light.active {
+  color: #555;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
 }

@@ -7,10 +7,11 @@ p {
   margin: 0;
 }
 
-/* Fix styling from my-date-picker. */
-my-date-picker .mydp {
+/* Fix styling from my-date-picker in the dark. */
+my-date-picker.dark div.mydp {
   border: none;
 }
+/* Small padding to make them align with other textboxes. */
 my-date-picker .mydp .selectiongroup .selection {
   padding-left: 12px;
 }
