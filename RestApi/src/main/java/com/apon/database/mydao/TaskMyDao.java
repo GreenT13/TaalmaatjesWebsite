@@ -30,7 +30,7 @@ public class TaskMyDao extends TaskDao {
     }
 
     @SuppressWarnings("Duplicates")
-    public boolean generateIds(TaskPojo taskPojo) {
+    private boolean generateIds(TaskPojo taskPojo) {
         if (taskPojo.getTaskid() == null) {
             Integer maxId = getMaxId();
             taskPojo.setTaskid(maxId != null ? maxId + 1 : 0);
@@ -134,18 +134,23 @@ public class TaskMyDao extends TaskDao {
 
     /**
      * Search tasks based on given input.
-     * @param input Searched for in Task.description and Task.title.
+     * @param title Searched for in Task.title. Will lower performance a lot if filled.
+     * @param description Searched for in Task.description. Will lower performance a lot if filled.
      * @param isFinished Must equal Task.isFinished (if not null).
      * @param volunteerExtId Task must belong to this volunteer.
      * @return List&lt;TaskPojo&gt;
      */
-    public List<TaskPojo> advancedSearch(String input, Boolean isFinished, String volunteerExtId) {
+    public List<TaskPojo> advancedSearch(String title, String description, Boolean isFinished, String volunteerExtId) {
         SelectWhereStep<TaskRecord> query = using(configuration()).selectFrom(Task.TASK);
 
-        // Search for input in the description and the title.
-        if (input != null && input.trim().length() > 0) {
-            query.where(Task.TASK.DESCRIPTION.lower().like("%" + input.toLowerCase() + "%"))
-            .or(Task.TASK.TITLE.lower().like("%" + input.toLowerCase() + "%"));
+        // Search for title. Since this is hard to search for, we use %description%.
+        if (title != null && title.trim().length() > 0) {
+            query.where(Task.TASK.TITLE.lower().like("%" + title.toLowerCase() + "%"));
+        }
+
+        // Search for description. Since this is hard to search for, we use %description%.
+        if(description != null && description.trim().length() > 0) {
+            query.where(Task.TASK.DESCRIPTION.lower().like("%" + description.toLowerCase() + "%"));
         }
 
         if (isFinished != null) {

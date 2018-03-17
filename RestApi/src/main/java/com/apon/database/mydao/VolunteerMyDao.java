@@ -239,9 +239,9 @@ public class VolunteerMyDao extends VolunteerDao {
             String[] searchStrings = input.toLowerCase().split(" ");
             for (String s : searchStrings) {
                 query.where(
-                        Volunteer.VOLUNTEER.FIRSTNAME.lower().like("%" + s + "%")
-                                .or(Volunteer.VOLUNTEER.INSERTION.lower().like("%" + s + "%"))
-                                .or(Volunteer.VOLUNTEER.LASTNAME.lower().like("%" + s + "%"))
+                        Volunteer.VOLUNTEER.FIRSTNAME.lower().like(s + "%")
+                                .or(Volunteer.VOLUNTEER.INSERTION.lower().like(s + "%"))
+                                .or(Volunteer.VOLUNTEER.LASTNAME.lower().like(s + "%"))
                 );
             }
         }

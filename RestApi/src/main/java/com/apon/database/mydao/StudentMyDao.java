@@ -213,9 +213,9 @@ public class StudentMyDao extends StudentDao {
             String[] searchStrings = input.toLowerCase().split(" ");
             for (String s : searchStrings) {
                 query.where(
-                        Student.STUDENT.FIRSTNAME.lower().like("%" + s + "%")
-                                .or(Student.STUDENT.INSERTION.lower().like("%" + s + "%"))
-                                .or(Student.STUDENT.LASTNAME.lower().like("%" + s + "%"))
+                        Student.STUDENT.FIRSTNAME.lower().like(s + "%")
+                                .or(Student.STUDENT.INSERTION.lower().like(s + "%"))
+                                .or(Student.STUDENT.LASTNAME.lower().like(s + "%"))
                 );
             }
         }
