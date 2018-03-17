@@ -24,7 +24,9 @@ export class LoginComponent {
         if (value == true) {
           this.router.navigate(['/volunteer']);
         }
-      }
+      },
+      // Add this line so the 'ERROR false' disappears.
+      () => { }
     );
 
     this.versionService.getVersion().subscribe(
