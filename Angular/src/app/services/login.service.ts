@@ -26,6 +26,11 @@ export class LoginService {
     return promise;
   }
 
+  logout() {
+    this.myHttpClient.get('user/logout', null);
+    this.loggedIn = false;
+  }
+
   isLoggedIn(): boolean {
     return this.loggedIn;
   }

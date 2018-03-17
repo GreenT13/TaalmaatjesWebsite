@@ -3,6 +3,7 @@ import {DOCUMENT} from "@angular/common";
 import {OverlayService} from "./services/overlay.service";
 import {LoginService} from "./services/login.service";
 import {ThemeService} from "./services/theme.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,8 @@ export class AppComponent {
   constructor(@Inject(DOCUMENT) private document,
               public overlayService: OverlayService,
               public loginService: LoginService,
-              private themeService: ThemeService) {
+              private themeService: ThemeService,
+              private router: Router) {
 
     overlayService.showOverlayEventEmitter.subscribe((value: boolean) => this.showOverlay = value);
 
@@ -41,5 +43,10 @@ export class AppComponent {
   handleChangeTheme() {
     this.themeService.toggleTheme();
     // Subscription from constructor does the rest.
+  }
+
+  logout() {
+    this.loginService.logout();
+    this.router.navigate(['/login']);
   }
 }

@@ -56,7 +56,7 @@ public class DatabaseRealm extends AuthorizingRealm {
             }
 
             // Check nrOfLogonAttempts
-            if (logonuserPojo.getNroflogonattempts() >= 2) {
+            if (logonuserPojo.getNroflogonattempts() >= 3) {
                 throw new LockedAccountException("Cannot login anymore.");
             }
 
