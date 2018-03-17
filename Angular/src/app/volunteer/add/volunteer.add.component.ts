@@ -7,6 +7,7 @@ import {VolunteerService} from "../../services/volunteer.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {SingleStringModel} from "../../valueobject/singlestring.model";
 import {HttpErrorResponse} from "@angular/common/http";
+import {AlertModel} from "../../alert/alert.model";
 
 @Component({
   selector: 'app-volunteer-add',
@@ -14,7 +15,7 @@ import {HttpErrorResponse} from "@angular/common/http";
   styleUrls: ['./volunteer.add.component.css']
 })
 export class VolunteerAddComponent implements OnInit {
-  public error;
+  public alertModel = new AlertModel();
   public genders = GenderUtil.genders;
   public volunteer: VolunteerModel;
   public dateOfBirth;
@@ -55,7 +56,7 @@ export class VolunteerAddComponent implements OnInit {
         this.router.navigate(['../' + volunteerExtId.value], {relativeTo: this.route});
       },
       (error: HttpErrorResponse) => {
-        this.error = error;
+        this.alertModel.setError(error);
       }
     );
   }

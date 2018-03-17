@@ -37,11 +37,11 @@ export class VolunteerEditActiveComponent extends VolunteerActiveComponent {
 
   doHttpRequest() {
     this.volunteerService.updateVolunteerInstance(this.volunteerInstanceModel).subscribe(
-      (response: Response) => {
-        this.error = this.volunteerDetailService.retrieveVolunteer(this.volunteer.externalIdentifier, this.volunteerService);
+      () => {
+        this.alertModel.setError(this.volunteerDetailService.retrieveVolunteer(this.volunteer.externalIdentifier, this.volunteerService));
       },
       (error: HttpErrorResponse) => {
-        this.error = error;
+        this.alertModel.setError(error);
       }
     );
   }

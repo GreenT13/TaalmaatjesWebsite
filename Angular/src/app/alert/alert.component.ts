@@ -1,4 +1,5 @@
 import {Component, Input} from "@angular/core";
+import {AlertModel} from "./alert.model";
 
 @Component({
   selector: 'app-alert-component',
@@ -7,6 +8,6 @@ import {Component, Input} from "@angular/core";
 })
 export class AlertComponent {
   @Input()
-  public error;
+  public alertModel: AlertModel;
 
 }

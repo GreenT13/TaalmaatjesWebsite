@@ -4,6 +4,7 @@ import {VolunteerService} from "../../services/volunteer.service";
 import {VolunteerModel} from "../../valueobject/volunteer.model";
 import {VolunteerDetailService} from "./volunteer.detail.service";
 import {NameUtil} from "../../util/name.util";
+import {AlertModel} from "../../alert/alert.model";
 
 @Component({
   selector: 'app-volunteer-detail',
@@ -12,7 +13,7 @@ import {NameUtil} from "../../util/name.util";
   styleUrls: ['./volunteer.detail.component.css']
 })
 export class VolunteerDetailComponent implements OnInit {
-  public error;
+  public alertModel = new AlertModel();
   public volunteer: VolunteerModel = new VolunteerModel();
   public parseName = NameUtil.parseName;
 
@@ -28,7 +29,7 @@ export class VolunteerDetailComponent implements OnInit {
             this.volunteerDetailService.setVolunteer(response);
           },
           (error) => {
-            this.error = error;
+            this.alertModel.setError(error);
             // Clear the volunteer on screen if there was any.
             this.volunteer = new VolunteerModel();
           }

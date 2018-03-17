@@ -6,6 +6,7 @@ import {VolunteerInstanceModel} from "../../../valueobject/volunteerinstance.mod
 import {VolunteerModel} from "../../../valueobject/volunteer.model";
 import {ActivatedRoute} from "@angular/router";
 import {IMyDpOptions} from "mydatepicker";
+import {AlertModel} from "../../../alert/alert.model";
 
 export abstract class VolunteerActiveComponent implements OnInit {
   public dateStartActive;
@@ -16,7 +17,7 @@ export abstract class VolunteerActiveComponent implements OnInit {
   };
   public volunteerInstanceModel: VolunteerInstanceModel;
   protected volunteer: VolunteerModel;
-  public error = null;
+  public alertModel = new AlertModel();
 
   constructor(protected volunteerService: VolunteerService,
               protected volunteerDetailService: VolunteerDetailService,

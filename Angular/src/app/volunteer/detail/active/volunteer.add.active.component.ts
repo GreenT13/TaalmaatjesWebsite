@@ -4,7 +4,6 @@ import {VolunteerDetailService} from "../volunteer.detail.service";
 import {VolunteerService} from "../../../services/volunteer.service";
 import {ActivatedRoute} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
-import {VolunteerModel} from "../../../valueobject/volunteer.model";
 
 @Component({
   selector: 'app-volunteer-add-active',
@@ -21,11 +20,11 @@ export class VolunteerAddActiveComponent extends VolunteerActiveComponent {
 
   doHttpRequest() {
     this.volunteerService.insertVolunteerInstance(this.volunteerInstanceModel).subscribe(
-      (response: Response) => {
-        this.error = this.volunteerDetailService.retrieveVolunteer(this.volunteer.externalIdentifier, this.volunteerService);
+      () => {
+        this.alertModel.setError(this.volunteerDetailService.retrieveVolunteer(this.volunteer.externalIdentifier, this.volunteerService));
       },
       (error: HttpErrorResponse) => {
-        this.error = error;
+        this.alertModel.setError(error);
       }
     );
   }

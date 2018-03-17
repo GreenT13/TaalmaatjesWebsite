@@ -6,6 +6,7 @@ import {NameUtil} from "../../util/name.util";
 import {HttpErrorResponse} from "@angular/common/http";
 import {FormUtil} from "../../util/form.util";
 import {Subscription} from "rxjs/Subscription";
+import {AlertModel} from "../../alert/alert.model";
 
 @Component({
   selector: 'app-volunteer-overview',
@@ -13,7 +14,7 @@ import {Subscription} from "rxjs/Subscription";
   styleUrls: ['./volunteer.overview.component.css']
 })
 export class VolunteerOverviewComponent implements OnInit {
-  public error;
+  public alertModel = new AlertModel();
   volunteers: VolunteerModel[];
   parseName = NameUtil.parseName;
   currentHttpRequest: Subscription = null;
@@ -54,7 +55,7 @@ export class VolunteerOverviewComponent implements OnInit {
         this.volunteers = volunteers;
       },
       (error: HttpErrorResponse) => {
-        this.error = error;
+        this.alertModel.setError(error);
       });
   }
 }

@@ -1,11 +1,11 @@
-<!-- Alert -->
-<div *ngIf="error != null" class="alert alert-danger alert-dismissible" role="alert">
+<!-- Error -->
+<div *ngIf="alertModel.getElement() != null" [class]="'alert alert-dismissible alert-' + alertModel.getClass()" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  {{ error.error.title }}
-  <span *ngIf="error.error.detail != null">
+  {{ alertModel.getElement().title }}
+  <span *ngIf="alertModel.getElement().detail != null">
     (<a data-toggle="collapse" data-target="#detail-panel">meer details</a>)
   </span>
   <div id="detail-panel" class="collapse">
-    {{ error.error.detail }}
+    {{ alertModel.getElement().detail }}
   </div>
 </div>
