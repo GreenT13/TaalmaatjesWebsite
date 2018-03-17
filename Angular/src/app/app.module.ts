@@ -22,6 +22,7 @@ import {MyDatePipe} from "./pipes/mydate.pipe";
 import {GenderPipe} from "./pipes/gender.pipe";
 import {BooleanPipe} from "./pipes/boolean.pipe";
 import {VolunteerAddActiveComponent} from "./volunteer/detail/active/volunteer.add.active.component";
+import {VersionService} from "./services/version.service";
 
 
 @NgModule({
@@ -44,7 +45,7 @@ import {VolunteerAddActiveComponent} from "./volunteer/detail/active/volunteer.a
     MyDatePickerModule
   ],
   providers: [
-    MyHttpClient, LoginService, VolunteerService,
+    MyHttpClient, LoginService, VolunteerService, VersionService,
     OverlayService, AuthGuardService],
   bootstrap: [AppComponent]
 })
