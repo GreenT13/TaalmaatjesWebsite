@@ -1,6 +1,5 @@
 package com.apon.resteasy;
 
-import com.apon.service.IService;
 import org.reflections.Reflections;
 
 import javax.ws.rs.Path;
@@ -8,7 +7,7 @@ import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"unchecked", "unused"})
 public class ApiApplication extends Application {
     private Set<Object> singletons = new HashSet();
     private Set<Class<?>> classes = new HashSet();
@@ -31,7 +30,6 @@ public class ApiApplication extends Application {
      * @param reflections Used to search the classes.
      * @param annotation The annotation needed.
      */
-    @SuppressWarnings("unused")
     private void addInstanceToSetWithAnnotation(Reflections reflections,
                                                 Class<? extends java.lang.annotation.Annotation> annotation) {
         for (Class<?> myClass : reflections.getTypesAnnotatedWith(annotation)) {
