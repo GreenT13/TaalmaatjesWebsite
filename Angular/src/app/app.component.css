@@ -26,11 +26,6 @@ div.overlay.light { background: url("spinner-blue.svg") no-repeat center; }
   background-color: transparent;
 }
 
-/* This padding doubles because I start with columns in each subview. */
-.center-container {
-  padding: 0;
-}
-
 /* Remove weird corners. They only stand out in light theme, but this is a fine fix in dark theme as well. */
 .navbar {
   border-radius: 0;

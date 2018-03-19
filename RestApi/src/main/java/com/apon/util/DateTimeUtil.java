@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+@SuppressWarnings({"RedundantIfStatement", "unused"})
 public class DateTimeUtil {
 
     private static LocalDate toLocalDate(Date d) {
@@ -30,7 +31,7 @@ public class DateTimeUtil {
      * @param d Date
      * @param r1 Start date of the range.
      * @param r2 End date of the range.
-     * @return
+     * @return boolean
      */
     public static boolean isBetween(Date d, Date r1, Date r2) {
         return isBetween(toLocalDate(d), toLocalDate(r1), toLocalDate(r2));
@@ -104,11 +105,11 @@ public class DateTimeUtil {
     /**
      * Determine whether holds [d1, d2] \subset [e1, e2]. This is equivalent to
      * d1 \in [e1, e2] and d2 \in [e1,e2].
-     * @param d1
-     * @param d2
-     * @param e1
-     * @param e2
-     * @return
+     * @param d1 Start range 1.
+     * @param d2 End range 1.
+     * @param e1 Start range 1.
+     * @param e2 End range 1.
+     * @return boolean
      */
     public static boolean isContained(Date d1, Date d2, Date e1, Date e2) {
         return isBetween(d1, e1, e2) && isBetween(d2, e1, e2);
@@ -118,6 +119,9 @@ public class DateTimeUtil {
         return nrOfDaysInBetween(toLocalDate(d1), toLocalDate(d2));
     }
     private static long nrOfDaysInBetween(LocalDate d1, LocalDate d2) {
+        if (d2 == null) {
+            return Long.MAX_VALUE;
+        }
         return ChronoUnit.DAYS.between(d1, d2);
     }
 

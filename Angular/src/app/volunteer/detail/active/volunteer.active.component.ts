@@ -4,7 +4,7 @@ import {VolunteerService} from "../../../services/volunteer.service";
 import {DateUtil} from "../../../util/date.util";
 import {VolunteerInstanceModel} from "../../../valueobject/volunteerinstance.model";
 import {VolunteerModel} from "../../../valueobject/volunteer.model";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {IMyDpOptions} from "mydatepicker";
 import {AlertModel} from "../../../alert/alert.model";
 import {DestroyUtil} from "../../../util/destroy.util";
@@ -27,6 +27,7 @@ export abstract class VolunteerActiveComponent implements OnInit, OnDestroy {
 
   constructor(protected volunteerService: VolunteerService,
               protected volunteerDetailService: VolunteerDetailService,
+              protected router: Router,
               protected route: ActivatedRoute,
               public title: string) {
   }
@@ -60,4 +61,6 @@ export abstract class VolunteerActiveComponent implements OnInit, OnDestroy {
   }
 
   abstract doHttpRequest();
+
+  delete() { }
 }

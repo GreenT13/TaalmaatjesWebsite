@@ -122,6 +122,40 @@ public class VolunteerInstanceService implements IService {
     }
 
     /**
+     * Delete instance from the database. Checks if there are no matches inside the instance.
+     * @param volunteerExtId The extId from the volunteer.
+     * @param volunteerInstanceExtId The extId from the volunteer instance.
+     * @throws Exception FunctionalException
+     */
+    @DELETE
+    @Path("{volunteerInstanceExtId}")
+    @InjectContext
+    public void delete(@PathParam("volunteerExtId") String volunteerExtId,
+                       @PathParam("volunteerInstanceExtId") String volunteerInstanceExtId) throws Exception {
+        // Retrieve the instance.
+        VolunteerInstanceMyDao volunteerInstanceMyDao = new VolunteerInstanceMyDao(context);
+        VolunteerinstancePojo volunteerinstancePojo = volunteerInstanceMyDao.fetchByExtIds(volunteerExtId, volunteerInstanceExtId);
+        if (volunteerinstancePojo == null) {
+            throw new FunctionalException("VolunteerInstanceService.notFound.instance");
+        }
+
+        // Check that there are no matches contained inside the instance.
+        VolunteerMatchMyDao volunteerMatchMyDao = new VolunteerMatchMyDao(context);
+        for (VolunteermatchPojo volunteermatchPojo : volunteerMatchMyDao.getMatchForVolunteer(volunteerExtId)) {
+            if (isMatchCompletelyInsideInstance(volunteermatchPojo, volunteerinstancePojo)) {
+                // This match would fall outside of activity range, hence we cannot delete the instance.
+                throw new FunctionalException("VolunteerInstanceService.error.matchWithoutInstance");
+            }
+        }
+
+        // Delete the instance.
+        volunteerInstanceMyDao.delete(volunteerinstancePojo);
+
+        // Commit the changes.
+        context.commit();
+    }
+
+    /**
      * Check if the line can be added to the database. Merge the line if needed. Returns true if added (possibly merged)
      * and return false if some verification failed.
      * @param volunteerExtId The extId from the volunteer.
@@ -223,7 +257,7 @@ public class VolunteerInstanceService implements IService {
 
         // Merge before if possible.
         if (mergeBeforeVolunteerInstanceExtId != null) {
-            VolunteerinstancePojo mergedVolunteerinstancePojo = volunteerInstanceMyDao.fetchByExtIds(volunteerExtId, mergeAfterVolunteerInstanceExtId);
+            VolunteerinstancePojo mergedVolunteerinstancePojo = volunteerInstanceMyDao.fetchByExtIds(volunteerExtId, mergeBeforeVolunteerInstanceExtId);
             volunteerinstancePojoNew.setDatestart(mergedVolunteerinstancePojo.getDatestart());
             volunteerInstanceMyDao.delete(mergedVolunteerinstancePojo);
         }
@@ -293,8 +327,13 @@ public class VolunteerInstanceService implements IService {
                 return true;
             }
         }
-
         return false;
+    }
+
+    private boolean isMatchCompletelyInsideInstance(VolunteermatchPojo volunteermatchPojo, VolunteerinstancePojo volunteerinstancePojo) {
+        List<VolunteerinstancePojo> volunteerInstancePojos = new ArrayList();
+        volunteerInstancePojos.add(volunteerinstancePojo);
+        return isMatchCompletelyInsideInstance(volunteermatchPojo, volunteerInstancePojos);
     }
 
     @Override

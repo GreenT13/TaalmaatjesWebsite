@@ -25,9 +25,12 @@
       </div>
       <div class="pull-right">
         <input type="submit" class="btn btn-default" value="Opslaan">
-        <!-- Only one specific point: returning is one or two back. -->
-        <a *ngIf="volunteerInstanceModel.externalIdentifier == null" class="btn btn-default" [routerLink]="['../']">Terug</a>
+        <!-- Edit -->
+        <a *ngIf="volunteerInstanceModel.externalIdentifier != null" class="btn btn-default" (click)="delete()">Verwijderen</a>
         <a *ngIf="volunteerInstanceModel.externalIdentifier != null" class="btn btn-default" [routerLink]="['../../']">Terug</a>
+
+        <!-- Add -->
+        <a *ngIf="volunteerInstanceModel.externalIdentifier == null" class="btn btn-default" [routerLink]="['../']">Terug</a>
       </div>
     </div>
   </div>

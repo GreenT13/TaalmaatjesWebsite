@@ -37,4 +37,10 @@ export class VolunteerService {
       volunteerInstanceModel.externalIdentifier, null, volunteerInstanceModel);
   }
 
+
+  deleteVolunteerInstance(volunteerExtId: string, volunteerInstanceExtId: string) {
+    return this.myHttpClient.delete('volunteer/' + volunteerExtId + '/instance/' + volunteerInstanceExtId, null);
+  }
+
+
 }

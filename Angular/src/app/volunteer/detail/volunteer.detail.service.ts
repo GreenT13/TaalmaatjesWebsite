@@ -17,8 +17,9 @@ export class VolunteerDetailService {
     return this.subject.asObservable();
   }
 
-  public retrieveVolunteer(extId: string, volunteerService: VolunteerService): any {
-    volunteerService.getVolunteer(extId).subscribe(
+  public retrieveVolunteer(extId: string, volunteerService: VolunteerService) {
+    let observable = volunteerService.getVolunteer(extId);
+    observable.subscribe(
       (response: VolunteerModel) => {
         this.setVolunteer(response);
         return null;
@@ -27,5 +28,6 @@ export class VolunteerDetailService {
         return error;
       }
     );
+    return observable;
   }
 }
