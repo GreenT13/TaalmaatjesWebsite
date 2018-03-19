@@ -1,6 +1,7 @@
 package com.apon.service.valueobject.mapper;
 
 import com.apon.database.generated.tables.pojos.TaskPojo;
+import com.apon.database.generated.tables.pojos.VolunteerPojo;
 import com.apon.service.valueobject.TaskValueObject;
 
 public class TaskMapper {
@@ -30,19 +31,25 @@ public class TaskMapper {
         fillValueObjectWithPojo(taskPojo);
     }
 
-    public void fillValueObjectWithPojo(TaskPojo taskPojo) {
+    public void setVolunteerPojo(VolunteerPojo volunteerPojo) {
+        VolunteerMapper volunteerMapper = new VolunteerMapper();
+        volunteerMapper.setVolunteerPojo(volunteerPojo);
+        this.taskValueObject.setVolunteerValueObject(volunteerMapper.getVolunteerValueObject());
+    }
+
+    private void fillValueObjectWithPojo(TaskPojo taskPojo) {
         taskValueObject.setTaskExtId(taskPojo.getExternalidentifier());
         taskValueObject.setTitle(taskPojo.getTitle());
         taskValueObject.setDescription(taskPojo.getDescription());
-        taskValueObject.setFinished(taskPojo.getIsfinished());
+        taskValueObject.setIsFinished(taskPojo.getIsfinished());
         taskValueObject.setDateToBeFinished(taskPojo.getDatetobefinished());
     }
 
-    public void fillPojoWithValueObject(TaskValueObject taskValueObject) {
+    private void fillPojoWithValueObject(TaskValueObject taskValueObject) {
         taskPojo.setExternalidentifier(taskValueObject.getTaskExtId());
         taskPojo.setTitle(taskValueObject.getTitle());
         taskPojo.setDescription(taskValueObject.getDescription());
-        taskPojo.setIsfinished(taskValueObject.getFinished());
+        taskPojo.setIsfinished(taskValueObject.getIsFinished());
         taskPojo.setDatetobefinished(taskValueObject.getDateToBeFinished());
     }
 

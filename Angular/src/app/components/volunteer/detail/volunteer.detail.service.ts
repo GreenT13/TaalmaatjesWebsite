@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
-import {VolunteerModel} from "../../valueobject/volunteer.model";
+import {VolunteerModel} from "../../../valueobject/volunteer.model";
 import {Observable} from "rxjs/Observable";
 import {ReplaySubject} from "rxjs/ReplaySubject";
-import {VolunteerService} from "../../services/volunteer.service";
+import {VolunteerService} from "../../../services/volunteer.service";
 
 @Injectable()
 export class VolunteerDetailService {

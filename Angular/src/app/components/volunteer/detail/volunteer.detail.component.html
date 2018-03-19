@@ -99,14 +99,16 @@
       </div>
     </div>
 
-
     <!-- Tasks -->
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h1 class="panel-title"><span data-toggle="collapse" data-target="#task-panel" class="glyphicon glyphicon-pushpin"></span>Taken</h1>
       </div>
       <div id="task-panel" class="list-group collapse in">
-        <a *ngFor="let task of volunteer.taskValueObjects" class="list-group-item">{{ task.title }}.</a>
+        <ng-container *ngFor="let task of volunteer.taskValueObjects" >
+        <a  *ngIf="task.isFinished == false" class="list-group-item">
+          {{ task.dateToBeFinished | mydate }} | {{ task.title }}.</a>
+        </ng-container>
       </div>
     </div>
 

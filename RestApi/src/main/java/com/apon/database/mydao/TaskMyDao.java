@@ -4,14 +4,16 @@ import com.apon.database.generated.tables.Task;
 import com.apon.database.generated.tables.Volunteer;
 import com.apon.database.generated.tables.daos.TaskDao;
 import com.apon.database.generated.tables.pojos.TaskPojo;
-import com.apon.database.generated.tables.records.TaskRecord;
+import com.apon.database.generated.tables.pojos.VolunteerPojo;
 import com.apon.database.jooq.DbContext;
 import com.apon.exceptionhandler.ResultObject;
 import com.apon.util.ResultUtil;
+import org.jooq.Record;
 import org.jooq.SelectWhereStep;
 import org.jooq.util.mysql.MySQLDataType;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.jooq.impl.DSL.select;
 import static org.jooq.impl.DSL.using;
@@ -117,6 +119,16 @@ public class TaskMyDao extends TaskDao {
         return true;
     }
 
+    public boolean deletePojo(TaskPojo taskPojo) {
+        try {
+            super.delete(taskPojo);
+        } catch (Exception e) {
+            resultObject = ResultUtil.createErrorResult("TaskMyDao.delete.error", e);
+        }
+
+        return true;
+    }
+
     /**
      * Get all tasks for a volunteer, ordered by dateToBeFinished (asc).
      * @param volunteerExtId The extId from the volunteer.
@@ -140,8 +152,12 @@ public class TaskMyDao extends TaskDao {
      * @param volunteerExtId Task must belong to this volunteer.
      * @return List&lt;TaskPojo&gt;
      */
-    public List<TaskPojo> advancedSearch(String title, String description, Boolean isFinished, String volunteerExtId) {
-        SelectWhereStep<TaskRecord> query = using(configuration()).selectFrom(Task.TASK);
+    public Map<TaskPojo, List<VolunteerPojo>> advancedSearch(String title, String description, Boolean isFinished, String volunteerExtId) {
+        SelectWhereStep<Record> query = using(configuration())
+                .select(Task.TASK.fields())
+                .select(Volunteer.VOLUNTEER.fields())
+                .from(Task.TASK)
+                .join(Volunteer.VOLUNTEER).on(Volunteer.VOLUNTEER.VOLUNTEERID.eq(Task.TASK.VOLUNTEERID));
 
         // Search for title. Since this is hard to search for, we use %description%.
         if (title != null && title.trim().length() > 0) {
@@ -163,24 +179,9 @@ public class TaskMyDao extends TaskDao {
                             .where(Volunteer.VOLUNTEER.EXTERNALIDENTIFIER.eq(volunteerExtId))));
         }
 
-        return query.orderBy(Task.TASK.DATETOBEFINISHED.asc()).limit(50).fetch().map(mapper());
+        return query.orderBy(Task.TASK.DATETOBEFINISHED.asc()).limit(50).fetchGroups(
+                r -> r.into(Task.TASK).into(TaskPojo.class),
+                r -> r.into(Volunteer.VOLUNTEER).into(VolunteerPojo.class)
+        );
     }
-
-//    If I ever want to use the functions below, I should return how many rows it deleted / updated. This is really useful for finding bugs.
-//    public void deleteTask(int taskId) {
-//        using(configuration())
-//                .deleteFrom(Task.TASK)
-//                .where(Task.TASK.TASKID.eq(taskId))
-//                .returning()
-//                .fetch();
-//    }
-//
-//    public void finishTask(int taskId, boolean isFinished) {
-//        using(configuration())
-//                .update(Task.TASK)
-//                .set(Task.TASK.ISFINISHED, isFinished)
-//                .where(Task.TASK.TASKID.eq(taskId))
-//                .returning()
-//                .fetch();
-//    }
 }

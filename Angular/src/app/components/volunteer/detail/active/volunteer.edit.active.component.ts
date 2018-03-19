@@ -1,10 +1,10 @@
 import {Component} from "@angular/core";
 import {VolunteerActiveComponent} from "./volunteer.active.component";
 import {VolunteerDetailService} from "../volunteer.detail.service";
-import {VolunteerService} from "../../../services/volunteer.service";
+import {VolunteerService} from "../../../../services/volunteer.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {DateUtil} from "../../../util/date.util";
-import {CopyUtil} from "../../../util/copy.util";
+import {DateUtil} from "../../../../util/date.util";
+import {CopyUtil} from "../../../../util/copy.util";
 import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({

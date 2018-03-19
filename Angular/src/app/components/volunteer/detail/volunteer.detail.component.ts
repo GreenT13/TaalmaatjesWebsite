@@ -1,11 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {VolunteerService} from "../../services/volunteer.service";
-import {VolunteerModel} from "../../valueobject/volunteer.model";
+import {VolunteerService} from "../../../services/volunteer.service";
+import {VolunteerModel} from "../../../valueobject/volunteer.model";
 import {VolunteerDetailService} from "./volunteer.detail.service";
-import {NameUtil} from "../../util/name.util";
+import {NameUtil} from "../../../util/name.util";
 import {AlertModel} from "../../alert/alert.model";
-import {DestroyUtil} from "../../util/destroy.util";
+import {DestroyUtil} from "../../../util/destroy.util";
 
 @Component({
   selector: 'app-volunteer-detail',

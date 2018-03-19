@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 import {VolunteerActiveComponent} from "./volunteer.active.component";
 import {VolunteerDetailService} from "../volunteer.detail.service";
-import {VolunteerService} from "../../../services/volunteer.service";
+import {VolunteerService} from "../../../../services/volunteer.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
 

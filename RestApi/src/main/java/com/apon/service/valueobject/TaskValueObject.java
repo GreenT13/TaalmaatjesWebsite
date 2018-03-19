@@ -6,9 +6,10 @@ public class TaskValueObject {
     private String taskExtId;
     private String title;
     private String description;
-    private String volunteerExtId;
     private Boolean isFinished;
     private Date dateToBeFinished;
+
+    private VolunteerValueObject volunteerValueObject;
 
     public String getTaskExtId() {
         return taskExtId;
@@ -34,19 +35,11 @@ public class TaskValueObject {
         this.description = description;
     }
 
-    public String getVolunteerExtId() {
-        return volunteerExtId;
-    }
-
-    public void setVolunteerExtId(String volunteerExtId) {
-        this.volunteerExtId = volunteerExtId;
-    }
-
-    public Boolean getFinished() {
+    public Boolean getIsFinished() {
         return isFinished;
     }
 
-    public void setFinished(Boolean finished) {
+    public void setIsFinished(Boolean finished) {
         isFinished = finished;
     }
 
@@ -56,5 +49,13 @@ public class TaskValueObject {
 
     public void setDateToBeFinished(Date dateToBeFinished) {
         this.dateToBeFinished = dateToBeFinished;
+    }
+
+    public VolunteerValueObject getVolunteerValueObject() {
+        return volunteerValueObject;
+    }
+
+    public void setVolunteerValueObject(VolunteerValueObject volunteerValueObject) {
+        this.volunteerValueObject = volunteerValueObject;
     }
 }

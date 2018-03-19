@@ -1,11 +1,11 @@
 import {Component, OnInit} from "@angular/core";
 import {IMyDpOptions} from 'mydatepicker';
-import {DateUtil} from "../../util/date.util";
-import {VolunteerModel} from "../../valueobject/volunteer.model";
-import {GenderUtil} from "../../util/gender.util";
-import {VolunteerService} from "../../services/volunteer.service";
+import {DateUtil} from "../../../util/date.util";
+import {VolunteerModel} from "../../../valueobject/volunteer.model";
+import {GenderUtil} from "../../../util/gender.util";
+import {VolunteerService} from "../../../services/volunteer.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {SingleStringModel} from "../../valueobject/singlestring.model";
+import {SingleStringModel} from "../../../valueobject/singlestring.model";
 import {HttpErrorResponse} from "@angular/common/http";
 import {AlertModel} from "../../alert/alert.model";
 

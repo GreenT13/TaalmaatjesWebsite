@@ -1,13 +1,13 @@
 import {OnDestroy, OnInit} from "@angular/core";
 import {VolunteerDetailService} from "../volunteer.detail.service";
-import {VolunteerService} from "../../../services/volunteer.service";
-import {DateUtil} from "../../../util/date.util";
-import {VolunteerInstanceModel} from "../../../valueobject/volunteerinstance.model";
-import {VolunteerModel} from "../../../valueobject/volunteer.model";
+import {VolunteerService} from "../../../../services/volunteer.service";
+import {DateUtil} from "../../../../util/date.util";
+import {VolunteerInstanceModel} from "../../../../valueobject/volunteerinstance.model";
+import {VolunteerModel} from "../../../../valueobject/volunteer.model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {IMyDpOptions} from "mydatepicker";
 import {AlertModel} from "../../../alert/alert.model";
-import {DestroyUtil} from "../../../util/destroy.util";
+import {DestroyUtil} from "../../../../util/destroy.util";
 
 export abstract class VolunteerActiveComponent implements OnInit, OnDestroy {
   protected destroyUtil: DestroyUtil = new DestroyUtil();

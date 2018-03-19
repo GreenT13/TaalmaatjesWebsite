@@ -2,21 +2,23 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
 import {AuthGuardService} from './auth-guard.service';
-import {LoginComponent} from '../login/login.component';
-import {VolunteerOverviewComponent} from "../volunteer/overview/volunteer.overview.component";
-import {VolunteerDetailComponent} from "../volunteer/detail/volunteer.detail.component";
-import {VolunteerAddComponent} from "../volunteer/add/volunteer.add.component";
-import {VolunteerEditActiveComponent} from "../volunteer/detail/active/volunteer.edit.active.component";
-import {VolunteerAddActiveComponent} from "../volunteer/detail/active/volunteer.add.active.component";
+import {LoginComponent} from '../components/login/login.component';
+import {VolunteerOverviewComponent} from "../components/volunteer/overview/volunteer.overview.component";
+import {VolunteerDetailComponent} from "../components/volunteer/detail/volunteer.detail.component";
+import {VolunteerAddComponent} from "../components/volunteer/add/volunteer.add.component";
+import {VolunteerEditActiveComponent} from "../components/volunteer/detail/active/volunteer.edit.active.component";
+import {VolunteerAddActiveComponent} from "../components/volunteer/detail/active/volunteer.add.active.component";
+import {TaskOverviewComponent} from "../components/task/overview/task.overview.component";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'volunteer', canActivate: [AuthGuardService], component: VolunteerOverviewComponent},
-  { path: 'volunteer/add', canActivate: [AuthGuardService], component: VolunteerAddComponent},
+  { path: 'volunteer', canActivate: [AuthGuardService], component: VolunteerOverviewComponent },
+  { path: 'volunteer/add', canActivate: [AuthGuardService], component: VolunteerAddComponent },
   { path: 'volunteer/:volunteerExtId', canActivate: [AuthGuardService], component: VolunteerDetailComponent, children: [
-      { path: 'active/:volunteerInstanceExtId', component: VolunteerEditActiveComponent},
-      { path: 'active', component: VolunteerAddActiveComponent}]}
+      { path: 'active/:volunteerInstanceExtId', component: VolunteerEditActiveComponent },
+      { path: 'active', component: VolunteerAddActiveComponent }]},
+  { path: 'task', canActivate: [AuthGuardService], component: TaskOverviewComponent }
       ];
 
 @NgModule({
