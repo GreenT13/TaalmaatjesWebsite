@@ -9,7 +9,10 @@ export class DestroyUtil {
 
   public destroy() {
     for (let subscribe of this.subscribed) {
-      subscribe.unsubscribe();
+      if (subscribe) {
+        subscribe.unsubscribe();
+      }
     }
+    this.subscribed = [];
   }
 }
