@@ -7,17 +7,15 @@ export class ThemeService {
   private currentTheme;
 
   constructor(private cookieService: CookieService) {
-    // // Set theme to the theme from the cookie, if it exists.
-    // if (this.cookieService.get('theme')) {
-    //   this.currentTheme = this.cookieService.get('theme');
-    //   this.changeTheme.emit(this.currentTheme);
-    // } else {
-    //   this.cookieService.put('theme', 'dark');
-    //   this.currentTheme = 'dark';
-    //   this.changeTheme.emit(this.currentTheme);
-    // }
-      this.currentTheme = 'light';
+    // Set theme to the theme from the cookie, if it exists.
+    if (this.cookieService.get('theme')) {
+      this.currentTheme = this.cookieService.get('theme');
       this.changeTheme.emit(this.currentTheme);
+    } else {
+      this.cookieService.put('theme', 'dark');
+      this.currentTheme = 'dark';
+      this.changeTheme.emit(this.currentTheme);
+    }
   }
 
   public toggleTheme() {
