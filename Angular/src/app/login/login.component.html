@@ -9,9 +9,9 @@
 
         <div class="col-sm-12">
           <form (ngSubmit)="onSubmit()">
-            <!-- Alert -->
-            <div *ngIf="errorMessage != null" class="alert alert-danger" role="alert">
-              {{ errorMessage }}
+            <!-- Alert. Specific one for login screen. -->
+            <div *ngIf="alertModel.getElement() != null" class="alert alert-danger" role="alert">
+              {{ alertModel.getElement().title }}
             </div>
 
             <div class="form-group input-group">

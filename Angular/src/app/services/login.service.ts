@@ -27,8 +27,12 @@ export class LoginService {
   }
 
   logout() {
-    this.myHttpClient.get('user/logout', null);
-    this.loggedIn = false;
+    let observable = this.myHttpClient.get('user/logout', null);
+    observable.subscribe(
+      () => this.loggedIn = false
+    );
+
+    return observable;
   }
 
   isLoggedIn(): boolean {

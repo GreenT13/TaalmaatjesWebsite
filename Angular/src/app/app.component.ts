@@ -4,6 +4,7 @@ import {OverlayService} from "./services/overlay.service";
 import {LoginService} from "./services/login.service";
 import {ThemeService} from "./services/theme.service";
 import {Router} from "@angular/router";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-root',
@@ -46,7 +47,9 @@ export class AppComponent {
   }
 
   logout() {
-    this.loginService.logout();
-    this.router.navigate(['/login']);
+    this.loginService.logout().subscribe(
+      () => this.router.navigate(['/login']),
+      (error: HttpErrorResponse) => console.log(error)
+    );
   }
 }

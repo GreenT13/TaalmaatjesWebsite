@@ -3,6 +3,8 @@ import {Router} from '@angular/router';
 import {LoginService} from "../services/login.service";
 import {VersionService} from "../services/version.service";
 import {SingleStringModel} from "../valueobject/singlestring.model";
+import {HttpErrorResponse} from "@angular/common/http";
+import {AlertModel} from "../alert/alert.model";
 
 @Component({
   selector: 'app-login',
@@ -12,7 +14,7 @@ import {SingleStringModel} from "../valueobject/singlestring.model";
 export class LoginComponent {
   username: string;
   password: string;
-  errorMessage: string;
+  alertModel: AlertModel = new AlertModel();
   version: string;
 
   constructor(private loginService: LoginService,
@@ -33,8 +35,8 @@ export class LoginComponent {
       (version: SingleStringModel) => {
         this.version = version.value;
       },
-      () => {
-        this.errorMessage = 'Versie kon niet opgehaald worden.';
+      (error: HttpErrorResponse) => {
+        this.alertModel.setError(error);
       }
     )
   }
@@ -44,8 +46,8 @@ export class LoginComponent {
       () => {
         // We already route because of constructor.
       },
-      () => {
-        this.errorMessage = 'Inloggen mislukt.'
+      (error: HttpErrorResponse) => {
+        this.alertModel.setError(error);
       });
   }
 }
