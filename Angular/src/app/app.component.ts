@@ -1,17 +1,23 @@
-import {Component, Inject} from '@angular/core';
+import {Component, Inject, OnDestroy} from '@angular/core';
 import {DOCUMENT} from "@angular/common";
 import {OverlayService} from "./services/overlay.service";
 import {LoginService} from "./services/login.service";
 import {ThemeService} from "./services/theme.service";
 import {Router} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
+import {DestroyUtil} from "./util/destroy.util";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
+  private destroyUtil: DestroyUtil = new DestroyUtil();
+  ngOnDestroy(): void {
+    this.destroyUtil.destroy();
+  }
+
   hrefDarkTheme: string = 'https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/slate/bootstrap.min.css';
   hrefLightTheme: string = 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css';
   public showOverlay: boolean = false;
@@ -28,9 +34,9 @@ export class AppComponent {
     this.loadTheme(this.themeService.getTheme());
 
     // Subscribe so that if theme changes, bootstrap theme changes with it.
-    this.themeService.changeTheme.subscribe(
+    this.destroyUtil.addSubscription(this.themeService.changeTheme.subscribe(
       (theme: string) => this.loadTheme(theme)
-    );
+    ));
   }
 
   private loadTheme(theme: string) {

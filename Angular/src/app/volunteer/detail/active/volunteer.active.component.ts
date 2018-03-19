@@ -1,4 +1,4 @@
-import {OnInit} from "@angular/core";
+import {OnDestroy, OnInit} from "@angular/core";
 import {VolunteerDetailService} from "../volunteer.detail.service";
 import {VolunteerService} from "../../../services/volunteer.service";
 import {DateUtil} from "../../../util/date.util";
@@ -7,8 +7,14 @@ import {VolunteerModel} from "../../../valueobject/volunteer.model";
 import {ActivatedRoute} from "@angular/router";
 import {IMyDpOptions} from "mydatepicker";
 import {AlertModel} from "../../../alert/alert.model";
+import {DestroyUtil} from "../../../util/destroy.util";
 
-export abstract class VolunteerActiveComponent implements OnInit {
+export abstract class VolunteerActiveComponent implements OnInit, OnDestroy {
+  protected destroyUtil: DestroyUtil = new DestroyUtil();
+  ngOnDestroy(): void {
+    this.destroyUtil.destroy();
+  }
+
   public dateStartActive;
   public dateEndActive;
   public optionsAll: IMyDpOptions = {
@@ -30,14 +36,14 @@ export abstract class VolunteerActiveComponent implements OnInit {
     this.volunteerInstanceModel = new VolunteerInstanceModel();
 
     // Retrieve the volunteer from the service.
-    this.volunteerDetailService.getVolunteer().subscribe(
+    this.destroyUtil.addSubscription(this.volunteerDetailService.getVolunteer().subscribe(
       (volunteer: VolunteerModel) => {
         this.volunteerInstanceModel.volunteerExtId = volunteer.externalIdentifier;
         this.volunteer = volunteer;
 
         this.retrieveSpecificInstance();
       }
-    );
+    ));
   }
 
   retrieveSpecificInstance() { }
@@ -50,7 +56,7 @@ export abstract class VolunteerActiveComponent implements OnInit {
       this.volunteerInstanceModel.dateEnd = DateUtil.convertIDateToString(this.dateEndActive.date);
     }
 
-    this.doHttpRequest();
+    this.destroyUtil.addSubscription(this.doHttpRequest());
   }
 
   abstract doHttpRequest();

@@ -21,7 +21,7 @@ export class VolunteerEditActiveComponent extends VolunteerActiveComponent {
   }
 
   retrieveSpecificInstance() {
-    this.route.params.subscribe(
+    this.destroyUtil.addSubscription(this.route.params.subscribe(
       (params) => {
         // Find the instance from the volunteer that corresponds to this instance.
         this.volunteerInstanceModel = CopyUtil.createCopy(this.volunteer.volunteerInstanceValueObjects.find(
@@ -32,7 +32,7 @@ export class VolunteerEditActiveComponent extends VolunteerActiveComponent {
         this.dateStartActive = {date: DateUtil.convertStringToIDate(this.volunteerInstanceModel.dateStart)};
         this.dateEndActive = {date: DateUtil.convertStringToIDate(this.volunteerInstanceModel.dateEnd)};
       }
-    );
+    ));
   }
 
   doHttpRequest() {
