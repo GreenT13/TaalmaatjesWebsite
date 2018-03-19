@@ -49,6 +49,11 @@ export class AlertModel {
     if (this.warning != null) {
       return 'warning';
     }
+  }
 
+  public clear() {
+    this.error = null;
+    this.success = null;
+    this.warning = null;
   }
 }
