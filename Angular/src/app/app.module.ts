@@ -28,6 +28,11 @@ import {ThemeService} from "./services/theme.service";
 import {CookieModule} from "ngx-cookie";
 import {TaskService} from "./services/task.service";
 import {TaskOverviewComponent} from "./components/task/overview/task.overview.component";
+import {TaskAddComponent} from "./components/task/add/task.add.component";
+import {AutocompleteComponent} from "./components/autocomplete/autocomplete.component";
+import {VolunteerNamePipe} from "./pipes/volunteername.pipe";
+import {TaskDetailComponent} from "./components/task/detail/task.detail.component";
+import {ShortenPipe} from "./pipes/shorten.pipe";
 
 
 @NgModule({
@@ -35,9 +40,10 @@ import {TaskOverviewComponent} from "./components/task/overview/task.overview.co
     AppComponent,
     LoginComponent,
     VolunteerOverviewComponent, VolunteerDetailComponent, VolunteerAddComponent, VolunteerAddActiveComponent, VolunteerEditActiveComponent,
-    TaskOverviewComponent,
+    TaskOverviewComponent, TaskAddComponent, TaskDetailComponent,
+    AutocompleteComponent,
     AlertComponent,
-    MyDatePipe, GenderPipe, BooleanPipe,
+    MyDatePipe, GenderPipe, BooleanPipe, VolunteerNamePipe, ShortenPipe,
     ThemeDirective
   ],
   imports: [

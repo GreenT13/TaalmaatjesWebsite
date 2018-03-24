@@ -53,8 +53,8 @@
         <tr *ngFor="let task of tasks" (dblclick)="click(task.taskExtId)">
           <td>{{ task.dateToBeFinished | mydate }}</td>
           <td>{{ task.title }}</td>
-          <td>{{ parseName(task.volunteerValueObject) }}</td>
-          <td>{{ task.description }}</td>
+          <td>{{ task.volunteerValueObject | parsevolunteername }}</td>
+          <td>{{ task.description | shorten:100 }}</td>
         </tr>
       </tbody>
     </table>

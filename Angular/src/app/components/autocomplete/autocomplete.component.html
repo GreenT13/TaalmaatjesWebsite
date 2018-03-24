@@ -1,0 +1,13 @@
+<div class="dropdown" >
+  <div class="input-field col s12">
+    <!--suppress HtmlFormInputWithoutLabel -->
+    <input type="text" class="form-control" [(ngModel)]=query (keyup)=filter()>
+  </div>
+  <div id="demo" *ngIf="filteredList.length > 0">
+    <ul class="dropdown-menu" >
+      <li *ngFor="let volunteer of filteredList">
+        <a (click)="select(volunteer)">{{ volunteer | parsevolunteername }}</a>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {VolunteerModel} from "../../../valueobject/volunteer.model";
-import {NameUtil} from "../../../util/name.util";
 import {HttpErrorResponse} from "@angular/common/http";
 import {FormUtil} from "../../../util/form.util";
 import {Subscription} from "rxjs/Subscription";
@@ -17,7 +16,6 @@ import {TaskService} from "../../../services/task.service";
 export class TaskOverviewComponent implements OnInit {
   public alertModel = new AlertModel();
   tasks: TaskModel[];
-  parseName = NameUtil.parseName;
   currentHttpRequest: Subscription = null;
 
   // Searching parameters
@@ -52,7 +50,6 @@ export class TaskOverviewComponent implements OnInit {
     ).subscribe(
       (tasks: any) => {
         this.tasks = tasks;
-        console.log(this.tasks);
       },
       (error: HttpErrorResponse) => {
         this.alertModel.setError(error);

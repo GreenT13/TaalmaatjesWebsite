@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {MyHttpClient} from "./base/myhttpclient.service";
-import 'rxjs/Rx';
 import {VolunteerModel} from "../valueobject/volunteer.model";
+import {TaskModel} from "../valueobject/task.model";
 
 @Injectable()
 export class TaskService {
@@ -16,4 +16,11 @@ export class TaskService {
     return this.myHttpClient.get(url, null);
   }
 
+  insertTask(taskModel: TaskModel) {
+    return this.myHttpClient.put('task', null, taskModel);
+  }
+
+  getTask(taskExtId: string) {
+    return this.myHttpClient.get('task/' + taskExtId, null);
+  }
 }

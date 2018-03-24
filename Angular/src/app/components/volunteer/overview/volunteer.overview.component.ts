@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {VolunteerService} from "../../../services/volunteer.service";
 import {VolunteerModel} from "../../../valueobject/volunteer.model";
-import {NameUtil} from "../../../util/name.util";
 import {HttpErrorResponse} from "@angular/common/http";
 import {FormUtil} from "../../../util/form.util";
 import {Subscription} from "rxjs/Subscription";
@@ -16,7 +15,6 @@ import {AlertModel} from "../../alert/alert.model";
 export class VolunteerOverviewComponent implements OnInit {
   public alertModel = new AlertModel();
   volunteers: VolunteerModel[];
-  parseName = NameUtil.parseName;
   currentHttpRequest: Subscription = null;
 
   // Searching parameters

@@ -7,11 +7,12 @@
     <!-- Text Panel with information from customer. -->
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <h1 class="panel-title"><span data-toggle="collapse" data-target="#user-panel" class="glyphicon glyphicon-user"></span>{{ parseName(volunteer) }}</h1>
+        <h1 class="panel-title"><span data-toggle="collapse" data-target="#user-panel" class="glyphicon glyphicon-user"></span>
+          {{ volunteer | parsevolunteername }}</h1>
       </div>
       <div id="user-panel" class="panel-body collapse in collapsible-text-panel">
         <div class="fix-collapse">
-          <table data-toggle="table" data-pagination="true" class="table table-condensed borderless">
+          <table data-toggle="table" class="table table-condensed borderless">
             <tbody>
             <tr>
               <td>Geboortedatum</td>

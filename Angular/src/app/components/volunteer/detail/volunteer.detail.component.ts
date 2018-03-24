@@ -3,7 +3,6 @@ import {ActivatedRoute} from "@angular/router";
 import {VolunteerService} from "../../../services/volunteer.service";
 import {VolunteerModel} from "../../../valueobject/volunteer.model";
 import {VolunteerDetailService} from "./volunteer.detail.service";
-import {NameUtil} from "../../../util/name.util";
 import {AlertModel} from "../../alert/alert.model";
 import {DestroyUtil} from "../../../util/destroy.util";
 
@@ -18,7 +17,6 @@ export class VolunteerDetailComponent implements OnInit, OnDestroy {
   public alertModel = new AlertModel();
 
   public volunteer: VolunteerModel = new VolunteerModel();
-  public parseName = NameUtil.parseName;
 
   constructor(private volunteerService: VolunteerService,
               public volunteerDetailService: VolunteerDetailService,

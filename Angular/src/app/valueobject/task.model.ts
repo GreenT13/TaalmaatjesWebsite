@@ -6,5 +6,5 @@ export class TaskModel {
   public description: string;
   public volunteerValueObject: VolunteerModel;
   public isFinished: boolean;
-  public dateToBeFinished: Date;
+  public dateToBeFinished: string;
 }
