@@ -1,3 +1,4 @@
+-- noinspection SqlResolve
 SET sql_mode = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
 
 create table scriptlog (
@@ -80,7 +81,7 @@ create table task (
   description varchar(1000),
   volunteerId int not null,
   isFinished boolean not null,
-  dateToBeFinished date,
+  dateToBeFinished date not null,
   constraint `Task_PK` primary key (taskId),
   constraint `Task_ExtId` unique (externalIdentifier),
   constraint `Task_Volu_FK` foreign key (volunteerId) references volunteer (volunteerid)

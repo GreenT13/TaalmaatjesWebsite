@@ -3,6 +3,7 @@ package com.apon.service;
 import com.apon.database.generated.tables.pojos.TaskPojo;
 import com.apon.database.generated.tables.pojos.VolunteerPojo;
 import com.apon.database.jooq.DbContext;
+import com.apon.database.mydao.QueryResult;
 import com.apon.database.mydao.TaskMyDao;
 import com.apon.database.mydao.VolunteerMyDao;
 import com.apon.exceptionhandler.FunctionalException;
@@ -34,13 +35,14 @@ public class TaskService implements IService {
     public TaskValueObject get(@PathParam("taskExtId") String taskExtId) throws Exception {
         // Get taskId
         TaskMyDao taskMyDao = new TaskMyDao(context);
-        TaskPojo taskPojo = taskMyDao.fetchOneByExternalidentifier(taskExtId);
-        if (taskPojo == null) {
+        QueryResult<TaskPojo, VolunteerPojo> result = taskMyDao.retrieveTaskWithVolunteer(taskExtId);
+        if (result == null) {
             throw new FunctionalException("TaskService.notFound.task");
         }
 
         TaskMapper taskMapper = new TaskMapper();
-        taskMapper.setTaskPojo(taskPojo);
+        taskMapper.setTaskPojo(result.getS());
+        taskMapper.setVolunteerPojo(result.getT());
 
         return taskMapper.getTaskValueObject();
     }

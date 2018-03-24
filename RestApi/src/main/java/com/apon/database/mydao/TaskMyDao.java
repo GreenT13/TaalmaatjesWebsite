@@ -9,6 +9,7 @@ import com.apon.database.jooq.DbContext;
 import com.apon.exceptionhandler.ResultObject;
 import com.apon.util.ResultUtil;
 import org.jooq.Record;
+import org.jooq.SelectConditionStep;
 import org.jooq.SelectWhereStep;
 import org.jooq.util.mysql.MySQLDataType;
 
@@ -80,6 +81,11 @@ public class TaskMyDao extends TaskDao {
             return false;
         }
 
+        if (taskPojo.getDatetobefinished() == null) {
+            resultObject = ResultUtil.createErrorResult("TaskMyDao.validate.dateToBeFinished");
+            return false;
+        }
+
         return true;
     }
 
@@ -145,12 +151,39 @@ public class TaskMyDao extends TaskDao {
     }
 
     /**
+     * Retrieve a task, together with the corresponding volunteer.
+     * @param taskExtId The extId from the task.
+     * @return QueryResult&lt;TaskPojo, VolunteerPojo&gt;
+     */
+    public QueryResult<TaskPojo, VolunteerPojo> retrieveTaskWithVolunteer(String taskExtId) {
+        SelectConditionStep<Record> query = using(configuration())
+                .select(Task.TASK.fields())
+                .select(Volunteer.VOLUNTEER.fields())
+                .from(Task.TASK)
+                .join(Volunteer.VOLUNTEER).on(Volunteer.VOLUNTEER.VOLUNTEERID.eq(Task.TASK.VOLUNTEERID))
+                .where(Task.TASK.EXTERNALIDENTIFIER.eq(taskExtId));
+
+        Map<TaskPojo, List<VolunteerPojo>> map = query.orderBy(Task.TASK.DATETOBEFINISHED.asc()).limit(50).fetchGroups(
+                r -> r.into(Task.TASK).into(TaskPojo.class),
+                r -> r.into(Volunteer.VOLUNTEER).into(VolunteerPojo.class)
+        );
+
+        // The map must contain zero or one items.
+        Map.Entry<TaskPojo, List<VolunteerPojo>> entry = map.entrySet().iterator().next();
+        if (entry == null) {
+            return null;
+        }
+        return new QueryResult<>(entry.getKey(), entry.getValue().get(0));
+    }
+
+
+    /**
      * Search tasks based on given input.
      * @param title Searched for in Task.title. Will lower performance a lot if filled.
      * @param description Searched for in Task.description. Will lower performance a lot if filled.
      * @param isFinished Must equal Task.isFinished (if not null).
      * @param volunteerExtId Task must belong to this volunteer.
-     * @return List&lt;TaskPojo&gt;
+     * @return Map&lt;TaskPojo, List&lt;VolunteerPojo&gt;&gt;
      */
     public Map<TaskPojo, List<VolunteerPojo>> advancedSearch(String title, String description, Boolean isFinished, String volunteerExtId) {
         SelectWhereStep<Record> query = using(configuration())
