@@ -23,4 +23,9 @@ export class TaskService {
   getTask(taskExtId: string) {
     return this.myHttpClient.get('task/' + taskExtId, null);
   }
+
+  updateTask(taskModel: TaskModel) {
+    return this.myHttpClient.post('task/' + taskModel.taskExtId, null, taskModel);
+  }
+
 }

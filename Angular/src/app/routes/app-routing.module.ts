@@ -11,6 +11,7 @@ import {VolunteerAddActiveComponent} from "../components/volunteer/detail/active
 import {TaskOverviewComponent} from "../components/task/overview/task.overview.component";
 import {TaskAddComponent} from "../components/task/add/task.add.component";
 import {TaskDetailComponent} from "../components/task/detail/task.detail.component";
+import {TaskEditComponent} from "../components/task/add/task.edit.component";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -22,7 +23,8 @@ const appRoutes: Routes = [
       { path: 'active', component: VolunteerAddActiveComponent }]},
   { path: 'task', canActivate: [AuthGuardService], component: TaskOverviewComponent},
   { path: 'task/add', canActivate: [AuthGuardService], component: TaskAddComponent},
-  { path: 'task/:taskExtId', canActivate: [AuthGuardService], component: TaskDetailComponent }
+  { path: 'task/:taskExtId', canActivate: [AuthGuardService], component: TaskDetailComponent },
+  { path: 'task/:taskExtId/edit', canActivate: [AuthGuardService], component: TaskEditComponent },
       ];
 
 @NgModule({

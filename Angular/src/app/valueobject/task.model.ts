@@ -4,7 +4,7 @@ export class TaskModel {
   public taskExtId: string;
   public title: string;
   public description: string;
-  public volunteerValueObject: VolunteerModel;
+  public volunteerValueObject: VolunteerModel = new VolunteerModel();
   public isFinished: boolean;
   public dateToBeFinished: string;
 }

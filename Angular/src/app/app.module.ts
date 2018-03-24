@@ -33,6 +33,7 @@ import {AutocompleteComponent} from "./components/autocomplete/autocomplete.comp
 import {VolunteerNamePipe} from "./pipes/volunteername.pipe";
 import {TaskDetailComponent} from "./components/task/detail/task.detail.component";
 import {ShortenPipe} from "./pipes/shorten.pipe";
+import {TaskEditComponent} from "./components/task/add/task.edit.component";
 
 
 @NgModule({
@@ -40,7 +41,7 @@ import {ShortenPipe} from "./pipes/shorten.pipe";
     AppComponent,
     LoginComponent,
     VolunteerOverviewComponent, VolunteerDetailComponent, VolunteerAddComponent, VolunteerAddActiveComponent, VolunteerEditActiveComponent,
-    TaskOverviewComponent, TaskAddComponent, TaskDetailComponent,
+    TaskOverviewComponent, TaskAddComponent, TaskDetailComponent, TaskEditComponent,
     AutocompleteComponent,
     AlertComponent,
     MyDatePipe, GenderPipe, BooleanPipe, VolunteerNamePipe, ShortenPipe,

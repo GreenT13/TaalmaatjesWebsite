@@ -1,14 +1,16 @@
 <app-alert-component [alertModel]="alertModel"></app-alert-component>
 
 <!-- Show all information in pannels -->
-<div class="panel-group row">
+<div class="row">
   <!-- Left column of panels -->
   <div class="col-sm-6">
     <!-- Text Panel with information from customer. -->
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <h1 class="panel-title"><span data-toggle="collapse" data-target="#user-panel" class="glyphicon glyphicon-pushpin"></span>
-          {{ taskModel.title }}</h1>
+        <h1 class="panel-title">
+          <span data-toggle="collapse"
+                data-target="#user-panel"
+                class="glyphicon glyphicon-pushpin"></span><a [routerLink]="['edit']">{{ taskModel.title }}</a></h1>
       </div>
       <div id="user-panel" class="panel-body collapse in collapsible-text-panel">
         <div class="fix-collapse">

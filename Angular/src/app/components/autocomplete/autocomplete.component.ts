@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from "@angular/core";
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from "@angular/core";
 import {VolunteerModel} from "../../valueobject/volunteer.model";
 import {VolunteerService} from "../../services/volunteer.service";
 import {VolunteerNamePipe} from "../../pipes/volunteername.pipe";
@@ -8,7 +8,7 @@ import {VolunteerNamePipe} from "../../pipes/volunteername.pipe";
   templateUrl: './autocomplete.component.html',
   styleUrls: ['./autocomplete.component.css']
 })
-export class AutocompleteComponent {
+export class AutocompleteComponent implements OnChanges {
   public query: string = "";
   public volunteers: VolunteerModel[];
   public filteredList = [];
@@ -23,6 +23,13 @@ export class AutocompleteComponent {
       (volunteers: VolunteerModel[]) => {
         this.volunteers = volunteers;
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges){
+    // Allow prefilling default values. Make sure it doesn't overwrite if we want to overwrite with an empty volunteer.
+    if (changes.volunteer && VolunteerNamePipe.parseName(changes.volunteer.currentValue).length > 0) {
+      this.query = VolunteerNamePipe.parseName(changes.volunteer.currentValue);
+    }
   }
 
   filter() {
