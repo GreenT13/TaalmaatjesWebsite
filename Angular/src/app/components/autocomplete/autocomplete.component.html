@@ -1,7 +1,7 @@
 <div class="dropdown" >
   <div class="input-field col s12">
     <!--suppress HtmlFormInputWithoutLabel -->
-    <input type="text" class="form-control" [(ngModel)]=query (keyup)=filter()>
+    <input type="text" class="form-control" [(ngModel)]=query (keyup)=filter() [disabled]="disabled">
   </div>
   <div id="demo" *ngIf="filteredList.length > 0">
     <ul class="dropdown-menu" >

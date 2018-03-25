@@ -14,6 +14,8 @@ export class AutocompleteComponent implements OnChanges {
   public filteredList = [];
 
   @Input()
+  public disabled: boolean = false;
+  @Input()
   public volunteer: VolunteerModel;
   @Output()
   volunteerChange = new EventEmitter<VolunteerModel>();

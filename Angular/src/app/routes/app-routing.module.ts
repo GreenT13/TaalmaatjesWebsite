@@ -20,7 +20,8 @@ const appRoutes: Routes = [
   { path: 'volunteer/add', canActivate: [AuthGuardService], component: VolunteerAddComponent },
   { path: 'volunteer/:volunteerExtId', canActivate: [AuthGuardService], component: VolunteerDetailComponent, children: [
       { path: 'active/:volunteerInstanceExtId', component: VolunteerEditActiveComponent },
-      { path: 'active', component: VolunteerAddActiveComponent }]},
+      { path: 'active', component: VolunteerAddActiveComponent },
+      { path: 'task/:taskExtId', component: TaskEditComponent }]},
   { path: 'task', canActivate: [AuthGuardService], component: TaskOverviewComponent},
   { path: 'task/add', canActivate: [AuthGuardService], component: TaskAddComponent},
   { path: 'task/:taskExtId', canActivate: [AuthGuardService], component: TaskDetailComponent },
