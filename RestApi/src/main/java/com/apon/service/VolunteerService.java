@@ -52,7 +52,7 @@ public class VolunteerService implements IService {
         volunteerMapper.setVolunteerPojo(volunteerPojo);
 
         // Retrieve the instances.
-        List<VolunteerinstancePojo> volunteerinstancePojos = volunteerInstanceMyDao.getInstanceForVolunteer(volunteerExtId);
+        List<VolunteerinstancePojo> volunteerinstancePojos = volunteerInstanceMyDao.getInstanceForVolunteer(volunteerExtId, false);
         if (volunteerinstancePojos == null) {
             throw new FunctionalException("VolunteerService.notFound.volunteerInstance");
         }
