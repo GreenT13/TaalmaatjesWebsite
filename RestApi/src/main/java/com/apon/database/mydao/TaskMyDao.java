@@ -13,6 +13,7 @@ import org.jooq.SelectConditionStep;
 import org.jooq.SelectWhereStep;
 import org.jooq.util.mysql.MySQLDataType;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -168,11 +169,12 @@ public class TaskMyDao extends TaskDao {
                 r -> r.into(Volunteer.VOLUNTEER).into(VolunteerPojo.class)
         );
 
-        // The map must contain zero or one items.
-        Map.Entry<TaskPojo, List<VolunteerPojo>> entry = map.entrySet().iterator().next();
-        if (entry == null) {
+        // If the map has no elements.
+        if (map.size() == 0) {
             return null;
         }
+
+        Map.Entry<TaskPojo, List<VolunteerPojo>> entry = map.entrySet().iterator().next();
         return new QueryResult<>(entry.getKey(), entry.getValue().get(0));
     }
 
