@@ -4,87 +4,18 @@
 <div class="row">
   <!-- Left column of panels -->
   <div class="col-sm-6">
-    <!-- Text Panel with information from customer. -->
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h1 class="panel-title"><span data-toggle="collapse" data-target="#user-panel" class="glyphicon glyphicon-user"></span>
-          {{ volunteer | parsevolunteername }}</h1>
-      </div>
-      <div id="user-panel" class="panel-body collapse in collapsible-text-panel">
-        <div class="fix-collapse">
-          <table data-toggle="table" class="table table-condensed borderless">
-            <tbody>
-            <tr>
-              <td>Geboortedatum</td>
-              <td>{{ volunteer.dateOfBirth | mydate }}</td>
-            </tr>
-            <tr>
-              <td>Leeftijd</td>
-              <td>TODO</td>
-            </tr>
-            <tr>
-              <td>Geslacht</td>
-              <td>{{ volunteer.gender | gender }}</td>
-            </tr>
-            <tr>
-              <td>Telefoonnr</td>
-              <td>{{ volunteer.phoneNumber }}</td>
-            </tr>
-            <tr>
-              <td>Mobiele telefoonnr</td>
-              <td>{{ volunteer.mobilePhoneNumber }}</td>
-            </tr>
-            <tr>
-              <td>Email</td>
-              <td>{{ volunteer.email }}</td>
-            </tr>
-            <tr>
-              <td>Straat</td>
-              <td>{{ volunteer.streetName }}</td>
-            </tr>
-            <tr>
-              <td>Huisnummer</td>
-              <td>{{ volunteer.houseNr }}</td>
-            </tr>
-            <tr>
-              <td>Postcode</td>
-              <td>{{ volunteer.postalCode }}</td>
-            </tr>
-            <tr>
-              <td>Stad</td>
-              <td>{{ volunteer.city }}</td>
-            </tr>
-            <tr>
-              <td>Datum training</td>
-              <td>{{ volunteer.dateTraining | mydate }}</td>
-            </tr>
-            <tr>
-              <td>Beroep</td>
-              <td>{{ volunteer.job }}</td>
-            </tr>
-            <tr>
-              <td>Is klassenassistent</td>
-              <td>{{ volunteer.isClassAssistant | boolean }}</td>
-            </tr>
-            <tr>
-              <td>Is taalmaatje</td>
-              <td>{{ volunteer.isTaalmaatje | boolean }}</td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+    <app-volunteer-personal [volunteer]="volunteer"></app-volunteer-personal>
 
     <!-- Active -->
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h1 class="panel-title">
-          <span data-toggle="collapse" data-target="#active-panel" class="glyphicon glyphicon-ok-sign"></span><a [routerLink]="['active']">Actief</a>
+          <span data-toggle="collapse" data-target="#active-panel" class="glyphicon glyphicon-ok-sign"></span><a (click)="setNewInstance()">Actief</a>
         </h1>
       </div>
       <div id="active-panel" class="list-group collapse in">
-        <a *ngFor="let instance of volunteer.volunteerInstanceValueObjects" [routerLink]="'active/' + instance.externalIdentifier" class="list-group-item">
+        <a *ngFor="let instance of volunteer.volunteerInstanceValueObjects"
+           (click)="setInstance(instance)" class="list-group-item">
           Van {{ instance.dateStart | mydate }} tot {{ instance.dateEnd | mydate:true }}.
         </a>
       </div>
@@ -103,11 +34,12 @@
     <!-- Tasks -->
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <h1 class="panel-title"><span data-toggle="collapse" data-target="#task-panel" class="glyphicon glyphicon-pushpin"></span>Taken</h1>
+        <h1 class="panel-title"><span data-toggle="collapse" data-target="#task-panel" class="glyphicon glyphicon-pushpin">
+        </span><a (click)="setNewTask()">Taken</a></h1>
       </div>
       <div id="task-panel" class="list-group collapse in">
         <ng-container *ngFor="let task of volunteer.taskValueObjects" >
-        <a  *ngIf="task.isFinished == false" class="list-group-item">
+        <a (click)="setTask(task)" *ngIf="task.isFinished == false" class="list-group-item">
           {{ task.dateToBeFinished | mydate }} | {{ task.title }}.</a>
         </ng-container>
       </div>
@@ -129,6 +61,17 @@
 
   <!-- Right column of panels -->
   <div class="col-sm-6">
-    <router-outlet></router-outlet>
+    <app-task-add
+      *ngIf="currentItemInstance === TASK_ADD" (onBackEmitter)="clear()"
+      [(alertModel)]="alertModel" [volunteer]="volunteer" (didHttpRequest)="refresh()"></app-task-add>
+    <app-task-edit
+      *ngIf="currentItemInstance === TASK_EDIT" [(alertModel)]="alertModel" (onBackEmitter)="clear()"
+      [prefillTask]="currentItem" [volunteer]="volunteer" (didHttpRequest)="refresh()"></app-task-edit>
+    <app-volunteer-add-active
+      *ngIf="currentItemInstance === INSTANCE_ADD" [volunteer]="volunteer" (didHttpRequest)="refresh()"
+      (onBackEmitter)="clear()" [(alertModel)]="alertModel"></app-volunteer-add-active>
+    <app-volunteer-edit-active
+      *ngIf="currentItemInstance === INSTANCE_EDIT" [(volunteerInstanceModel)]="currentItem" (didHttpRequest)="refresh()"
+      (onBackEmitter)="clear()" [(alertModel)]="alertModel" [volunteer]="volunteer"></app-volunteer-edit-active>
   </div>
 </div>

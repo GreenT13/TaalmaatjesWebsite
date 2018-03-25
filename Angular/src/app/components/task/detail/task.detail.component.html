@@ -3,7 +3,7 @@
 <!-- Show all information in pannels -->
 <div class="row">
   <!-- Left column of panels -->
-  <div class="col-sm-6">
+  <div class="col-sm-12">
     <!-- Text Panel with information from customer. -->
     <div class="panel panel-primary">
       <div class="panel-heading">
@@ -26,7 +26,8 @@
               </tr>
               <tr>
                 <td>Is afgehandeld</td>
-                <td>{{ taskModel.isFinished | boolean }}</td>
+                <!-- Add href to make mouse look like clicking mouse when hovering over the link. -->
+                <td><a href="Javascript:void(0);" (click)="changeState()">{{ taskModel.isFinished | boolean }}</a></td>
               </tr>
             </tbody>
           </table>
@@ -45,9 +46,5 @@
         </div>
       </div>
     </div>
-  </div>
-  <!-- Right column of panels -->
-  <div class="col-sm-6">
-    <router-outlet></router-outlet>
   </div>
 </div>

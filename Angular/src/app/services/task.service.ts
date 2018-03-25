@@ -24,6 +24,11 @@ export class TaskService {
     return this.myHttpClient.get('task/' + taskExtId, null);
   }
 
+  changeState(taskModel: TaskModel) {
+    taskModel.isFinished = !taskModel.isFinished;
+    return this.updateTask(taskModel);
+  }
+
   updateTask(taskModel: TaskModel) {
     return this.myHttpClient.post('task/' + taskModel.taskExtId, null, taskModel);
   }

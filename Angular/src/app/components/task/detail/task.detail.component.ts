@@ -1,5 +1,4 @@
 import {Component, OnInit} from "@angular/core";
-import {DestroyUtil} from "../../../util/destroy.util";
 import {AlertModel} from "../../alert/alert.model";
 import {TaskModel} from "../../../valueobject/task.model";
 import {TaskService} from "../../../services/task.service";
@@ -11,7 +10,6 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./task.detail.component.css']
 })
 export class TaskDetailComponent implements OnInit {
-  private destroyUtil: DestroyUtil = new DestroyUtil();
   public alertModel = new AlertModel();
   public taskModel: TaskModel = new TaskModel();
 
@@ -19,7 +17,7 @@ export class TaskDetailComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.destroyUtil.addSubscription(this.route.params.subscribe(
+    this.route.params.subscribe(
       (params) => {
         this.taskService.getTask(params['taskExtId']).subscribe(
           (response: TaskModel) => {
@@ -31,6 +29,13 @@ export class TaskDetailComponent implements OnInit {
             this.taskModel = new TaskModel();
           }
         );
-      }));
+      });
+  }
+
+  changeState() {
+    this.taskService.changeState(this.taskModel).subscribe(
+      () => {},
+      (error) => this.alertModel.setError(error)
+    );
   }
 }

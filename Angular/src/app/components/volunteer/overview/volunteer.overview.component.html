@@ -49,26 +49,21 @@
 </div>
 
 <!-- The table with output results -->
-<div class="row ">
+<div class="row">
   <div class="col-sm-12">
-    <table data-toggle="table" data-pagination="true" class="table table-hover">
-      <thead>
-      <tr>
+    <app-table-pagination [completeList]="volunteers" (onDblClick)="onDblClick($event)">
+      <ng-template #templateHeader>
         <th>Naam</th>
         <th>Stad</th>
         <th>Telefoonnummer</th>
         <th>Koppelingen</th>
-      </tr>
-      </thead>
-      <tbody>
-        <!-- Show all volunteers -->
-        <tr *ngFor="let volunteer of volunteers" (dblclick)="clickOnVolunteer(volunteer.externalIdentifier)">
-          <td>{{ volunteer | parsevolunteername }}</td>
-          <td>{{ volunteer.city }}</td>
-          <td>{{ volunteer.mobilePhoneNumber }}</td>
-          <td>{{ volunteer.gender }}</td>
-        </tr>
-      </tbody>
-    </table>
+      </ng-template>
+      <ng-template #templateItem let-volunteer>
+        <td>{{ volunteer | parsevolunteername }}</td>
+        <td>{{ volunteer.city }}</td>
+        <td>{{ volunteer.mobilePhoneNumber }}</td>
+        <td>{{ volunteer.gender }}</td>
+      </ng-template>
+    </app-table-pagination>
   </div>
 </div>

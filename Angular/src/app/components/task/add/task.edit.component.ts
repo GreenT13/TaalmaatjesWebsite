@@ -1,36 +1,58 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, Input, OnInit} from "@angular/core";
 import {TaskModel} from "../../../valueobject/task.model";
 import {DateUtil} from "../../../util/date.util";
 import {HttpErrorResponse} from "@angular/common/http";
 import {TaskAddComponent} from "./task.add.component";
+import {TaskService} from "../../../services/task.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
-  selector: 'app-task-detail',
-  templateUrl: './task.add.component.html',
-  styleUrls: ['./task.add.component.css']
+  selector: 'app-task-edit',
+  templateUrl: './task.upsert.component.html',
+  styleUrls: ['./task.upsert.component.css']
 })
 export class TaskEditComponent extends TaskAddComponent implements OnInit {
+  @Input()
+  prefillTask: TaskModel;
+
+  constructor(protected taskService: TaskService,
+              protected route: ActivatedRoute) {
+    super(taskService);
+  }
+
   ngOnInit(): void {
-    // Prefill all values based on retrieved task.
-    this.route.params.subscribe(
-      (params) => {
-        this.taskService.getTask(params['taskExtId']).subscribe(
-          (response: TaskModel) => {
-            this.taskModel = response;
-            this.dateToBeFinished = {date: DateUtil.convertStringToIDate(this.taskModel.dateToBeFinished)};
-          },
-          (error) => {
-            this.alertModel.setError(error);
-            // Clear the task on screen if there was any.
-            this.taskModel = new TaskModel();
-          }
-        );
-      });
+    if(!this.prefillTask) {
+      // Prefill all values based on retrieved task.
+      this.route.params.subscribe(
+        (params) => {
+          this.taskService.getTask(params['taskExtId']).subscribe(
+            (response: TaskModel) => {
+              this.prefill(response);
+            },
+            (error) => {
+              this.alertModel.setError(error);
+              // Clear the task on screen if there was any.
+              this.taskModel = new TaskModel();
+            }
+          );
+        });
+    } else {
+      // Prefill the given task.
+      this.prefill(this.prefillTask);
+    }
+  }
+
+  prefill(task: TaskModel) {
+    this.taskModel = task;
+    this.dateToBeFinished = {date: DateUtil.convertStringToIDate(this.taskModel.dateToBeFinished)};
+    if (this.volunteer) {
+      this.taskModel.volunteerValueObject = this.volunteer;
+    }
   }
 
   doHttpRequest() {
     this.taskService.updateTask(this.taskModel).subscribe(
-      () => this.router.navigate(['../'], {relativeTo: this.route}),
+      () => this.didHttpRequest.emit(this.taskModel.taskExtId),
       (error: HttpErrorResponse) => this.alertModel.setError(error)
     );
   }

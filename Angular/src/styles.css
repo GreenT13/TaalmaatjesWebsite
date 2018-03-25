@@ -15,3 +15,10 @@ my-date-picker.dark div.mydp {
 my-date-picker .mydp .selectiongroup .selection {
   padding-left: 12px;
 }
+
+.fix-collapse {
+  padding: 15px;
+}
+.collapsible-text-panel {
+  padding: 0;
+}

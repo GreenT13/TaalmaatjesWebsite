@@ -5,6 +5,8 @@ import {VolunteerModel} from "../../../valueobject/volunteer.model";
 import {VolunteerDetailService} from "./volunteer.detail.service";
 import {AlertModel} from "../../alert/alert.model";
 import {DestroyUtil} from "../../../util/destroy.util";
+import {TaskModel} from "../../../valueobject/task.model";
+import {VolunteerInstanceModel} from "../../../valueobject/volunteerinstance.model";
 
 @Component({
   selector: 'app-volunteer-detail',
@@ -46,5 +48,43 @@ export class VolunteerDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.destroyUtil.destroy();
+  }
+
+  refresh() {
+    console.log('refreshing');
+    this.ngOnInit();
+    this.clear();
+  }
+
+
+
+  // All code for determining which component should be shown to the right.
+  public TASK_ADD = 'task_add';
+  public TASK_EDIT = 'task_edit';
+  public INSTANCE_ADD = 'instance_add';
+  public INSTANCE_EDIT = 'instance_edit';
+  public currentItemInstance: string;
+  public currentItem: any;
+
+  clear() {
+    this.currentItem = null;
+    this.currentItemInstance = null;
+  }
+
+  setTask(task: TaskModel) {
+    this.currentItem = task;
+    this.currentItemInstance = this.TASK_EDIT;
+  }
+  setNewTask() {
+    this.currentItem = null;
+    this.currentItemInstance = this.TASK_ADD;
+  }
+  setInstance(instance: VolunteerInstanceModel) {
+    this.currentItem = instance;
+    this.currentItemInstance = this.INSTANCE_EDIT;
+  }
+  setNewInstance() {
+    this.currentItem = null;
+    this.currentItemInstance = this.INSTANCE_ADD;
   }
 }

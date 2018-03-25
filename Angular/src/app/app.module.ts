@@ -34,6 +34,11 @@ import {VolunteerNamePipe} from "./pipes/volunteername.pipe";
 import {TaskDetailComponent} from "./components/task/detail/task.detail.component";
 import {ShortenPipe} from "./pipes/shorten.pipe";
 import {TaskEditComponent} from "./components/task/add/task.edit.component";
+import {TaskAddView} from "./components/task/add/task.add.view";
+import {TaskEditView} from "./components/task/add/task.edit.view";
+import {TaskDetailView} from "./components/task/detail/task.detail.view";
+import {VolunteerPersonalComponent} from "./components/volunteer/detail/blocks/personal/volunteerpersonal.component";
+import {PaginationComponent} from "./components/pagination/pagination.component";
 
 
 @NgModule({
@@ -41,9 +46,11 @@ import {TaskEditComponent} from "./components/task/add/task.edit.component";
     AppComponent,
     LoginComponent,
     VolunteerOverviewComponent, VolunteerDetailComponent, VolunteerAddComponent, VolunteerAddActiveComponent, VolunteerEditActiveComponent,
+    VolunteerPersonalComponent,
     TaskOverviewComponent, TaskAddComponent, TaskDetailComponent, TaskEditComponent,
+    TaskAddView, TaskEditView, TaskDetailView,
     AutocompleteComponent,
-    AlertComponent,
+    AlertComponent, PaginationComponent,
     MyDatePipe, GenderPipe, BooleanPipe, VolunteerNamePipe, ShortenPipe,
     ThemeDirective
   ],

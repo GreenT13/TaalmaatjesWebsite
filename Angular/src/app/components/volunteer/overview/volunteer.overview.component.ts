@@ -14,7 +14,7 @@ import {AlertModel} from "../../alert/alert.model";
 })
 export class VolunteerOverviewComponent implements OnInit {
   public alertModel = new AlertModel();
-  volunteers: VolunteerModel[];
+  volunteers: VolunteerModel[] = [];
   currentHttpRequest: Subscription = null;
 
   // Searching parameters
@@ -28,16 +28,11 @@ export class VolunteerOverviewComponent implements OnInit {
   public yesNoNull = FormUtil.yesNoNull;
 
   constructor(private volunteerService: VolunteerService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+              public router: Router,
+              public route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.searchVolunteers();
-  }
-
-  clickOnVolunteer(extId: string) {
-    // Go to the volunteer.
-    this.router.navigate([extId], {relativeTo: this.route});
   }
 
   searchVolunteers() {
@@ -55,5 +50,10 @@ export class VolunteerOverviewComponent implements OnInit {
       (error: HttpErrorResponse) => {
         this.alertModel.setError(error);
       });
+  }
+
+  onDblClick(volunteer: VolunteerModel) {
+    // Go to the volunteer.
+    this.router.navigate([volunteer.externalIdentifier], {relativeTo: this.route});
   }
 }
