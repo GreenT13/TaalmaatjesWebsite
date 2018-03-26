@@ -1,11 +1,15 @@
 package com.apon.service.valueobject;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.sql.Date;
 
 public class VolunteerInstanceValueObject {
     private String volunteerExtId;
     private String externalIdentifier;
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date dateStart;
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date dateEnd;
 
     public String getVolunteerExtId() {

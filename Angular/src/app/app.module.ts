@@ -14,7 +14,6 @@ import {VolunteerOverviewComponent} from "./components/volunteer/overview/volunt
 import {VolunteerService} from "./services/volunteer.service";
 import {VolunteerDetailComponent} from "./components/volunteer/detail/volunteer.detail.component";
 import {VolunteerAddComponent} from "./components/volunteer/add/volunteer.add.component";
-import {MyDatePickerModule} from 'mydatepicker';
 import {VolunteerEditActiveComponent} from "./components/volunteer/detail/active/volunteer.edit.active.component";
 import {OverlayService} from "./services/overlay.service";
 import {AlertComponent} from "./components/alert/alert.component";
@@ -60,7 +59,6 @@ import {PaginationComponent} from "./components/pagination/pagination.component"
     CommonModule,
     AppRoutingModule,
     HttpClientModule,
-    MyDatePickerModule,
     CookieModule.forRoot()
   ],
   providers: [

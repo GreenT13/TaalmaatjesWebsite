@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from "@angular/core";
 import {TaskModel} from "../../../valueobject/task.model";
-import {DateUtil} from "../../../util/date.util";
 import {HttpErrorResponse} from "@angular/common/http";
 import {TaskAddComponent} from "./task.add.component";
 import {TaskService} from "../../../services/task.service";
@@ -44,7 +43,6 @@ export class TaskEditComponent extends TaskAddComponent implements OnInit {
 
   prefill(task: TaskModel) {
     this.taskModel = task;
-    this.dateToBeFinished = {date: DateUtil.convertStringToIDate(this.taskModel.dateToBeFinished)};
     if (this.volunteer) {
       this.taskModel.volunteerValueObject = this.volunteer;
     }

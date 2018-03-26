@@ -11,10 +11,13 @@ import com.apon.guice.InjectContext;
 import com.apon.service.valueobject.StringValueObject;
 import com.apon.service.valueobject.VolunteerValueObject;
 import com.apon.service.valueobject.mapper.VolunteerMapper;
+import com.apon.util.DateTimeUtil;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,13 +82,16 @@ public class VolunteerService implements IService {
 
     /**
      * Add a Volunteer in the database. If dateStartActive is filled, we also add a VolunteerInstance to the database.
+     * @param stringStartActive (optional) Date as a string in "dd-MM-yyyy" format.
      * @param volunteerValueObject The volunteer object.
      * @return The extId from the volunteer that is inserted.
      */
     @PUT
     @InjectContext
-    public StringValueObject insert(@QueryParam("dateStartActive") Date dateStartActive,
+    public StringValueObject insert(@QueryParam("dateStartActive") String stringStartActive,
                                     VolunteerValueObject volunteerValueObject) throws Exception {
+        Date dateStartActive = stringStartActive != null ? DateTimeUtil.convertStringToDate(stringStartActive) : null;
+
         VolunteerMapper volunteerMapper = new VolunteerMapper();
         volunteerMapper.setVolunteerValueObject(volunteerValueObject);
 

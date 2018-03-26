@@ -7,17 +7,15 @@
     </div>
     <div class="panel-body form-horizontal">
       <div class="form-group">
-        <label for="dateStartActive" class="col-sm-4 control-label">Actief vanaf</label>
+        <label for="dateStart" class="col-sm-4 control-label">Actief vanaf</label>
         <div class="col-sm-8">
-          <!--suppress HtmlUnknownAttribute -->
-          <my-date-picker name="dateStartActive" id="dateStartActive" [options]="optionsAll" [(ngModel)]="dateStartActive" theme></my-date-picker>
+          <input type="text" name="dateStart" id="dateStart" class="form-control" [(ngModel)]="volunteerInstanceModel.dateStart" />
         </div>
       </div>
       <div class="form-group">
-        <label for="dateEndActive" class="col-sm-4 control-label">Actief tot</label>
+        <label for="dateEnd" class="col-sm-4 control-label">Actief tot</label>
         <div class="col-sm-8">
-          <!--suppress HtmlUnknownAttribute -->
-          <my-date-picker name="dateEndActive" id="dateEndActive" [options]="optionsAll" [(ngModel)]="dateEndActive" theme></my-date-picker>
+          <input type="text" name="dateEnd" id="dateEnd" class="form-control" [(ngModel)]="volunteerInstanceModel.dateEnd" />
         </div>
       </div>
       <div class="pull-right">

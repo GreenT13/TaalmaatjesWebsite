@@ -1,8 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {TaskModel} from "../../../valueobject/task.model";
-import {IMyDpOptions} from "mydatepicker";
 import {TaskService} from "../../../services/task.service";
-import {DateUtil} from "../../../util/date.util";
 import {HttpErrorResponse} from "@angular/common/http";
 import {SingleStringModel} from "../../../valueobject/singlestring.model";
 import {VolunteerModel} from "../../../valueobject/volunteer.model";
@@ -23,12 +21,6 @@ export class TaskAddComponent implements OnInit {
   onBackEmitter = new EventEmitter<boolean>();
 
   public taskModel: TaskModel = new TaskModel();
-  public dateToBeFinished;
-
-  public optionsAll: IMyDpOptions = {
-    satHighlight: true,
-    dateFormat: 'dd-mm-yyyy'
-  };
 
   ngOnInit(): void {
     if (this.volunteer) {
@@ -39,7 +31,6 @@ export class TaskAddComponent implements OnInit {
   constructor(protected taskService: TaskService) { }
 
   onSubmit() {
-    this.taskModel.dateToBeFinished = DateUtil.convertDateIDateToString(this.dateToBeFinished);
     this.doHttpRequest();
   }
 

@@ -1,5 +1,4 @@
 import {Component, OnInit} from "@angular/core";
-import {IMyDpOptions} from 'mydatepicker';
 import {DateUtil} from "../../../util/date.util";
 import {VolunteerModel} from "../../../valueobject/volunteer.model";
 import {GenderUtil} from "../../../util/gender.util";
@@ -18,19 +17,7 @@ export class VolunteerAddComponent implements OnInit {
   public alertModel = new AlertModel();
   public genders = GenderUtil.genders;
   public volunteer: VolunteerModel;
-  public dateOfBirth;
-  public dateTraining;
-  public dateStartActive;
-
-  public optionsBeforeToday: IMyDpOptions = {
-    disableSince: DateUtil.getCurrentIDate(),
-    satHighlight: true,
-    dateFormat: 'dd-mm-yyyy'
-  };
-  public optionsAll: IMyDpOptions = {
-    satHighlight: true,
-    dateFormat: 'dd-mm-yyyy'
-  };
+  public dateStartActive: string;
 
   setNewGender(id: any) {
     this.volunteer.gender = id;
@@ -41,17 +28,14 @@ export class VolunteerAddComponent implements OnInit {
     this.setNewGender(GenderUtil.getMaleId());
     this.volunteer.isClassAssistant = false;
     this.volunteer.isTaalmaatje = true;
-    this.dateStartActive = {date: DateUtil.getCurrentIDate()};
+    this.dateStartActive = DateUtil.getCurrentDate();
   }
 
   constructor(private volunteerService: VolunteerService,
               private router: Router, private route: ActivatedRoute) { }
 
   onSubmit() {
-    this.volunteer.dateOfBirth = DateUtil.convertDateIDateToString(this.dateOfBirth);
-    this.volunteer.dateTraining = DateUtil.convertDateIDateToString(this.dateTraining);
-
-    this.volunteerService.insertVolunteer(this.volunteer, DateUtil.convertDateIDateToString(this.dateStartActive)).subscribe(
+    this.volunteerService.insertVolunteer(this.volunteer, this.dateStartActive).subscribe(
       (volunteerExtId: SingleStringModel) => {
         this.router.navigate(['../' + volunteerExtId.value], {relativeTo: this.route});
       },

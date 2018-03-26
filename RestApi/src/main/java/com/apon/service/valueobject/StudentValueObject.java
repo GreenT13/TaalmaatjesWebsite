@@ -1,5 +1,7 @@
 package com.apon.service.valueobject;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.sql.Date;
 
 public class StudentValueObject {
@@ -8,6 +10,7 @@ public class StudentValueObject {
     private String insertion;
     private String lastName;
     private String gender;
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date dateOfBirth;
     private String groupIdentification;
     private Boolean hasQuit;

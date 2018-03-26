@@ -1,5 +1,7 @@
 package com.apon.service.valueobject;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.sql.Date;
 import java.util.List;
 
@@ -9,11 +11,13 @@ public class VolunteerValueObject {
     private String firstName;
     private String insertion;
     private String lastName;
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date dateOfBirth;
     private String gender;
     private String phoneNumber;
     private String mobilePhoneNumber;
     private String email;
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date dateTraining;
     private String postalCode;
     private String city;

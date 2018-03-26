@@ -1,5 +1,7 @@
 package com.apon.service.valueobject;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.sql.Date;
 
 public class TaskValueObject {
@@ -7,6 +9,7 @@ public class TaskValueObject {
     private String title;
     private String description;
     private Boolean isFinished;
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date dateToBeFinished;
 
     private VolunteerValueObject volunteerValueObject;

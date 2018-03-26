@@ -1,11 +1,18 @@
 package com.apon.util;
 
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 @SuppressWarnings({"RedundantIfStatement", "unused"})
 public class DateTimeUtil {
+
+    public static Date convertStringToDate(String d) throws ParseException {
+        return new Date(new SimpleDateFormat("dd-MM-yyyy").parse(d).getTime());
+    }
 
     private static LocalDate toLocalDate(Date d) {
         if (d == null) {

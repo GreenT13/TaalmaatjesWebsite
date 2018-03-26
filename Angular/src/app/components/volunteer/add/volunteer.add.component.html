@@ -32,8 +32,7 @@
         <div class="form-group">
           <label for="dateOfBirth" class="col-sm-4 control-label">Geboortedatum</label>
           <div class="col-sm-8">
-            <!--suppress HtmlUnknownAttribute -->
-            <my-date-picker id="dateOfBirth" name="dateOfBirth" [options]="optionsBeforeToday" [(ngModel)]="dateOfBirth" theme></my-date-picker>
+            <input type="text" name="dateOfBirth" id="dateOfBirth" class="form-control" [(ngModel)]="volunteer.dateOfBirth" />
           </div>
         </div>
         <div class="form-group">
@@ -127,15 +126,13 @@
         <div class="form-group">
           <label for="dateTraining" class="col-sm-4 control-label">Training gevolgd</label>
           <div class="col-sm-8">
-            <!--suppress HtmlUnknownAttribute -->
-            <my-date-picker name="dateTraining" id="dateTraining" [options]="optionsBeforeToday" [(ngModel)]="dateTraining" theme></my-date-picker>
+            <input type="text" name="dateTraining" id="dateTraining" class="form-control" [(ngModel)]="volunteer.dateTraining" />
           </div>
         </div>
         <div class="form-group">
           <label for="dateStartActive" class="col-sm-4 control-label">Actief vanaf</label>
           <div class="col-sm-8">
-            <!--suppress HtmlUnknownAttribute -->
-            <my-date-picker name="dateStartActive" id="dateStartActive" [options]="optionsAll" [(ngModel)]="dateStartActive" theme></my-date-picker>
+            <input type="text" name="dateStartActive" id="dateStartActive" class="form-control" [(ngModel)]="dateStartActive" />
           </div>
         </div>
         <div class="form-group">
