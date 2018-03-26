@@ -19,7 +19,6 @@ export class VolunteerService {
 
   insertVolunteer(volunteerModel: VolunteerModel, dateStartActive: String) {
     const url: string = 'volunteer' + MyHttpClient.createParameterUrl([{name: 'dateStartActive', value: dateStartActive}]);
-    console.log(url);
     return this.myHttpClient.put(url, null, volunteerModel);
   }
 

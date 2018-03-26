@@ -33,8 +33,10 @@ export class PaginationComponent implements OnChanges {
   pageStart : number = 1; // Kind off a constant, but no reason to change this to something different than 1.
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.completeList = changes.completeList.currentValue;
-    this.init();
+    if (changes.completeList.currentValue) {
+      this.completeList = changes.completeList.currentValue;
+      this.init();
+    }
   }
 
   init(){

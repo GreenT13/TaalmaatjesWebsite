@@ -1,6 +1,8 @@
 package com.apon.service.valueobject;
 
+import com.apon.service.config.CustomDateSerializer;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.sql.Date;
 import java.util.List;
@@ -11,13 +13,13 @@ public class VolunteerValueObject {
     private String firstName;
     private String insertion;
     private String lastName;
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "dd-MM-yyyy") @JsonSerialize(using = CustomDateSerializer.class)
     private Date dateOfBirth;
     private String gender;
     private String phoneNumber;
     private String mobilePhoneNumber;
     private String email;
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "dd-MM-yyyy") @JsonSerialize(using = CustomDateSerializer.class)
     private Date dateTraining;
     private String postalCode;
     private String city;

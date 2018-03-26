@@ -47,7 +47,7 @@
         <th>Beschrijving</th>
       </ng-template>
       <ng-template #templateItem let-task>
-        <td>{{ task.dateToBeFinished | mydate }}</td>
+        <td>{{ task.dateToBeFinished }}</td>
         <td>{{ task.title }}</td>
         <td>{{ task.volunteerValueObject | parsevolunteername }}</td>
         <td>{{ task.description | shorten:50 }}</td>

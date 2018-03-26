@@ -16,7 +16,7 @@
       <div id="active-panel" class="list-group collapse in">
         <a *ngFor="let instance of volunteer.volunteerInstanceValueObjects"
            (click)="setInstance(instance)" class="list-group-item">
-          Van {{ instance.dateStart | mydate }} tot {{ instance.dateEnd | mydate:true }}.
+          Van {{ instance.dateStart }} tot {{ instance.dateEnd }}.
         </a>
       </div>
     </div>
@@ -40,7 +40,7 @@
       <div id="task-panel" class="list-group collapse in">
         <ng-container *ngFor="let task of volunteer.taskValueObjects" >
         <a (click)="setTask(task)" *ngIf="task.isFinished == false" class="list-group-item">
-          {{ task.dateToBeFinished | mydate }} | {{ task.title }}.</a>
+          {{ task.dateToBeFinished }} | {{ task.title }}.</a>
         </ng-container>
       </div>
     </div>

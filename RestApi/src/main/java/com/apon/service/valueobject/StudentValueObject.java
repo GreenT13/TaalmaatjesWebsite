@@ -1,6 +1,8 @@
 package com.apon.service.valueobject;
 
+import com.apon.service.config.CustomDateSerializer;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.sql.Date;
 
@@ -10,7 +12,7 @@ public class StudentValueObject {
     private String insertion;
     private String lastName;
     private String gender;
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "dd-MM-yyyy") @JsonSerialize(using = CustomDateSerializer.class)
     private Date dateOfBirth;
     private String groupIdentification;
     private Boolean hasQuit;

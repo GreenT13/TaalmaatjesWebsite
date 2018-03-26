@@ -17,7 +17,6 @@ import {VolunteerAddComponent} from "./components/volunteer/add/volunteer.add.co
 import {VolunteerEditActiveComponent} from "./components/volunteer/detail/active/volunteer.edit.active.component";
 import {OverlayService} from "./services/overlay.service";
 import {AlertComponent} from "./components/alert/alert.component";
-import {MyDatePipe} from "./pipes/mydate.pipe";
 import {GenderPipe} from "./pipes/gender.pipe";
 import {BooleanPipe} from "./pipes/boolean.pipe";
 import {VolunteerAddActiveComponent} from "./components/volunteer/detail/active/volunteer.add.active.component";
@@ -50,7 +49,7 @@ import {PaginationComponent} from "./components/pagination/pagination.component"
     TaskAddView, TaskEditView, TaskDetailView,
     AutocompleteComponent,
     AlertComponent, PaginationComponent,
-    MyDatePipe, GenderPipe, BooleanPipe, VolunteerNamePipe, ShortenPipe,
+    GenderPipe, BooleanPipe, VolunteerNamePipe, ShortenPipe,
     ThemeDirective
   ],
   imports: [

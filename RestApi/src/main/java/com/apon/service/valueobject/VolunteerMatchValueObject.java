@@ -1,6 +1,8 @@
 package com.apon.service.valueobject;
 
+import com.apon.service.config.CustomDateSerializer;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.sql.Date;
 
@@ -8,9 +10,9 @@ public class VolunteerMatchValueObject {
     private String volunteerExtId;
     private String externalIdentifier;
     private String studentExtId;
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "dd-MM-yyyy") @JsonSerialize(using = CustomDateSerializer.class)
     private Date dateStart;
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "dd-MM-yyyy") @JsonSerialize(using = CustomDateSerializer.class)
     private Date dateEnd;
 
     public String getExternalIdentifier() {
