@@ -37,6 +37,7 @@ import {TaskEditView} from "./components/task/add/task.edit.view";
 import {TaskDetailView} from "./components/task/detail/task.detail.view";
 import {VolunteerPersonalComponent} from "./components/volunteer/detail/blocks/personal/volunteerpersonal.component";
 import {PaginationComponent} from "./components/pagination/pagination.component";
+import {MyDatePipe} from "./pipes/mydate.pipe";
 
 
 @NgModule({
@@ -49,7 +50,7 @@ import {PaginationComponent} from "./components/pagination/pagination.component"
     TaskAddView, TaskEditView, TaskDetailView,
     AutocompleteComponent,
     AlertComponent, PaginationComponent,
-    GenderPipe, BooleanPipe, VolunteerNamePipe, ShortenPipe,
+    GenderPipe, BooleanPipe, VolunteerNamePipe, ShortenPipe, MyDatePipe,
     ThemeDirective
   ],
   imports: [

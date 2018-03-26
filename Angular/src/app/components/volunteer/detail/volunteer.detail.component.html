@@ -16,7 +16,7 @@
       <div id="active-panel" class="list-group collapse in">
         <a *ngFor="let instance of volunteer.volunteerInstanceValueObjects"
            (click)="setInstance(instance)" class="list-group-item">
-          Van {{ instance.dateStart }} tot {{ instance.dateEnd }}.
+          Van {{ instance.dateStart }} tot {{ instance.dateEnd | mydate }}.
         </a>
       </div>
     </div>
@@ -27,7 +27,9 @@
         <h1 class="panel-title"><span data-toggle="collapse" data-target="#matches-panel" class="glyphicon glyphicon-ok-sign"></span>Koppelingen</h1>
       </div>
       <div id="matches-panel" class="list-group collapse in">
-        <a *ngFor="let match of volunteer.volunteerMatchValueObjects" class="list-group-item">Van {{ match.dateStart }} tot {{ match.dateEnd }} {{ match.studentExtId }}.</a>
+        <a *ngFor="let match of volunteer.volunteerMatchValueObjects" class="list-group-item">
+          Van {{ match.dateStart }} tot {{ match.dateEnd | mydate }} {{ match.studentExtId }}.
+        </a>
       </div>
     </div>
 
