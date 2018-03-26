@@ -11,7 +11,7 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 @Path("version")
 public class VersionService {
-    private final String VERSION = "0.3";
+    private final String VERSION = "0.4";
 
     /**
      * Get the current version of the application.
