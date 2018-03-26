@@ -5,7 +5,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 @Component({
   selector: 'app-task-add-view',
   template: '<app-alert-component [alertModel]="alertModel"></app-alert-component>' +
-  '<div class="row col-sm-6"><app-task-add [(alertModel)]="alertModel" (didHttpRequest)="didHttpRequest($event)"></app-task-add></div>'
+  '<div class="row col-sm-6"><app-task-add [(alertModel)]="alertModel" ' +
+  '(didHttpRequest)="didHttpRequest($event)" (onBackEmitter)="onBack()"></app-task-add></div>'
 })
 export class TaskAddView {
   public alertModel: AlertModel = new AlertModel();
@@ -15,5 +16,9 @@ export class TaskAddView {
 
   didHttpRequest(taskExtId) {
     this.router.navigate(['task/' + taskExtId]);
+  }
+
+  onBack() {
+    this.router.navigate(['../'], {relativeTo: this.route});
   }
 }
