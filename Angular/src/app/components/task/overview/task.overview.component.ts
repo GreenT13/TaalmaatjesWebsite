@@ -55,4 +55,9 @@ export class TaskOverviewComponent implements OnInit {
         this.alertModel.setError(error);
       });
   }
+
+  onDblClick(task: TaskModel) {
+    // Go to the volunteer.
+    this.router.navigate([task.taskExtId], {relativeTo: this.route});
+  }
 }
