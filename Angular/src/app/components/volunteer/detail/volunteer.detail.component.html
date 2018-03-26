@@ -67,13 +67,20 @@
       *ngIf="currentItemInstance === TASK_ADD" (onBackEmitter)="clear()"
       [(alertModel)]="alertModel" [volunteer]="volunteer" (didHttpRequest)="refresh()"></app-task-add>
     <app-task-edit
-      *ngIf="currentItemInstance === TASK_EDIT" [(alertModel)]="alertModel" (onBackEmitter)="clear()"
-      [prefillTask]="currentItem" [volunteer]="volunteer" (didHttpRequest)="refresh()"></app-task-edit>
+      *ngIf="currentItemInstance === TASK_EDIT" [alertModel]="alertModel" (onBackEmitter)="setTask(currentItem)"
+      [prefillTask]="currentItem" [volunteer]="volunteer" (didHttpRequest)="refreshAndOpenItem(currentItem)"></app-task-edit>
+    <app-task-detail
+      *ngIf="currentItemInstance === TASK_VIEW" [alertModel]="alertModel" [taskModel]="currentItem" [volunteer]="volunteer"
+      (onEditEmitter)="editTask()"></app-task-detail>
+    <div *ngIf="currentItemInstance === TASK_VIEW" class="pull-right">
+      <button class="btn btn-default" (click)="clear()">Terug</button>
+    </div>
+
     <app-volunteer-add-active
       *ngIf="currentItemInstance === INSTANCE_ADD" [volunteer]="volunteer" (didHttpRequest)="refresh()"
-      (onBackEmitter)="clear()" [(alertModel)]="alertModel"></app-volunteer-add-active>
+      (onBackEmitter)="clear()" [alertModel]="alertModel"></app-volunteer-add-active>
     <app-volunteer-edit-active
       *ngIf="currentItemInstance === INSTANCE_EDIT" [(volunteerInstanceModel)]="currentItem" (didHttpRequest)="refresh()"
-      (onBackEmitter)="clear()" [(alertModel)]="alertModel" [volunteer]="volunteer"></app-volunteer-edit-active>
+      (onBackEmitter)="clear()" [alertModel]="alertModel" [volunteer]="volunteer" (onDeleteEmitter)="clear()"></app-volunteer-edit-active>
   </div>
 </div>

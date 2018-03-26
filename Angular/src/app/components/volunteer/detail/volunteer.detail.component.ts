@@ -50,17 +50,12 @@ export class VolunteerDetailComponent implements OnInit, OnDestroy {
     this.destroyUtil.destroy();
   }
 
-  refresh() {
-    console.log('refreshing');
-    this.ngOnInit();
-    this.clear();
-  }
-
 
 
   // All code for determining which component should be shown to the right.
   public TASK_ADD = 'task_add';
   public TASK_EDIT = 'task_edit';
+  public TASK_VIEW = 'task_view';
   public INSTANCE_ADD = 'instance_add';
   public INSTANCE_EDIT = 'instance_edit';
   public currentItemInstance: string;
@@ -70,9 +65,21 @@ export class VolunteerDetailComponent implements OnInit, OnDestroy {
     this.currentItem = null;
     this.currentItemInstance = null;
   }
+  refresh() {
+    this.ngOnInit();
+    this.clear();
+  }
+
+  refreshAndOpenItem(currentItem) {
+    this.ngOnInit();
+    this.setTask(currentItem);
+  }
 
   setTask(task: TaskModel) {
     this.currentItem = task;
+    this.currentItemInstance = this.TASK_VIEW;
+  }
+  editTask() {
     this.currentItemInstance = this.TASK_EDIT;
   }
   setNewTask() {

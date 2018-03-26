@@ -4,6 +4,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {TaskAddComponent} from "./task.add.component";
 import {TaskService} from "../../../services/task.service";
 import {ActivatedRoute} from "@angular/router";
+import {CopyUtil} from "../../../util/copy.util";
 
 @Component({
   selector: 'app-task-edit',
@@ -49,6 +50,9 @@ export class TaskEditComponent extends TaskAddComponent implements OnInit {
   }
 
   doHttpRequest() {
+    // Make sure the volunteer has no reference to the task.
+    this.taskModel.volunteerValueObject = CopyUtil.createCopyVolunteer(this.volunteer);
+
     this.taskService.updateTask(this.taskModel).subscribe(
       () => this.didHttpRequest.emit(this.taskModel.taskExtId),
       (error: HttpErrorResponse) => this.alertModel.setError(error)

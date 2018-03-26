@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, EventEmitter, Output} from "@angular/core";
 import {VolunteerActiveComponent} from "./volunteer.active.upsert.component";
 import {VolunteerService} from "../../../../services/volunteer.service";
 import {HttpErrorResponse} from "@angular/common/http";
@@ -9,6 +9,8 @@ import {HttpErrorResponse} from "@angular/common/http";
   styleUrls: ['./volunteer.active.upsert.component.css']
 })
 export class VolunteerEditActiveComponent extends VolunteerActiveComponent {
+  @Output()
+  onDeleteEmitter = new EventEmitter<boolean>();
 
   constructor(protected volunteerService: VolunteerService) {
     super('Wijzigen activiteit', volunteerService);
@@ -34,6 +36,7 @@ export class VolunteerEditActiveComponent extends VolunteerActiveComponent {
         this.volunteer.volunteerInstanceValueObjects = this.volunteer.volunteerInstanceValueObjects.filter(
           volunteerInstanceValueObject => volunteerInstanceValueObject.externalIdentifier !== this.volunteerInstanceModel.externalIdentifier
         );
+        this.onDeleteEmitter.emit(true);
       },
       (error: HttpErrorResponse) => this.alertModel.setError(error)
     );
