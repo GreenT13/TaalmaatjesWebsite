@@ -5,8 +5,10 @@ import {AlertModel} from "../../alert/alert.model";
 @Component({
   selector: 'app-task-edit-view',
   template: '<app-alert-component [alertModel]="alertModel"></app-alert-component>' +
-  '<div class="col-sm-6"><app-task-edit [(alertModel)]="alertModel" ' +
-  '(didHttpRequest)="didHttpRequest($event)" (onBackEmitter)="onBack()"></app-task-edit></div>'
+  '<div class="row">' +
+    '<div class="col-sm-6"><app-task-edit [(alertModel)]="alertModel" ' +
+    '(didHttpRequest)="didHttpRequest($event)" (onBackEmitter)="onBack()"></app-task-edit></div>' +
+  '</div>'
 })
 export class TaskEditView {
   public alertModel: AlertModel = new AlertModel();
