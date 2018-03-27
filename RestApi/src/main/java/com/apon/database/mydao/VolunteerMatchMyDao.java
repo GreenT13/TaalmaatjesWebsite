@@ -4,6 +4,7 @@ import com.apon.database.generated.tables.Student;
 import com.apon.database.generated.tables.Volunteer;
 import com.apon.database.generated.tables.Volunteermatch;
 import com.apon.database.generated.tables.daos.VolunteermatchDao;
+import com.apon.database.generated.tables.pojos.StudentPojo;
 import com.apon.database.generated.tables.pojos.VolunteermatchPojo;
 import com.apon.database.jooq.DbContext;
 import com.apon.exceptionhandler.ResultObject;
@@ -13,7 +14,9 @@ import org.jooq.SelectConditionStep;
 import org.jooq.impl.DSL;
 import org.jooq.util.mysql.MySQLDataType;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static org.jooq.impl.DSL.using;
 
@@ -126,7 +129,7 @@ public class VolunteerMatchMyDao extends VolunteermatchDao {
      * @param sortAscending Sort by dateStart. If null, it will not sort.
      * @return List&lt;VolunteermatchPojo&gt;
      */
-    public List<VolunteermatchPojo> getMatchForVolunteer(String volunteerExtId, Boolean sortAscending) {
+    private List<VolunteermatchPojo> getMatchForVolunteer(String volunteerExtId, Boolean sortAscending) {
         SelectConditionStep<Record> query = using(configuration())
                 .select(Volunteermatch.VOLUNTEERMATCH.fields())
                 .from(Volunteermatch.VOLUNTEERMATCH)
@@ -140,6 +143,40 @@ public class VolunteerMatchMyDao extends VolunteermatchDao {
         }
 
         return query.fetchInto(Volunteermatch.VOLUNTEERMATCH).map(mapper());
+    }
+
+    /**
+     * Get all matches for a volunteer.
+     * @param volunteerExtId The extId from the volunteer.
+     * @param sortAscending Sort by dateStart. If null, it will not sort.
+     * @return QueryResult&lt;VolunteermatchPojo, StudentPojo&gt;
+     */
+    public List<QueryResult<VolunteermatchPojo, StudentPojo>> getMatchForVolunteerWithStudent(String volunteerExtId, Boolean sortAscending) {
+        SelectConditionStep<Record> query = using(configuration())
+                .select(Volunteermatch.VOLUNTEERMATCH.fields())
+                .select(Student.STUDENT.fields())
+                .from(Volunteermatch.VOLUNTEERMATCH)
+                .join(Volunteer.VOLUNTEER).on(Volunteer.VOLUNTEER.VOLUNTEERID.eq(Volunteermatch.VOLUNTEERMATCH.VOLUNTEERID))
+                .join(Student.STUDENT).on(Student.STUDENT.STUDENTID.eq(Volunteermatch.VOLUNTEERMATCH.STUDENTID))
+                .where(Volunteer.VOLUNTEER.EXTERNALIDENTIFIER.eq(volunteerExtId));
+
+        if (sortAscending != null && sortAscending) {
+            query.orderBy(Volunteermatch.VOLUNTEERMATCH.DATESTART.asc());
+        } else if (sortAscending != null) {
+            query.orderBy(Volunteermatch.VOLUNTEERMATCH.DATESTART.desc());
+        }
+
+        Map<VolunteermatchPojo, List<StudentPojo>> map = query.fetchGroups(
+                        r -> r.into(Volunteermatch.VOLUNTEERMATCH).into(VolunteermatchPojo.class),
+                        r -> r.into(Student.STUDENT).into(StudentPojo.class));
+
+        // Create a list of query results.
+        List<QueryResult<VolunteermatchPojo, StudentPojo>> list = new ArrayList<>();
+        for (Map.Entry<VolunteermatchPojo, List<StudentPojo>> entry : map.entrySet()) {
+            list.add(new QueryResult<>(entry.getKey(), entry.getValue().get(0)));
+        }
+
+        return list;
     }
 
     /**
@@ -195,5 +232,56 @@ public class VolunteerMatchMyDao extends VolunteermatchDao {
                 .and(Volunteermatch.VOLUNTEERMATCH.DATEEND.isNull()
                         .or(Volunteermatch.VOLUNTEERMATCH.DATEEND.ge(DSL.currentDate())))
                 .fetchOne(0, Integer.class);
+    }
+
+    /**
+     * Retrieve a single VolunteerMatch based on extId's.
+     * @param volunteerExtId The extId from the volunteer.
+     * @param volunteerMatchExtId The extId from the volunteerMatch.
+     * @return VolunteerinstancePojo
+     */
+    public VolunteermatchPojo fetchByExtIds(String volunteerExtId, String volunteerMatchExtId) {
+        List<VolunteermatchPojo> volunteermatchPojos = using(configuration())
+                .select(Volunteermatch.VOLUNTEERMATCH.fields())
+                .from(Volunteermatch.VOLUNTEERMATCH)
+                .join(Volunteer.VOLUNTEER).on(Volunteer.VOLUNTEER.VOLUNTEERID.eq(Volunteermatch.VOLUNTEERMATCH.VOLUNTEERID))
+                .where(Volunteer.VOLUNTEER.EXTERNALIDENTIFIER.eq(volunteerExtId))
+                .and(Volunteermatch.VOLUNTEERMATCH.EXTERNALIDENTIFIER.eq(volunteerMatchExtId))
+                .fetchInto(Volunteermatch.VOLUNTEERMATCH).map(mapper());
+
+        // We know there must be one. We do this to prevent IndexOutOfBoundsExceptions.
+        if (volunteermatchPojos.size() != 1) {
+            return null;
+        }
+
+        return volunteermatchPojos.get(0);
+    }
+
+    /**
+     * Retrieve a VolunteerMatch with a corresponding Student.
+     * @param volunteerExtId The extId from the volunteer.
+     * @param volunteerMatchExtId The extId from the match.
+     * @return QueryResult&lt;VolunteermatchPojo, StudentPojo&gt;
+     */
+    public QueryResult<VolunteermatchPojo, StudentPojo> retrieveMatchWithStudent(String volunteerExtId, String volunteerMatchExtId) {
+        Map<VolunteermatchPojo, List<StudentPojo>> map = using(configuration())
+                .select(Volunteermatch.VOLUNTEERMATCH.fields())
+                .select(Student.STUDENT.fields())
+                .from(Volunteermatch.VOLUNTEERMATCH)
+                .join(Volunteer.VOLUNTEER).on(Volunteer.VOLUNTEER.VOLUNTEERID.eq(Volunteermatch.VOLUNTEERMATCH.VOLUNTEERID))
+                .join(Student.STUDENT).on(Student.STUDENT.STUDENTID.eq(Volunteermatch.VOLUNTEERMATCH.STUDENTID))
+                .where(Volunteer.VOLUNTEER.EXTERNALIDENTIFIER.eq(volunteerExtId))
+                .and(Volunteermatch.VOLUNTEERMATCH.EXTERNALIDENTIFIER.eq(volunteerMatchExtId))
+                .fetchGroups(
+                        r -> r.into(Volunteermatch.VOLUNTEERMATCH).into(VolunteermatchPojo.class),
+                        r -> r.into(Student.STUDENT).into(StudentPojo.class)
+                );
+        // If the map has no elements.
+        if (map.size() == 0) {
+            return null;
+        }
+
+        Map.Entry<VolunteermatchPojo, List<StudentPojo>> entry = map.entrySet().iterator().next();
+        return new QueryResult<>(entry.getKey(), entry.getValue().get(0));
     }
 }

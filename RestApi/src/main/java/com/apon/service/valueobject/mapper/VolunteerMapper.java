@@ -1,10 +1,7 @@
 package com.apon.service.valueobject.mapper;
 
-import com.apon.database.generated.tables.pojos.TaskPojo;
-import com.apon.database.generated.tables.pojos.VolunteerPojo;
-import com.apon.database.generated.tables.pojos.VolunteerinstancePojo;
-import com.apon.database.generated.tables.pojos.VolunteermatchPojo;
-import com.apon.database.mydao.StudentMyDao;
+import com.apon.database.generated.tables.pojos.*;
+import com.apon.database.mydao.QueryResult;
 import com.apon.service.valueobject.TaskValueObject;
 import com.apon.service.valueobject.VolunteerInstanceValueObject;
 import com.apon.service.valueobject.VolunteerMatchValueObject;
@@ -14,7 +11,7 @@ import com.apon.util.DateTimeUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "unchecked"})
 public class VolunteerMapper {
     private VolunteerValueObject volunteerValueObject;
     private VolunteerPojo volunteerPojo;
@@ -42,7 +39,7 @@ public class VolunteerMapper {
         fillValueObjectWithPojo(volunteerPojo);
     }
 
-    public void fillValueObjectWithPojo(VolunteerPojo volunteerPojo) {
+    private void fillValueObjectWithPojo(VolunteerPojo volunteerPojo) {
         volunteerValueObject.setExternalIdentifier(volunteerPojo.getExternalidentifier());
         volunteerValueObject.setFirstName(volunteerPojo.getFirstname());
         volunteerValueObject.setInsertion(volunteerPojo.getInsertion());
@@ -63,7 +60,7 @@ public class VolunteerMapper {
         volunteerValueObject.setIsTaalmaatje(volunteerPojo.getIstaalmaatje());
     }
 
-    public void fillPojoWithValueObject(VolunteerValueObject volunteerValueObject) {
+    private void fillPojoWithValueObject(VolunteerValueObject volunteerValueObject) {
         volunteerPojo.setExternalidentifier(volunteerValueObject.getExternalIdentifier());
         volunteerPojo.setFirstname(volunteerValueObject.getFirstName());
         volunteerPojo.setInsertion(volunteerValueObject.getInsertion());
@@ -103,7 +100,7 @@ public class VolunteerMapper {
         }
     }
 
-    private void addMatch(VolunteermatchPojo volunteermatchPojo, StudentMyDao studentMyDao) {
+    private void addMatch(VolunteermatchPojo volunteermatchPojo, StudentPojo studentPojo) {
         VolunteerMatchValueObject volunteerMatchValueObject = new VolunteerMatchValueObject();
         volunteerMatchValueObject.setExternalIdentifier(volunteermatchPojo.getExternalidentifier());
         volunteerMatchValueObject.setDateStart(volunteermatchPojo.getDatestart());
@@ -116,18 +113,18 @@ public class VolunteerMapper {
 
         // Set the student.
         StudentMapper studentMapper = new StudentMapper();
-        studentMapper.setStudentPojo(studentMyDao.fetchOneByStudentid(volunteermatchPojo.getStudentid()));
-        volunteerMatchValueObject.setStudentExtId(studentMapper.getStudentValueObject().getExternalIdentifier());
+        studentMapper.setStudentPojo(studentPojo);
+        volunteerMatchValueObject.setStudentValueObject(studentMapper.getStudentValueObject());
 
         volunteerValueObject.getVolunteerMatchValueObjects().add(volunteerMatchValueObject);
     }
 
-    public void setMatchList(List<VolunteermatchPojo> listVolunteerMatchPojo, StudentMyDao studentMyDao) {
+    public void setMatchList(List<QueryResult<VolunteermatchPojo, StudentPojo>> listVolunteerMatchPojo) {
         List<VolunteerMatchValueObject> listVolunteerMatchValueObject = new ArrayList();
         volunteerValueObject.setVolunteerMatchValueObjects(listVolunteerMatchValueObject);
 
-        for (VolunteermatchPojo volunteermatchPojo : listVolunteerMatchPojo) {
-            addMatch(volunteermatchPojo, studentMyDao);
+        for (QueryResult<VolunteermatchPojo, StudentPojo> queryResult : listVolunteerMatchPojo) {
+            addMatch(queryResult.getS(), queryResult.getT());
         }
     }
 

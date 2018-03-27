@@ -41,7 +41,7 @@ public class VolunteerInstanceService implements IService {
         VolunteerInstanceMyDao volunteerInstanceMyDao = new VolunteerInstanceMyDao(context);
         VolunteerInstanceMapper volunteerInstanceMapper = new VolunteerInstanceMapper();
 
-        // Retrieve volunteerInstanceId.
+        // Retrieve volunteerMatch.
         VolunteerinstancePojo volunteerinstancePojo = volunteerInstanceMyDao.fetchByExtIds(volunteerExtId, volunteerInstanceExtId);
         if (volunteerinstancePojo == null) {
             throw new FunctionalException("VolunteerInstanceService.notFound.instance");

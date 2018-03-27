@@ -1,5 +1,6 @@
 package com.apon.service.valueobject.mapper;
 
+import com.apon.database.generated.tables.pojos.StudentPojo;
 import com.apon.database.generated.tables.pojos.VolunteermatchPojo;
 import com.apon.service.valueobject.VolunteerMatchValueObject;
 
@@ -22,26 +23,29 @@ public class VolunteerMatchMapper {
 
     public void setVolunteerMatchValueObject(VolunteerMatchValueObject volunteerMatchValueObject) {
         this.volunteerMatchValueObject = volunteerMatchValueObject;
+        fillPojoWithValueObject(volunteerMatchValueObject);
     }
 
     public void setVolunteermatchPojo(VolunteermatchPojo volunteermatchPojo) {
         this.volunteermatchPojo = volunteermatchPojo;
+        fillValueObjectWithPojo(volunteermatchPojo);
     }
 
-
-    public void fillValueObjectWithPojo(VolunteermatchPojo volunteermatchPojo) {
+    private void fillValueObjectWithPojo(VolunteermatchPojo volunteermatchPojo) {
         volunteerMatchValueObject.setExternalIdentifier(volunteermatchPojo.getExternalidentifier());
         volunteerMatchValueObject.setDateStart(volunteermatchPojo.getDatestart());
         volunteerMatchValueObject.setDateEnd(volunteermatchPojo.getDateend());
     }
 
-    public void fillPojoWithValueObject(VolunteerMatchValueObject volunteerMatchValueObject) {
+    private void fillPojoWithValueObject(VolunteerMatchValueObject volunteerMatchValueObject) {
         volunteermatchPojo.setDatestart(volunteerMatchValueObject.getDateStart());
         volunteermatchPojo.setDateend(volunteerMatchValueObject.getDateEnd());
         volunteermatchPojo.setExternalidentifier(volunteerMatchValueObject.getExternalIdentifier());
     }
 
-    public void setStudent(String studentExtId) {
-        volunteerMatchValueObject.setStudentExtId(studentExtId);
+    public void setStudentPojo(StudentPojo studentPojo) {
+        StudentMapper studentMapper = new StudentMapper();
+        studentMapper.setStudentPojo(studentPojo);
+        volunteerMatchValueObject.setStudentValueObject(studentMapper.getStudentValueObject());
     }
 }

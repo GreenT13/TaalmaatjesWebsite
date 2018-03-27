@@ -1,9 +1,6 @@
 package com.apon.service;
 
-import com.apon.database.generated.tables.pojos.TaskPojo;
-import com.apon.database.generated.tables.pojos.VolunteerPojo;
-import com.apon.database.generated.tables.pojos.VolunteerinstancePojo;
-import com.apon.database.generated.tables.pojos.VolunteermatchPojo;
+import com.apon.database.generated.tables.pojos.*;
 import com.apon.database.jooq.DbContext;
 import com.apon.database.mydao.*;
 import com.apon.exceptionhandler.FunctionalException;
@@ -12,12 +9,10 @@ import com.apon.service.valueobject.StringValueObject;
 import com.apon.service.valueobject.VolunteerValueObject;
 import com.apon.service.valueobject.mapper.VolunteerMapper;
 import com.apon.util.DateTimeUtil;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,12 +57,11 @@ public class VolunteerService implements IService {
         volunteerMapper.setInstanceList(volunteerinstancePojos);
 
         // Retrieve the matches.
-        List<VolunteermatchPojo> volunteermatchPojos = volunteerMatchMyDao.getMatchForVolunteer(volunteerExtId, false);
-        if (volunteermatchPojos == null) {
+        List<QueryResult<VolunteermatchPojo, StudentPojo>> result = volunteerMatchMyDao.getMatchForVolunteerWithStudent(volunteerExtId, false);
+        if (result == null) {
             throw new FunctionalException("VolunteerService.notFound.volunteerMatch");
         }
-        // TODO: remove this StudentMyDao.
-        volunteerMapper.setMatchList(volunteermatchPojos, new StudentMyDao(context));
+        volunteerMapper.setMatchList(result);
 
         // Retrieve the tasks.
         List<TaskPojo> taskPojos = taskMyDao.getTasksForVolunteer(volunteerExtId);

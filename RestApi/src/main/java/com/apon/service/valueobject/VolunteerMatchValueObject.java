@@ -9,7 +9,7 @@ import java.sql.Date;
 public class VolunteerMatchValueObject {
     private String volunteerExtId;
     private String externalIdentifier;
-    private String studentExtId;
+    private StudentValueObject studentValueObject;
     @JsonFormat(pattern = "dd-MM-yyyy") @JsonSerialize(using = CustomDateSerializer.class)
     private Date dateStart;
     @JsonFormat(pattern = "dd-MM-yyyy") @JsonSerialize(using = CustomDateSerializer.class)
@@ -47,11 +47,11 @@ public class VolunteerMatchValueObject {
         this.volunteerExtId = volunteerExtId;
     }
 
-    public String getStudentExtId() {
-        return studentExtId;
+    public StudentValueObject getStudentValueObject() {
+        return studentValueObject;
     }
 
-    public void setStudentExtId(String studentExtId) {
-        this.studentExtId = studentExtId;
+    public void setStudentValueObject(StudentValueObject studentValueObject) {
+        this.studentValueObject = studentValueObject;
     }
 }
