@@ -141,7 +141,7 @@ public class VolunteerService implements IService {
         volunteerMapper.getVolunteerPojo().setVolunteerid(volunteerPojo.getVolunteerid());
 
         if (!volunteerMyDao.updatePojo(volunteerMapper.getVolunteerPojo())) {
-            throw new FunctionalException("VolunteerService.update.error");
+            throw new FunctionalException(volunteerMyDao.getResultObject());
         }
 
         // Commit the changes.

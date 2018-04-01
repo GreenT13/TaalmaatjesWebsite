@@ -10,6 +10,7 @@ import com.apon.exceptionhandler.FunctionalException;
 import com.apon.guice.InjectContext;
 import com.apon.service.valueobject.StringValueObject;
 import com.apon.service.valueobject.VolunteerMatchValueObject;
+import com.apon.service.valueobject.VolunteerValueObject;
 import com.apon.service.valueobject.mapper.VolunteerMatchMapper;
 import com.apon.util.DateTimeUtil;
 
@@ -36,6 +37,7 @@ public class VolunteerMatchService implements IService {
                                          @PathParam("volunteerMatchExtId") String volunteerMatchExtId) throws Exception {
         // Mapper and Dao variables.
         VolunteerMatchMyDao volunteerMatchMyDao = new VolunteerMatchMyDao(context);
+        VolunteerMyDao volunteerMyDao = new VolunteerMyDao(context);
         VolunteerMatchMapper volunteerMatchMapper = new VolunteerMatchMapper();
 
         // Retrieve volunteerMatch.
@@ -46,9 +48,14 @@ public class VolunteerMatchService implements IService {
         volunteerMatchMapper.setVolunteermatchPojo(result.getS());
         volunteerMatchMapper.setStudentPojo(result.getT());
 
-        // volunteerExtId is not retrieved, but it is a path param so we just set it manually.
-        volunteerMatchMapper.getVolunteerMatchValueObject().setVolunteerExtId(volunteerExtId);
+        // Retrieve the volunteer.
+        VolunteerPojo volunteerPojo = volunteerMyDao.fetchOneByExternalidentifier(volunteerExtId);
+        if (volunteerPojo == null) {
+            throw new FunctionalException("VolunteerMatchService.notFound.volunteer");
+        }
+        volunteerMatchMapper.setVolunteerPojo(volunteerPojo);
 
+        // Return the match.
         return volunteerMatchMapper.getVolunteerMatchValueObject();
     }
 

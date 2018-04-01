@@ -1,0 +1,13 @@
+/* Form-select elements are usually bold, but I don't want this. */
+select {
+  font-weight: normal;
+}
+
+/* Normally you have some padding right to avoid spaces, but here it is not needed. */
+.glyphicon-chevron-down {
+  padding-right: 0;
+}
+
+#advancedRow .form-group {
+  padding-left: 30px;
+}

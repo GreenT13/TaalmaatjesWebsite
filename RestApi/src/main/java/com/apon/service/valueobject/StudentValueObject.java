@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.sql.Date;
+import java.util.List;
 
 public class StudentValueObject {
     private String externalIdentifier;
@@ -16,6 +17,7 @@ public class StudentValueObject {
     private Date dateOfBirth;
     private String groupIdentification;
     private Boolean hasQuit;
+    private List<VolunteerMatchValueObject> volunteerMatchValueObjects;
 
     public String getExternalIdentifier() {
         return externalIdentifier;
@@ -81,4 +83,11 @@ public class StudentValueObject {
         this.dateOfBirth = dateOfBirth;
     }
 
+    public List<VolunteerMatchValueObject> getVolunteerMatchValueObjects() {
+        return volunteerMatchValueObjects;
+    }
+
+    public void setVolunteerMatchValueObjects(List<VolunteerMatchValueObject> volunteerMatchValueObjects) {
+        this.volunteerMatchValueObjects = volunteerMatchValueObjects;
+    }
 }

@@ -38,6 +38,10 @@ import {TaskDetailView} from "./components/task/detail/task.detail.view";
 import {VolunteerPersonalComponent} from "./components/volunteer/detail/blocks/personal/volunteerpersonal.component";
 import {PaginationComponent} from "./components/pagination/pagination.component";
 import {MyDatePipe} from "./pipes/mydate.pipe";
+import {StudentOverviewComponent} from "./components/student/overview/student.overview.component";
+import {StudentService} from "./services/student.service";
+import {StudentNamePipe} from "./pipes/studentname.pipe";
+import {StudentAddComponent} from "./components/student/add/student.add.component";
 
 
 @NgModule({
@@ -48,9 +52,10 @@ import {MyDatePipe} from "./pipes/mydate.pipe";
     VolunteerPersonalComponent,
     TaskOverviewComponent, TaskAddComponent, TaskDetailComponent, TaskEditComponent,
     TaskAddView, TaskEditView, TaskDetailView,
+    StudentOverviewComponent, StudentAddComponent,
     AutocompleteComponent,
     AlertComponent, PaginationComponent,
-    GenderPipe, BooleanPipe, VolunteerNamePipe, ShortenPipe, MyDatePipe,
+    GenderPipe, BooleanPipe, VolunteerNamePipe, ShortenPipe, MyDatePipe, StudentNamePipe,
     ThemeDirective
   ],
   imports: [
@@ -62,7 +67,7 @@ import {MyDatePipe} from "./pipes/mydate.pipe";
     CookieModule.forRoot()
   ],
   providers: [
-    MyHttpClient, LoginService, VolunteerService, VersionService, TaskService,
+    MyHttpClient, LoginService, VolunteerService, VersionService, TaskService, StudentService,
     OverlayService, AuthGuardService,
     ThemeService],
   bootstrap: [AppComponent]

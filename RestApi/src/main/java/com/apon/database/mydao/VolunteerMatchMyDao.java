@@ -5,6 +5,7 @@ import com.apon.database.generated.tables.Volunteer;
 import com.apon.database.generated.tables.Volunteermatch;
 import com.apon.database.generated.tables.daos.VolunteermatchDao;
 import com.apon.database.generated.tables.pojos.StudentPojo;
+import com.apon.database.generated.tables.pojos.VolunteerPojo;
 import com.apon.database.generated.tables.pojos.VolunteermatchPojo;
 import com.apon.database.jooq.DbContext;
 import com.apon.exceptionhandler.ResultObject;
@@ -180,16 +181,17 @@ public class VolunteerMatchMyDao extends VolunteermatchDao {
     }
 
     /**
-     * Get al matches for a student.
-     * @param studentExtId The extid from the student.
+     * Get al matches for a student, together with the volunteer.
+     * @param studentExtId The extId from the student.
      * @param sortAscending Sort by dateStart. If null, it will not sort.
-     * @return List&lt;VolunteermatchPojo&gt;
+     * @return List&lt;QueryResult&lt;VolunteermatchPojo, VolunteerPojo&gt;&gt;
      */
-    public List<VolunteermatchPojo> getMatchForStudent(String studentExtId, Boolean sortAscending) {
+    public List<QueryResult<VolunteermatchPojo, VolunteerPojo>> getMatchForStudent(String studentExtId, Boolean sortAscending) {
         SelectConditionStep<Record> query = using(configuration())
                 .select(Volunteermatch.VOLUNTEERMATCH.fields())
                 .from(Volunteermatch.VOLUNTEERMATCH)
                 .join(Student.STUDENT).on(Student.STUDENT.STUDENTID.eq(Volunteermatch.VOLUNTEERMATCH.STUDENTID))
+                .join(Volunteer.VOLUNTEER).on(Volunteer.VOLUNTEER.VOLUNTEERID.eq(Volunteermatch.VOLUNTEERMATCH.VOLUNTEERID))
                 .where(Student.STUDENT.EXTERNALIDENTIFIER.eq(studentExtId));
 
         if (sortAscending != null && sortAscending) {
@@ -198,7 +200,18 @@ public class VolunteerMatchMyDao extends VolunteermatchDao {
             query.orderBy(Volunteermatch.VOLUNTEERMATCH.DATESTART.desc());
         }
 
-        return query.fetchInto(Volunteermatch.VOLUNTEERMATCH).map(mapper());
+        Map<VolunteermatchPojo, List<VolunteerPojo>> map = query.fetchGroups(
+                r -> r.into(Volunteermatch.VOLUNTEERMATCH).into(VolunteermatchPojo.class),
+                r -> r.into(Volunteer.VOLUNTEER).into(VolunteerPojo.class)
+        );
+
+        // Create a list of query results.
+        List<QueryResult<VolunteermatchPojo, VolunteerPojo>> list = new ArrayList<>();
+        for (Map.Entry<VolunteermatchPojo, List<VolunteerPojo>> entry : map.entrySet()) {
+            list.add(new QueryResult<>(entry.getKey(), entry.getValue().get(0)));
+        }
+
+        return list;
     }
 
     /**

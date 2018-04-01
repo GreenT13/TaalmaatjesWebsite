@@ -1,3 +1,5 @@
+import {VolunteerMatchModel} from "./volunteermatch.model";
+
 export class StudentModel {
   public externalIdentifier: string;
   public firstName: string;
@@ -6,5 +8,6 @@ export class StudentModel {
   public gender: string;
   public dateOfBirth: Date;
   public groupIdentification: string;
-  public hasQuit: boolean;
+  public hasQuit: boolean = false;
+  public volunteerMatchValueObjects: VolunteerMatchModel[];
 }

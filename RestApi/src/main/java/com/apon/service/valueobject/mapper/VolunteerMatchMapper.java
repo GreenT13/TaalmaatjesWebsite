@@ -1,6 +1,7 @@
 package com.apon.service.valueobject.mapper;
 
 import com.apon.database.generated.tables.pojos.StudentPojo;
+import com.apon.database.generated.tables.pojos.VolunteerPojo;
 import com.apon.database.generated.tables.pojos.VolunteermatchPojo;
 import com.apon.service.valueobject.VolunteerMatchValueObject;
 
@@ -48,4 +49,11 @@ public class VolunteerMatchMapper {
         studentMapper.setStudentPojo(studentPojo);
         volunteerMatchValueObject.setStudentValueObject(studentMapper.getStudentValueObject());
     }
+
+    public void setVolunteerPojo(VolunteerPojo volunteerPojo) {
+        VolunteerMapper volunteerMapper = new VolunteerMapper();
+        volunteerMapper.setVolunteerPojo(volunteerPojo);
+        volunteerMatchValueObject.setVolunteerValueObject(volunteerMapper.getVolunteerValueObject());
+    }
+
 }

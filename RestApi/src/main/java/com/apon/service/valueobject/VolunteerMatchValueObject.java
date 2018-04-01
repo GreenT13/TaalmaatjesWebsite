@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.sql.Date;
 
 public class VolunteerMatchValueObject {
-    private String volunteerExtId;
+    private VolunteerValueObject volunteerValueObject;
     private String externalIdentifier;
     private StudentValueObject studentValueObject;
     @JsonFormat(pattern = "dd-MM-yyyy") @JsonSerialize(using = CustomDateSerializer.class)
@@ -15,12 +15,28 @@ public class VolunteerMatchValueObject {
     @JsonFormat(pattern = "dd-MM-yyyy") @JsonSerialize(using = CustomDateSerializer.class)
     private Date dateEnd;
 
+    public VolunteerValueObject getVolunteerValueObject() {
+        return volunteerValueObject;
+    }
+
+    public void setVolunteerValueObject(VolunteerValueObject volunteerValueObject) {
+        this.volunteerValueObject = volunteerValueObject;
+    }
+
     public String getExternalIdentifier() {
         return externalIdentifier;
     }
 
     public void setExternalIdentifier(String externalIdentifier) {
         this.externalIdentifier = externalIdentifier;
+    }
+
+    public StudentValueObject getStudentValueObject() {
+        return studentValueObject;
+    }
+
+    public void setStudentValueObject(StudentValueObject studentValueObject) {
+        this.studentValueObject = studentValueObject;
     }
 
     public Date getDateStart() {
@@ -37,21 +53,5 @@ public class VolunteerMatchValueObject {
 
     public void setDateEnd(Date dateEnd) {
         this.dateEnd = dateEnd;
-    }
-
-    public String getVolunteerExtId() {
-        return volunteerExtId;
-    }
-
-    public void setVolunteerExtId(String volunteerExtId) {
-        this.volunteerExtId = volunteerExtId;
-    }
-
-    public StudentValueObject getStudentValueObject() {
-        return studentValueObject;
-    }
-
-    public void setStudentValueObject(StudentValueObject studentValueObject) {
-        this.studentValueObject = studentValueObject;
     }
 }
