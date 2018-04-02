@@ -1,0 +1,14 @@
+.borderless tbody tr td {
+  border: none;
+}
+.collapsible-text-panel {
+  padding: 0;
+}
+
+.fix-collapse {
+  padding: 15px;
+}
+
+table {
+  margin-bottom: 0;
+}

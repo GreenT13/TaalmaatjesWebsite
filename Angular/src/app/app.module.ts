@@ -42,6 +42,8 @@ import {StudentOverviewComponent} from "./components/student/overview/student.ov
 import {StudentService} from "./services/student.service";
 import {StudentNamePipe} from "./pipes/studentname.pipe";
 import {StudentAddComponent} from "./components/student/add/student.add.component";
+import {StudentDetailComponent} from "./components/student/detail/student.detail.component";
+import {AgePipe} from "./pipes/age.pipe";
 
 
 @NgModule({
@@ -52,10 +54,10 @@ import {StudentAddComponent} from "./components/student/add/student.add.componen
     VolunteerPersonalComponent,
     TaskOverviewComponent, TaskAddComponent, TaskDetailComponent, TaskEditComponent,
     TaskAddView, TaskEditView, TaskDetailView,
-    StudentOverviewComponent, StudentAddComponent,
+    StudentOverviewComponent, StudentAddComponent, StudentDetailComponent,
     AutocompleteComponent,
     AlertComponent, PaginationComponent,
-    GenderPipe, BooleanPipe, VolunteerNamePipe, ShortenPipe, MyDatePipe, StudentNamePipe,
+    GenderPipe, BooleanPipe, VolunteerNamePipe, ShortenPipe, MyDatePipe, StudentNamePipe, AgePipe,
     ThemeDirective
   ],
   imports: [

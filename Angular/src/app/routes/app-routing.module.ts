@@ -12,6 +12,7 @@ import {TaskEditView} from "../components/task/add/task.edit.view";
 import {TaskDetailView} from "../components/task/detail/task.detail.view";
 import {StudentOverviewComponent} from "../components/student/overview/student.overview.component";
 import {StudentAddComponent} from "../components/student/add/student.add.component";
+import {StudentDetailComponent} from "../components/student/detail/student.detail.component";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -21,6 +22,7 @@ const appRoutes: Routes = [
   { path: 'volunteer/:volunteerExtId', canActivate: [AuthGuardService], component: VolunteerDetailComponent },
   { path: 'student', canActivate: [AuthGuardService], component: StudentOverviewComponent},
   { path: 'student/add', canActivate: [AuthGuardService], component: StudentAddComponent},
+  { path: 'student/:studentExtId', canActivate: [AuthGuardService], component: StudentDetailComponent},
   { path: 'task', canActivate: [AuthGuardService], component: TaskOverviewComponent},
   { path: 'task/add', canActivate: [AuthGuardService], component: TaskAddView},
   { path: 'task/:taskExtId', canActivate: [AuthGuardService], component: TaskDetailView },
