@@ -20,7 +20,6 @@ export class VolunteerEditMatchComponent extends VolunteerMatchComponent {
   doHttpRequest() {
     this.volunteerMatchModel.volunteerValueObject = CopyUtil.createCopyVolunteer(this.volunteer);
 
-    console.log(this.volunteerMatchModel);
     this.volunteerService.updateVolunteerMatch(this.volunteerMatchModel).subscribe(
       () => this.didHttpRequest.emit(this.volunteerMatchModel.externalIdentifier),
       (error: HttpErrorResponse) => this.alertModel.setError(error)
