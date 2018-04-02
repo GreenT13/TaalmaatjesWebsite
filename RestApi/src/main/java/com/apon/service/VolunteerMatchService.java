@@ -10,7 +10,6 @@ import com.apon.exceptionhandler.FunctionalException;
 import com.apon.guice.InjectContext;
 import com.apon.service.valueobject.StringValueObject;
 import com.apon.service.valueobject.VolunteerMatchValueObject;
-import com.apon.service.valueobject.VolunteerValueObject;
 import com.apon.service.valueobject.mapper.VolunteerMatchMapper;
 import com.apon.util.DateTimeUtil;
 
@@ -136,7 +135,6 @@ public class VolunteerMatchService implements IService {
         context.commit();
     }
 
-
     /**
      * Check if the line can be added to the database. Merge the line if needed. Returns true if added (possibly merged)
      * and return false if some verification failed.
@@ -230,6 +228,9 @@ public class VolunteerMatchService implements IService {
 
         // If we actually reach this point, we know the line will be added to the database (merged or not).
         VolunteermatchPojo volunteermatchPojo = new VolunteermatchPojo();
+        volunteermatchPojo.setVolunteerid(volunteermatchPojoNew.getVolunteerid());
+        volunteermatchPojo.setStudentid(volunteermatchPojoNew.getStudentid());
+        volunteermatchPojo.setVolunteermatchid(volunteermatchPojoNew.getVolunteermatchid());
 
         // Merge after if possible.
         if (mergeAfterVolunteerMatchExtId != null) {

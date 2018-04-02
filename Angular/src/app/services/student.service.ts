@@ -21,4 +21,8 @@ export class StudentService {
   getStudent(studentExtId: string) {
     return this.myHttpClient.get('student/' + studentExtId, null);
   }
+
+  getStudentForMatch() {
+    return this.myHttpClient.get('student/match', null);
+  }
 }

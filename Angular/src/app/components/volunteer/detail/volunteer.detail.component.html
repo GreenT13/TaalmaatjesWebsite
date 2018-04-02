@@ -24,11 +24,12 @@
     <!-- Matches -->
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <h1 class="panel-title"><span data-toggle="collapse" data-target="#matches-panel" class="glyphicon glyphicon-ok-sign"></span>Koppelingen</h1>
+        <h1 class="panel-title"><span data-toggle="collapse" data-target="#matches-panel" class="glyphicon glyphicon-ok-sign">
+        </span><a (click)="setNewMatch()">Koppelingen</a></h1>
       </div>
       <div id="matches-panel" class="list-group collapse in">
-        <a *ngFor="let match of volunteer.volunteerMatchValueObjects" class="list-group-item">
-          Van {{ match.dateStart }} tot {{ match.dateEnd | mydate }} {{ match.studentExtId }}.
+        <a (click)="setMatch(match)" *ngFor="let match of volunteer.volunteerMatchValueObjects" class="list-group-item">
+          Van {{ match.dateStart }} tot {{ match.dateEnd | mydate }} voor cursist {{ match.studentValueObject | parsestudentname }}.
         </a>
       </div>
     </div>
@@ -63,6 +64,7 @@
 
   <!-- Right column of panels -->
   <div class="col-sm-6">
+    <!-- Tasks -->
     <app-task-add
       *ngIf="currentItemInstance === TASK_ADD" (onBackEmitter)="clear()"
       [(alertModel)]="alertModel" [volunteer]="volunteer" (didHttpRequest)="refresh()"></app-task-add>
@@ -76,11 +78,20 @@
       <button class="btn btn-default" (click)="clear()">Terug</button>
     </div>
 
+    <!-- Instances -->
     <app-volunteer-add-active
       *ngIf="currentItemInstance === INSTANCE_ADD" [volunteer]="volunteer" (didHttpRequest)="refresh()"
       (onBackEmitter)="clear()" [alertModel]="alertModel"></app-volunteer-add-active>
     <app-volunteer-edit-active
       *ngIf="currentItemInstance === INSTANCE_EDIT" [(volunteerInstanceModel)]="currentItem" (didHttpRequest)="refresh()"
       (onBackEmitter)="clear()" [alertModel]="alertModel" [volunteer]="volunteer" (onDeleteEmitter)="clear()"></app-volunteer-edit-active>
+
+    <!-- Matches -->
+    <app-volunteer-add-match
+      *ngIf="currentItemInstance === MATCH_ADD" [volunteer]="volunteer" (didHttpRequest)="refresh()"
+      (onBackEmitter)="clear()" [alertModel]="alertModel"></app-volunteer-add-match>
+    <app-volunteer-edit-match
+      *ngIf="currentItemInstance === MATCH_EDIT" [(volunteerMatchModel)]="currentItem" (didHttpRequest)="refresh()"
+      (onBackEmitter)="clear()" [alertModel]="alertModel" [volunteer]="volunteer" (onDeleteEmitter)="clear()"></app-volunteer-edit-match>
   </div>
 </div>

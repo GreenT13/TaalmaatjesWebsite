@@ -3,6 +3,7 @@ import {MyHttpClient} from "./base/myhttpclient.service";
 import 'rxjs/Rx';
 import {VolunteerModel} from "../valueobject/volunteer.model";
 import {VolunteerInstanceModel} from "../valueobject/volunteerinstance.model";
+import {VolunteerMatchModel} from "../valueobject/volunteermatch.model";
 
 @Injectable()
 export class VolunteerService {
@@ -37,10 +38,22 @@ export class VolunteerService {
       volunteerInstanceModel.externalIdentifier, null, volunteerInstanceModel);
   }
 
-
   deleteVolunteerInstance(volunteerExtId: string, volunteerInstanceExtId: string) {
     return this.myHttpClient.delete('volunteer/' + volunteerExtId + '/instance/' + volunteerInstanceExtId, null);
   }
 
+  insertVolunteerMatch(volunteerMatchModel: VolunteerMatchModel) {
+    return this.myHttpClient.put('volunteer/' + volunteerMatchModel.volunteerValueObject.externalIdentifier + '/match',
+      null, volunteerMatchModel);
+  }
 
+  updateVolunteerMatch(volunteerMatchModel: VolunteerMatchModel) {
+    return this.myHttpClient.post('volunteer/' + volunteerMatchModel.volunteerValueObject.externalIdentifier +
+      '/match/' + volunteerMatchModel.externalIdentifier, null, volunteerMatchModel);
+  }
+
+  deleteVolunteerMatch(volunteerExtId: string, volunteerMatchExtId: string) {
+    return this.myHttpClient.delete('volunteer/' + volunteerExtId +
+      '/match/' + volunteerMatchExtId, null);
+  }
 }

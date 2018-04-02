@@ -7,7 +7,6 @@ import * as moment from 'moment';
 export class AgePipe implements PipeTransform {
 
   transform(dateOfBirth: string): number {
-    console.log(dateOfBirth);
     if (!dateOfBirth) {
       return null;
     }

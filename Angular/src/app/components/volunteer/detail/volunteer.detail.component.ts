@@ -7,6 +7,7 @@ import {AlertModel} from "../../alert/alert.model";
 import {DestroyUtil} from "../../../util/destroy.util";
 import {TaskModel} from "../../../valueobject/task.model";
 import {VolunteerInstanceModel} from "../../../valueobject/volunteerinstance.model";
+import {VolunteerMatchModel} from "../../../valueobject/volunteermatch.model";
 
 @Component({
   selector: 'app-volunteer-detail',
@@ -58,6 +59,8 @@ export class VolunteerDetailComponent implements OnInit, OnDestroy {
   public TASK_VIEW = 'task_view';
   public INSTANCE_ADD = 'instance_add';
   public INSTANCE_EDIT = 'instance_edit';
+  public MATCH_ADD = 'match_add';
+  public MATCH_EDIT = 'match_edit';
   public currentItemInstance: string;
   public currentItem: any;
 
@@ -93,5 +96,13 @@ export class VolunteerDetailComponent implements OnInit, OnDestroy {
   setNewInstance() {
     this.currentItem = null;
     this.currentItemInstance = this.INSTANCE_ADD;
+  }
+  setMatch(match: VolunteerMatchModel) {
+    this.currentItem = match;
+    this.currentItemInstance = this.MATCH_EDIT;
+  }
+  setNewMatch() {
+    this.currentItem = null;
+    this.currentItemInstance = this.MATCH_ADD;
   }
 }

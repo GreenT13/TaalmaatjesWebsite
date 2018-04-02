@@ -148,6 +148,33 @@ public class StudentService implements IService {
         return studentValueObjects;
     }
 
+    /**
+     * Retrieve students that are available for matching.
+     * @return List&lt;StudentValueObject&gt;
+     */
+    @GET
+    @Path("match")
+    @InjectContext
+    public List<StudentValueObject> getStudentsForMatch() throws Exception {
+        // At this moment it is only hasMatch == false, but later it might be more.
+        StudentMyDao studentMyDao = new StudentMyDao(context);
+        List<StudentPojo> studentPojos = studentMyDao.advancedSearch(null, false);
+        if (studentPojos == null) {
+            throw new FunctionalException("StudentService.search.error");
+        }
+
+        // Convert the list of pojo's to value objects.
+        List<StudentValueObject> studentValueObjects = new ArrayList();
+        for (StudentPojo studentPojo : studentPojos) {
+            StudentMapper studentMapper = new StudentMapper();
+            studentMapper.setStudentPojo(studentPojo);
+
+            studentValueObjects.add(studentMapper.getStudentValueObject());
+        }
+
+        return studentValueObjects;
+    }
+
 
 
 

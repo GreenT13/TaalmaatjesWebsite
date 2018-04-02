@@ -1,13 +1,12 @@
 import {Pipe, PipeTransform} from "@angular/core";
-import {VolunteerModel} from "../valueobject/volunteer.model";
 import {StudentModel} from "../valueobject/student.model";
 
 @Pipe({
   name: 'parsestudentname'
 })
 export class StudentNamePipe implements PipeTransform {
-  transform(volunteer: VolunteerModel) {
-    return StudentNamePipe.parseName(volunteer);
+  transform(student: StudentModel) {
+    return StudentNamePipe.parseName(student);
   }
 
   public static isEmptyString(value: string): boolean {
@@ -15,20 +14,20 @@ export class StudentNamePipe implements PipeTransform {
     return !value || value.length == 0 || value.trim().length == 0;
   }
 
-  public static parseName(volunteer: VolunteerModel): string {
-    if (!volunteer) {
+  public static parseName(student: StudentModel): string {
+    if (!student) {
       return '';
     }
 
     let name: string = '';
-    if (!StudentNamePipe.isEmptyString(volunteer.firstName)) {
-      name += volunteer.firstName + ' ';
+    if (!StudentNamePipe.isEmptyString(student.firstName)) {
+      name += student.firstName + ' ';
     }
-    if (!StudentNamePipe.isEmptyString(volunteer.insertion)) {
-      name += volunteer.insertion + ' ';
+    if (!StudentNamePipe.isEmptyString(student.insertion)) {
+      name += student.insertion + ' ';
     }
-    if (!StudentNamePipe.isEmptyString(volunteer.lastName)) {
-      name += volunteer.lastName;
+    if (!StudentNamePipe.isEmptyString(student.lastName)) {
+      name += student.lastName;
     }
     // Possible that we end with a space, so we remove this one.
     return name.trim();
