@@ -7,10 +7,11 @@ import * as moment from 'moment';
 export class AgePipe implements PipeTransform {
 
   transform(dateOfBirth: string): number {
+    console.log(dateOfBirth);
     if (!dateOfBirth) {
       return null;
     }
 
-    return moment().diff(moment(dateOfBirth), 'years');
+    return moment().diff(moment(dateOfBirth, "DD-MM-YYYY"), 'years');
   }
 }
