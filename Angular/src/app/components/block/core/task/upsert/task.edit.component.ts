@@ -15,7 +15,7 @@ export class TaskEditComponent extends TaskUpsertComponent {
   }
 
   doHttpRequest() {
-    this.taskService.updateTask(this.task).subscribe(
+    return this.taskService.updateTask(this.task).subscribe(
       () => this.didHttpRequest.emit(this.task.externalIdentifier),
       (error: HttpErrorResponse) => this.alertModel.setError(error)
     );

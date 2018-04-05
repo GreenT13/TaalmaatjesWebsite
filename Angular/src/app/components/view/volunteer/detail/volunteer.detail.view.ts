@@ -7,6 +7,7 @@ import {VolunteerService} from "../../../../services/volunteer.service";
 import {TaskDVO} from "../../../../valueobject/dvo/task.dvo";
 import {VolunteerInstanceDVO} from "../../../../valueobject/dvo/volunteerinstance.dvo";
 import {VolunteerMatchDVO} from "../../../../valueobject/dvo/volunteermatch.dvo";
+import {VolunteerDVO} from "../../../../valueobject/dvo/volunteer.dvo";
 
 @Component({
   selector: 'app-volunteer-detail-view',
@@ -65,6 +66,7 @@ export class VolunteerDetailView implements OnInit, OnDestroy {
 
 
   // All code for determining which component should be shown to the right.
+  public VOLUNTEER_EDIT = 'volunteer_edit';
   public TASK_ADD = 'task_add';
   public TASK_EDIT = 'task_edit';
   public TASK_VIEW = 'task_view';
@@ -89,6 +91,10 @@ export class VolunteerDetailView implements OnInit, OnDestroy {
     this.setTask(currentItem);
   }
 
+  setVolunteer(volunteer: VolunteerDVO) {
+    this.currentItem = volunteer;
+    this.currentItemInstance = this.VOLUNTEER_EDIT;
+  }
   setTask(task: TaskDVO) {
     this.currentItem = task;
     this.currentItemInstance = this.TASK_VIEW;

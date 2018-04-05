@@ -14,7 +14,7 @@ export class StudentAddComponent extends StudentUpsertComponent {
   }
 
   doHttpRequest() {
-    this.studentService.insertStudent(this.student).subscribe(
+    return this.studentService.insertStudent(this.student).subscribe(
       () => this.didHttpRequest.emit(this.student.externalIdentifier),
       (error: HttpErrorResponse) =>  this.alertModel.setError(error)
     );

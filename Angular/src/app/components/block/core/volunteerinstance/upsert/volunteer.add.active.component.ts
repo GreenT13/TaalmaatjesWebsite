@@ -15,7 +15,7 @@ export class VolunteerAddActiveComponent extends VolunteerActiveUpsertComponent 
   }
 
   doHttpRequest() {
-    this.volunteerService.insertVolunteerInstance(this.volunteerInstance).subscribe(
+    return this.volunteerService.insertVolunteerInstance(this.volunteerInstance).subscribe(
       () => this.didHttpRequest.emit(this.volunteerInstance.externalIdentifier),
       (error: HttpErrorResponse) =>  this.alertModel.setError(error)
     );

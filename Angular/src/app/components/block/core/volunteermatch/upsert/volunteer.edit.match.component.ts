@@ -17,7 +17,7 @@ export class VolunteerEditMatchComponent extends VolunteerMatchComponent {
   }
 
   doHttpRequest() {
-    this.volunteerService.updateVolunteerMatch(this.volunteerMatch).subscribe(
+    return this.volunteerService.updateVolunteerMatch(this.volunteerMatch).subscribe(
       () => this.didHttpRequest.emit(this.volunteerMatch.externalIdentifier),
       (error: HttpErrorResponse) => this.alertModel.setError(error)
     );

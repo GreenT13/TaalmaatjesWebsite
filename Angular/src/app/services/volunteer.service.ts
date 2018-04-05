@@ -21,6 +21,10 @@ export class VolunteerService {
     return this.myHttpClient.put(url, null, volunteer);
   }
 
+  updateVolunteer(volunteer: VolunteerDVO) {
+    return this.myHttpClient.post('volunteer/' + volunteer.externalIdentifier, null, volunteer);
+  }
+
   getVolunteer(volunteerExtId: string) {
     return this.myHttpClient.get('volunteer/' + volunteerExtId, null);
   }

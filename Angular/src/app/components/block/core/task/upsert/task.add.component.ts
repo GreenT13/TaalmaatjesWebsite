@@ -15,7 +15,7 @@ export class TaskAddComponent extends TaskUpsertComponent {
   }
 
   doHttpRequest() {
-    this.taskService.insertTask(this.task).subscribe(
+    return this.taskService.insertTask(this.task).subscribe(
       (externalIdentifier: StringVO) => this.didHttpRequest.emit(externalIdentifier.value),
       (error: HttpErrorResponse) => this.alertModel.setError(error)
     );
