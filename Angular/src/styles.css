@@ -7,9 +7,23 @@ p {
   margin: 0;
 }
 
+/* For styling panels */
 .fix-collapse {
   padding: 15px;
 }
 .collapsible-text-panel {
   padding: 0;
+}
+
+/* For styling tables to display information */
+.borderless tbody tr td {
+  border: none;
+}
+table {
+  margin-bottom: 0;
+}
+
+/* For labels in edit mode. */
+.control-label {
+  text-align: left;
 }

@@ -1,0 +1,31 @@
+<!-- Text Panel with information from customer. -->
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h1 class="panel-title"><span data-toggle="collapse" data-target="#user-panel" class="glyphicon glyphicon-user"></span>
+      {{ student | parsename }}</h1>
+  </div>
+  <div id="user-panel" class="panel-body collapse in collapsible-text-panel">
+    <div class="fix-collapse">
+      <table data-toggle="table" class="table table-condensed borderless">
+        <tbody>
+          <tr>
+            <td>Geboortedatum</td>
+            <td>{{ student.dateOfBirth }}</td>
+          </tr>
+          <tr>
+            <td>Leeftijd</td>
+            <td>{{ student.dateOfBirth | age }}</td>
+          </tr>
+          <tr>
+            <td>Geslacht</td>
+            <td>{{ student.gender | gender }}</td>
+          </tr>
+          <tr>
+            <td>Groep</td>
+            <td>{{ student.groupIdentification }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

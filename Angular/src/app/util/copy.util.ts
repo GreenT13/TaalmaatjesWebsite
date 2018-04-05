@@ -1,36 +1,36 @@
-import {VolunteerInstanceModel} from "../valueobject/volunteerinstance.model";
-import {VolunteerModel} from "../valueobject/volunteer.model";
+import {VolunteerDVO} from "../valueobject/dvo/volunteer.dvo";
+import {VolunteerInstanceDVO} from "../valueobject/dvo/volunteerinstance.dvo";
 
 export class CopyUtil {
-  public static createCopyVolunteerInstance(volunteerInstanceModel: VolunteerInstanceModel): VolunteerInstanceModel {
-    let copy: VolunteerInstanceModel = new VolunteerInstanceModel();
-    copy.volunteerExtId = volunteerInstanceModel.volunteerExtId;
-    copy.externalIdentifier = volunteerInstanceModel.externalIdentifier;
-    copy.dateStart = volunteerInstanceModel.dateStart;
-    copy.dateEnd = volunteerInstanceModel.dateEnd;
+  public static createCopyVolunteerInstance(volunteerInstance: VolunteerInstanceDVO): VolunteerInstanceDVO {
+    let copy: VolunteerInstanceDVO = new VolunteerInstanceDVO();
+    copy.volunteerDVO = volunteerInstance.volunteerDVO;
+    copy.externalIdentifier = volunteerInstance.externalIdentifier;
+    copy.dateStart = volunteerInstance.dateStart;
+    copy.dateEnd = volunteerInstance.dateEnd;
     return copy;
   }
 
-  public static createCopyVolunteer(volunteerModel: VolunteerModel): VolunteerModel {
-    let copy: VolunteerModel = new VolunteerModel();
-    copy.externalIdentifier = volunteerModel.externalIdentifier;
-    copy.firstName = volunteerModel.firstName;
-    copy.insertion = volunteerModel.insertion;
-    copy.lastName = volunteerModel.lastName;
-    copy.dateOfBirth = volunteerModel.dateOfBirth;
-    copy.gender = volunteerModel.gender;
-    copy.phoneNumber = volunteerModel.phoneNumber;
-    copy.mobilePhoneNumber = volunteerModel.mobilePhoneNumber;
-    copy.email = volunteerModel.email;
-    copy.dateTraining = volunteerModel.dateTraining;
-    copy.postalCode = volunteerModel.postalCode;
-    copy.city = volunteerModel.city;
-    copy.streetName = volunteerModel.streetName;
-    copy.houseNr = volunteerModel.houseNr;
-    copy.log = volunteerModel.log;
-    copy.job = volunteerModel.job;
-    copy.isClassAssistant = volunteerModel.isClassAssistant;
-    copy.isTaalmaatje = volunteerModel.isTaalmaatje;
+  public static createCopyVolunteer(volunteer: VolunteerDVO): VolunteerDVO {
+    let copy: VolunteerDVO = new VolunteerDVO();
+    copy.externalIdentifier = volunteer.externalIdentifier;
+    copy.firstName = volunteer.firstName;
+    copy.insertion = volunteer.insertion;
+    copy.lastName = volunteer.lastName;
+    copy.dateOfBirth = volunteer.dateOfBirth;
+    copy.gender = volunteer.gender;
+    copy.phoneNumber = volunteer.phoneNumber;
+    copy.mobilePhoneNumber = volunteer.mobilePhoneNumber;
+    copy.email = volunteer.email;
+    copy.dateTraining = volunteer.dateTraining;
+    copy.postalCode = volunteer.postalCode;
+    copy.city = volunteer.city;
+    copy.streetName = volunteer.streetName;
+    copy.houseNr = volunteer.houseNr;
+    copy.log = volunteer.log;
+    copy.job = volunteer.job;
+    copy.isClassAssistant = volunteer.isClassAssistant;
+    copy.isTaalmaatje = volunteer.isTaalmaatje;
     return copy;
   }
 

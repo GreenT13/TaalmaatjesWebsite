@@ -1,0 +1,71 @@
+<!-- Text Panel with information from customer. -->
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h1 class="panel-title"><span data-toggle="collapse" data-target="#user-panel" class="glyphicon glyphicon-user"></span>
+      {{ volunteer | parsename }}</h1>
+  </div>
+  <div id="user-panel" class="panel-body collapse in collapsible-text-panel">
+    <div class="fix-collapse">
+      <table data-toggle="table" class="table table-condensed borderless">
+        <tbody>
+        <tr>
+          <td>Geboortedatum</td>
+          <td>{{ volunteer.dateOfBirth }}</td>
+        </tr>
+        <tr>
+          <td>Leeftijd</td>
+          <td>{{ volunteer.dateOfBirth | age }}</td>
+        </tr>
+        <tr>
+          <td>Geslacht</td>
+          <td>{{ volunteer.gender | gender }}</td>
+        </tr>
+        <tr>
+          <td>Telefoonnr</td>
+          <td>{{ volunteer.phoneNumber }}</td>
+        </tr>
+        <tr>
+          <td>Mobiele telefoonnr</td>
+          <td>{{ volunteer.mobilePhoneNumber }}</td>
+        </tr>
+        <tr>
+          <td>Email</td>
+          <td>{{ volunteer.email }}</td>
+        </tr>
+        <tr>
+          <td>Straat</td>
+          <td>{{ volunteer.streetName }}</td>
+        </tr>
+        <tr>
+          <td>Huisnummer</td>
+          <td>{{ volunteer.houseNr }}</td>
+        </tr>
+        <tr>
+          <td>Postcode</td>
+          <td>{{ volunteer.postalCode }}</td>
+        </tr>
+        <tr>
+          <td>Stad</td>
+          <td>{{ volunteer.city }}</td>
+        </tr>
+        <tr>
+          <td>Datum training</td>
+          <td>{{ volunteer.dateTraining }}</td>
+        </tr>
+        <tr>
+          <td>Beroep</td>
+          <td>{{ volunteer.job }}</td>
+        </tr>
+        <tr>
+          <td>Is klassenassistent</td>
+          <td>{{ volunteer.isClassAssistant | boolean }}</td>
+        </tr>
+        <tr>
+          <td>Is taalmaatje</td>
+          <td>{{ volunteer.isTaalmaatje | boolean }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

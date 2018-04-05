@@ -9,9 +9,9 @@ import com.apon.database.mydao.VolunteerMatchMyDao;
 import com.apon.database.mydao.VolunteerMyDao;
 import com.apon.exceptionhandler.FunctionalException;
 import com.apon.guice.InjectContext;
-import com.apon.service.valueobject.StringValueObject;
-import com.apon.service.valueobject.VolunteerInstanceValueObject;
-import com.apon.service.valueobject.mapper.VolunteerInstanceMapper;
+import com.apon.service.valueobject.StringVO;
+import com.apon.service.valueobject.database.VolunteerInstanceDVO;
+import com.apon.service.valueobject.database.mapper.VolunteerInstanceDVOMapper;
 import com.apon.util.DateTimeUtil;
 
 import javax.ws.rs.*;
@@ -30,43 +30,47 @@ public class VolunteerInstanceService implements IService {
      * Retrieves a volunteerInstance.
      * @param volunteerExtId The extId from the volunteer.
      * @param volunteerInstanceExtId The extId from the instance.
-     * @return VolunteerInstanceValueObject
+     * @return VolunteerInstanceDVO
      */
     @GET
     @Path("{volunteerInstanceExtId}")
     @InjectContext
-    public VolunteerInstanceValueObject get(@PathParam("volunteerExtId") String volunteerExtId,
-                                            @PathParam("volunteerInstanceExtId") String volunteerInstanceExtId) throws Exception {
-        // Mapper and Dao variables.
+    public VolunteerInstanceDVO get(@PathParam("volunteerExtId") String volunteerExtId,
+                                    @PathParam("volunteerInstanceExtId") String volunteerInstanceExtId) throws Exception {
+        // Variables
+        VolunteerMyDao volunteerMyDao = new VolunteerMyDao(context);
         VolunteerInstanceMyDao volunteerInstanceMyDao = new VolunteerInstanceMyDao(context);
-        VolunteerInstanceMapper volunteerInstanceMapper = new VolunteerInstanceMapper();
+        VolunteerInstanceDVOMapper volunteerInstanceDVOMapper = new VolunteerInstanceDVOMapper();
 
-        // Retrieve volunteerMatch.
+        // Retrieve volunteerInstance.
         VolunteerinstancePojo volunteerinstancePojo = volunteerInstanceMyDao.fetchByExtIds(volunteerExtId, volunteerInstanceExtId);
         if (volunteerinstancePojo == null) {
             throw new FunctionalException("VolunteerInstanceService.notFound.instance");
         }
-        volunteerInstanceMapper.setVolunteerinstancePojo(volunteerinstancePojo);
+        volunteerInstanceDVOMapper.setVolunteerinstancePojo(volunteerinstancePojo);
 
-        // volunteerExtId is not retrieved, but it is a path param so we just set it manually.
-        volunteerInstanceMapper.getVolunteerInstanceValueObject().setVolunteerExtId(volunteerExtId);
+        // Retrieve the volunteer.
+        VolunteerPojo volunteerPojo = volunteerMyDao.fetchOneByExternalidentifier(volunteerExtId);
+        if (volunteerPojo == null) {
+            throw new FunctionalException("VolunteerInstanceService.notFound.volunteer");
+        }
+        volunteerInstanceDVOMapper.setVolunteerPojo(volunteerPojo);
 
-        return volunteerInstanceMapper.getVolunteerInstanceValueObject();
+        return volunteerInstanceDVOMapper.getVolunteerInstanceDVO();
     }
 
     /**
      * Add a VolunteerInstance in the database.
      * @param volunteerExtId The extId from the volunteer.
-     * @param volunteerInstanceValueObject The instance object.
+     * @param volunteerInstanceDVO The instance object.
      * @return The extId from the instance that is inserted.
      */
     @PUT
     @InjectContext
-    public StringValueObject insert(@PathParam("volunteerExtId") String volunteerExtId,
-                                    VolunteerInstanceValueObject volunteerInstanceValueObject) throws Exception {
-        // Mapper and Dao variables.
-        VolunteerInstanceMapper volunteerInstanceMapper = new VolunteerInstanceMapper();
-        volunteerInstanceMapper.setVolunteerInstanceValueObject(volunteerInstanceValueObject);
+    public StringVO insert(@PathParam("volunteerExtId") String volunteerExtId,
+                           VolunteerInstanceDVO volunteerInstanceDVO) throws Exception {
+        VolunteerInstanceDVOMapper volunteerInstanceDVOMapper = new VolunteerInstanceDVOMapper();
+        volunteerInstanceDVOMapper.setVolunteerInstanceDVO(volunteerInstanceDVO);
 
         // Get volunteerId.
         VolunteerMyDao volunteerMyDao = new VolunteerMyDao(context);
@@ -75,7 +79,7 @@ public class VolunteerInstanceService implements IService {
             throw new FunctionalException("VolunteerInstanceService.notFound.volunteer");
         }
 
-        VolunteerinstancePojo volunteerinstancePojo = volunteerInstanceMapper.getVolunteerinstancePojo();
+        VolunteerinstancePojo volunteerinstancePojo = volunteerInstanceDVOMapper.getVolunteerinstancePojo();
         volunteerinstancePojo.setVolunteerid(volunteerPojo.getVolunteerid());
 
         // Handle the complete adding / merging in another function. This function will throw its exceptions.
@@ -85,7 +89,7 @@ public class VolunteerInstanceService implements IService {
         context.commit();
 
         // Return the extId.
-        return new StringValueObject(volunteerInstanceMapper.getVolunteerinstancePojo().getExternalidentifier());
+        return new StringVO(volunteerinstancePojo.getExternalidentifier());
     }
 
     /**
@@ -93,14 +97,14 @@ public class VolunteerInstanceService implements IService {
      * Note that you overwrite ALL fields on the instance. You have to fill every parameter.
      * @param volunteerExtId The extId to identify the volunteer.
      * @param volunteerInstanceExtId The extId to identify the instance.
-     * @param volunteerInstanceValueObject The instance object.
+     * @param volunteerInstanceDVO The instance object.
      */
     @POST
     @Path("{volunteerInstanceExtId}")
     @InjectContext
     public void update(@PathParam("volunteerExtId") String volunteerExtId,
                        @PathParam("volunteerInstanceExtId") String volunteerInstanceExtId,
-                       VolunteerInstanceValueObject volunteerInstanceValueObject) throws Exception {
+                       VolunteerInstanceDVO volunteerInstanceDVO) throws Exception {
         // Retrieve the instance.
         VolunteerInstanceMyDao volunteerInstanceMyDao = new VolunteerInstanceMyDao(context);
         VolunteerinstancePojo volunteerinstancePojo = volunteerInstanceMyDao.fetchByExtIds(volunteerExtId, volunteerInstanceExtId);
@@ -108,14 +112,14 @@ public class VolunteerInstanceService implements IService {
             throw new FunctionalException("VolunteerInstanceService.notFound.instance");
         }
 
-        VolunteerInstanceMapper volunteerInstanceMapper = new VolunteerInstanceMapper();
+        VolunteerInstanceDVOMapper volunteerInstanceDVOMapper = new VolunteerInstanceDVOMapper();
         // Make sure the id's are set.
-        volunteerInstanceMapper.setVolunteerinstancePojo(volunteerinstancePojo);
+        volunteerInstanceDVOMapper.setVolunteerinstancePojo(volunteerinstancePojo);
         // Overwrite the rest.
-        volunteerInstanceMapper.setVolunteerInstanceValueObject(volunteerInstanceValueObject);
+        volunteerInstanceDVOMapper.setVolunteerInstanceDVO(volunteerInstanceDVO);
 
         // Handle the complete adding / merging in another function.
-        isVolunteerInstanceValidAndAdd(volunteerExtId, volunteerInstanceMapper.getVolunteerinstancePojo(), true);
+        isVolunteerInstanceValidAndAdd(volunteerExtId, volunteerInstanceDVOMapper.getVolunteerinstancePojo(), true);
 
         // Commit the changes.
         context.commit();
@@ -125,7 +129,6 @@ public class VolunteerInstanceService implements IService {
      * Delete instance from the database. Checks if there are no matches inside the instance.
      * @param volunteerExtId The extId from the volunteer.
      * @param volunteerInstanceExtId The extId from the volunteer instance.
-     * @throws Exception FunctionalException
      */
     @DELETE
     @Path("{volunteerInstanceExtId}")

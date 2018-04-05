@@ -8,9 +8,9 @@ import com.apon.database.mydao.TaskMyDao;
 import com.apon.database.mydao.VolunteerMyDao;
 import com.apon.exceptionhandler.FunctionalException;
 import com.apon.guice.InjectContext;
-import com.apon.service.valueobject.StringValueObject;
-import com.apon.service.valueobject.TaskValueObject;
-import com.apon.service.valueobject.mapper.TaskMapper;
+import com.apon.service.valueobject.StringVO;
+import com.apon.service.valueobject.database.TaskDVO;
+import com.apon.service.valueobject.database.mapper.TaskDVOMapper;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -27,12 +27,12 @@ public class TaskService implements IService {
     /**
      * Retrieve a task.
      * @param taskExtId The external identifier.
-     * @return TaskValueObject.
+     * @return TaskDVO.
      */
     @GET
     @Path("{taskExtId}")
     @InjectContext
-    public TaskValueObject get(@PathParam("taskExtId") String taskExtId) throws Exception {
+    public TaskDVO get(@PathParam("taskExtId") String taskExtId) throws Exception {
         // Get taskId
         TaskMyDao taskMyDao = new TaskMyDao(context);
         QueryResult<TaskPojo, VolunteerPojo> result = taskMyDao.retrieveTaskWithVolunteer(taskExtId);
@@ -40,44 +40,44 @@ public class TaskService implements IService {
             throw new FunctionalException("TaskService.notFound.task");
         }
 
-        TaskMapper taskMapper = new TaskMapper();
-        taskMapper.setTaskPojo(result.getS());
-        taskMapper.setVolunteerPojo(result.getT());
+        TaskDVOMapper taskDVOMapper = new TaskDVOMapper();
+        taskDVOMapper.setTaskPojo(result.getS());
+        taskDVOMapper.setVolunteerPojo(result.getT());
 
-        return taskMapper.getTaskValueObject();
+        return taskDVOMapper.getTaskDVO();
     }
 
     /**
      * Add a Task.
-     * @param taskValueObject The task object.
+     * @param taskDVO The task object.
      * @return The extId from the task that is inserted.
      */
     @PUT
     @InjectContext
-    public StringValueObject addTask(TaskValueObject taskValueObject) throws Exception {
+    public StringVO addTask(TaskDVO taskDVO) throws Exception {
         TaskMyDao taskMyDao = new TaskMyDao(context);
-        TaskMapper taskMapper = new TaskMapper();
+        TaskDVOMapper taskDVOMapper = new TaskDVOMapper();
 
         // Retrieve the volunteerId
         VolunteerMyDao volunteerMyDao = new VolunteerMyDao(context);
         VolunteerPojo volunteerPojo = volunteerMyDao.fetchOneByExternalidentifier(
-                taskValueObject.getVolunteerValueObject().getExternalIdentifier());
+                taskDVO.getVolunteerDVO().getExternalIdentifier());
         if (volunteerPojo == null) {
             throw new FunctionalException("TaskService.notFound.volunteer");
         }
 
-        taskMapper.setTaskValueObject(taskValueObject);
-        taskMapper.getTaskPojo().setVolunteerid(volunteerPojo.getVolunteerid());
+        taskDVOMapper.setTaskDVO(taskDVO);
+        taskDVOMapper.getTaskPojo().setVolunteerid(volunteerPojo.getVolunteerid());
 
         // Insert also fills the external identifier we return later.
-        if (!taskMyDao.insertPojo(taskMapper.getTaskPojo())) {
+        if (!taskMyDao.insertPojo(taskDVOMapper.getTaskPojo())) {
             throw new FunctionalException(taskMyDao.getResultObject());
         }
 
         // Commit the changes.
         context.commit();
 
-        return new StringValueObject(taskMapper.getTaskPojo().getExternalidentifier());
+        return new StringVO(taskDVOMapper.getTaskPojo().getExternalidentifier());
     }
 
     /**
@@ -88,7 +88,7 @@ public class TaskService implements IService {
     @Path("{taskExtId}")
     @InjectContext
     public void updateTask(@PathParam("taskExtId") String taskExtId,
-                             TaskValueObject taskValueObject) throws Exception {
+                           TaskDVO taskDVO) throws Exception {
         // Retrieve the original task.
         TaskMyDao taskMyDao = new TaskMyDao(context);
         TaskPojo taskPojo = taskMyDao.fetchOneByExternalidentifier(taskExtId);
@@ -99,17 +99,17 @@ public class TaskService implements IService {
         // Retrieve the volunteerId
         VolunteerMyDao volunteerMyDao = new VolunteerMyDao(context);
         VolunteerPojo volunteerPojo = volunteerMyDao.fetchOneByExternalidentifier(
-                taskValueObject.getVolunteerValueObject().getExternalIdentifier());
+                taskDVO.getVolunteerDVO().getExternalIdentifier());
         if (volunteerPojo == null) {
             throw new FunctionalException("TaskService.notFound.volunteer");
         }
 
         // Task is valid, so we map return to pojo.
-        TaskMapper taskMapper = new TaskMapper();
-        taskMapper.setTaskPojo(taskPojo);
-        taskMapper.setTaskValueObject(taskValueObject);
+        TaskDVOMapper taskDVOMapper = new TaskDVOMapper();
+        taskDVOMapper.setTaskPojo(taskPojo);
+        taskDVOMapper.setTaskDVO(taskDVO);
         // Overwrite the volunteerId so you can set one task to another volunteer.
-        taskMapper.getTaskPojo().setVolunteerid(volunteerPojo.getVolunteerid());
+        taskDVOMapper.getTaskPojo().setVolunteerid(volunteerPojo.getVolunteerid());
 
         if (!taskMyDao.updatePojo(taskPojo)) {
             throw new FunctionalException(taskMyDao.getResultObject());
@@ -125,28 +125,28 @@ public class TaskService implements IService {
      * @param description Searched for in Task.description.
      * @param isFinished Whether the value of Task.isFinished is true or false.
      * @param volunteerExtId The volunteer it is linked to.
-     * @return List&lt;TaskValueObject&gt;
+     * @return List&lt;TaskDVO&gt;
      */
     @GET
     @InjectContext
-    public List<TaskValueObject> advancedSearch(@QueryParam("title") String title,
-                                                @QueryParam("description") String description,
-                                                @QueryParam("isFinished") Boolean isFinished,
-                                                @QueryParam("volunteerExtId") String volunteerExtId) {
+    public List<TaskDVO> advancedSearch(@QueryParam("title") String title,
+                                        @QueryParam("description") String description,
+                                        @QueryParam("isFinished") Boolean isFinished,
+                                        @QueryParam("volunteerExtId") String volunteerExtId) {
         // Retrieve the list from the database.
         TaskMyDao taskMyDao = new TaskMyDao(context);
         Map<TaskPojo, List<VolunteerPojo>> taskPojos = taskMyDao.advancedSearch(title, description, isFinished, volunteerExtId);
 
-        // Convert the list of pojos to returns.
-        List<TaskValueObject> taskValueObjects = new ArrayList();
+        // Convert the list of pojo's to returns.
+        List<TaskDVO> taskDVOS = new ArrayList();
         for (Map.Entry<TaskPojo, List<VolunteerPojo>> entry : taskPojos.entrySet()) {
-            TaskMapper taskMapper = new TaskMapper();
-            taskMapper.setTaskPojo(entry.getKey());
-            taskMapper.setVolunteerPojo(entry.getValue().get(0));
-            taskValueObjects.add(taskMapper.getTaskValueObject());
+            TaskDVOMapper taskDVOMapper = new TaskDVOMapper();
+            taskDVOMapper.setTaskPojo(entry.getKey());
+            taskDVOMapper.setVolunteerPojo(entry.getValue().get(0));
+            taskDVOS.add(taskDVOMapper.getTaskDVO());
         }
 
-        return taskValueObjects;
+        return taskDVOS;
     }
 
     /**

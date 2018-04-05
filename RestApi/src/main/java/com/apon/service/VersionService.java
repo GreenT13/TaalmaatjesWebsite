@@ -1,6 +1,6 @@
 package com.apon.service;
 
-import com.apon.service.valueobject.StringValueObject;
+import com.apon.service.valueobject.StringVO;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -15,20 +15,20 @@ public class VersionService {
 
     /**
      * Get the current version of the application.
-     * @return StringValueObject
+     * @return StringVO
      */
     @GET
-    public StringValueObject getVersion() {
-        return new StringValueObject(VERSION);
+    public StringVO getVersion() {
+        return new StringVO(VERSION);
     }
 
     /**
      * Get the current version of the application, but you must be logged into get it.
-     * @return StringValueObject
+     * @return StringVO
      */
     @GET
     @Path("secured")
-    public StringValueObject getSecuredVersion() {
-        return new StringValueObject(VERSION);
+    public StringVO getSecuredVersion() {
+        return new StringVO(VERSION);
     }
 }

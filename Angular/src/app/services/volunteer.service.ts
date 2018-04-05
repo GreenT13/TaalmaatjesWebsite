@@ -1,14 +1,12 @@
 import {Injectable} from "@angular/core";
 import {MyHttpClient} from "./base/myhttpclient.service";
 import 'rxjs/Rx';
-import {VolunteerModel} from "../valueobject/volunteer.model";
-import {VolunteerInstanceModel} from "../valueobject/volunteerinstance.model";
-import {VolunteerMatchModel} from "../valueobject/volunteermatch.model";
+import {VolunteerDVO} from "../valueobject/dvo/volunteer.dvo";
+import {VolunteerInstanceDVO} from "../valueobject/dvo/volunteerinstance.dvo";
+import {VolunteerMatchDVO} from "../valueobject/dvo/volunteermatch.dvo";
 
 @Injectable()
 export class VolunteerService {
-  public currentVolunteer: VolunteerModel;
-
   constructor(private myHttpClient: MyHttpClient) {}
 
   searchVolunteers(search: String, city: String, isActive: Boolean, hasTraining: Boolean, hasMatch: Boolean) {
@@ -18,38 +16,38 @@ export class VolunteerService {
     return this.myHttpClient.get(url, null);
   }
 
-  insertVolunteer(volunteerModel: VolunteerModel, dateStartActive: String) {
+  insertVolunteer(volunteer: VolunteerDVO, dateStartActive: String) {
     const url: string = 'volunteer' + MyHttpClient.createParameterUrl([{name: 'dateStartActive', value: dateStartActive}]);
-    return this.myHttpClient.put(url, null, volunteerModel);
+    return this.myHttpClient.put(url, null, volunteer);
   }
 
   getVolunteer(volunteerExtId: string) {
     return this.myHttpClient.get('volunteer/' + volunteerExtId, null);
   }
 
-  insertVolunteerInstance(volunteerInstanceModel: VolunteerInstanceModel) {
-    return this.myHttpClient.put('volunteer/' + volunteerInstanceModel.volunteerExtId + '/instance', null, volunteerInstanceModel);
+  insertVolunteerInstance(volunteerInstance: VolunteerInstanceDVO) {
+    return this.myHttpClient.put('volunteer/' + volunteerInstance.volunteerDVO.externalIdentifier + '/instance', null, volunteerInstance);
   }
 
-  updateVolunteerInstance(volunteerInstanceModel: VolunteerInstanceModel) {
+  updateVolunteerInstance(volunteerInstance: VolunteerInstanceDVO) {
     return this.myHttpClient.post('volunteer/' +
-      volunteerInstanceModel.volunteerExtId +
+      volunteerInstance.volunteerDVO.externalIdentifier +
       '/instance/' +
-      volunteerInstanceModel.externalIdentifier, null, volunteerInstanceModel);
+      volunteerInstance.externalIdentifier, null, volunteerInstance);
   }
 
   deleteVolunteerInstance(volunteerExtId: string, volunteerInstanceExtId: string) {
     return this.myHttpClient.delete('volunteer/' + volunteerExtId + '/instance/' + volunteerInstanceExtId, null);
   }
 
-  insertVolunteerMatch(volunteerMatchModel: VolunteerMatchModel) {
-    return this.myHttpClient.put('volunteer/' + volunteerMatchModel.volunteerValueObject.externalIdentifier + '/match',
-      null, volunteerMatchModel);
+  insertVolunteerMatch(volunteerMatch: VolunteerMatchDVO) {
+    return this.myHttpClient.put('volunteer/' + volunteerMatch.volunteerDVO.externalIdentifier + '/match',
+      null, volunteerMatch);
   }
 
-  updateVolunteerMatch(volunteerMatchModel: VolunteerMatchModel) {
-    return this.myHttpClient.post('volunteer/' + volunteerMatchModel.volunteerValueObject.externalIdentifier +
-      '/match/' + volunteerMatchModel.externalIdentifier, null, volunteerMatchModel);
+  updateVolunteerMatch(volunteerMatch: VolunteerMatchDVO) {
+    return this.myHttpClient.post('volunteer/' + volunteerMatch.volunteerDVO.externalIdentifier +
+      '/match/' + volunteerMatch.externalIdentifier, null, volunteerMatch);
   }
 
   deleteVolunteerMatch(volunteerExtId: string, volunteerMatchExtId: string) {

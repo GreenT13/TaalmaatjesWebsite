@@ -1,12 +1,9 @@
 import {Injectable} from "@angular/core";
 import {MyHttpClient} from "./base/myhttpclient.service";
-import {VolunteerModel} from "../valueobject/volunteer.model";
-import {TaskModel} from "../valueobject/task.model";
+import {TaskDVO} from "../valueobject/dvo/task.dvo";
 
 @Injectable()
 export class TaskService {
-  public currentVolunteer: VolunteerModel;
-
   constructor(private myHttpClient: MyHttpClient) {}
 
   searchTask(title: String, description: String, isFinished: Boolean, volunteerExtId: String) {
@@ -16,21 +13,21 @@ export class TaskService {
     return this.myHttpClient.get(url, null);
   }
 
-  insertTask(taskModel: TaskModel) {
-    return this.myHttpClient.put('task', null, taskModel);
+  insertTask(task: TaskDVO) {
+    return this.myHttpClient.put('task', null, task);
   }
 
   getTask(taskExtId: string) {
     return this.myHttpClient.get('task/' + taskExtId, null);
   }
 
-  changeState(taskModel: TaskModel) {
-    taskModel.isFinished = !taskModel.isFinished;
-    return this.updateTask(taskModel);
+  changeState(task: TaskDVO) {
+    task.isFinished = !task.isFinished;
+    return this.updateTask(task);
   }
 
-  updateTask(taskModel: TaskModel) {
-    return this.myHttpClient.post('task/' + taskModel.taskExtId, null, taskModel);
+  updateTask(task: TaskDVO) {
+    return this.myHttpClient.post('task/' + task.externalIdentifier, null, task);
   }
 
 }

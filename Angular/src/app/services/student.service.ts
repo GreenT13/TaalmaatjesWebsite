@@ -1,11 +1,10 @@
 import {Injectable} from "@angular/core";
 import {MyHttpClient} from "./base/myhttpclient.service";
 import 'rxjs/Rx';
-import {StudentModel} from "../valueobject/student.model";
+import {StudentDVO} from "../valueobject/dvo/student.dvo";
+
 @Injectable()
 export class StudentService {
-  public currentStudent: StudentModel;
-
   constructor(private myHttpClient: MyHttpClient) {}
 
   searchStudents(search: String, hasMatch: Boolean) {
@@ -14,8 +13,12 @@ export class StudentService {
     return this.myHttpClient.get(url, null);
   }
 
-  insertStudent(studentModel: StudentModel) {
-    return this.myHttpClient.put('student', null, studentModel);
+  insertStudent(student: StudentDVO) {
+    return this.myHttpClient.put('student', null, student);
+  }
+
+  updateStudent(student: StudentDVO) {
+    return this.myHttpClient.post('student' + student.externalIdentifier, null, student);
   }
 
   getStudent(studentExtId: string) {

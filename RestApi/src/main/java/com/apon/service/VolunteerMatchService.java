@@ -8,9 +8,9 @@ import com.apon.database.jooq.DbContext;
 import com.apon.database.mydao.*;
 import com.apon.exceptionhandler.FunctionalException;
 import com.apon.guice.InjectContext;
-import com.apon.service.valueobject.StringValueObject;
-import com.apon.service.valueobject.VolunteerMatchValueObject;
-import com.apon.service.valueobject.mapper.VolunteerMatchMapper;
+import com.apon.service.valueobject.StringVO;
+import com.apon.service.valueobject.database.VolunteerMatchDVO;
+import com.apon.service.valueobject.database.mapper.VolunteerMatchDVOMapper;
 import com.apon.util.DateTimeUtil;
 
 import javax.ws.rs.*;
@@ -27,50 +27,50 @@ public class VolunteerMatchService implements IService {
      * Retrieves a volunteerMatch.
      * @param volunteerExtId The extId from the volunteer.
      * @param volunteerMatchExtId The extId from the match.
-     * @return VolunteerMatchValueObject
+     * @return VolunteerMatchDVO
      */
     @GET
     @Path("{volunteerMatchExtId}")
     @InjectContext
-    public VolunteerMatchValueObject get(@PathParam("volunteerExtId") String volunteerExtId,
-                                         @PathParam("volunteerMatchExtId") String volunteerMatchExtId) throws Exception {
+    public VolunteerMatchDVO get(@PathParam("volunteerExtId") String volunteerExtId,
+                                 @PathParam("volunteerMatchExtId") String volunteerMatchExtId) throws Exception {
         // Mapper and Dao variables.
         VolunteerMatchMyDao volunteerMatchMyDao = new VolunteerMatchMyDao(context);
         VolunteerMyDao volunteerMyDao = new VolunteerMyDao(context);
-        VolunteerMatchMapper volunteerMatchMapper = new VolunteerMatchMapper();
+        VolunteerMatchDVOMapper volunteerMatchDVOMapper = new VolunteerMatchDVOMapper();
 
         // Retrieve volunteerMatch.
         QueryResult<VolunteermatchPojo, StudentPojo> result = volunteerMatchMyDao.retrieveMatchWithStudent(volunteerExtId, volunteerMatchExtId);
         if (result == null) {
             throw new FunctionalException("VolunteerMatchService.notFound.match");
         }
-        volunteerMatchMapper.setVolunteermatchPojo(result.getS());
-        volunteerMatchMapper.setStudentPojo(result.getT());
+        volunteerMatchDVOMapper.setVolunteermatchPojo(result.getS());
+        volunteerMatchDVOMapper.setStudentPojo(result.getT());
 
         // Retrieve the volunteer.
         VolunteerPojo volunteerPojo = volunteerMyDao.fetchOneByExternalidentifier(volunteerExtId);
         if (volunteerPojo == null) {
             throw new FunctionalException("VolunteerMatchService.notFound.volunteer");
         }
-        volunteerMatchMapper.setVolunteerPojo(volunteerPojo);
+        volunteerMatchDVOMapper.setVolunteerPojo(volunteerPojo);
 
         // Return the match.
-        return volunteerMatchMapper.getVolunteerMatchValueObject();
+        return volunteerMatchDVOMapper.getVolunteerMatchDVO();
     }
 
     /**
      * Add a VolunteerMatch in the database.
      * @param volunteerExtId The extId from the volunteer.
-     * @param volunteerMatchValueObject The match object.
+     * @param volunteerMatchDVO The match object.
      * @return The extId from the instance that is inserted.
      */
     @PUT
     @InjectContext
-    public StringValueObject insert(@PathParam("volunteerExtId") String volunteerExtId,
-                                    VolunteerMatchValueObject volunteerMatchValueObject) throws Exception {
+    public StringVO insert(@PathParam("volunteerExtId") String volunteerExtId,
+                           VolunteerMatchDVO volunteerMatchDVO) throws Exception {
         // Mapper and Dao variables.
-        VolunteerMatchMapper volunteerMatchMapper = new VolunteerMatchMapper();
-        volunteerMatchMapper.setVolunteerMatchValueObject(volunteerMatchValueObject);
+        VolunteerMatchDVOMapper volunteerMatchDVOMapper = new VolunteerMatchDVOMapper();
+        volunteerMatchDVOMapper.setVolunteerMatchDVO(volunteerMatchDVO);
 
         // Get volunteerId.
         VolunteerMyDao volunteerMyDao = new VolunteerMyDao(context);
@@ -81,12 +81,12 @@ public class VolunteerMatchService implements IService {
 
         // Get studentId
         StudentMyDao studentMyDao = new StudentMyDao(context);
-        StudentPojo studentPojo = studentMyDao.fetchOneByExternalidentifier(volunteerMatchValueObject.getStudentValueObject().getExternalIdentifier());
+        StudentPojo studentPojo = studentMyDao.fetchOneByExternalidentifier(volunteerMatchDVO.getStudentDVO().getExternalIdentifier());
         if (studentPojo == null) {
             throw new FunctionalException("VolunteerMatchService.notFound.student");
         }
 
-        VolunteermatchPojo volunteermatchPojo = volunteerMatchMapper.getVolunteermatchPojo();
+        VolunteermatchPojo volunteermatchPojo = volunteerMatchDVOMapper.getVolunteermatchPojo();
         volunteermatchPojo.setVolunteerid(volunteerPojo.getVolunteerid());
         volunteermatchPojo.setStudentid(studentPojo.getStudentid());
 
@@ -97,7 +97,7 @@ public class VolunteerMatchService implements IService {
         context.commit();
 
         // Return the extId.
-        return new StringValueObject(volunteermatchPojo.getExternalidentifier());
+        return new StringVO(volunteermatchPojo.getExternalidentifier());
     }
 
     /**
@@ -105,7 +105,7 @@ public class VolunteerMatchService implements IService {
      * Note that you overwrite ALL fields on the instance. You have to fill every parameter.
      * @param volunteerExtId The extId to identify the volunteer.
      * @param volunteerMatchExtId The extId to identify the match.
-     * @param volunteerMatchValueObject The instance object.
+     * @param volunteerMatchDVO The instance object.
      * @throws Exception FunctionalException
      */
     @POST
@@ -113,7 +113,7 @@ public class VolunteerMatchService implements IService {
     @InjectContext
     public void update(@PathParam("volunteerExtId") String volunteerExtId,
                        @PathParam("volunteerMatchExtId") String volunteerMatchExtId,
-                       VolunteerMatchValueObject volunteerMatchValueObject) throws Exception {
+                       VolunteerMatchDVO volunteerMatchDVO) throws Exception {
         // Retrieve the match.
         VolunteerMatchMyDao volunteerMatchMyDao = new VolunteerMatchMyDao(context);
         VolunteermatchPojo volunteermatchPojo = volunteerMatchMyDao.fetchByExtIds(volunteerExtId, volunteerMatchExtId);
@@ -121,14 +121,14 @@ public class VolunteerMatchService implements IService {
             throw new FunctionalException("VolunteerMatchService.notFound.match");
         }
 
-        VolunteerMatchMapper volunteerMatchMapper = new VolunteerMatchMapper();
+        VolunteerMatchDVOMapper volunteerMatchDVOMapper = new VolunteerMatchDVOMapper();
         // Make sure the id's are set.
-        volunteerMatchMapper.setVolunteermatchPojo(volunteermatchPojo);
+        volunteerMatchDVOMapper.setVolunteermatchPojo(volunteermatchPojo);
         // Overwrite the rest.
-        volunteerMatchMapper.setVolunteerMatchValueObject(volunteerMatchValueObject);
+        volunteerMatchDVOMapper.setVolunteerMatchDVO(volunteerMatchDVO);
 
         // Handle the complete adding / merging in another function.
-        isVolunteerMatchValidAndAdd(volunteerExtId, volunteerMatchValueObject.getStudentValueObject().getExternalIdentifier(),
+        isVolunteerMatchValidAndAdd(volunteerExtId, volunteerMatchDVO.getStudentDVO().getExternalIdentifier(),
                 volunteermatchPojo, true);
 
         // Commit the changes.

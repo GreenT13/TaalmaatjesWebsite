@@ -1,0 +1,57 @@
+<app-alert-component [alertModel]="alertModel"></app-alert-component>
+
+<!--Search bar on top -->
+<div class="row">
+  <div class="col-sm-3">
+    <button type="button" [routerLink]="['add']" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span>Toevoegen taak</button>
+  </div>
+
+  <!-- Empty space in the middle -->
+  <div class="col-sm-7" >
+    <div class="pull-right form-inline form-group">
+      <label for="status">Status: </label>
+      <select id="status" class="form-control" [(ngModel)]="status" (change)="search()">
+        <option *ngFor="let answer of OpenClosedNull" [ngValue]="answer.id"> {{ answer.value }}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="col-sm-2">
+    <div class="text-right input-group">
+      <input type="text" class="form-control" placeholder="Zoeken&hellip;" [(ngModel)]="inputSearch" (keyup)="search()">
+      <span class="input-group-btn">
+        <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#advancedRow"><span class="glyphicon glyphicon-chevron-down"></span></button>
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- Advanced search bar -->
+<div id="advancedRow" class="row collapse">
+  <div class="col-sm-12">
+    <div class="pull-right form-inline form-group">
+      <label for="volunteer">Vrijwilliger: </label>
+      <input id="volunteer" type="text" class="form-control" placeholder="Vrijwilliger">
+    </div>
+  </div>
+</div>
+
+<!-- The table with output results -->
+<div class="row">
+  <div class="col-sm-12">
+    <app-table-pagination [completeList]="tasks" (onDblClick)="onDblClick($event)">
+      <ng-template #templateHeader>
+        <th>Datum af te handelen</th>
+        <th>Titel</th>
+        <th>Vrijwilliger</th>
+        <th>Beschrijving</th>
+      </ng-template>
+      <ng-template #templateItem let-task>
+        <td>{{ task.dateToBeFinished }}</td>
+        <td>{{ task.title }}</td>
+        <td>{{ task.volunteerDVO | parsename }}</td>
+        <td>{{ task.description | shorten:50 }}</td>
+      </ng-template>
+    </app-table-pagination>
+  </div>
+</div>
