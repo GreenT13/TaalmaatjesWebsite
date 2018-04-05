@@ -23,6 +23,7 @@ export abstract class StudentUpsertComponent implements OnDestroy {
   constructor(public title: string) { }
 
   onSubmit() {
+    console.log('Submitted!');
     this.destroyUtil.addSubscription(this.doHttpRequest());
   }
 

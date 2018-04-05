@@ -35,4 +35,8 @@ export class VolunteerAddView implements OnInit {
       }
     );
   }
+
+  onBack() {
+    this.router.navigate(['../'], {relativeTo: this.route});
+  }
 }
