@@ -21,8 +21,8 @@ export class StudentAddView implements OnInit {
   constructor(private studentService: StudentService,
               private router: Router, private route: ActivatedRoute) { }
 
-  didHttpRequest() {
-    this.router.navigate(['../' + this.student.externalIdentifier], {relativeTo: this.route});
+  didHttpRequest(studentExtId: string) {
+    this.router.navigate(['../' + studentExtId], {relativeTo: this.route});
   }
 
   onBack() {

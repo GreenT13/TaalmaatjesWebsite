@@ -33,3 +33,8 @@ input[type='checkbox'] {
   height: 30px;
   width: 25px;
 }
+
+/* Don't make the validation block so large. */
+.help-block {
+  margin-bottom: 0 !important;
+}
