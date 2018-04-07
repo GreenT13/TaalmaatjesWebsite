@@ -6,7 +6,7 @@
   <div class="col-sm-6">
 
     <!-- Panel with student information -->
-    <app-student-detail [student]="student.studentDVO"></app-student-detail>
+    <app-student-detail [student]="student.studentDVO" (onEditEmitter)="onEdit()"></app-student-detail>
 
     <!-- Matches -->
     <div class="panel panel-primary">

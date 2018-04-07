@@ -1,8 +1,8 @@
 <!-- Text Panel with information from customer. -->
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <h1 class="panel-title"><span data-toggle="collapse" data-target="#user-panel" class="glyphicon glyphicon-user"></span>
-      {{ student | parsename }}</h1>
+    <h1 class="panel-title"><span data-toggle="collapse" data-target="#user-panel" class="glyphicon glyphicon-user">
+    </span><a (click)="onEdit()">{{ student | parsename }}</a></h1>
   </div>
   <div id="user-panel" class="panel-body collapse in collapsible-text-panel">
     <div class="fix-collapse">

@@ -3,7 +3,7 @@
 <div class="row">
   <!-- Left column of panels -->
   <div class="col-sm-6">
-    <app-student-edit [alertModel]="alertModel" [student]="student"
-                     (didHttpRequest)="didHttpRequest()" (onBack)="onBack()"></app-student-edit>
+    <app-student-edit [alertModel]="alertModel" [student]="student.studentDVO"
+                     (didHttpRequest)="didHttpRequest()" (onBackEmitter)="onBack()"></app-student-edit>
   </div>
 </div>

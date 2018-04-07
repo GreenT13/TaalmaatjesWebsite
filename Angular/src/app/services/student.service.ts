@@ -18,7 +18,7 @@ export class StudentService {
   }
 
   updateStudent(student: StudentDVO) {
-    return this.myHttpClient.post('student' + student.externalIdentifier, null, student);
+    return this.myHttpClient.post('student/' + student.externalIdentifier, null, student);
   }
 
   getStudent(studentExtId: string) {

@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {DestroyUtil} from "../../../../util/destroy.util";
 import {AlertModel} from "../../../block/alert/alert.model";
 import {StudentVOGet} from "../../../../valueobject/student.vo.get";
@@ -16,6 +16,7 @@ export class StudentDetailView implements OnInit, OnDestroy {
   public student: StudentVOGet = new StudentVOGet();
 
   constructor(private studentService: StudentService,
+              private router: Router,
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -39,5 +40,8 @@ export class StudentDetailView implements OnInit, OnDestroy {
     this.destroyUtil.destroy();
   }
 
+  onEdit() {
+    this.router.navigate(['edit'], {relativeTo: this.route});
+  }
 
 }
