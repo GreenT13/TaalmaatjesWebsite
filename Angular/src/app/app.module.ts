@@ -51,6 +51,7 @@ import {VolunteerAddView} from "./components/view/volunteer/add/volunteer.add.vi
 import {VolunteerEditMatchComponent} from "./components/block/core/volunteermatch/upsert/volunteer.edit.match.component";
 import {VolunteerAddMatchComponent} from "./components/block/core/volunteermatch/upsert/volunteer.add.match.component";
 import {VolunteerEditComponent} from "./components/block/core/volunteer/edit/volunteer.edit.component";
+import {DatepickerComponent} from "./components/block/datepicker/datepicker.component";
 
 
 @NgModule({
@@ -84,7 +85,7 @@ import {VolunteerEditComponent} from "./components/block/core/volunteer/edit/vol
     TaskAddView, TaskDetailView, TaskEditView, TaskOverviewView,
 
     AutocompleteComponent, AutocompleteStudentComponent,
-    AlertComponent, PaginationComponent,
+    AlertComponent, PaginationComponent, DatepickerComponent,
     GenderPipe, BooleanPipe, NamePipe, ShortenPipe, MyDatePipe, AgePipe,
     ThemeDirective
   ],

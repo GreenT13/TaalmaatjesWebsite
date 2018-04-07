@@ -3,11 +3,9 @@ import {AlertModel} from "../../../alert/alert.model";
 import {DestroyUtil} from "../../../../../util/destroy.util";
 import {StudentDVO} from "../../../../../valueobject/dvo/student.dvo";
 import {GenderUtil} from "../../../../../util/gender.util";
-import {DateUtil} from "../../../../../util/date.util";
 
 export abstract class StudentUpsertComponent implements OnDestroy {
   public triedSubmit = false;
-  public REGEX_DATE = DateUtil.REGEX_DATE;
   public genders = GenderUtil.genders;
   protected destroyUtil: DestroyUtil = new DestroyUtil();
 

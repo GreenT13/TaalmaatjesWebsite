@@ -12,6 +12,7 @@ import {VolunteerService} from "../../../../services/volunteer.service";
   templateUrl: './volunteer.add.view.html'
 })
 export class VolunteerAddView implements OnInit {
+  public triedSubmit = false;
   public alertModel = new AlertModel();
   public genders = GenderUtil.genders;
   public volunteer: VolunteerDVO = new VolunteerDVO();
