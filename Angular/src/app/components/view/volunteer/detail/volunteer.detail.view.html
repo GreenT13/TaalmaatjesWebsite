@@ -16,7 +16,7 @@
       <div id="active-panel" class="list-group collapse in">
         <a *ngFor="let instance of volunteer.volunteerInstanceDVOS"
            (click)="setInstance(instance)" class="list-group-item">
-          Van {{ instance.dateStart }} tot {{ instance.dateEnd | mydate }}.
+          Van {{ instance.dateStart }} tot {{ instance.dateEnd | mydate }}
         </a>
       </div>
     </div>
@@ -29,7 +29,7 @@
       </div>
       <div id="matches-panel" class="list-group collapse in">
         <a (click)="setMatch(match)" *ngFor="let match of volunteer.volunteerMatchDVOS" class="list-group-item">
-          Van {{ match.dateStart }} tot {{ match.dateEnd | mydate }} voor cursist {{ match.studentDVO | parsename }}.
+          Van {{ match.dateStart }} tot {{ match.dateEnd | mydate }} voor cursist {{ match.studentDVO | parsename }}
         </a>
       </div>
     </div>
@@ -43,7 +43,7 @@
       <div id="task-panel" class="list-group collapse in">
         <ng-container *ngFor="let task of volunteer.taskDVOS" >
         <a (click)="setTask(task)" *ngIf="task.isFinished == false" class="list-group-item">
-          {{ task.dateToBeFinished }} | {{ task.title }}.</a>
+          {{ task.dateToBeFinished }} | {{ task.title }}</a>
         </ng-container>
       </div>
     </div>
@@ -75,7 +75,7 @@
       [alertModel]="alertModel" [volunteer]="volunteer.volunteerDVO" (didHttpRequest)="refresh()"></app-task-add>
     <app-task-edit
       *ngIf="currentItemInstance === TASK_EDIT" [alertModel]="alertModel" (onBackEmitter)="setTask(currentItem)"
-      [task]="currentItem" [volunteer]="volunteer" (didHttpRequest)="refreshAndOpenItem(currentItem)"></app-task-edit>
+      [task]="currentItem" [volunteer]="volunteer.volunteerDVO" (didHttpRequest)="refreshAndOpenItem(currentItem)"></app-task-edit>
     <app-task-detail
       *ngIf="currentItemInstance === TASK_VIEW" [alertModel]="alertModel" [task]="currentItem" [volunteer]="volunteer.volunteerDVO"
       (onEditEmitter)="editTask()"></app-task-detail>

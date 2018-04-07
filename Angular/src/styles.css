@@ -20,7 +20,7 @@ p {
   border: none;
 }
 table {
-  margin-bottom: 0;
+  margin-bottom: 0 !important;
 }
 
 /* For labels in edit mode. Apparently this is also a bootstrap class, so I need to override this. */
