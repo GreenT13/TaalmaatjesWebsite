@@ -235,6 +235,6 @@ public class StudentMyDao extends StudentDao {
             }
         }
 
-        return query.orderBy(Student.STUDENT.FIRSTNAME.asc()).limit(50).fetch().map(mapper());
+        return query.orderBy(Student.STUDENT.FIRSTNAME.asc()).fetch().map(mapper());
     }
 }

@@ -164,7 +164,7 @@ public class TaskMyDao extends TaskDao {
                 .join(Volunteer.VOLUNTEER).on(Volunteer.VOLUNTEER.VOLUNTEERID.eq(Task.TASK.VOLUNTEERID))
                 .where(Task.TASK.EXTERNALIDENTIFIER.eq(taskExtId));
 
-        Map<TaskPojo, List<VolunteerPojo>> map = query.orderBy(Task.TASK.DATETOBEFINISHED.asc()).limit(50).fetchGroups(
+        Map<TaskPojo, List<VolunteerPojo>> map = query.orderBy(Task.TASK.DATETOBEFINISHED.asc()).fetchGroups(
                 r -> r.into(Task.TASK).into(TaskPojo.class),
                 r -> r.into(Volunteer.VOLUNTEER).into(VolunteerPojo.class)
         );
@@ -214,7 +214,7 @@ public class TaskMyDao extends TaskDao {
                             .where(Volunteer.VOLUNTEER.EXTERNALIDENTIFIER.eq(volunteerExtId))));
         }
 
-        return query.orderBy(Task.TASK.DATETOBEFINISHED.asc()).limit(50).fetchGroups(
+        return query.orderBy(Task.TASK.DATETOBEFINISHED.asc()).fetchGroups(
                 r -> r.into(Task.TASK).into(TaskPojo.class),
                 r -> r.into(Volunteer.VOLUNTEER).into(VolunteerPojo.class)
         );
