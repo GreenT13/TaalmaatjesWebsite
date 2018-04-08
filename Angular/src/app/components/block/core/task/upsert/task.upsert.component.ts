@@ -5,6 +5,7 @@ import {TaskDVO} from "../../../../../valueobject/dvo/task.dvo";
 import {VolunteerDVO} from "../../../../../valueobject/dvo/volunteer.dvo";
 
 export abstract class TaskUpsertComponent implements OnDestroy {
+  public triedSubmit = false;
   protected destroyUtil: DestroyUtil = new DestroyUtil();
 
   @Input()

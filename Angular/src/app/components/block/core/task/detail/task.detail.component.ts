@@ -25,6 +25,8 @@ export class TaskDetailComponent {
   constructor(public taskService: TaskService) { }
 
   changeState() {
+    this.task.volunteerDVO = this.volunteer;
+
     this.taskService.changeState(this.task).subscribe(
       () => this.taskModelChanged.emit(this.task),
       (error) => this.alertModel.setError(error)
