@@ -16,10 +16,7 @@ export class StudentAddComponent extends StudentUpsertComponent {
 
   doHttpRequest() {
     return this.studentService.insertStudent(this.student).subscribe(
-      (studentExtId: StringVO) => {
-        this.didHttpRequest.emit(studentExtId.value);
-        console.log(studentExtId);
-      } ,
+      (studentExtId: StringVO) => this.didHttpRequest.emit(studentExtId.value),
       (error: HttpErrorResponse) =>  this.alertModel.setError(error)
     );
   }

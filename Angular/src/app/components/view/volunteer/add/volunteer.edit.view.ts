@@ -26,7 +26,6 @@ export class VolunteerEditView extends VolunteerAddView implements OnInit {
         this.volunteerService.getVolunteer(params['volunteerExtId']).subscribe(
           (response: VolunteerVOGet) => {
             this.volunteer = response.volunteerDVO;
-            console.log(this.volunteer);
           },
           (error) => {
             this.alertModel.setError(error);
