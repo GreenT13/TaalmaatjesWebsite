@@ -45,7 +45,7 @@ export class VolunteerEditView extends VolunteerAddView implements OnInit {
   onSubmit() {
     this.volunteerService.updateVolunteer(this.volunteer).subscribe(
       () => {
-        this.router.navigate(['../' + this.volunteer.externalIdentifier], {relativeTo: this.route});
+        this.router.navigate(['../'], {relativeTo: this.route});
       },
       (error: HttpErrorResponse) => {
         this.alertModel.setError(error);
