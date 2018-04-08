@@ -2,11 +2,13 @@ import {Component, EventEmitter, Output} from "@angular/core";
 import {VolunteerActiveUpsertComponent} from "./volunteer.active.upsert.component";
 import {VolunteerService} from "../../../../../services/volunteer.service";
 import {HttpErrorResponse} from "@angular/common/http";
+import {DatepickerComponent} from "../../../datepicker/datepicker.component";
 
 @Component({
   selector: 'app-volunteer-edit-active',
   templateUrl: './volunteer.active.upsert.component.html',
-  styleUrls: ['./volunteer.active.upsert.component.css']
+  styleUrls: ['./volunteer.active.upsert.component.css'],
+  providers: [DatepickerComponent]
 })
 export class VolunteerEditActiveComponent extends VolunteerActiveUpsertComponent {
   @Output()

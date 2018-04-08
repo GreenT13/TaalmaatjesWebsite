@@ -6,6 +6,7 @@ import {VolunteerInstanceDVO} from "../../../../../valueobject/dvo/volunteerinst
 import {VolunteerDVO} from "../../../../../valueobject/dvo/volunteer.dvo";
 
 export abstract class VolunteerActiveUpsertComponent implements OnDestroy {
+  public triedSubmit = false;
   protected destroyUtil: DestroyUtil = new DestroyUtil();
 
   @Input()

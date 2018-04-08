@@ -12,6 +12,7 @@ import {VolunteerService} from "../../../../services/volunteer.service";
   templateUrl: './volunteer.add.view.html'
 })
 export class VolunteerAddView implements OnInit {
+  public isEdit = false;
   public triedSubmit = false;
   public alertModel = new AlertModel();
   public genders = GenderUtil.genders;
@@ -23,8 +24,8 @@ export class VolunteerAddView implements OnInit {
     this.volunteer.isTaalmaatje = true;
   }
 
-  constructor(private volunteerService: VolunteerService,
-              private router: Router, private route: ActivatedRoute) { }
+  constructor(protected volunteerService: VolunteerService,
+              protected router: Router, protected route: ActivatedRoute) { }
 
   onSubmit() {
     this.volunteerService.insertVolunteer(this.volunteer, this.dateStartActive).subscribe(

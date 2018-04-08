@@ -50,8 +50,8 @@ import {VolunteerDetailView} from "./components/view/volunteer/detail/volunteer.
 import {VolunteerAddView} from "./components/view/volunteer/add/volunteer.add.view";
 import {VolunteerEditMatchComponent} from "./components/block/core/volunteermatch/upsert/volunteer.edit.match.component";
 import {VolunteerAddMatchComponent} from "./components/block/core/volunteermatch/upsert/volunteer.add.match.component";
-import {VolunteerEditComponent} from "./components/block/core/volunteer/edit/volunteer.edit.component";
 import {DatepickerComponent} from "./components/block/datepicker/datepicker.component";
+import {VolunteerEditView} from "./components/view/volunteer/add/volunteer.edit.view";
 
 
 @NgModule({
@@ -61,7 +61,7 @@ import {DatepickerComponent} from "./components/block/datepicker/datepicker.comp
     LoginComponent,
 
     // Volunteer blocks
-    VolunteerDetailComponent, VolunteerEditComponent,
+    VolunteerDetailComponent,
 
     // Volunteer active blocks
     VolunteerAddActiveComponent, VolunteerEditActiveComponent,
@@ -70,7 +70,7 @@ import {DatepickerComponent} from "./components/block/datepicker/datepicker.comp
     VolunteerAddMatchComponent, VolunteerEditMatchComponent,
 
     // Volunteer views
-    VolunteerOverviewView, VolunteerDetailView, VolunteerAddView,
+    VolunteerOverviewView, VolunteerDetailView, VolunteerAddView, VolunteerEditView,
 
     // Student blocks
     StudentDetailComponent, StudentAddComponent, StudentEditComponent,

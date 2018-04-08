@@ -4,7 +4,7 @@
 <div class="row">
   <!-- Left column of panels -->
   <div class="col-sm-6">
-    <app-volunteer-detail [volunteer]="volunteer.volunteerDVO" (onEditEmitter)="setVolunteer(volunteer.volunteerDVO)"></app-volunteer-detail>
+    <app-volunteer-detail [volunteer]="volunteer.volunteerDVO" (onEditEmitter)="onEditVolunteer()"></app-volunteer-detail>
 
     <!-- Active -->
     <div class="panel panel-primary">
@@ -64,11 +64,6 @@
 
   <!-- Right column of panels -->
   <div class="col-sm-6">
-    <!-- Volunteer -->
-    <app-volunteer-edit
-      *ngIf="currentItemInstance === VOLUNTEER_EDIT" (onBackEmitter)="clear()" [alertModel]="alertModel"
-      [volunteer]="currentItem" (didHttpRequest)="refresh()"></app-volunteer-edit>
-
     <!-- Tasks -->
     <app-task-add
       *ngIf="currentItemInstance === TASK_ADD" (onBackEmitter)="clear()"

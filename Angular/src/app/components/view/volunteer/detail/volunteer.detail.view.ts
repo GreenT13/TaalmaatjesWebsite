@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {DestroyUtil} from "../../../../util/destroy.util";
 import {AlertModel} from "../../../block/alert/alert.model";
 import {VolunteerVOGet} from "../../../../valueobject/volunteer.vo.get";
@@ -7,7 +7,6 @@ import {VolunteerService} from "../../../../services/volunteer.service";
 import {TaskDVO} from "../../../../valueobject/dvo/task.dvo";
 import {VolunteerInstanceDVO} from "../../../../valueobject/dvo/volunteerinstance.dvo";
 import {VolunteerMatchDVO} from "../../../../valueobject/dvo/volunteermatch.dvo";
-import {VolunteerDVO} from "../../../../valueobject/dvo/volunteer.dvo";
 
 @Component({
   selector: 'app-volunteer-detail-view',
@@ -20,7 +19,7 @@ export class VolunteerDetailView implements OnInit, OnDestroy {
   public volunteer: VolunteerVOGet = new VolunteerVOGet();
 
   constructor(private volunteerService: VolunteerService,
-              private route: ActivatedRoute) { }
+              private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.destroyUtil.addSubscription(this.route.params.subscribe(
@@ -43,6 +42,9 @@ export class VolunteerDetailView implements OnInit, OnDestroy {
     this.destroyUtil.destroy();
   }
 
+  onEditVolunteer() {
+    this.router.navigate(['edit'], {relativeTo: this.route});
+  }
 
   onDeleteActive(volunteerInstanceExtId: string) {
     // Remove the instance from the list of instances
@@ -66,7 +68,6 @@ export class VolunteerDetailView implements OnInit, OnDestroy {
 
 
   // All code for determining which component should be shown to the right.
-  public VOLUNTEER_EDIT = 'volunteer_edit';
   public TASK_ADD = 'task_add';
   public TASK_EDIT = 'task_edit';
   public TASK_VIEW = 'task_view';
@@ -91,10 +92,6 @@ export class VolunteerDetailView implements OnInit, OnDestroy {
     this.setTask(currentItem);
   }
 
-  setVolunteer(volunteer: VolunteerDVO) {
-    this.currentItem = volunteer;
-    this.currentItemInstance = this.VOLUNTEER_EDIT;
-  }
   setTask(task: TaskDVO) {
     this.currentItem = task;
     this.currentItemInstance = this.TASK_VIEW;

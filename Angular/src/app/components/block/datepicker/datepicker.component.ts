@@ -10,6 +10,9 @@ import {ControlContainer, NgForm} from "@angular/forms";
 })
 export class DatepickerComponent {
   @Input()
+  public name: string;
+
+  @Input()
   public label: string;
 
   @Input()

@@ -34,7 +34,7 @@
             </div>
           </div>
 
-          <app-datepicker-component label="Geboortedatum" [(date)]="volunteer.dateOfBirth" [required]="true" [triedSubmit]="triedSubmit"></app-datepicker-component>
+          <app-datepicker-component name="dateOfBirth" label="Geboortedatum" [(date)]="volunteer.dateOfBirth" [required]="true" [triedSubmit]="triedSubmit"></app-datepicker-component>
 
           <div class="form-group">
             <label for="gender" class="col-sm-4 control-label">Geslacht</label>
@@ -126,9 +126,9 @@
         </div>
         <div class="panel-body form-horizontal">
 
-          <app-datepicker-component label="Training gevolgd" [(date)]="volunteer.dateTraining" [required]="false" [triedSubmit]="triedSubmit"></app-datepicker-component>
+          <app-datepicker-component name="dateTraining" label="Training gevolgd" [(date)]="volunteer.dateTraining" [required]="false" [triedSubmit]="triedSubmit"></app-datepicker-component>
 
-          <app-datepicker-component label="Actief vanaf" [(date)]="dateStartActive" [required]="false" [triedSubmit]="triedSubmit"></app-datepicker-component>
+          <app-datepicker-component *ngIf="isEdit == false" name="dateActive" label="Actief vanaf" [(date)]="dateStartActive" [required]="false" [triedSubmit]="triedSubmit"></app-datepicker-component>
 
           <div class="form-group">
             <label for="isClassAssistant" class="col-sm-4 control-label">Is klassenassistent</label>
