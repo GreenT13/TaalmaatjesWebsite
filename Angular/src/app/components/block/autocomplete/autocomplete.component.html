@@ -6,7 +6,7 @@
   <div id="demo" *ngIf="filteredList.length > 0">
     <ul class="dropdown-menu" >
       <li *ngFor="let volunteer of filteredList">
-        <a (click)="select(volunteer)">{{ volunteer | parsename }}</a>
+        <a (click)="select(volunteer)">{{ volunteer.volunteerDVO | parsename }}</a>
       </li>
     </ul>
   </div>

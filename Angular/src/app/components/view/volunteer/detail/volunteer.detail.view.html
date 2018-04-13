@@ -65,13 +65,13 @@
   <!-- Right column of panels -->
   <div class="col-sm-6">
     <!-- Tasks -->
-    <app-task-add
+    <app-task-add [prefillVolunteer]="true"
       *ngIf="currentItemInstance === TASK_ADD" (onBackEmitter)="clear()"
       [alertModel]="alertModel" [volunteer]="volunteer.volunteerDVO" (didHttpRequest)="refresh()"></app-task-add>
-    <app-task-edit
+    <app-task-edit [prefillVolunteer]="true"
       *ngIf="currentItemInstance === TASK_EDIT" [alertModel]="alertModel" (onBackEmitter)="setTask(currentItem)"
       [task]="currentItem" [volunteer]="volunteer.volunteerDVO" (didHttpRequest)="refreshAndOpenItem(currentItem)"></app-task-edit>
-    <app-task-detail
+    <app-task-detail [prefillVolunteer]="true"
       *ngIf="currentItemInstance === TASK_VIEW" [alertModel]="alertModel" [task]="currentItem" [volunteer]="volunteer.volunteerDVO"
       (onEditEmitter)="editTask()"></app-task-detail>
     <div *ngIf="currentItemInstance === TASK_VIEW" class="pull-right">

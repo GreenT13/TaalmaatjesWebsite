@@ -19,13 +19,17 @@ export class TaskDetailComponent {
   taskModelChanged = new EventEmitter<TaskDVO>();
   @Input()
   volunteer: VolunteerDVO = new VolunteerDVO();
+  @Input()
+  prefillVolunteer: boolean = false;
   @Output()
   onEditEmitter = new EventEmitter<boolean>();
 
   constructor(public taskService: TaskService) { }
 
   changeState() {
-    this.task.volunteerDVO = this.volunteer;
+    if (this.prefillVolunteer) {
+      this.task.volunteerDVO = this.volunteer;
+    }
 
     this.taskService.changeState(this.task).subscribe(
       () => this.taskModelChanged.emit(this.task),

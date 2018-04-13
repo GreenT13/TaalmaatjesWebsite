@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from "
 import {VolunteerService} from "../../../services/volunteer.service";
 import {NamePipe} from "../../../pipes/name.pipe";
 import {VolunteerDVO} from "../../../valueobject/dvo/volunteer.dvo";
+import {VolunteerVOSearch} from "../../../valueobject/volunteer.vo.search";
 
 @Component({
   selector: 'app-autocomplete',
@@ -10,7 +11,7 @@ import {VolunteerDVO} from "../../../valueobject/dvo/volunteer.dvo";
 })
 export class AutocompleteComponent implements OnChanges {
   public query: string = "";
-  public volunteers: VolunteerDVO[];
+  public volunteers: VolunteerVOSearch[];
   public filteredList = [];
 
   @Input()
@@ -22,7 +23,7 @@ export class AutocompleteComponent implements OnChanges {
 
   constructor(private volunteerService: VolunteerService) {
     this.volunteerService.searchVolunteers(this.query, null, true, null, null).subscribe(
-      (volunteers: VolunteerDVO[]) => {
+      (volunteers: VolunteerVOSearch[]) => {
         this.volunteers = volunteers;
     });
   }
@@ -38,33 +39,33 @@ export class AutocompleteComponent implements OnChanges {
     if (this.query !== ""){
       // Filter the list, with at most 10 elements.
       let count = 0;
-      this.filteredList = this.volunteers.filter(function(volunteer: VolunteerDVO){
+      this.filteredList = this.volunteers.filter(function(volunteer: VolunteerVOSearch){
         if (count > 10) {
           return false;
         }
         for (let section of this.query.split(" ")) {
-          if (!NamePipe.containsString(section, volunteer)) {
+          if (!NamePipe.containsString(section, volunteer.volunteerDVO)) {
             return false;
           }
         }
         count++;
         return true;
       }.bind(this));
-      this.setVolunteer(new VolunteerDVO());
+      this.setVolunteer(new VolunteerVOSearch());
     } else {
       this.filteredList = [];
-      this.setVolunteer(new VolunteerDVO());
+      this.setVolunteer(new VolunteerVOSearch());
     }
   }
 
-  select(volunteer: VolunteerDVO){
-    this.query = NamePipe.parseName(volunteer);
+  select(volunteer: VolunteerVOSearch){
+    this.query = NamePipe.parseName(volunteer.volunteerDVO);
     this.setVolunteer(volunteer);
     this.filteredList = [];
   }
 
-  setVolunteer(volunteer: VolunteerDVO) {
-    this.volunteer = volunteer;
+  setVolunteer(volunteer: VolunteerVOSearch) {
+    this.volunteer = volunteer.volunteerDVO;
     this.volunteerChange.emit(this.volunteer);
   }
 }

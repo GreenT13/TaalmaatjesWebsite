@@ -16,7 +16,8 @@
           </tr>
           <tr>
             <td>Vrijwilliger</td>
-            <td>{{ task.volunteerDVO | parsename }}</td>
+            <td *ngIf="task.volunteerDVO && task.volunteerDVO.externalIdentifier; else elseBlock">{{ task.volunteerDVO | parsename }}</td>
+            <ng-template #elseBlock><td>{{ volunteer | parsename }}</td></ng-template>
           </tr>
           <tr>
             <td>Is afgehandeld</td>

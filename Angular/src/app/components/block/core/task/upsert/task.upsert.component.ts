@@ -15,7 +15,10 @@ export abstract class TaskUpsertComponent implements OnDestroy {
   public task: TaskDVO = new TaskDVO();
 
   @Input()
-  volunteer: VolunteerDVO = new VolunteerDVO();
+  public prefillVolunteer: boolean = false;
+
+  @Input()
+  volunteer: VolunteerDVO;
 
   @Output()
   didHttpRequest = new EventEmitter<string>();
@@ -26,7 +29,9 @@ export abstract class TaskUpsertComponent implements OnDestroy {
   constructor(public title: string) { }
 
   onSubmit() {
-    this.task.volunteerDVO = this.volunteer;
+    if (this.prefillVolunteer) {
+      this.task.volunteerDVO = this.volunteer;
+    }
 
     this.destroyUtil.addSubscription(this.doHttpRequest());
   }

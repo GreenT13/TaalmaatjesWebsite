@@ -8,7 +8,7 @@ import {TaskDVO} from "../../../../valueobject/dvo/task.dvo";
   selector: 'app-task-edit-view',
   template: '<app-alert-component [alertModel]="alertModel"></app-alert-component>' +
   '<div class="row">' +
-    '<div class="col-sm-6"><app-task-edit [(alertModel)]="alertModel" [volunteer]="task.volunteerDVO" ' +
+    '<div class="col-sm-6"><app-task-edit [(alertModel)]="alertModel" ' +
     '(didHttpRequest)="didHttpRequest($event)" (onBackEmitter)="onBack()" [task]="task"></app-task-edit></div>' +
   '</div>'
 })

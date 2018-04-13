@@ -15,6 +15,13 @@
 
       <app-datepicker-component name="dateToBeFinished" label="Datum afhandelen" [(date)]="task.dateToBeFinished" [required]="true" [triedSubmit]="triedSubmit"></app-datepicker-component>
 
+      <div *ngIf="!prefillVolunteer" class="form-group">
+        <label for="volunteer" class="col-sm-4 control-label">Vrijwilliger</label>
+        <div class="col-sm-8">
+          <app-autocomplete id="volunteer" [(volunteer)]="task.volunteerDVO"></app-autocomplete>
+        </div>
+      </div>
+
       <div class="form-group">
         <label for="description" class="col-sm-4 control-label">Beschrijving</label>
         <div class="col-sm-8">
