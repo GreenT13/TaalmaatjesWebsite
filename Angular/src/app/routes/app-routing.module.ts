@@ -15,6 +15,8 @@ import {TaskDetailView} from "../components/view/task/detail/task.detail.view";
 import {TaskEditView} from "../components/view/task/edit/task.edit.view";
 import {StudentEditView} from "../components/view/student/edit/student.edit.view";
 import {VolunteerEditView} from "../components/view/volunteer/add/volunteer.edit.view";
+import {ReportCreateView} from "../components/view/report/create/report.create.view";
+import {ReportView} from "../components/view/report/view/report.view";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -31,6 +33,8 @@ const appRoutes: Routes = [
   { path: 'task/add', canActivate: [AuthGuardService], component: TaskAddView},
   { path: 'task/:taskExtId', canActivate: [AuthGuardService], component: TaskDetailView },
   { path: 'task/:taskExtId/edit', canActivate: [AuthGuardService], component: TaskEditView },
+  { path: 'report', canActivate: [AuthGuardService], component: ReportCreateView },
+  { path: 'report/view', canActivate: [AuthGuardService], component: ReportView },
       ];
 
 @NgModule({

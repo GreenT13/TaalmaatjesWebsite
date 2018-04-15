@@ -1,0 +1,26 @@
+<app-alert-component [alertModel]="alertModel"></app-alert-component>
+
+<div class="row">
+  <!-- Left column of panels -->
+  <div class="col-sm-6">
+    <form #f="ngForm" (ngSubmit)="(triedSubmit = true) && f.valid && onSubmit()">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h1 class="panel-title">
+            <span data-toggle="collapse" data-target="#active-panel" class="glyphicon glyphicon-floppy-disk"></span>Rapportage
+          </h1>
+        </div>
+        <div class="panel-body form-horizontal">
+          <app-datepicker-component name="dateStart" label="Actief vanaf" [(date)]="dateStart" [required]="true" [triedSubmit]="triedSubmit"></app-datepicker-component>
+
+          <app-datepicker-component name="dateEnd" label="Actief tot" [(date)]="dateEnd" [required]="false" [triedSubmit]="triedSubmit"></app-datepicker-component>
+
+          <div class="pull-right">
+            <input type="submit" class="btn btn-default" value="Genereer">
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>

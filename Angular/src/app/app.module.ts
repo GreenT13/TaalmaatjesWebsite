@@ -53,6 +53,9 @@ import {VolunteerAddMatchComponent} from "./components/block/core/volunteermatch
 import {DatepickerComponent} from "./components/block/datepicker/datepicker.component";
 import {VolunteerEditView} from "./components/view/volunteer/add/volunteer.edit.view";
 import {VolunteerLogComponent} from "./components/block/core/volunteer/log/volunteer.log.component";
+import {ReportCreateView} from "./components/view/report/create/report.create.view";
+import {ReportService} from "./services/report.service";
+import {ReportView} from "./components/view/report/view/report.view";
 
 
 @NgModule({
@@ -85,6 +88,9 @@ import {VolunteerLogComponent} from "./components/block/core/volunteer/log/volun
     // Task views
     TaskAddView, TaskDetailView, TaskEditView, TaskOverviewView,
 
+    // Report views
+    ReportCreateView, ReportView,
+
     AutocompleteComponent, AutocompleteStudentComponent,
     AlertComponent, PaginationComponent, DatepickerComponent,
     GenderPipe, BooleanPipe, NamePipe, ShortenPipe, MyDatePipe, AgePipe,
@@ -99,7 +105,7 @@ import {VolunteerLogComponent} from "./components/block/core/volunteer/log/volun
     CookieModule.forRoot()
   ],
   providers: [
-    MyHttpClient, LoginService, VolunteerService, VersionService, TaskService, StudentService,
+    MyHttpClient, LoginService, VolunteerService, VersionService, TaskService, StudentService, ReportService,
     OverlayService, AuthGuardService,
     ThemeService],
   bootstrap: [AppComponent]

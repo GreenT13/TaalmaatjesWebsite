@@ -1,28 +1,26 @@
 package com.apon.database.mydao;
 
-import com.apon.database.generated.tables.Student;
 import com.apon.database.generated.tables.Volunteer;
 import com.apon.database.generated.tables.Volunteerinstance;
 import com.apon.database.generated.tables.Volunteermatch;
 import com.apon.database.generated.tables.daos.VolunteerDao;
-import com.apon.database.generated.tables.pojos.StudentPojo;
 import com.apon.database.generated.tables.pojos.VolunteerPojo;
-import com.apon.database.generated.tables.pojos.VolunteermatchPojo;
 import com.apon.database.generated.tables.records.VolunteerRecord;
 import com.apon.database.generated.tables.records.VolunteerinstanceRecord;
 import com.apon.database.generated.tables.records.VolunteermatchRecord;
 import com.apon.database.jooq.DbContext;
 import com.apon.exceptionhandler.ResultObject;
 import com.apon.util.ResultUtil;
-import org.jooq.*;
+import org.jooq.Record1;
+import org.jooq.Select;
+import org.jooq.SelectConditionStep;
+import org.jooq.SelectWhereStep;
 import org.jooq.impl.DSL;
 import org.jooq.util.mysql.MySQLDataType;
 
 import javax.annotation.Nonnull;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import static org.jooq.impl.DSL.using;
 
@@ -238,41 +236,7 @@ public class VolunteerMyDao extends VolunteerDao {
      * @return List&lt;QueryResult&lt;VolunteerPojo, Integer&gt;&gt;
      */
     public List<VolunteerPojo> advancedSearch(String input, Boolean isActive, Boolean hasTraining, Boolean hasMatch, String city) {
-//        SelectHavingStep<Record> query = using(configuration())
-//                .select(Volunteer.VOLUNTEER.fields())
-//                .select(Volunteermatch.VOLUNTEERMATCH.VOLUNTEERID.count())
-//                .from(Volunteer.VOLUNTEER)
-//                .leftJoin(Volunteermatch.VOLUNTEERMATCH).on(Volunteermatch.VOLUNTEERMATCH.VOLUNTEERID.eq(Volunteer.VOLUNTEER.VOLUNTEERID))
-//                .groupBy(Volunteer.VOLUNTEER.fields());
-//
-//        Map<VolunteerPojo, List<Integer>> map = query.fetchGroups(
-//                        r -> r.into(Volunteer.VOLUNTEER).into(VolunteerPojo.class),
-//                        r -> r.into(Volunteermatch.VOLUNTEERMATCH.VOLUNTEERID.count()).into(Integer.class)
-//                );
-//
-//        Result<Record> result = query.fetch();
-//        for (Record r : result) {
-//            VolunteerPojo volunteerPojo = r.into(Volunteer.VOLUNTEER).into(VolunteerPojo.class);
-//            Integer count = r.into(Volunteermatch.VOLUNTEERMATCH.VOLUNTEERID.count()).into(Integer.class);
-//        }
-
-
-
-
-
-
-
-
-
-
-
-
-
         SelectWhereStep<VolunteerRecord> query = using(configuration()).selectFrom(Volunteer.VOLUNTEER);
-//                .select(Volunteer.VOLUNTEER.fields())
-////                .select(DSL.inline("count").as("count"))
-//                .from(Volunteer.VOLUNTEER);
-////                .leftJoin(Volunteermatch.VOLUNTEERMATCH).on(Volunteermatch.VOLUNTEERMATCH.VOLUNTEERID.eq(Volunteer.VOLUNTEER.VOLUNTEERID));
 
         // Add the input to search criteria.
         if (input != null && input.trim().length() > 0) {
@@ -328,18 +292,6 @@ public class VolunteerMyDao extends VolunteerDao {
         if (city != null && city.trim().length() > 0) {
             query.where(Volunteer.VOLUNTEER.CITY.lower().like("%" + city.toLowerCase() + "%"));
         }
-
-////        query.groupBy(Volunteer.VOLUNTEER.fields())
-////                .orderBy(Volunteer.VOLUNTEER.FIRSTNAME.asc());
-////
-//        Map<VolunteerPojo> map = query.fetch().map(mapper());
-//
-//        // Create a list of query results.
-//        List<QueryResult<VolunteerPojo, Integer>> list = new ArrayList<>();
-//        for (Map.Entry<VolunteerPojo, List<Integer>> entry : map.entrySet()) {
-//            list.add(new QueryResult<>(entry.getKey(), entry.getValue().get(0)));
-//        }
-
         return query.fetch().map(mapper());
     }
 

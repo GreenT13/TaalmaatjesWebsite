@@ -1,0 +1,38 @@
+<app-alert-component [alertModel]="alertModel"></app-alert-component>
+
+<div class="row">
+  <!-- Left column of panels -->
+  <div class="col-sm-6">
+    <div class="panel panel-primary">
+
+      <div class="panel-heading">
+        <h1 class="panel-title">
+        <span data-toggle="collapse"
+              data-target="#user-panel"
+              class="glyphicon glyphicon-floppy-disk"></span>Rapportage</h1>
+      </div>
+      <div id="user-panel" class="panel-body collapse in collapsible-text-panel">
+        <div class="fix-collapse">
+          <table data-toggle="table" class="table table-condensed borderless">
+            <tbody>
+              <tr>
+                <td>Leeftijd</td>
+                <td>Geslacht</td>
+                <td>Aantal nieuw</td>
+                <td>Aantal actief</td>
+              </tr>
+            <tr *ngFor="let reportPersonVO of reportVO.volunteers">
+              <td *ngIf="reportPersonVO.maxAge !== 999">{{ reportPersonVO.minAge }} - {{ reportPersonVO.maxAge }}</td>
+              <td *ngIf="reportPersonVO.maxAge === 999">{{ reportPersonVO.minAge }}+</td>
+              <td>{{ reportPersonVO.sex | gender}}</td>
+              <td>{{ reportPersonVO.countNew }}</td>
+              <td>{{ reportPersonVO.countActive }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
