@@ -1,0 +1,21 @@
+<form #f="ngForm" (ngSubmit)="onSubmit()">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h1 class="panel-title">
+        <span data-toggle="collapse" data-target="#active-panel" class="glyphicon glyphicon-user"></span>Log
+      </h1>
+    </div>
+    <div class="panel-body">
+      <div class="form-group">
+          <!--suppress HtmlFormInputWithoutLabel -->
+        <textarea name="description" id="description" rows="10" class="form-control"
+                    [(ngModel)]="volunteer.log"></textarea>
+      </div>
+
+      <div class="pull-right">
+        <input type="submit" class="btn btn-default" value="Opslaan">
+        <button type="button" (click)="onBack()" class="btn btn-default">Terug</button>
+      </div>
+    </div>
+  </div>
+</form>

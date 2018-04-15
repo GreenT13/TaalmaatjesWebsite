@@ -51,7 +51,8 @@
     <!-- Log -->
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <h1 class="panel-title"><span data-toggle="collapse" data-target="#log-panel" class="glyphicon glyphicon-user"></span>Logboek</h1>
+        <h1 class="panel-title"><span data-toggle="collapse" data-target="#log-panel" class="glyphicon glyphicon-user">
+        </span><a (click)="setLog()">Logboek</a></h1>
       </div>
 
       <div id="log-panel" class="panel-body collapse in collapsible-text-panel">
@@ -93,5 +94,10 @@
     <app-volunteer-edit-match
       *ngIf="currentItemInstance === MATCH_EDIT" [(volunteerMatch)]="currentItem" (didHttpRequest)="refresh()"
       (onBackEmitter)="clear()" [alertModel]="alertModel" [volunteer]="volunteer.volunteerDVO" (onDeleteEmitter)="onDeleteMatch($event)"></app-volunteer-edit-match>
+
+    <!-- Log -->
+    <app-volunteer-log *ngIf="currentItemInstance === LOG_EDIT" [volunteer]="volunteer.volunteerDVO" (didHttpRequest)="refresh()" [alertModel]="alertModel"
+                       (onBackEmitter)="clear()"></app-volunteer-log>
+
   </div>
 </div>

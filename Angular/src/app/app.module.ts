@@ -52,6 +52,7 @@ import {VolunteerEditMatchComponent} from "./components/block/core/volunteermatc
 import {VolunteerAddMatchComponent} from "./components/block/core/volunteermatch/upsert/volunteer.add.match.component";
 import {DatepickerComponent} from "./components/block/datepicker/datepicker.component";
 import {VolunteerEditView} from "./components/view/volunteer/add/volunteer.edit.view";
+import {VolunteerLogComponent} from "./components/block/core/volunteer/log/volunteer.log.component";
 
 
 @NgModule({
@@ -61,7 +62,7 @@ import {VolunteerEditView} from "./components/view/volunteer/add/volunteer.edit.
     LoginComponent,
 
     // Volunteer blocks
-    VolunteerDetailComponent,
+    VolunteerDetailComponent, VolunteerLogComponent,
 
     // Volunteer active blocks
     VolunteerAddActiveComponent, VolunteerEditActiveComponent,

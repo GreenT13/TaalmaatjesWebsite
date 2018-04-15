@@ -75,6 +75,7 @@ export class VolunteerDetailView implements OnInit, OnDestroy {
   public INSTANCE_EDIT = 'instance_edit';
   public MATCH_ADD = 'match_add';
   public MATCH_EDIT = 'match_edit';
+  public LOG_EDIT = 'log_edit';
   public currentItemInstance: string;
   public currentItem: any;
 
@@ -118,5 +119,9 @@ export class VolunteerDetailView implements OnInit, OnDestroy {
   setNewMatch() {
     this.currentItem = null;
     this.currentItemInstance = this.MATCH_ADD;
+  }
+  setLog() {
+    this.currentItem = null;
+    this.currentItemInstance = this.LOG_EDIT;
   }
 }
