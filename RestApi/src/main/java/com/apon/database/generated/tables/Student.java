@@ -39,7 +39,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Student extends TableImpl<StudentRecord> {
 
-    private static final long serialVersionUID = -183446440;
+    private static final long serialVersionUID = 251089059;
 
     /**
      * The reference instance of <code>student</code>
@@ -98,6 +98,11 @@ public class Student extends TableImpl<StudentRecord> {
      * The column <code>student.hasQuit</code>.
      */
     public final TableField<StudentRecord, Boolean> HASQUIT = createField("hasQuit", org.jooq.impl.SQLDataType.BOOLEAN.nullable(false), this, "");
+
+    /**
+     * The column <code>student.log</code>.
+     */
+    public final TableField<StudentRecord, String> LOG = createField("log", org.jooq.impl.SQLDataType.CLOB, this, "");
 
     /**
      * Create a <code>student</code> table reference

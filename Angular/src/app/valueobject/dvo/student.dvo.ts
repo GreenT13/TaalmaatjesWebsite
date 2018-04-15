@@ -7,4 +7,5 @@ export class StudentDVO {
   public dateOfBirth: Date;
   public groupIdentification: string;
   public hasQuit: boolean = false;
+  public log: string;
 }

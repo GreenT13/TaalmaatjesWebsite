@@ -23,6 +23,7 @@ import javax.ws.rs.core.MediaType;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings({"unchecked", "RedundantThrows"})
 @Path("volunteer")
@@ -195,19 +196,19 @@ public class VolunteerService implements IService {
                                                     @QueryParam("city") String city) throws Exception {
         // Retrieve the list from the database.
         VolunteerMyDao volunteerMyDao = new VolunteerMyDao(context);
-        List<VolunteerPojo> volunteerPojos = volunteerMyDao.advancedSearch(input, isActive, hasTraining, hasMatch, city);
-        if (volunteerPojos == null) {
+        Map<VolunteerPojo, Integer> volunteerPojoIntegerMap = volunteerMyDao.advancedSearch(input, isActive, hasTraining, hasMatch, city);
+        if (volunteerPojoIntegerMap == null) {
             throw new FunctionalException("VolunteerService.search.error");
         }
 
         // Convert the list of pojo's to value objects.
         List<VolunteerVOSearch> volunteerVOSearches = new ArrayList();
-        for (VolunteerPojo result : volunteerPojos) {
+        for (Map.Entry<VolunteerPojo, Integer> entry : volunteerPojoIntegerMap.entrySet()) {
             VolunteerDVOMapper volunteerDVOMapper = new VolunteerDVOMapper();
-            volunteerDVOMapper.setVolunteerPojo(result);
+            volunteerDVOMapper.setVolunteerPojo(entry.getKey());
             VolunteerVOSearch volunteerVOSearch = new VolunteerVOSearch();
             volunteerVOSearch.setVolunteerDVO(volunteerDVOMapper.getVolunteerDVO());
-//            volunteerVOSearch.setNumberOfMatches(result.getT());
+            volunteerVOSearch.setNumberOfMatches(entry.getValue());
             volunteerVOSearches.add(volunteerVOSearch);
         }
 

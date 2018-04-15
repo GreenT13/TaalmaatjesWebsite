@@ -31,11 +31,13 @@
         <th>Naam</th>
         <th>Vrijwilliger (moet ik nog doen!)</th>
         <th>Groep</th>
+        <th>Opmerkingen</th>
       </ng-template>
       <ng-template #templateItem let-student>
         <td>{{ student | parsename }}</td>
         <td> TODO </td>
         <td>{{ student.groupIdentification }}</td>
+        <td>{{ student.log | shorten:100 }}</td>
       </ng-template>
     </app-table-pagination>
   </div>

@@ -11,16 +11,14 @@ import com.apon.database.generated.tables.records.VolunteermatchRecord;
 import com.apon.database.jooq.DbContext;
 import com.apon.exceptionhandler.ResultObject;
 import com.apon.util.ResultUtil;
-import org.jooq.Record1;
-import org.jooq.Select;
-import org.jooq.SelectConditionStep;
-import org.jooq.SelectWhereStep;
+import org.jooq.*;
 import org.jooq.impl.DSL;
 import org.jooq.util.mysql.MySQLDataType;
 
 import javax.annotation.Nonnull;
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 import static org.jooq.impl.DSL.using;
 
@@ -233,10 +231,14 @@ public class VolunteerMyDao extends VolunteerDao {
      * @param hasTraining Whether Volunteer.dateTraining is filled.
      * @param hasMatch Whether there is a VolunteerMatch today.
      * @param city Search for this text in Volunteer.city.
-     * @return List&lt;QueryResult&lt;VolunteerPojo, Integer&gt;&gt;
+     * @return Map&lt;VolunteerPojo, Integer&gt;
      */
-    public List<VolunteerPojo> advancedSearch(String input, Boolean isActive, Boolean hasTraining, Boolean hasMatch, String city) {
-        SelectWhereStep<VolunteerRecord> query = using(configuration()).selectFrom(Volunteer.VOLUNTEER);
+    public Map<VolunteerPojo, Integer> advancedSearch(String input, Boolean isActive, Boolean hasTraining, Boolean hasMatch, String city) {
+        SelectWhereStep<Record> query = using(configuration())
+                .select(Volunteer.VOLUNTEER.fields())
+                .select(Volunteermatch.VOLUNTEERMATCH.VOLUNTEERID.count())
+                .from(Volunteer.VOLUNTEER)
+                .leftJoin(Volunteermatch.VOLUNTEERMATCH).on(Volunteermatch.VOLUNTEERMATCH.VOLUNTEERID.eq(Volunteer.VOLUNTEER.VOLUNTEERID));
 
         // Add the input to search criteria.
         if (input != null && input.trim().length() > 0) {
@@ -292,7 +294,9 @@ public class VolunteerMyDao extends VolunteerDao {
         if (city != null && city.trim().length() > 0) {
             query.where(Volunteer.VOLUNTEER.CITY.lower().like("%" + city.toLowerCase() + "%"));
         }
-        return query.fetch().map(mapper());
+        return query.groupBy(Volunteer.VOLUNTEER.fields()) .fetchMap(
+                r -> r.into(Volunteer.VOLUNTEER).into(VolunteerPojo.class),
+                r -> r.get(Volunteermatch.VOLUNTEERMATCH.VOLUNTEERID.count()));
     }
 
     public List<VolunteerPojo> getCurrentVolunteer(int studentId) {

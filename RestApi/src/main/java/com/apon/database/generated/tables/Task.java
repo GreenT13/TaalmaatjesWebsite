@@ -40,7 +40,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Task extends TableImpl<TaskRecord> {
 
-    private static final long serialVersionUID = -506690416;
+    private static final long serialVersionUID = 787084241;
 
     /**
      * The reference instance of <code>task</code>
@@ -88,7 +88,7 @@ public class Task extends TableImpl<TaskRecord> {
     /**
      * The column <code>task.dateToBeFinished</code>.
      */
-    public final TableField<TaskRecord, Date> DATETOBEFINISHED = createField("dateToBeFinished", org.jooq.impl.SQLDataType.DATE, this, "");
+    public final TableField<TaskRecord, Date> DATETOBEFINISHED = createField("dateToBeFinished", org.jooq.impl.SQLDataType.DATE.nullable(false), this, "");
 
     /**
      * Create a <code>task</code> table reference

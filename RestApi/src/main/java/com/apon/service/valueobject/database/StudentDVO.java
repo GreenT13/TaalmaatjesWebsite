@@ -16,6 +16,7 @@ public class StudentDVO {
     private Date dateOfBirth;
     private String groupIdentification;
     private Boolean hasQuit;
+    private String log;
 
     public String getExternalIdentifier() {
         return externalIdentifier;
@@ -79,5 +80,13 @@ public class StudentDVO {
 
     public void setHasQuit(Boolean hasQuit) {
         this.hasQuit = hasQuit;
+    }
+
+    public String getLog() {
+        return log;
+    }
+
+    public void setLog(String log) {
+        this.log = log;
     }
 }

@@ -39,6 +39,7 @@ public class StudentDVOMapper {
         studentDVO.setDateOfBirth(studentPojo.getDateofbirth());
         studentDVO.setGroupIdentification(studentPojo.getGroupidentification());
         studentDVO.setHasQuit(studentPojo.getHasquit());
+        studentDVO.setLog(studentPojo.getLog());
     }
 
     private void fillPojoWithDVO(StudentDVO studentDVO) {
@@ -50,6 +51,6 @@ public class StudentDVOMapper {
         studentPojo.setDateofbirth(studentDVO.getDateOfBirth());
         studentPojo.setGroupidentification(studentDVO.getGroupIdentification());
         studentPojo.setHasquit(studentDVO.getHasQuit());
+        studentPojo.setLog(studentDVO.getLog());
     }
-
 }

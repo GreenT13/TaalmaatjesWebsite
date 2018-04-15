@@ -128,4 +128,11 @@ public class StudentDao extends DAOImpl<StudentRecord, StudentPojo, Integer> {
     public List<StudentPojo> fetchByHasquit(Boolean... values) {
         return fetch(Student.STUDENT.HASQUIT, values);
     }
+
+    /**
+     * Fetch records that have <code>log IN (values)</code>
+     */
+    public List<StudentPojo> fetchByLog(String... values) {
+        return fetch(Student.STUDENT.LOG, values);
+    }
 }

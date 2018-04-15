@@ -57,6 +57,7 @@ create table student (
   dateOfBirth date not null,
   groupIdentification varchar(100),
   hasQuit boolean not null,
+  log TEXT,
   constraint `Stud_PK` primary key (studentId),
   constraint `Stud_ExtId` unique(externalIdentifier)
 );

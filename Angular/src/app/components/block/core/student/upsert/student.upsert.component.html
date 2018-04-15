@@ -44,6 +44,13 @@
           <input type="text" id="groupIdentification" name="groupIdentification" class="form-control" [(ngModel)]="student.groupIdentification"/>
         </div>
       </div>
+      <div class="form-group">
+        <label for="log" class="col-sm-4 control-label">Opmerkingen</label>
+        <div class="col-sm-8">
+          <input type="text" id="log" name="log" class="form-control" [(ngModel)]="student.log"/>
+        </div>
+      </div>
+
 
       <div class="pull-right">
         <input type="submit" class="btn btn-default" value="Opslaan"> <button type="button" (click)="onBack()" class="btn btn-default">Terug</button>

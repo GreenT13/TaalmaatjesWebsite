@@ -23,7 +23,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class StudentPojo implements Serializable {
 
-    private static final long serialVersionUID = -791412492;
+    private static final long serialVersionUID = 1822693690;
 
     private Integer studentid;
     private String  externalidentifier;
@@ -34,6 +34,7 @@ public class StudentPojo implements Serializable {
     private Date    dateofbirth;
     private String  groupidentification;
     private Boolean hasquit;
+    private String  log;
 
     public StudentPojo() {}
 
@@ -47,6 +48,7 @@ public class StudentPojo implements Serializable {
         this.dateofbirth = value.dateofbirth;
         this.groupidentification = value.groupidentification;
         this.hasquit = value.hasquit;
+        this.log = value.log;
     }
 
     public StudentPojo(
@@ -58,7 +60,8 @@ public class StudentPojo implements Serializable {
         String  gender,
         Date    dateofbirth,
         String  groupidentification,
-        Boolean hasquit
+        Boolean hasquit,
+        String  log
     ) {
         this.studentid = studentid;
         this.externalidentifier = externalidentifier;
@@ -69,6 +72,7 @@ public class StudentPojo implements Serializable {
         this.dateofbirth = dateofbirth;
         this.groupidentification = groupidentification;
         this.hasquit = hasquit;
+        this.log = log;
     }
 
     public Integer getStudentid() {
@@ -143,6 +147,14 @@ public class StudentPojo implements Serializable {
         this.hasquit = hasquit;
     }
 
+    public String getLog() {
+        return this.log;
+    }
+
+    public void setLog(String log) {
+        this.log = log;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -206,6 +218,12 @@ public class StudentPojo implements Serializable {
         }
         else if (!hasquit.equals(other.hasquit))
             return false;
+        if (log == null) {
+            if (other.log != null)
+                return false;
+        }
+        else if (!log.equals(other.log))
+            return false;
         return true;
     }
 
@@ -222,6 +240,7 @@ public class StudentPojo implements Serializable {
         result = prime * result + ((this.dateofbirth == null) ? 0 : this.dateofbirth.hashCode());
         result = prime * result + ((this.groupidentification == null) ? 0 : this.groupidentification.hashCode());
         result = prime * result + ((this.hasquit == null) ? 0 : this.hasquit.hashCode());
+        result = prime * result + ((this.log == null) ? 0 : this.log.hashCode());
         return result;
     }
 
@@ -238,6 +257,7 @@ public class StudentPojo implements Serializable {
         sb.append(", ").append(dateofbirth);
         sb.append(", ").append(groupidentification);
         sb.append(", ").append(hasquit);
+        sb.append(", ").append(log);
 
         sb.append(")");
         return sb.toString();
