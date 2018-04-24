@@ -6,6 +6,20 @@
   <div class="col-sm-6">
     <app-volunteer-detail [volunteer]="volunteer.volunteerDVO" (onEditEmitter)="onEditVolunteer()"></app-volunteer-detail>
 
+    <!-- Log -->
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h1 class="panel-title"><span data-toggle="collapse" data-target="#log-panel" class="glyphicon glyphicon-user">
+        </span><a (click)="setLog()">Logboek</a></h1>
+      </div>
+
+      <div id="log-panel" class="panel-body collapse in collapsible-text-panel">
+        <div class="fix-collapse">
+          <p>{{ volunteer.volunteerDVO.log }}</p>
+        </div>
+      </div>
+    </div>
+
     <!-- Active -->
     <div class="panel panel-primary">
       <div class="panel-heading">
@@ -20,7 +34,10 @@
         </a>
       </div>
     </div>
+  </div>
 
+  <!-- Right column of panels -->
+  <div class="col-sm-6">
     <!-- Matches -->
     <div class="panel panel-primary">
       <div class="panel-heading">
@@ -42,29 +59,12 @@
       </div>
       <div id="task-panel" class="list-group collapse in">
         <ng-container *ngFor="let task of volunteer.taskDVOS" >
-        <a (click)="setTask(task)" *ngIf="task.isFinished == false" class="list-group-item">
-          {{ task.dateToBeFinished }} | {{ task.title }}</a>
+          <a (click)="setTask(task)" *ngIf="task.isFinished == false" class="list-group-item">
+            {{ task.dateToBeFinished }} | {{ task.title }}</a>
         </ng-container>
       </div>
     </div>
 
-    <!-- Log -->
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h1 class="panel-title"><span data-toggle="collapse" data-target="#log-panel" class="glyphicon glyphicon-user">
-        </span><a (click)="setLog()">Logboek</a></h1>
-      </div>
-
-      <div id="log-panel" class="panel-body collapse in collapsible-text-panel">
-        <div class="fix-collapse">
-          <p>{{ volunteer.volunteerDVO.log }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Right column of panels -->
-  <div class="col-sm-6">
     <!-- Tasks -->
     <app-task-add [prefillVolunteer]="true"
       *ngIf="currentItemInstance === TASK_ADD" (onBackEmitter)="clear()"
