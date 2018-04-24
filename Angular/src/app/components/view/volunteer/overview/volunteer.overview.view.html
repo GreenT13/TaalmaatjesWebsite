@@ -36,7 +36,7 @@
       </select>
     </div>
     <div class="pull-right form-inline form-group">
-      <label for="hasMatch">Heeft taalmaatjes: </label>
+      <label for="hasMatch">Is gekoppeld: </label>
       <select id="hasMatch" class="form-control" [(ngModel)]="hasMatch" (change)="searchVolunteers()">
         <option *ngFor="let answer of yesNoNull" [ngValue]="answer.id"> {{ answer.value }}</option>
       </select>
