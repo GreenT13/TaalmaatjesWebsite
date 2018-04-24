@@ -5,21 +5,16 @@ import com.apon.database.generated.tables.Volunteer;
 import com.apon.database.generated.tables.Volunteermatch;
 import com.apon.database.generated.tables.daos.StudentDao;
 import com.apon.database.generated.tables.pojos.StudentPojo;
-import com.apon.database.generated.tables.records.StudentRecord;
 import com.apon.database.generated.tables.records.VolunteermatchRecord;
 import com.apon.database.jooq.DbContext;
 import com.apon.exceptionhandler.ResultObject;
 import com.apon.util.ResultUtil;
-import org.jooq.Record1;
-import org.jooq.Select;
-import org.jooq.SelectConditionStep;
-import org.jooq.SelectWhereStep;
+import org.jooq.*;
 import org.jooq.impl.DSL;
 import org.jooq.util.mysql.MySQLDataType;
 
 import javax.annotation.Nonnull;
 import java.sql.Date;
-import java.util.List;
 
 import static org.jooq.impl.DSL.using;
 
@@ -205,8 +200,19 @@ public class StudentMyDao extends StudentDao {
      * @param hasMatch Whether the student has a VolunteerMatch today.
      * @return List&lt;StudentPojo&gt;
      */
-    public List<StudentPojo> advancedSearch(String input, Boolean hasMatch) {
-        SelectWhereStep<StudentRecord> query = using(configuration()).selectFrom(Student.STUDENT);
+    public Result<Record> advancedSearch(String input, Boolean hasMatch) {
+        TableLike<?> subVolunteerMatch = using(configuration()).selectFrom(Volunteermatch.VOLUNTEERMATCH)
+                .where(Volunteermatch.VOLUNTEERMATCH.DATESTART.le(DSL.currentDate())
+                        .and(Volunteermatch.VOLUNTEERMATCH.DATEEND.isNull().or(Volunteermatch.VOLUNTEERMATCH.DATEEND.ge(DSL.currentDate()))))
+                .limit(1).asTable("subVolunteerMatch");
+
+        SelectWhereStep<Record> query = using(configuration())
+                .select(Student.STUDENT.fields())
+                .select(subVolunteerMatch.fields())
+                .select(Volunteer.VOLUNTEER.fields())
+                .from(Student.STUDENT)
+                .leftJoin(subVolunteerMatch).on(subVolunteerMatch.field(Volunteermatch.VOLUNTEERMATCH.STUDENTID).eq(Student.STUDENT.STUDENTID))
+                .leftJoin(Volunteer.VOLUNTEER).on(Volunteer.VOLUNTEER.VOLUNTEERID.eq(subVolunteerMatch.field(Volunteermatch.VOLUNTEERMATCH.VOLUNTEERID)));
 
         // Add the input to search criteria.
         if (input != null && input.trim().length() > 0) {
@@ -235,6 +241,6 @@ public class StudentMyDao extends StudentDao {
             }
         }
 
-        return query.orderBy(Student.STUDENT.FIRSTNAME.asc()).fetch().map(mapper());
+        return query.orderBy(Student.STUDENT.FIRSTNAME.asc()).fetch();
     }
 }

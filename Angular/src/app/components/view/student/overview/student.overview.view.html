@@ -29,15 +29,16 @@
     <app-table-pagination [completeList]="students" (onDblClick)="onDblClick($event)">
       <ng-template #templateHeader>
         <th>Naam</th>
-        <th>Vrijwilliger (moet ik nog doen!)</th>
+        <th>Vrijwilliger</th>
         <th>Groep</th>
         <th>Opmerkingen</th>
       </ng-template>
       <ng-template #templateItem let-student>
-        <td>{{ student | parsename }}</td>
-        <td> TODO </td>
-        <td>{{ student.groupIdentification }}</td>
-        <td>{{ student.log | shorten:100 }}</td>
+        <td>{{ student.studentDVO | parsename }}</td>
+        <td *ngIf="student.currentVolunteerMatchDVO.volunteerDVO">{{ student.currentVolunteerMatchDVO.volunteerDVO | parsename }}</td>
+        <td *ngIf="!student.currentVolunteerMatchDVO.volunteerDVO"></td>
+        <td>{{ student.studentDVO.groupIdentification }}</td>
+        <td>{{ student.studentDVO.log | shorten:100 }}</td>
       </ng-template>
     </app-table-pagination>
   </div>

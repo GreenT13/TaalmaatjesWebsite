@@ -1,5 +1,8 @@
 package com.apon.service;
 
+import com.apon.database.generated.tables.Student;
+import com.apon.database.generated.tables.Volunteer;
+import com.apon.database.generated.tables.Volunteermatch;
 import com.apon.database.generated.tables.pojos.StudentPojo;
 import com.apon.database.generated.tables.pojos.VolunteerPojo;
 import com.apon.database.generated.tables.pojos.VolunteermatchPojo;
@@ -11,10 +14,13 @@ import com.apon.exceptionhandler.FunctionalException;
 import com.apon.guice.InjectContext;
 import com.apon.service.valueobject.StringVO;
 import com.apon.service.valueobject.StudentVOGet;
+import com.apon.service.valueobject.StudentVOSearch;
 import com.apon.service.valueobject.database.StudentDVO;
 import com.apon.service.valueobject.database.VolunteerMatchDVO;
 import com.apon.service.valueobject.database.mapper.StudentDVOMapper;
 import com.apon.service.valueobject.database.mapper.VolunteerMatchDVOMapper;
+import org.jooq.Record;
+import org.jooq.Result;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -140,25 +146,37 @@ public class StudentService implements IService {
      */
     @GET
     @InjectContext
-    public List<StudentDVO> searchStudents(@QueryParam("search") String search,
-                                           @QueryParam("hasMatch") Boolean hasMatch) throws Exception {
+    public List<StudentVOSearch> searchStudents(@QueryParam("search") String search,
+                                                @QueryParam("hasMatch") Boolean hasMatch) throws Exception {
         // Retrieve the list from the database.
         StudentMyDao studentMyDao = new StudentMyDao(context);
-        List<StudentPojo> studentPojos = studentMyDao.advancedSearch(search, hasMatch);
-        if (studentPojos == null) {
+        Result<Record> result = studentMyDao.advancedSearch(search, hasMatch);
+        if (result == null) {
             throw new FunctionalException("StudentService.search.error");
         }
 
         // Convert the list of pojo's to value objects.
-        List<StudentDVO> studentDVOS = new ArrayList();
-        for (StudentPojo studentPojo : studentPojos) {
+        List<StudentVOSearch> studentVOSearches = new ArrayList();
+        for (Record record : result) {
+            StudentPojo studentPojo = record.into(Student.STUDENT).into(StudentPojo.class);
+            VolunteermatchPojo volunteermatchPojo = record.into(Volunteermatch.VOLUNTEERMATCH.as("subVolunteerMatch")).into(VolunteermatchPojo.class);
+            VolunteerPojo volunteerPojo = record.into(Volunteer.VOLUNTEER).into(VolunteerPojo.class);
+
             StudentDVOMapper studentDVOMapper = new StudentDVOMapper();
             studentDVOMapper.setStudentPojo(studentPojo);
 
-            studentDVOS.add(studentDVOMapper.getStudentDVO());
+            VolunteerMatchDVOMapper volunteerMatchDVOMapper = new VolunteerMatchDVOMapper();
+            volunteerMatchDVOMapper.setVolunteermatchPojo(volunteermatchPojo);
+            volunteerMatchDVOMapper.setVolunteerPojo(volunteerPojo);
+
+            StudentVOSearch studentVOSearch = new StudentVOSearch();
+            studentVOSearch.setStudentDVO(studentDVOMapper.getStudentDVO());
+            studentVOSearch.setCurrentVolunteerMatchDVO(volunteerMatchDVOMapper.getVolunteerMatchDVO());
+
+            studentVOSearches.add(studentVOSearch);
         }
 
-        return studentDVOS;
+        return studentVOSearches;
     }
 
     /**
@@ -171,16 +189,16 @@ public class StudentService implements IService {
     public List<StudentDVO> getStudentsForMatch() throws Exception {
         // At this moment it is only hasMatch == false, but later it might be more.
         StudentMyDao studentMyDao = new StudentMyDao(context);
-        List<StudentPojo> studentPojos = studentMyDao.advancedSearch(null, false);
-        if (studentPojos == null) {
+        Result<Record> result = studentMyDao.advancedSearch(null, false);
+        if (result == null) {
             throw new FunctionalException("StudentService.search.error");
         }
 
         // Convert the list of pojo's to value objects.
         List<StudentDVO> studentDVOS = new ArrayList();
-        for (StudentPojo studentPojo : studentPojos) {
+        for (Record record : result) {
             StudentDVOMapper studentDVOMapper = new StudentDVOMapper();
-            studentDVOMapper.setStudentPojo(studentPojo);
+            studentDVOMapper.setStudentPojo(record.into(Student.STUDENT).into(StudentPojo.class));
 
             studentDVOS.add(studentDVOMapper.getStudentDVO());
         }

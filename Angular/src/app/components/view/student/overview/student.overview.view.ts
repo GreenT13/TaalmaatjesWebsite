@@ -2,10 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
 import {AlertModel} from "../../../block/alert/alert.model";
-import {StudentDVO} from "../../../../valueobject/dvo/student.dvo";
 import {Subscription} from "rxjs/Subscription";
 import {FormUtil} from "../../../../util/form.util";
 import {StudentService} from "../../../../services/student.service";
+import {StudentVOSearch} from "../../../../valueobject/student.vo.search";
 
 @Component({
   selector: 'app-student-overview-view',
@@ -14,7 +14,7 @@ import {StudentService} from "../../../../services/student.service";
 })
 export class StudentOverviewView implements OnInit {
   public alertModel = new AlertModel();
-  students: StudentDVO[] = [];
+  students: StudentVOSearch[] = [];
   currentHttpRequest: Subscription = null;
 
   // Searching parameters
@@ -41,7 +41,7 @@ export class StudentOverviewView implements OnInit {
     this.currentHttpRequest = this.studentService.searchStudents(
       this.inputSearch, this.hasMatch
     ).subscribe(
-      (students: StudentDVO[]) => {
+      (students: StudentVOSearch[]) => {
         this.students = students;
       },
       (error: HttpErrorResponse) => {
@@ -49,8 +49,8 @@ export class StudentOverviewView implements OnInit {
       });
   }
 
-  onDblClick(student: StudentDVO) {
+  onDblClick(student: StudentVOSearch) {
     // Go to the volunteer.
-    this.router.navigate([student.externalIdentifier], {relativeTo: this.route});
+    this.router.navigate([student.studentDVO.externalIdentifier], {relativeTo: this.route});
   }
 }
