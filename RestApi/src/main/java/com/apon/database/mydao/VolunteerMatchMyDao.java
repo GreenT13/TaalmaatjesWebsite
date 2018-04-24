@@ -189,6 +189,7 @@ public class VolunteerMatchMyDao extends VolunteermatchDao {
     public List<QueryResult<VolunteermatchPojo, VolunteerPojo>> getMatchForStudent(String studentExtId, Boolean sortAscending) {
         SelectConditionStep<Record> query = using(configuration())
                 .select(Volunteermatch.VOLUNTEERMATCH.fields())
+                .select(Volunteer.VOLUNTEER.fields())
                 .from(Volunteermatch.VOLUNTEERMATCH)
                 .join(Student.STUDENT).on(Student.STUDENT.STUDENTID.eq(Volunteermatch.VOLUNTEERMATCH.STUDENTID))
                 .join(Volunteer.VOLUNTEER).on(Volunteer.VOLUNTEER.VOLUNTEERID.eq(Volunteermatch.VOLUNTEERMATCH.VOLUNTEERID))
