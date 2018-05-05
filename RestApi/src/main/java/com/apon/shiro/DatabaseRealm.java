@@ -17,14 +17,14 @@ public class DatabaseRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        // No clue what to do with this functin. I only use authentication and not authorization, so probably just nothing.
+        // No clue what to do with this function. I only use authentication and not authorization, so probably just nothing.
         return null;
     }
 
     /**
      * Check if the user inputted is valid. The user can login if holds:
      * 1. Password is correct. (if not, nrOfLogonAttempts++)
-     * 2. LogonUser.nrOfLogonAttemps is less than 3
+     * 2. LogonUser.nrOfLogonAttempts is less than 3
      * 3. LogonUser.dateEndValid is null or >= today.
      * @param authenticationToken Token with basic information.
      * @return SimpleAuthenticationInfo

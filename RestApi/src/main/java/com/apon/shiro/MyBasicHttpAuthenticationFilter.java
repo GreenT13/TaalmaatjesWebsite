@@ -95,7 +95,4 @@ public class MyBasicHttpAuthenticationFilter extends BasicHttpAuthenticationFilt
         request.setAttribute(ERROR_ATTRIBUTE, errorCode);
         return false;
     }
-
-
-
 }

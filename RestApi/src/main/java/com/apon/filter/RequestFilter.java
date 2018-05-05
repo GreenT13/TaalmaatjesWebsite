@@ -11,6 +11,6 @@ import javax.ws.rs.container.ContainerRequestFilter;
 public class RequestFilter implements ContainerRequestFilter {
 
     public void filter(ContainerRequestContext containerRequestContext) {
-        MyLogger.logDebug("Look at my filter woop.");
+        //MyLogger.logDebug("Look at my filter woop.");
     }
 }

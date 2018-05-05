@@ -4,24 +4,38 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 @SuppressWarnings({"RedundantIfStatement", "unused"})
 public class DateTimeUtil {
 
-    public static Date convertStringToDate(String d) throws ParseException {
-        return new Date(new SimpleDateFormat("dd-MM-yyyy").parse(d).getTime());
+    /**
+     * Convert String to Date.
+     * @param date String with format dd-MM-yyyy
+     * @return java.sql.Date
+     */
+    public static Date convertStringToDate(String date) throws ParseException {
+        return new Date(new SimpleDateFormat("dd-MM-yyyy").parse(date).getTime());
     }
 
-    private static LocalDate toLocalDate(Date d) {
-        if (d == null) {
+    /**
+     * Helper function that converts Date to LocalDate (which is used to compare dates).
+     * @param date Date to convert.
+     * @return LocalDate
+     */
+    private static LocalDate toLocalDate(Date date) {
+        if (date == null) {
             return null;
         }
 
-        return d.toLocalDate();
+        return date.toLocalDate();
     }
 
+    /**
+     * Check whether given date is before today.
+     * @param date Given date to check.
+     * @return If date < currentDate, then return {@code true}. Else return {@code false}
+     */
     public static boolean isBeforeToday(Date date) {
         return isBeforeToday(toLocalDate(date));
     }
@@ -29,6 +43,10 @@ public class DateTimeUtil {
         return date.compareTo(toLocalDate(getCurrentDate())) < 0;
     }
 
+    /**
+     * Get current date.
+     * @return java.sql.Date
+     */
     public static Date getCurrentDate() {
         return Date.valueOf(LocalDate.now());
     }
@@ -59,6 +77,13 @@ public class DateTimeUtil {
         return true;
     }
 
+    /**
+     * Determine whether the date lies inside the range (r1, r2).
+     * @param d Date
+     * @param r1 Start date of the range.
+     * @param r2 End date of the range.
+     * @return boolean
+     */
     public static boolean isBetweenWithoutEndpoints(Date d, Date r1, Date r2) {
         return isBetweenWithoutEndpoints(toLocalDate(d), toLocalDate(r1), toLocalDate(r2));
     }
@@ -86,10 +111,10 @@ public class DateTimeUtil {
      * @param e2 End range 1.
      * @return boolean
      */
-    public static boolean isOverlap(Date d1, Date d2, Date e1, Date e2) {
-        return isOverlap(toLocalDate(d1), toLocalDate(d2), toLocalDate(e1), toLocalDate(e2));
+    public static boolean hasOverlap(Date d1, Date d2, Date e1, Date e2) {
+        return hasOverlap(toLocalDate(d1), toLocalDate(d2), toLocalDate(e1), toLocalDate(e2));
     }
-    private static boolean isOverlap(LocalDate d1, LocalDate d2, LocalDate e1, LocalDate e2) {
+    private static boolean hasOverlap(LocalDate d1, LocalDate d2, LocalDate e1, LocalDate e2) {
         if (isBetween(e1, d1, d2)) {
             return true;
         }
@@ -122,6 +147,12 @@ public class DateTimeUtil {
         return isBetween(d1, e1, e2) && isBetween(d2, e1, e2);
     }
 
+    /**
+     * Count the number of days between two dates.
+     * @param d1 First date
+     * @param d2 Second date
+     * @return long
+     */
     public static long nrOfDaysInBetween(Date d1, Date d2) {
         return nrOfDaysInBetween(toLocalDate(d1), toLocalDate(d2));
     }
