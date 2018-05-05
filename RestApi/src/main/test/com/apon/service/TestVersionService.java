@@ -19,6 +19,10 @@ public class TestVersionService {
     @Test
     public void getVersion() {
         assertEquals(versionService.getVersion().getValue(), versionService.VERSION);
+    }
+
+    @Test
+    public void getSecuredVersion() {
         assertEquals(versionService.getSecuredVersion().getValue(), versionService.VERSION);
     }
 }
